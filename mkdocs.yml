@@ -1,0 +1,54 @@
+site_name: MPSurvival Documentation
+theme:
+  name: material
+  language: en
+  palette:
+    scheme: slate
+    primary: amber
+    accent: deep orange
+  features:
+    - navigation.tabs
+    - navigation.indexes
+    - content.code.annotate
+    - search.suggest
+    - search.highlight
+    - content.tabs.link
+
+nav:
+  - Home: index.md
+  - Item Creation:
+      - Create an item: items/item_creation.md
+  - Crafting:
+      - Create a recipe: craft/crafting_creation.md
+  - Gatherables:
+      - Create a gatherable: gatherable/gatherable_creation.md
+  - Wieldables:
+      - Create a wieldable: wieldable/wieldable_creation.md
+  - Equipment:
+      - Create an armor piece: equipment/equipment_creation.md
+  - Vitals:
+      - Create a vital stat: vital/vital_creation.md
+  - Storage:
+      - Create a storage system: storage/storage_creation.md
+  - Interactions:
+      - Create an interaction: interaction/interaction_creation.md
+
+markdown_extensions:
+  - toc:
+      permalink: true
+  - admonition
+  - codehilite
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - pymdownx.details
+  - pymdownx.emoji
+  - pymdownx.tabbed
+
+extra:
+  social:
+    - icon: fontawesome/brands/discord
+      link: https://discord.gg/EqHCtq38jy
+
+extra_css:
+  - overrides.css

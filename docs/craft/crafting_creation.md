@@ -18,11 +18,13 @@ Open the newly created Data Asset and fill in the fields:
 | `Output Amount`  | Number of items crafted per recipe                              |
 | `Craft Costs`    | Array of required items and their amounts                        |
 | `Time to Craft`  | Time (in seconds) needed to craft the item                      |
+| `CraftedSound`  | Sound when craft finished                      |
+| `CraftingSound`  | Sound when crafting is in progress                      |
 
 ### 2. Add the recipe in the game data
 
 Open : `MPSurvival/Blueprints/PlayerCharacter/GI_SurvivalInstance`
 
-Then add the crafting recipe asset in the map or array variable called : `CraftsData`
+Then add the crafting recipe asset in the map variable called : `CraftsData`
 
 ![CraftingRecipes](../assets/craft/Craft_01.jpeg)

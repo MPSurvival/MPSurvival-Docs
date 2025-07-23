@@ -4,7 +4,7 @@
 
 Go to the **Content Browser**, right-click → **Miscellaneous → Data Asset**.
 
-Select `PDA_ItemCraftData` as the class, then name it something like `DA_Wood_Craft`.
+Select `BP_ItemCraftData` as the class, then name it something like `DA_Wood_Craft`.
 
 ---
 
@@ -18,8 +18,8 @@ Open the newly created Data Asset and fill in the fields:
 | `Output Amount`  | Number of items crafted per recipe                              |
 | `Craft Costs`    | Array of required items and their amounts                        |
 | `Time to Craft`  | Time (in seconds) needed to craft the item                      |
-| `CraftedSound`  | Sound when craft finished                      |
-| `CraftingSound`  | Sound when crafting is in progress                      |
+| `Crafted Sound`  | Sound when craft finished                      |
+| `Crafting Sound`  | Sound when crafting is in progress                      |
 
 ### 2. Add the recipe in the game data
 

@@ -4,7 +4,7 @@
 
 Go to the **Content Browser**, right-click → **Miscellaneous → Data Asset**.
 
-Select `PDA_ItemData` as the class, then name it something like `DA_Wood_Item`.
+Select `BP_ItemData` as the class, then name it something like `DA_Wood_Item`.
 
 ---
 

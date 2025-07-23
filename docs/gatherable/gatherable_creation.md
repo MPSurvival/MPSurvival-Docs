@@ -4,7 +4,7 @@
 
 Go to the **Content Browser**, right-click → **Miscellaneous → Data Asset**.
 
-Select `PDA_GatherableData` as the class, then name it something like `DA_Tree_Gatherable`.
+Select `BP_GatherableData` as the class, then name it something like `DA_Tree_Gatherable`.
 
 ---
 

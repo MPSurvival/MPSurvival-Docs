@@ -2,15 +2,15 @@
 
 ### 1. Add the storage component
 
-In your Blueprint, add the component `AC_StorageSystem`.
+In your Blueprint, add the component `BP_StorageSystem`.
 
 ---
 
 ### 2. Implement the storage interface
 
-- Add the interface `BPI_StorageManager` to your Blueprint.
+- Add the interface `BPI_StorageManagerInterface` to your Blueprint.
 - Implement the interface function `GetStorageComponent`.
-- Return your `AC_StorageSystem` component in the return value.
+- Return your `BP_StorageSystem` component in the return value.
 
 This works like the vital manager interface.
 

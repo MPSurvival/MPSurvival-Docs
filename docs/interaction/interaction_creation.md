@@ -2,7 +2,7 @@
 
 ### 1. Add the interactable interface
 
-In your Blueprint, add the interface `BPI_Interactable`.
+In your Blueprint, add the interface `BP_InteractableInterface`.
 
 ---
 

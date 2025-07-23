@@ -4,7 +4,7 @@
 
 Go to the **Content Browser**, right-click → **Miscellaneous → Data Asset**.
 
-Select `PDA_VitalData` as the class, then name it something like `DA_Health_Vital`.
+Select `BP_VitalData` as the class, then name it something like `DA_Health_Vital`.
 
 ---
 

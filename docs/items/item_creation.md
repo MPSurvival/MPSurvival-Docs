@@ -43,7 +43,7 @@ Open the newly created Data Asset and fill in the fields:
 
 ### 3. Add the item in the game data
 
-Open : `MPSurvival/Blueprints/PlayerCharacter/GI_SurvivalInstance`
+Open : `MPSurvival/Blueprints/PlayerCharacter/BP_SurvivalInstance`
 
 Then add the item with his same ID in the map variable called : ItemsData
 

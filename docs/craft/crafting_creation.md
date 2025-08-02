@@ -23,7 +23,7 @@ Open the newly created Data Asset and fill in the fields:
 
 ### 2. Add the recipe in the game data
 
-Open : `MPSurvival/Blueprints/PlayerCharacter/GI_SurvivalInstance`
+Open : `MPSurvival/Blueprints/PlayerCharacter/BP_SurvivalInstance`
 
 Then add the crafting recipe asset in the map variable called : `CraftsData`
 

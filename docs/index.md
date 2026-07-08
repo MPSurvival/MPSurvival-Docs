@@ -1,62 +1,19 @@
-# 🧭 MPSurvival — Ultimate Multiplayer Survival Template
+# 📦 Del Studio Assets Documentation
 
-Welcome to the official documentation for **MPSurvival**, the ultimate template to kickstart your multiplayer survival game in Unreal Engine.
+Welcome! This is the central documentation hub for **Del Studio's Unreal Engine assets**.
 
-This template is designed to **save you weeks of work** by providing a clean, modular, and fully networked foundation — all Blueprint-based and ready to customize.
-
-> 🔁 Regular updates are delivered frequently! Check the roadmap to see what's coming next.
+Every asset has its own **dedicated section**, so nothing gets mixed up. Pick the one you're working with below, or use the tabs at the top.
 
 ---
 
-## 💥 What is MPSurvival?
+## 🗂️ Available Assets
 
-MPSurvival gives you a **robust starting point** for your own survival game — no bloat, just essentials. It's multiplayer-ready, 100% Blueprint-based, and packed with well-documented systems covering:
+### 🧭 [MPSurvival](mpsurvival/index.md)
+The ultimate multiplayer survival template, with inventory, crafting, vitals, gathering, equipment, storage and more. 100% Blueprint-based and fully networked.
 
-- Inventory and storage
-- Crafting
-- Player vitals (hunger, thirst, health)
-- Gathering and tools
-- Gear and equipment
-- Clean animated UI inspired by modern survival games
+[👉 Open the MPSurvival docs](mpsurvival/index.md)
 
----
-
-## ⚙️ Key Features
-
-### Inventory System
-- Drag & drop, stack splitting, slot interaction
-- Create new items via Data Assets with minimal setup
-- Multiplayer-ready: full replication support
-- Built-in storage system
-
-### Crafting
-- Support for crafting categories and recipes
-- Easy setup via Data Assets
-- Feedback-ready system (animations, sounds, particles...)
-
-### Tools & Resource Gathering
-- Equip and use tools (axes, pickaxes…) with procedural first-person animations
-- Chop trees, break rocks, gather resources
-- Add new gatherables with minimal steps
-
-### Survival Stats
-- Built-in health, thirst, and hunger systems
-- Death handling included
-- Stats degrade over time or based on actions
-- Easy to extend with your own stats
-
-### Food & Water
-- Create consumables (healing, hydration effects, etc.)
-- Add custom effects quickly
-
-### Gear & Armor
-- Equip armor/clothing on body parts (head, body, legs…)
-- Gear impacts stats or visuals
-- Fully customizable system
-
-### Stylized UI
-- Built using UMG
-- Clean, animated, and inspired by modern survival titles
+<!-- Add new assets here as they are released. Duplicate the block above and point it to the new asset's index page. -->
 
 ---
 
@@ -64,8 +21,8 @@ MPSurvival gives you a **robust starting point** for your own survival game — 
 
 Got ideas? Need help? Found a bug?
 
-Join the **Discord server** to connect with other devs, give feedback, or ask for support. Your suggestions directly shape future updates!
+Join the **Discord server** to connect with other devs, give feedback, or ask for support.
 
-[👉 Join the MPSurvival Discord](https://discord.gg/EqHCtq38jy)
+[👉 Join the Discord](https://discord.gg/EqHCtq38jy)
 
 ---

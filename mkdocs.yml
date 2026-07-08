@@ -1,4 +1,4 @@
-site_name: MPSurvival Documentation
+site_name: Del Studio Assets Documentation
 theme:
   name: material
   language: en
@@ -8,30 +8,38 @@ theme:
     accent: deep orange
   features:
     - navigation.tabs
+    - navigation.sections
+    - navigation.top
     - navigation.indexes
     - content.code.annotate
     - search.suggest
     - search.highlight
     - content.tabs.link
 
+# Navigation is grouped per asset. Each top-level entry below (except Home) is
+# a self-contained asset with its own guides, so nothing gets mixed up.
+# To add a new asset: create docs/<asset>/ with an index.md and its guides,
+# then copy the "MPSurvival" block below and adapt the paths.
 nav:
   - Home: index.md
-  - Item Creation:
-      - Create an item: items/item_creation.md
-  - Crafting:
-      - Create a recipe: craft/crafting_creation.md
-  - Gatherables:
-      - Create a gatherable: gatherable/gatherable_creation.md
-  - Wieldables:
-      - Create a wieldable: wieldable/wieldable_creation.md
-  - Equipment:
-      - Create an armor piece: equipment/equipment_creation.md
-  - Vitals:
-      - Create a vital stat: vital/vital_creation.md
-  - Storage:
-      - Create a storage system: storage/storage_creation.md
-  - Interactions:
-      - Create an interaction: interaction/interaction_creation.md
+  - MPSurvival:
+      - Overview: mpsurvival/index.md
+      - Items:
+          - Create an item: mpsurvival/items/item_creation.md
+      - Crafting:
+          - Create a recipe: mpsurvival/craft/crafting_creation.md
+      - Gatherables:
+          - Create a gatherable: mpsurvival/gatherable/gatherable_creation.md
+      - Wieldables:
+          - Create a wieldable: mpsurvival/wieldable/wieldable_creation.md
+      - Equipment:
+          - Create an armor piece: mpsurvival/equipment/equipment_creation.md
+      - Vitals:
+          - Create a vital stat: mpsurvival/vital/vital_creation.md
+      - Storage:
+          - Create a storage system: mpsurvival/storage/storage_creation.md
+      - Interactions:
+          - Create an interaction: mpsurvival/interaction/interaction_creation.md
 
 markdown_extensions:
   - toc:

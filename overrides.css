@@ -1,7 +1,8 @@
-.md-sidebar {
-  display: none !important;
-}
+/* The left navigation sidebar is intentionally kept visible: with the tabbed
+   multi-asset layout it shows the sections of the currently selected asset,
+   which is what keeps each asset well delimited and easy to navigate. */
 
-.md-content {
-  margin-left: 0 !important;
+/* Hide only the right-hand table of contents to keep the reading area wide. */
+.md-sidebar--secondary {
+  display: none !important;
 }

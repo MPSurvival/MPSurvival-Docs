@@ -16,7 +16,7 @@ bEnabled=true
 !!! warning
     This value is read at **engine startup**. After adding it, **fully restart the editor** — it won't take effect on a hot reload.
 
-Also make sure your microphone is allowed by the OS (Windows: **Settings → Privacy → Microphone**).
+Your microphone is normally **already allowed** by the OS, so you shouldn't have to touch anything. But if you run into trouble and no capture starts, come back and double-check it here (Windows: **Settings → Privacy → Microphone**).
 
 ---
 
@@ -38,11 +38,6 @@ EPVC never guesses *when* you want to talk, your game decides. Call **Set Active
 - **Push-to-talk**: `Set Active Voice(true)` on key pressed, `Set Active Voice(false)` on released.
 - **Open mic**: `Set Active Voice(true)` once at BeginPlay.
 - **Trigger / radio**: toggle it from your own gameplay logic.
-
-```
-InputAction Talk (Pressed)  → ProximityVoiceChat → Set Active Voice (Active = true)
-InputAction Talk (Released) → ProximityVoiceChat → Set Active Voice (Active = false)
-```
 
 !!! note
     Call `Set Active Voice` on the **owning client** (the player who is talking). Transmission is replicated for you.

@@ -1291,6 +1291,21 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="3. Playback">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#turning-proximity-off-entirely" class="md-nav__link">
+    <span class="md-ellipsis">
+      🌍 Turning proximity off entirely
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1528,6 +1543,21 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="3. Playback">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#turning-proximity-off-entirely" class="md-nav__link">
+    <span class="md-ellipsis">
+      🌍 Turning proximity off entirely
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1661,6 +1691,18 @@
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>Assign a <strong>Sound Attenuation</strong> asset to <code>Proximity Attenuation</code> to control how far a voice carries and how it falls off with distance. This is your main "how loud, how far" dial.</p>
+</div>
+<h4 id="turning-proximity-off-entirely">🌍 Turning proximity off entirely<a class="headerlink" href="#turning-proximity-off-entirely" title="Permanent link">&para;</a></h4>
+<p>Proximity is driven <strong>only</strong> by the <code>Proximity Attenuation</code> asset. Leave it <strong>empty (None)</strong> and there's no distance falloff at all, the voice plays at full volume for everyone who can receive it, no matter how far away the speaker is.</p>
+<p>This effectively turns EPVC into a <strong>global / non-proximity voice chat</strong>. Handy for:</p>
+<ul>
+<li>A global lobby or party chat</li>
+<li>Team comms that should work across the whole map</li>
+<li>Radio channels (pair it with <a href="../channels/">Channels</a>)</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Removing the attenuation only disables <strong>distance falloff</strong>. <a href="../muting/">Muting</a>, <a href="../channels/">Channels</a> and <a href="../occlusion/">Occlusion</a> still apply, so you can still, say, have global team voice that gets muffled through walls, or none of that, it's up to your config.</p>
 </div>
 <hr />
 <h3 id="4-activity">4. Activity<a class="headerlink" href="#4-activity" title="Permanent link">&para;</a></h3>

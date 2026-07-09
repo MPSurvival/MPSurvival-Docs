@@ -13,6 +13,11 @@ The ultimate multiplayer survival template, with inventory, crafting, vitals, ga
 
 [👉 Open the MPSurvival docs](mpsurvival/index.md)
 
+### 🎙️ [Easy Proximity Voice Chat](epvc/index.md)
+Drop-in proximity voice chat over normal replication, no OnlineSubsystem, no EOS/Steam voice setup. Channels, occlusion through geometry, runtime-swappable config, server & client muting, and Blueprint events. Dedicated-server ready and PIE-testable.
+
+[👉 Open the Easy Proximity Voice Chat docs](epvc/index.md)
+
 <!-- Add new assets here as they are released. Duplicate the block above and point it to the new asset's index page. -->
 
 ---

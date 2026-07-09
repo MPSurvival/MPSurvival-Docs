@@ -40,6 +40,17 @@ nav:
           - Create a storage system: mpsurvival/storage/storage_creation.md
       - Interactions:
           - Create an interaction: mpsurvival/interaction/interaction_creation.md
+  - Easy Proximity Voice Chat:
+      - Overview: epvc/index.md
+      - Setup:
+          - Quick Start: epvc/setup/quick_start.md
+      - Guides:
+          - Configuration: epvc/guides/configuration.md
+          - Channels: epvc/guides/channels.md
+          - Muting: epvc/guides/muting.md
+          - Occlusion: epvc/guides/occlusion.md
+          - Blueprint Events: epvc/guides/events.md
+          - Debug Overlay: epvc/guides/debug.md
 
 markdown_extensions:
   - toc:

@@ -1567,7 +1567,7 @@
 <p class="admonition-title">Warning</p>
 <p>This value is read at <strong>engine startup</strong>. After adding it, <strong>fully restart the editor</strong> — it won't take effect on a hot reload.</p>
 </div>
-<p>Also make sure your microphone is allowed by the OS (Windows: <strong>Settings → Privacy → Microphone</strong>).</p>
+<p>Your microphone is normally <strong>already allowed</strong> by the OS, so you shouldn't have to touch anything. But if you run into trouble and no capture starts, come back and double-check it here (Windows: <strong>Settings → Privacy → Microphone</strong>).</p>
 <hr />
 <h3 id="2-add-the-component-to-your-player">2. Add the component to your player<a class="headerlink" href="#2-add-the-component-to-your-player" title="Permanent link">&para;</a></h3>
 <p>Open your player <strong>Character/Pawn</strong> Blueprint and add the <strong>Proximity Voice Chat</strong> component.</p>
@@ -1584,9 +1584,6 @@
 <li><strong>Open mic</strong>: <code>Set Active Voice(true)</code> once at BeginPlay.</li>
 <li><strong>Trigger / radio</strong>: toggle it from your own gameplay logic.</li>
 </ul>
-<div class="highlight"><pre><span></span><code>InputAction Talk (Pressed)  → ProximityVoiceChat → Set Active Voice (Active = true)
-InputAction Talk (Released) → ProximityVoiceChat → Set Active Voice (Active = false)
-</code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Call <code>Set Active Voice</code> on the <strong>owning client</strong> (the player who is talking). Transmission is replicated for you.</p>

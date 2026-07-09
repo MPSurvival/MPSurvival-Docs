@@ -13,9 +13,31 @@ No OnlineSubsystem. No EOS/Steam voice setup. It runs over your game's **normal 
 EPVC gives every player a **spatialized voice** that other nearby players hear based on distance, world geometry, and channels, without you touching any online backend. Drop the component on your player, decide *when* it transmits (push-to-talk, open mic, trigger zone), and the plugin handles capture, encoding, replication, jitter buffering, and 3D playback.
 
 - ✅ 100% over normal replication, no OnlineSubsystem / EOS / Steam voice
+- ✅ Works **with** Steam and EOS out of the box, zero extra setup
 - ✅ Dedicated-server ready & PIE-testable
 - ✅ Blueprint-first API
 - ✅ Data-Asset configuration, swappable at runtime
+
+---
+
+## 🔌 Steam & EOS Compatibility
+
+**Yes, EPVC works with Steam and EOS.** To be clear about what "no OnlineSubsystem" means: EPVC replaces their *voice* stack, not their *networking*. You keep using Steam or EOS for sessions, matchmaking and transport exactly as you do today.
+
+This works because EPVC only ever speaks the language of standard Unreal replication — a `Server` RPC to send captured audio, a `NetMulticast` RPC to distribute it. Steam and EOS plug in one layer below that, at the **NetDriver / SocketSubsystem** level (`SteamSockets`, `EOSNetDriver`). Your voice packets ride over whatever transport is active without ever knowing about it.
+
+The result is that the exact same code path runs everywhere:
+
+| Setup | Works | Notes |
+|---|---|---|
+| PIE / standalone | ✅ | No online backend needed |
+| `IpNetDriver` (LAN, direct IP) | ✅ | |
+| Steam listen server (P2P) | ✅ | No `bHasVoiceEnabled`, no Steam voice config |
+| Steam dedicated server | ✅ | |
+| EOS listen server (P2P / relay) | ✅ | No EOS RTC / Voice product required |
+| EOS dedicated server | ✅ | |
+
+You do **not** need to enable Steam voice, provision an EOS RTC (Voice) product, or add `OnlineSubsystemSteam` / `OnlineSubsystemEOS` to your dependencies for EPVC to function.
 
 ---
 

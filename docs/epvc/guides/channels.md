@@ -34,6 +34,14 @@ Handy for UI ("You are on Team Radio 1") or gating other systems.
 
 ---
 
+### Radios listen on a channel too
+
+A **Proximity Voice Receiver** tunes to a channel the same way a player does, and rebroadcasts everyone talking on it out of the actor it sits on. That's how you build a radio, an intercom or a PA speaker: the listener standing next to it hears the channel **without** being on it themselves.
+
+See [Radios & Receivers](receivers.md).
+
+---
+
 ### Example: team voice
 
 1. When a player joins a team, `Set Channel(TeamIndex)` on their voice component (on the server / owner).

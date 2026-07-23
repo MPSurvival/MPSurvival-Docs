@@ -1169,6 +1169,10 @@
       
         
       
+        
+      
+        
+      
     
     
     
@@ -1244,6 +1248,52 @@
   
   <span class="md-ellipsis">
     Channels
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../receivers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Radios & Receivers
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../effects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Voice Effects
     
   </span>
   
@@ -1389,6 +1439,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#reading-the-emitter-lines" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reading the emitter lines
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#what-to-look-for" class="md-nav__link">
     <span class="md-ellipsis">
       What to look for
@@ -1466,6 +1525,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#reading-the-emitter-lines" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reading the emitter lines
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#what-to-look-for" class="md-nav__link">
     <span class="md-ellipsis">
       What to look for
@@ -1532,7 +1600,7 @@
 </tr>
 <tr>
 <td><code>Show Occlusion Lines</code></td>
-<td>Draws the traces between speaker and listener used for <a href="../occlusion/">occlusion</a>.</td>
+<td>Draws one line per emitter (the speaker's body, and every <a href="../receivers/">receiver</a> rebroadcasting them) toward the listener.</td>
 </tr>
 </tbody>
 </table>
@@ -1541,11 +1609,16 @@
 <p>Bind it to a debug key (e.g. a dev-only input) so you can toggle the overlay live while walking around your map.</p>
 </div>
 <hr />
+<h3 id="reading-the-emitter-lines">Reading the emitter lines<a class="headerlink" href="#reading-the-emitter-lines" title="Permanent link">&para;</a></h3>
+<p>When a speaker is heard from several places at once (their body <strong>and</strong> a radio), you get <strong>one line per emitter</strong>. Line colour goes from green (clear) to red (occluded), and the <strong>brightness follows the emitter selection</strong>: the brightest line is the one you're actually hearing.</p>
+<p>Walk between a speaker and a radio rebroadcasting them and you'll see the handover happen live, which is the fastest way to tune <code>Emitter Switch Hysteresis</code> and <code>Emitter Crossfade Time</code>. Receiver lines are thicker than body lines and, with <code>Show Text</code> on, are labelled with the receiver's actor, its channel and its current weight in percent. See <a href="../receivers/">Radios &amp; Receivers</a>.</p>
+<hr />
 <h3 id="what-to-look-for">What to look for<a class="headerlink" href="#what-to-look-for" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>No text over a speaker who should be talking?</strong> They're probably not calling <code>Set Active Voice(true)</code>, or they're on a different <a href="../channels/">channel</a>.</li>
 <li><strong>Text shows transmitting but you hear nothing?</strong> Check <a href="../muting/">muting</a> and your attenuation range, or you're testing with a single player (you never hear yourself).</li>
 <li><strong>Voice cuts through walls?</strong> Occlusion lines will show whether the trace hits your geometry, verify the mesh responds to the <code>Occlusion Trace Channel</code>.</li>
+<li><strong>A radio stays silent?</strong> Check the receiver's <code>Listen Channel</code> matches the speaker, that <code>Receiver Enabled</code> is on, and that its <code>Max Simultaneous Speakers</code> isn't already full.</li>
 </ul>
 <hr />
 <h2 id="need-help">📢 Need help?<a class="headerlink" href="#need-help" title="Permanent link">&para;</a></h2>

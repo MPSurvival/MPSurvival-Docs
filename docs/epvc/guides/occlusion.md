@@ -15,6 +15,9 @@ On each listener's machine, EPVC periodically traces from the speaker to the lis
 
 The result is blended in/out smoothly so it never pops.
 
+!!! note
+    Occlusion is evaluated **per emitter**, from where each one actually sits. A [radio](receivers.md) behind a wall is muffled even when the speaker is standing in the open, and each emitter uses the config it plays on (the receiver's `Output Configuration` when it has one).
+
 ---
 
 ### 1. Enable it on the config

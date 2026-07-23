@@ -2,9 +2,19 @@
 
 Welcome to the official documentation for **Easy Proximity Voice Chat** (EPVC), the drop-in proximity voice chat for Unreal Engine.
 
-No OnlineSubsystem. No EOS/Steam voice setup. It runs over your game's **normal replication**, works on **dedicated servers**, and is fully testable in **PIE**. Voice is treated as a real gameplay signal: channels, occlusion through geometry, runtime-swappable config, server & client muting, and Blueprint events.
+No OnlineSubsystem. No EOS/Steam voice setup. It runs over your game's **normal replication**, works on **dedicated servers**, and is fully testable in **PIE**. Voice is treated as a real gameplay signal: channels, radios, voice effects, occlusion through geometry, runtime-swappable config, server & client muting, and Blueprint events.
 
 > 🎯 Designed to be integrated in minutes, not weeks. Add one component, flip one setting, and talk.
+
+---
+
+## 🆕 What's new in 1.1
+
+- **Radios & Receivers**: drop the new **Proximity Voice Receiver** component on any actor and it rebroadcasts a whole channel out of it. Radios, intercoms, PA speakers, walkie-talkies. See [Radios & Receivers](guides/receivers.md).
+- **Voice Effects**: run voices through a **Source Effect Chain** (bitcrusher, filter, EQ...) straight from the config asset. See [Voice Effects](guides/effects.md).
+- **Emitter selection**: a speaker heard from their body *and* a radio no longer comb-filters, one emitter wins with a smooth crossfade. See [Configuration](guides/configuration.md).
+- **Per-emitter occlusion**: a radio behind a wall is muffled even when the speaker is out in the open.
+- **Debug overlay**: one line per emitter, brightest = the one you're hearing.
 
 ---
 
@@ -53,6 +63,17 @@ You do **not** need to enable Steam voice, provision an EOS RTC (Voice) product,
 - Listeners only hear speakers on their **own** channel
 - Great for teams, radios, lobbies, spectators
 
+### Radios & Receivers
+- One component turns any actor into a **radio, intercom or PA speaker**
+- Rebroadcasts a whole channel with its **own** attenuation, volume and effects
+- Hear the channel without being on it, no replication needed on the actor
+- Smart emitter selection when a voice reaches you from body **and** radio
+
+### Voice Effects
+- Per-speaker **Source Effect Chain** (bitcrusher, filter, EQ, ring mod…)
+- Applied per emitter: clean on the pawn, crunchy on the radio
+- Swappable at runtime like any other config setting
+
 ### Occlusion
 - Voices get **muffled** by world geometry between speaker and listener
 - Per **physical material** presets (glass, concrete, wood…)
@@ -77,13 +98,15 @@ You do **not** need to enable Steam voice, provision an EOS RTC (Voice) product,
 
 Use the navigation to set things up, in order:
 
-- [Quick Start](setup/quick_start.md) — enable voice and hear your first words
-- [Configuration (Data Asset)](guides/configuration.md) — tune capture, playback, latency
-- [Channels](guides/channels.md) — separate who hears who
-- [Muting](guides/muting.md) — local & server muting
-- [Occlusion](guides/occlusion.md) — muffle voices through walls
-- [Blueprint Events](guides/events.md) — react to voice in your UI/gameplay
-- [Debug Overlay](guides/debug.md) — see what's happening in-world
+- [Quick Start](setup/quick_start.md), enable voice and hear your first words
+- [Configuration (Data Asset)](guides/configuration.md), tune capture, playback, latency
+- [Channels](guides/channels.md), separate who hears who
+- [Radios & Receivers](guides/receivers.md), rebroadcast a channel out of a radio or intercom
+- [Voice Effects](guides/effects.md), bitcrusher, filters and the radio crunch
+- [Muting](guides/muting.md), local & server muting
+- [Occlusion](guides/occlusion.md), muffle voices through walls
+- [Blueprint Events](guides/events.md), react to voice in your UI/gameplay
+- [Debug Overlay](guides/debug.md), see what's happening in-world
 
 ---
 

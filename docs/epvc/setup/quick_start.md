@@ -74,6 +74,17 @@ Walk the two players close together and talk.
 
 ---
 
+### 5. Going further
+
+Once you can hear each other, the rest is opt-in:
+
+- [Channels](../guides/channels.md), so teams don't hear each other
+- [Radios & Receivers](../guides/receivers.md), one component to turn a prop into a radio or an intercom
+- [Voice Effects](../guides/effects.md), the radio crunch and other source effects
+- [Occlusion](../guides/occlusion.md), muffle voices through walls
+
+---
+
 ## 📢 Need help?
 
 [👉 Join the Discord](https://discord.gg/EqHCtq38jy)

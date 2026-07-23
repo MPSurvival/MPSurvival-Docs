@@ -34,6 +34,7 @@ How the voice sounds on receiving machines.
 | `Proximity Attenuation` | Sound Attenuation used for spatialized playback. If empty, engine defaults are used. |
 | `Playback Attach Socket` | Mesh socket the voice plays from (e.g. `head`). Falls back to the actor root. |
 | `Base Low Pass Frequency` | Always-on low-pass cutoff (Hz) for this speaker, independent of occlusion. `0` = off. |
+| `Source Effect Chain` | Source effects applied to the voice itself (bitcrusher, EQ, filter...). Voice is mono, use effects that support 1 channel. See [Voice Effects](effects.md). |
 
 !!! tip
     Assign a **Sound Attenuation** asset to `Proximity Attenuation` to control how far a voice carries and how it falls off with distance. This is your main "how loud, how far" dial.
@@ -50,6 +51,20 @@ This effectively turns EPVC into a **global / non-proximity voice chat**. Handy 
 
 !!! note
     Removing the attenuation only disables **distance falloff**. [Muting](muting.md), [Channels](channels.md) and [Occlusion](occlusion.md) still apply, so you can still, say, have global team voice that gets muffled through walls, or none of that, it's up to your config.
+
+#### 🔊 Emitters
+
+A speaker's voice can come out of several places at once: their own body, plus any [receiver](receivers.md) (radio, intercom) rebroadcasting their channel. These settings decide which one you actually hear when more than one is audible.
+
+| Property | Description |
+|----------|-------------|
+| `Emitter Selection` | `Loudest Wins` (default), `Priority`, or `Mix All`. See [Radios & Receivers](receivers.md). |
+| `Emitter Crossfade Time` | Seconds to fade between emitters when the winner changes. `0` = hard switch (audible click). |
+| `Emitter Switch Hysteresis` | How much louder a challenger must be to take over (`0.1` = 10%). Stops the two swapping every frame at the crossover point. |
+| `Body Emitter Priority` | Priority of the speaker's own body, used when `Emitter Selection` is `Priority`. Receivers carry their own. |
+
+!!! note
+    These only matter if your project uses receivers. With no receiver in the level, a speaker has a single emitter (their body) and nothing here changes anything.
 
 ---
 

@@ -31,9 +31,25 @@ You don't always need events, these are pure reads on the component:
 | `Get Is Active Voice()` | True while this player is transmitting (valid on server and all clients). |
 | `Is Self Speaking()` | True while transmitting, as seen on the player's own machine. |
 | `Get Voice Level()` | On the owner: live mic level. Elsewhere: last packet level, decaying to 0. |
-| `Get Occlusion Amount()` | 0..1 how muffled this speaker is on the local machine. |
+| `Get Occlusion Amount()` | 0..1 how muffled this speaker's **body** is on the local machine. |
 | `Is Capture Ready()` | True on the owning client once the mic is initialized. |
-| `Get Playback Audio Component()` | The Audio Component the remote voice plays through (null until the first packet). |
+| `Get Playback Audio Component()` | The Audio Component the speaker's own body plays through (null until the first packet). Receivers have their own. |
+| `Get Active Receivers()` | The [receivers](receivers.md) currently rebroadcasting this speaker on the local machine. |
+| `Get Receiver Audio Component(Receiver)` | The Audio Component this speaker plays through on that receiver. Null while it isn't rebroadcasting them. |
+
+---
+
+### Receiver events
+
+If you use [radios and receivers](receivers.md), the **Proximity Voice Receiver** component has its own set:
+
+| Event | Params | Use it for |
+|-------|--------|------------|
+| `On Speaker Started` | `Speaker` | A radio click, a burst of static, a "transmission incoming" UI. |
+| `On Speaker Stopped` | `Speaker` | The tail click, hide the UI. |
+| `On Receiver Activity` | `Volume` | Drive a radio light, a VU meter, a shaking speaker cone. |
+
+Plus the pure reads `Is Receiving Voice()`, `Get Received Voice Level()` and `Get Speakers On Air()`.
 
 ---
 

@@ -47,6 +47,8 @@ nav:
       - Guides:
           - Configuration: epvc/guides/configuration.md
           - Channels: epvc/guides/channels.md
+          - Radios & Receivers: epvc/guides/receivers.md
+          - Voice Effects: epvc/guides/effects.md
           - Muting: epvc/guides/muting.md
           - Occlusion: epvc/guides/occlusion.md
           - Blueprint Events: epvc/guides/events.md

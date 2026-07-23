@@ -1171,6 +1171,10 @@
       
         
       
+        
+      
+        
+      
     
     
     
@@ -1303,6 +1307,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#emitters" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔊 Emitters
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1375,6 +1388,52 @@
   
   <span class="md-ellipsis">
     Channels
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../receivers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Radios & Receivers
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../effects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Voice Effects
     
   </span>
   
@@ -1555,6 +1614,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#emitters" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔊 Emitters
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1686,6 +1754,10 @@
 <td><code>Base Low Pass Frequency</code></td>
 <td>Always-on low-pass cutoff (Hz) for this speaker, independent of occlusion. <code>0</code> = off.</td>
 </tr>
+<tr>
+<td><code>Source Effect Chain</code></td>
+<td>Source effects applied to the voice itself (bitcrusher, EQ, filter...). Voice is mono, use effects that support 1 channel. See <a href="../effects/">Voice Effects</a>.</td>
+</tr>
 </tbody>
 </table>
 <div class="admonition tip">
@@ -1703,6 +1775,38 @@
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Removing the attenuation only disables <strong>distance falloff</strong>. <a href="../muting/">Muting</a>, <a href="../channels/">Channels</a> and <a href="../occlusion/">Occlusion</a> still apply, so you can still, say, have global team voice that gets muffled through walls, or none of that, it's up to your config.</p>
+</div>
+<h4 id="emitters">🔊 Emitters<a class="headerlink" href="#emitters" title="Permanent link">&para;</a></h4>
+<p>A speaker's voice can come out of several places at once: their own body, plus any <a href="../receivers/">receiver</a> (radio, intercom) rebroadcasting their channel. These settings decide which one you actually hear when more than one is audible.</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Emitter Selection</code></td>
+<td><code>Loudest Wins</code> (default), <code>Priority</code>, or <code>Mix All</code>. See <a href="../receivers/">Radios &amp; Receivers</a>.</td>
+</tr>
+<tr>
+<td><code>Emitter Crossfade Time</code></td>
+<td>Seconds to fade between emitters when the winner changes. <code>0</code> = hard switch (audible click).</td>
+</tr>
+<tr>
+<td><code>Emitter Switch Hysteresis</code></td>
+<td>How much louder a challenger must be to take over (<code>0.1</code> = 10%). Stops the two swapping every frame at the crossover point.</td>
+</tr>
+<tr>
+<td><code>Body Emitter Priority</code></td>
+<td>Priority of the speaker's own body, used when <code>Emitter Selection</code> is <code>Priority</code>. Receivers carry their own.</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>These only matter if your project uses receivers. With no receiver in the level, a speaker has a single emitter (their body) and nothing here changes anything.</p>
 </div>
 <hr />
 <h3 id="4-activity">4. Activity<a class="headerlink" href="#4-activity" title="Permanent link">&para;</a></h3>

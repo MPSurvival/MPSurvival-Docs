@@ -1169,6 +1169,10 @@
       
         
       
+        
+      
+        
+      
     
     
     
@@ -1244,6 +1248,52 @@
   
   <span class="md-ellipsis">
     Channels
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="guides/receivers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Radios & Receivers
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="guides/effects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Voice Effects
     
   </span>
   
@@ -1388,9 +1438,27 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#whats-new-in-11" class="md-nav__link">
+    <span class="md-ellipsis">
+      🆕 What's new in 1.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#what-is-easy-proximity-voice-chat" class="md-nav__link">
     <span class="md-ellipsis">
       💥 What is Easy Proximity Voice Chat?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#steam-eos-compatibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔌 Steam &amp; EOS Compatibility
     </span>
   </a>
   
@@ -1419,6 +1487,24 @@
   <a href="#channels" class="md-nav__link">
     <span class="md-ellipsis">
       Channels
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#radios-receivers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Radios &amp; Receivers
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#voice-effects" class="md-nav__link">
+    <span class="md-ellipsis">
+      Voice Effects
     </span>
   </a>
   
@@ -1501,19 +1587,76 @@
 
 <h1 id="easy-proximity-voice-chat">🎙️ Easy Proximity Voice Chat<a class="headerlink" href="#easy-proximity-voice-chat" title="Permanent link">&para;</a></h1>
 <p>Welcome to the official documentation for <strong>Easy Proximity Voice Chat</strong> (EPVC), the drop-in proximity voice chat for Unreal Engine.</p>
-<p>No OnlineSubsystem. No EOS/Steam voice setup. It runs over your game's <strong>normal replication</strong>, works on <strong>dedicated servers</strong>, and is fully testable in <strong>PIE</strong>. Voice is treated as a real gameplay signal: channels, occlusion through geometry, runtime-swappable config, server &amp; client muting, and Blueprint events.</p>
+<p>No OnlineSubsystem. No EOS/Steam voice setup. It runs over your game's <strong>normal replication</strong>, works on <strong>dedicated servers</strong>, and is fully testable in <strong>PIE</strong>. Voice is treated as a real gameplay signal: channels, radios, voice effects, occlusion through geometry, runtime-swappable config, server &amp; client muting, and Blueprint events.</p>
 <blockquote>
 <p>🎯 Designed to be integrated in minutes, not weeks. Add one component, flip one setting, and talk.</p>
 </blockquote>
+<hr />
+<h2 id="whats-new-in-11">🆕 What's new in 1.1<a class="headerlink" href="#whats-new-in-11" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Radios &amp; Receivers</strong>: drop the new <strong>Proximity Voice Receiver</strong> component on any actor and it rebroadcasts a whole channel out of it. Radios, intercoms, PA speakers, walkie-talkies. See <a href="guides/receivers/">Radios &amp; Receivers</a>.</li>
+<li><strong>Voice Effects</strong>: run voices through a <strong>Source Effect Chain</strong> (bitcrusher, filter, EQ...) straight from the config asset. See <a href="guides/effects/">Voice Effects</a>.</li>
+<li><strong>Emitter selection</strong>: a speaker heard from their body <em>and</em> a radio no longer comb-filters, one emitter wins with a smooth crossfade. See <a href="guides/configuration/">Configuration</a>.</li>
+<li><strong>Per-emitter occlusion</strong>: a radio behind a wall is muffled even when the speaker is out in the open.</li>
+<li><strong>Debug overlay</strong>: one line per emitter, brightest = the one you're hearing.</li>
+</ul>
 <hr />
 <h2 id="what-is-easy-proximity-voice-chat">💥 What is Easy Proximity Voice Chat?<a class="headerlink" href="#what-is-easy-proximity-voice-chat" title="Permanent link">&para;</a></h2>
 <p>EPVC gives every player a <strong>spatialized voice</strong> that other nearby players hear based on distance, world geometry, and channels, without you touching any online backend. Drop the component on your player, decide <em>when</em> it transmits (push-to-talk, open mic, trigger zone), and the plugin handles capture, encoding, replication, jitter buffering, and 3D playback.</p>
 <ul>
 <li>✅ 100% over normal replication, no OnlineSubsystem / EOS / Steam voice</li>
+<li>✅ Works <strong>with</strong> Steam and EOS out of the box, zero extra setup</li>
 <li>✅ Dedicated-server ready &amp; PIE-testable</li>
 <li>✅ Blueprint-first API</li>
 <li>✅ Data-Asset configuration, swappable at runtime</li>
 </ul>
+<hr />
+<h2 id="steam-eos-compatibility">🔌 Steam &amp; EOS Compatibility<a class="headerlink" href="#steam-eos-compatibility" title="Permanent link">&para;</a></h2>
+<p><strong>Yes, EPVC works with Steam and EOS.</strong> To be clear about what "no OnlineSubsystem" means: EPVC replaces their <em>voice</em> stack, not their <em>networking</em>. You keep using Steam or EOS for sessions, matchmaking and transport exactly as you do today.</p>
+<p>This works because EPVC only ever speaks the language of standard Unreal replication — a <code>Server</code> RPC to send captured audio, a <code>NetMulticast</code> RPC to distribute it. Steam and EOS plug in one layer below that, at the <strong>NetDriver / SocketSubsystem</strong> level (<code>SteamSockets</code>, <code>EOSNetDriver</code>). Your voice packets ride over whatever transport is active without ever knowing about it.</p>
+<p>The result is that the exact same code path runs everywhere:</p>
+<table>
+<thead>
+<tr>
+<th>Setup</th>
+<th>Works</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PIE / standalone</td>
+<td>✅</td>
+<td>No online backend needed</td>
+</tr>
+<tr>
+<td><code>IpNetDriver</code> (LAN, direct IP)</td>
+<td>✅</td>
+<td></td>
+</tr>
+<tr>
+<td>Steam listen server (P2P)</td>
+<td>✅</td>
+<td>No <code>bHasVoiceEnabled</code>, no Steam voice config</td>
+</tr>
+<tr>
+<td>Steam dedicated server</td>
+<td>✅</td>
+<td></td>
+</tr>
+<tr>
+<td>EOS listen server (P2P / relay)</td>
+<td>✅</td>
+<td>No EOS RTC / Voice product required</td>
+</tr>
+<tr>
+<td>EOS dedicated server</td>
+<td>✅</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>You do <strong>not</strong> need to enable Steam voice, provision an EOS RTC (Voice) product, or add <code>OnlineSubsystemSteam</code> / <code>OnlineSubsystemEOS</code> to your dependencies for EPVC to function.</p>
 <hr />
 <h2 id="key-features">⚙️ Key Features<a class="headerlink" href="#key-features" title="Permanent link">&para;</a></h2>
 <h3 id="proximity-voice">Proximity Voice<a class="headerlink" href="#proximity-voice" title="Permanent link">&para;</a></h3>
@@ -1527,6 +1670,19 @@
 <li>Speakers talk and listen on a channel</li>
 <li>Listeners only hear speakers on their <strong>own</strong> channel</li>
 <li>Great for teams, radios, lobbies, spectators</li>
+</ul>
+<h3 id="radios-receivers">Radios &amp; Receivers<a class="headerlink" href="#radios-receivers" title="Permanent link">&para;</a></h3>
+<ul>
+<li>One component turns any actor into a <strong>radio, intercom or PA speaker</strong></li>
+<li>Rebroadcasts a whole channel with its <strong>own</strong> attenuation, volume and effects</li>
+<li>Hear the channel without being on it, no replication needed on the actor</li>
+<li>Smart emitter selection when a voice reaches you from body <strong>and</strong> radio</li>
+</ul>
+<h3 id="voice-effects">Voice Effects<a class="headerlink" href="#voice-effects" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Per-speaker <strong>Source Effect Chain</strong> (bitcrusher, filter, EQ, ring mod…)</li>
+<li>Applied per emitter: clean on the pawn, crunchy on the radio</li>
+<li>Swappable at runtime like any other config setting</li>
 </ul>
 <h3 id="occlusion">Occlusion<a class="headerlink" href="#occlusion" title="Permanent link">&para;</a></h3>
 <ul>
@@ -1554,13 +1710,15 @@
 <h2 id="guides">📚 Guides<a class="headerlink" href="#guides" title="Permanent link">&para;</a></h2>
 <p>Use the navigation to set things up, in order:</p>
 <ul>
-<li><a href="setup/quick_start/">Quick Start</a> — enable voice and hear your first words</li>
-<li><a href="guides/configuration/">Configuration (Data Asset)</a> — tune capture, playback, latency</li>
-<li><a href="guides/channels/">Channels</a> — separate who hears who</li>
-<li><a href="guides/muting/">Muting</a> — local &amp; server muting</li>
-<li><a href="guides/occlusion/">Occlusion</a> — muffle voices through walls</li>
-<li><a href="guides/events/">Blueprint Events</a> — react to voice in your UI/gameplay</li>
-<li><a href="guides/debug/">Debug Overlay</a> — see what's happening in-world</li>
+<li><a href="setup/quick_start/">Quick Start</a>, enable voice and hear your first words</li>
+<li><a href="guides/configuration/">Configuration (Data Asset)</a>, tune capture, playback, latency</li>
+<li><a href="guides/channels/">Channels</a>, separate who hears who</li>
+<li><a href="guides/receivers/">Radios &amp; Receivers</a>, rebroadcast a channel out of a radio or intercom</li>
+<li><a href="guides/effects/">Voice Effects</a>, bitcrusher, filters and the radio crunch</li>
+<li><a href="guides/muting/">Muting</a>, local &amp; server muting</li>
+<li><a href="guides/occlusion/">Occlusion</a>, muffle voices through walls</li>
+<li><a href="guides/events/">Blueprint Events</a>, react to voice in your UI/gameplay</li>
+<li><a href="guides/debug/">Debug Overlay</a>, see what's happening in-world</li>
 </ul>
 <hr />
 <h2 id="join-the-community">📢 Join the Community<a class="headerlink" href="#join-the-community" title="Permanent link">&para;</a></h2>

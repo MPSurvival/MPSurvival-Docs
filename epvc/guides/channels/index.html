@@ -12,7 +12,7 @@
         <link rel="prev" href="../configuration/">
       
       
-        <link rel="next" href="../muting/">
+        <link rel="next" href="../receivers/">
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
@@ -1171,6 +1171,10 @@
       
         
       
+        
+      
+        
+      
     
     
     
@@ -1308,6 +1312,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#radios-listen-on-a-channel-too" class="md-nav__link">
+    <span class="md-ellipsis">
+      Radios listen on a channel too
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#example-team-voice" class="md-nav__link">
     <span class="md-ellipsis">
       Example: team voice
@@ -1329,6 +1342,52 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../receivers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Radios & Receivers
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../effects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Voice Effects
+    
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -1486,6 +1545,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#radios-listen-on-a-channel-too" class="md-nav__link">
+    <span class="md-ellipsis">
+      Radios listen on a channel too
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#example-team-voice" class="md-nav__link">
     <span class="md-ellipsis">
       Example: team voice
@@ -1541,6 +1609,10 @@
 <div class="highlight"><pre><span></span><code>Get World Subsystem (Proximity Voice Chat Subsystem) → Get Local Listener Channel
 </code></pre></div>
 <p>Handy for UI ("You are on Team Radio 1") or gating other systems.</p>
+<hr />
+<h3 id="radios-listen-on-a-channel-too">Radios listen on a channel too<a class="headerlink" href="#radios-listen-on-a-channel-too" title="Permanent link">&para;</a></h3>
+<p>A <strong>Proximity Voice Receiver</strong> tunes to a channel the same way a player does, and rebroadcasts everyone talking on it out of the actor it sits on. That's how you build a radio, an intercom or a PA speaker: the listener standing next to it hears the channel <strong>without</strong> being on it themselves.</p>
+<p>See <a href="../receivers/">Radios &amp; Receivers</a>.</p>
 <hr />
 <h3 id="example-team-voice">Example: team voice<a class="headerlink" href="#example-team-voice" title="Permanent link">&para;</a></h3>
 <ol>

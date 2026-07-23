@@ -1171,6 +1171,10 @@
       
         
       
+        
+      
+        
+      
     
     
     
@@ -1246,6 +1250,52 @@
   
   <span class="md-ellipsis">
     Channels
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../receivers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Radios & Receivers
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../effects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Voice Effects
     
   </span>
   
@@ -1377,6 +1427,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#receiver-events" class="md-nav__link">
+    <span class="md-ellipsis">
+      Receiver events
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#example-floating-speaking-icon" class="md-nav__link">
     <span class="md-ellipsis">
       Example: floating "speaking" icon
@@ -1480,6 +1539,15 @@
   <a href="#handy-getters" class="md-nav__link">
     <span class="md-ellipsis">
       Handy getters
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#receiver-events" class="md-nav__link">
+    <span class="md-ellipsis">
+      Receiver events
     </span>
   </a>
   
@@ -1601,7 +1669,7 @@
 </tr>
 <tr>
 <td><code>Get Occlusion Amount()</code></td>
-<td>0..1 how muffled this speaker is on the local machine.</td>
+<td>0..1 how muffled this speaker's <strong>body</strong> is on the local machine.</td>
 </tr>
 <tr>
 <td><code>Is Capture Ready()</code></td>
@@ -1609,10 +1677,48 @@
 </tr>
 <tr>
 <td><code>Get Playback Audio Component()</code></td>
-<td>The Audio Component the remote voice plays through (null until the first packet).</td>
+<td>The Audio Component the speaker's own body plays through (null until the first packet). Receivers have their own.</td>
+</tr>
+<tr>
+<td><code>Get Active Receivers()</code></td>
+<td>The <a href="../receivers/">receivers</a> currently rebroadcasting this speaker on the local machine.</td>
+</tr>
+<tr>
+<td><code>Get Receiver Audio Component(Receiver)</code></td>
+<td>The Audio Component this speaker plays through on that receiver. Null while it isn't rebroadcasting them.</td>
 </tr>
 </tbody>
 </table>
+<hr />
+<h3 id="receiver-events">Receiver events<a class="headerlink" href="#receiver-events" title="Permanent link">&para;</a></h3>
+<p>If you use <a href="../receivers/">radios and receivers</a>, the <strong>Proximity Voice Receiver</strong> component has its own set:</p>
+<table>
+<thead>
+<tr>
+<th>Event</th>
+<th>Params</th>
+<th>Use it for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>On Speaker Started</code></td>
+<td><code>Speaker</code></td>
+<td>A radio click, a burst of static, a "transmission incoming" UI.</td>
+</tr>
+<tr>
+<td><code>On Speaker Stopped</code></td>
+<td><code>Speaker</code></td>
+<td>The tail click, hide the UI.</td>
+</tr>
+<tr>
+<td><code>On Receiver Activity</code></td>
+<td><code>Volume</code></td>
+<td>Drive a radio light, a VU meter, a shaking speaker cone.</td>
+</tr>
+</tbody>
+</table>
+<p>Plus the pure reads <code>Is Receiving Voice()</code>, <code>Get Received Voice Level()</code> and <code>Get Speakers On Air()</code>.</p>
 <hr />
 <h3 id="example-floating-speaking-icon">Example: floating "speaking" icon<a class="headerlink" href="#example-floating-speaking-icon" title="Permanent link">&para;</a></h3>
 <ol>

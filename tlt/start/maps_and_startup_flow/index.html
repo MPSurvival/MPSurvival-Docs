@@ -4148,10 +4148,6 @@
 <td>The demonstration level. A linear course of rooms, one system per room, with a panel at the entrance that says what you are looking at.</td>
 </tr>
 <tr>
-<td><code>L_LocomotionTesting</code></td>
-<td>The sandbox. Almost everything you can place is dropped in it: AI, pickups, doors, a workbench, traps, traversal blocks, a training dummy.</td>
-</tr>
-<tr>
 <td><code>L_MeshesShowcaseMap</code></td>
 <td>Every mesh of the environment kit laid out on the ground, and nothing else. Useful when you are dressing a level and want to see a piece before you place it.</td>
 </tr>
@@ -4198,7 +4194,7 @@
 </tr>
 </tbody>
 </table>
-<p><code>BP_TheLastTemplateGameMode</code> is set once, in <strong>Project Settings</strong>, under <strong>Maps &amp; Modes</strong>, as the <code>Default GameMode</code>. The other two are set per level, in <code>World Settings</code>, as a <code>GameMode Override</code>. That is why <code>L_ShowcaseMap</code>, <code>L_LocomotionTesting</code> and any level you add play the game with no setup: no override means the project default.</p>
+<p><code>BP_TheLastTemplateGameMode</code> is set once, in <strong>Project Settings</strong>, under <strong>Maps &amp; Modes</strong>, as the <code>Default GameMode</code>. The other two are set per level, in <code>World Settings</code>, as a <code>GameMode Override</code>. That is why <code>L_ShowcaseMap</code> and any level you add play the game with no setup: no override means the project default.</p>
 <p><code>BP_BootGameMode</code> has one field of its own.</p>
 <table>
 <thead>
@@ -4237,7 +4233,7 @@
 </tbody>
 </table>
 <p>Use <code>Open Level With Loading Screen</code> anywhere you would use <code>Open Level</code>. The template calls it from the boot game mode, from the menu when a slot is launched, from the pause menu when you quit to the main menu, and from the death screen when you continue from the last save.</p>
-<p><code>Level Name</code> is a name, not a path. The two level names that ship on those calls are <code>L_MainMenu</code> and <code>L_LocomotionTesting</code>.</p>
+<p><code>Level Name</code> is a name, not a path.</p>
 <p>The screen itself is <code>BP_LoadingScreenWidget</code>. Its <code>Fade Speed</code> and <code>Spinner Speed</code> are on the widget defaults if you want to change the pacing.</p>
 <hr />
 <h2 id="the-game-instance">The game instance<a class="headerlink" href="#the-game-instance" title="Permanent link">&para;</a></h2>
@@ -4281,7 +4277,7 @@
 <li>Build your level anywhere under <code>Content/</code>.</li>
 <li>Put a <code>Player Start</code> where the player should appear.</li>
 <li>Leave <code>World Settings</code> alone. With no <code>GameMode Override</code> the level uses <code>BP_TheLastTemplateGameMode</code>, so you get <code>BP_PlayerCharacter</code> and the full HUD.</li>
-<li>Open <code>BP_MainMenuWidget</code>, find the <code>Launch Slot</code> call on the new game path, and set its <code>In Level Name</code> pin to the name of your level. It ships as <code>L_LocomotionTesting</code>.</li>
+<li>Open <code>BP_MainMenuWidget</code>, find the <code>Launch Slot</code> call on the new game path, and set its <code>In Level Name</code> pin to the name of your level.</li>
 <li>Test by playing from <code>L_BootMap</code>, not from your level directly, so you go through the whole chain once.</li>
 </ol>
 <p>Continuing a game does not read that pin. It opens the level name stored in the save slot, so an old save still returns to the level it was made in.</p>
@@ -4289,7 +4285,7 @@
 <h2 id="editor-startup-map-is-not-game-default-map">Editor Startup Map is not Game Default Map<a class="headerlink" href="#editor-startup-map-is-not-game-default-map" title="Permanent link">&para;</a></h2>
 <p>The two are easy to mix up, and both are in <strong>Project Settings</strong>, under <strong>Maps &amp; Modes</strong>.</p>
 <ul>
-<li><code>Editor Startup Map</code> is the level the editor opens when you open the project. It ships as <code>L_LocomotionTesting</code>. Change it to whatever you are working on, it has no effect on the game.</li>
+<li><code>Editor Startup Map</code> is the level the editor opens when you open the project. Change it to whatever you are working on, it has no effect on the game.</li>
 <li><code>Game Default Map</code> is the level a packaged game loads first. It is <code>L_BootMap</code>, and it should stay <code>L_BootMap</code>. Point it straight at a gameplay level and you skip the menu, and with the menu you skip the save slot the rest of the game expects to be set.</li>
 </ul>
 <p>If you want a build that skips the menu on purpose, keep <code>L_BootMap</code> and change <code>Menu Level Name</code> on <code>BP_BootGameMode</code> to your level instead. The loading screen and the game instance still get their turn.</p>

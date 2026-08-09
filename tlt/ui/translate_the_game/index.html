@@ -3572,18 +3572,54 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#planned-sections" class="md-nav__link">
+  <a href="#the-three-config-lines-it-needs" class="md-nav__link">
     <span class="md-ellipsis">
-      Planned sections
+      The three config lines it needs
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#open-points-to-settle-before-this-page-is-written" class="md-nav__link">
+  <a href="#how-the-player-changes-language" class="md-nav__link">
     <span class="md-ellipsis">
-      Open points to settle before this page is written
+      How the player changes language
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#add-your-own-language" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add your own language
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#put-the-new-language-in-the-options-menu" class="md-nav__link">
+    <span class="md-ellipsis">
+      Put the new language in the options menu
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#your-own-text" class="md-nav__link">
+    <span class="md-ellipsis">
+      Your own text
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fonts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fonts
     </span>
   </a>
   
@@ -3977,18 +4013,54 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#planned-sections" class="md-nav__link">
+  <a href="#the-three-config-lines-it-needs" class="md-nav__link">
     <span class="md-ellipsis">
-      Planned sections
+      The three config lines it needs
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#open-points-to-settle-before-this-page-is-written" class="md-nav__link">
+  <a href="#how-the-player-changes-language" class="md-nav__link">
     <span class="md-ellipsis">
-      Open points to settle before this page is written
+      How the player changes language
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#add-your-own-language" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add your own language
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#put-the-new-language-in-the-options-menu" class="md-nav__link">
+    <span class="md-ellipsis">
+      Put the new language in the options menu
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#your-own-text" class="md-nav__link">
+    <span class="md-ellipsis">
+      Your own text
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fonts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fonts
     </span>
   </a>
   
@@ -4011,28 +4083,84 @@
 
 
 <h1 id="translate-the-game-into-another-language">Translate the game into another language<a class="headerlink" href="#translate-the-game-into-another-language" title="Permanent link">&para;</a></h1>
-<div class="admonition info">
-<p class="admonition-title">Outline, not written yet</p>
-<p>Answers how a buyer ships the game in a second language, and what they have to do for the text they add themselves.</p>
-</div>
-<h2 id="planned-sections">Planned sections<a class="headerlink" href="#planned-sections" title="Permanent link">&para;</a></h2>
-<ul>
-<li>What is translatable and what is not</li>
-<li>How text works in this template: every label the player reads is a text value, not a hard coded string</li>
-<li>The language page in the options menu, and what picking a line actually does</li>
-<li>Set up the Localization Dashboard for the project</li>
-<li>Gather the text out of the project</li>
-<li>Translate, then compile the language files</li>
-<li>Add a third language of your own</li>
-<li>Accents and fonts: the one thing that can silently break a language</li>
-<li>When you add your own screens, what to do so they follow the language</li>
-</ul>
-<h2 id="open-points-to-settle-before-this-page-is-written">Open points to settle before this page is written<a class="headerlink" href="#open-points-to-settle-before-this-page-is-written" title="Permanent link">&para;</a></h2>
-<ul>
-<li>The localization pass has not been done yet, so this page stays an outline until the languages are in.</li>
-<li>Verified on disk, and worth reusing when the page is written: the menu is already key based. Every row in a settings page Data Asset carries keys such as <code>audio.overall</code> and <code>audio.overall.desc</code> rather than literal text, and <code>DA_Page_Language</code> already offers <code>lang.en</code> and <code>lang.fr</code>.</li>
-<li>Verified on disk: there is no <code>Content/Localization</code> folder, no compiled language file anywhere in the project, no string table asset, and <code>CulturesToStage</code> lists English only. Nothing in the manual may suggest a second language works today.</li>
-</ul>
+<p>The template ships in <strong>English and French</strong>. Every label the player reads is a text value that goes through Unreal's localization system, so the language swaps at runtime with no Blueprint work.</p>
+<p>What comes with the template is the compiled language data, in <code>Content/TheLastTemplate/Localization/Game/</code>:</p>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Game.locmeta</code></td>
+<td>The description of the target.</td>
+</tr>
+<tr>
+<td><code>en/Game.locres</code></td>
+<td>Every English string of the template.</td>
+</tr>
+<tr>
+<td><code>fr-FR/Game.locres</code></td>
+<td>The French of the same strings.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="the-three-config-lines-it-needs">The three config lines it needs<a class="headerlink" href="#the-three-config-lines-it-needs" title="Permanent link">&para;</a></h2>
+<p>Localization is read from paths listed in the project config. Open <code>Config/DefaultGame.ini</code> and make sure these are there. Add them if they are not, under <code>[Internationalization]</code>:</p>
+<div class="highlight"><pre><span></span><code>+LocalizationPaths=%GAMEDIR%Content/TheLastTemplate/Localization
++CultureMappings=&quot;fr;fr-FR&quot;
++CultureMappings=&quot;fr-BE;fr-FR&quot;
++CultureMappings=&quot;fr-CA;fr-FR&quot;
++CultureMappings=&quot;fr-CH;fr-FR&quot;
+</code></pre></div>
+<p>The first line is the one that matters. Without it the <code>.locres</code> files sit on disk and nothing reads them, the game runs in English, and there is no warning of any kind.</p>
+<p>The culture mappings send every French variant to the same file, so a player in Belgium, Canada or Switzerland gets French instead of falling back to English.</p>
+<p>For a packaged build, <code>Config/DefaultGame.ini</code> also needs the cultures staged:</p>
+<div class="highlight"><pre><span></span><code>+CulturesToStage=en
++CulturesToStage=fr-FR
++DirectoriesToAlwaysStageAsUFS=(Path=&quot;TheLastTemplate/Localization&quot;)
+</code></pre></div>
+<hr />
+<h2 id="how-the-player-changes-language">How the player changes language<a class="headerlink" href="#how-the-player-changes-language" title="Permanent link">&para;</a></h2>
+<p>The options menu has a <strong>Language</strong> page, built from <code>DA_Page_Language</code> like every other page. It holds one selector row with the languages on it.</p>
+<p>When the player picks one, <code>SG_MenuSettings</code> calls <code>Apply Language</code>, which calls <strong>Set Current Culture</strong>. The interface swaps on the spot. The choice is stored with the rest of the settings under the key <code>lang.index</code>, so it survives a restart.</p>
+<p>Nothing else in the project sets a culture. To force a language from your own graph, call <strong>Set Current Culture</strong> the same way and save the settings.</p>
+<hr />
+<h2 id="add-your-own-language">Add your own language<a class="headerlink" href="#add-your-own-language" title="Permanent link">&para;</a></h2>
+<p>The template gives you compiled files, not the translation sources, so a new language is a target of your own. That is the normal way to work anyway: your text and the template's text stay in separate files and Unreal merges them at runtime.</p>
+<ol>
+<li>Open <strong>Tools</strong>, then <strong>Localization Dashboard</strong>.</li>
+<li>Create a target, or use the <code>Game</code> target your project already has.</li>
+<li>Under <strong>Cultures</strong>, add the languages you want.</li>
+<li>Click <strong>Gather Text</strong>. It walks the project and collects every text value, yours and the template's.</li>
+<li>Translate. <strong>Export</strong> writes a <code>.po</code> file that any translation tool opens, and <strong>Import</strong> brings it back.</li>
+<li>Click <strong>Compile Text</strong>.</li>
+<li>Add your culture to <code>CulturesToStage</code> in <code>Config/DefaultGame.ini</code>.</li>
+</ol>
+<p>Leave <code>+LocalizationPaths</code> pointing at the template folder while you do this. Unreal reads every path in the list and merges them, so the template's own English and French keep working next to your target instead of being replaced by it.</p>
+<hr />
+<h2 id="put-the-new-language-in-the-options-menu">Put the new language in the options menu<a class="headerlink" href="#put-the-new-language-in-the-options-menu" title="Permanent link">&para;</a></h2>
+<p>The page lists what the player can pick, so a compiled language nobody can select is invisible.</p>
+<ol>
+<li>Open <code>DA_Page_Language</code>.</li>
+<li>Find the selector row.</li>
+<li>Add an entry to <code>Options Keys</code>, following the ones already there: <code>lang.en</code>, <code>lang.fr</code>.</li>
+<li>Add the matching text for that key so the option shows a name.</li>
+</ol>
+<p>The order of the entries is the order of the values saved in <code>lang.index</code>. Adding a language at the end is safe. Inserting one in the middle shifts every saved choice by one, so players come back to the wrong language.</p>
+<hr />
+<h2 id="your-own-text">Your own text<a class="headerlink" href="#your-own-text" title="Permanent link">&para;</a></h2>
+<p>Two rules cover almost everything.</p>
+<p><strong>Use Text, not String.</strong> A <code>Text</code> pin, a <code>Text</code> variable and a text block in a widget are all gathered. A <code>String</code> is never gathered and never translated. If a label of yours stays English in a translated build, that is the first thing to check.</p>
+<p><strong>Gather again after you add screens.</strong> New text does not appear in the manifest until you click <strong>Gather Text</strong> again. Then translate the new entries and compile.</p>
+<p>If you build a sentence out of pieces, use <strong>Format Text</strong> with named arguments rather than joining strings. Word order changes between languages, and a format string lets the translator move the pieces around. The template already does this for the item counter and the ingredient list.</p>
+<hr />
+<h2 id="fonts">Fonts<a class="headerlink" href="#fonts" title="Permanent link">&para;</a></h2>
+<p>The fonts that ship carry accented characters, which is what French needs. A language that uses another script, such as Russian, Greek, Japanese or Arabic, needs a font that has those glyphs. Swap the font on the widgets, or add a fallback font in the font asset itself.</p>
+<p>Nothing in the interface assumes a language. The menus and the HUD are laid out with boxes that grow, so a German label twice as long as its English original pushes its row instead of being cut.</p>
 <hr />
 <p><a href="https://discord.gg/EqHCtq38jy">Join the Discord</a></p>
 

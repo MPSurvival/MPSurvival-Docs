@@ -4243,7 +4243,7 @@
 <p>The instance is a blendable on the post process component of <code>BP_VisualEffects</code>. Its strength is not a variable on the material: the player writes into the material parameter collection <code>MPC_PlayerMaterials</code>, which has a single scalar called <code>ListenMode</code>, and the material reads it. That is why the fade in and out is smooth and why nothing has to be spawned when the key is pressed.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>Listen mode is invisible in a level that has no <code>BP_VisualEffects</code> actor in it. That actor is what carries <code>MI_TLTPostProcess</code>, and it is the only thing in the project that does. <code>L_ShowcaseMap</code> and <code>L_LocomotionTesting</code> each have one. If you build a new map and the key seems dead, that is the reason.</p>
+<p>Listen mode is invisible in a level that has no <code>BP_VisualEffects</code> actor in it. That actor is what carries <code>MI_TLTPostProcess</code>, and it is the only thing in the project that does. <code>L_ShowcaseMap</code> has one. If you build a new map and the key seems dead, that is the reason.</p>
 </div>
 <h3 id="the-values-that-shape-it">The values that shape it<a class="headerlink" href="#the-values-that-shape-it" title="Permanent link">&para;</a></h3>
 <p>Open <code>MI_TLTPostProcess</code> and you get these. They are the whole effect.</p>

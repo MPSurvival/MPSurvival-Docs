@@ -169,7 +169,7 @@ It is reached from the `display.calibrate` row of `DA_Page_Display`, which is a 
 Two places name a level today:
 
 - `BP_BootGameMode` has a `Menu Level Name` variable, set to `L_MainMenu`. That is where the game goes on boot.
-- `BP_MainMenuWidget` passes `L_LocomotionTesting` to `Launch Slot`. That is the level the main menu starts. Change it to your own map and the whole main menu follows.
+- `BP_MainMenuWidget` passes a level name to `Launch Slot`. That is the level the main menu starts. Change it to your own map and the whole main menu follows.
 
 ---
 

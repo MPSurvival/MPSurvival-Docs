@@ -49,7 +49,7 @@ The effect is one post process material:
 The instance is a blendable on the post process component of `BP_VisualEffects`. Its strength is not a variable on the material: the player writes into the material parameter collection `MPC_PlayerMaterials`, which has a single scalar called `ListenMode`, and the material reads it. That is why the fade in and out is smooth and why nothing has to be spawned when the key is pressed.
 
 !!! warning
-    Listen mode is invisible in a level that has no `BP_VisualEffects` actor in it. That actor is what carries `MI_TLTPostProcess`, and it is the only thing in the project that does. `L_ShowcaseMap` and `L_LocomotionTesting` each have one. If you build a new map and the key seems dead, that is the reason.
+    Listen mode is invisible in a level that has no `BP_VisualEffects` actor in it. That actor is what carries `MI_TLTPostProcess`, and it is the only thing in the project that does. `L_ShowcaseMap` has one. If you build a new map and the key seems dead, that is the reason.
 
 ### The values that shape it
 

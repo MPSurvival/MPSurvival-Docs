@@ -16,7 +16,6 @@ This page shows the chain and the two places you cut into it to run your own lev
 | `L_BootMap` | Empty. The first level a packaged game loads. Its only job is to open the main menu. |
 | `L_MainMenu` | The menu scene: title screen, options, save slots. No player pawn. |
 | `L_ShowcaseMap` | The demonstration level. A linear course of rooms, one system per room, with a panel at the entrance that says what you are looking at. |
-| `L_LocomotionTesting` | The sandbox. Almost everything you can place is dropped in it: AI, pickups, doors, a workbench, traps, traversal blocks, a training dummy. |
 | `L_MeshesShowcaseMap` | Every mesh of the environment kit laid out on the ground, and nothing else. Useful when you are dressing a level and want to see a piece before you place it. |
 
 ---
@@ -42,7 +41,7 @@ This page shows the chain and the two places you cut into it to run your own lev
 | `BP_MenuGameMode` | `L_MainMenu` | no pawn, `BP_MenuPlayerController` |
 | `BP_TheLastTemplateGameMode` | every other level | `BP_PlayerCharacter`, `BP_PlayerController` |
 
-`BP_TheLastTemplateGameMode` is set once, in **Project Settings**, under **Maps & Modes**, as the `Default GameMode`. The other two are set per level, in `World Settings`, as a `GameMode Override`. That is why `L_ShowcaseMap`, `L_LocomotionTesting` and any level you add play the game with no setup: no override means the project default.
+`BP_TheLastTemplateGameMode` is set once, in **Project Settings**, under **Maps & Modes**, as the `Default GameMode`. The other two are set per level, in `World Settings`, as a `GameMode Override`. That is why `L_ShowcaseMap` and any level you add play the game with no setup: no override means the project default.
 
 `BP_BootGameMode` has one field of its own.
 
@@ -65,7 +64,7 @@ Two functions live in `BFL_LoadingLibrary`, both under the `Loading Library` cat
 
 Use `Open Level With Loading Screen` anywhere you would use `Open Level`. The template calls it from the boot game mode, from the menu when a slot is launched, from the pause menu when you quit to the main menu, and from the death screen when you continue from the last save.
 
-`Level Name` is a name, not a path. The two level names that ship on those calls are `L_MainMenu` and `L_LocomotionTesting`.
+`Level Name` is a name, not a path.
 
 The screen itself is `BP_LoadingScreenWidget`. Its `Fade Speed` and `Spinner Speed` are on the widget defaults if you want to change the pacing.
 
@@ -103,7 +102,7 @@ Your level needs nothing special. No game mode override, no boot actor.
 1. Build your level anywhere under `Content/`.
 2. Put a `Player Start` where the player should appear.
 3. Leave `World Settings` alone. With no `GameMode Override` the level uses `BP_TheLastTemplateGameMode`, so you get `BP_PlayerCharacter` and the full HUD.
-4. Open `BP_MainMenuWidget`, find the `Launch Slot` call on the new game path, and set its `In Level Name` pin to the name of your level. It ships as `L_LocomotionTesting`.
+4. Open `BP_MainMenuWidget`, find the `Launch Slot` call on the new game path, and set its `In Level Name` pin to the name of your level.
 5. Test by playing from `L_BootMap`, not from your level directly, so you go through the whole chain once.
 
 Continuing a game does not read that pin. It opens the level name stored in the save slot, so an old save still returns to the level it was made in.
@@ -114,7 +113,7 @@ Continuing a game does not read that pin. It opens the level name stored in the 
 
 The two are easy to mix up, and both are in **Project Settings**, under **Maps & Modes**.
 
-- `Editor Startup Map` is the level the editor opens when you open the project. It ships as `L_LocomotionTesting`. Change it to whatever you are working on, it has no effect on the game.
+- `Editor Startup Map` is the level the editor opens when you open the project. Change it to whatever you are working on, it has no effect on the game.
 - `Game Default Map` is the level a packaged game loads first. It is `L_BootMap`, and it should stay `L_BootMap`. Point it straight at a gameplay level and you skip the menu, and with the menu you skip the save slot the rest of the game expects to be set.
 
 If you want a build that skips the menu on purpose, keep `L_BootMap` and change `Menu Level Name` on `BP_BootGameMode` to your level instead. The loading screen and the game instance still get their turn.

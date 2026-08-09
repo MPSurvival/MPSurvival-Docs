@@ -54,6 +54,89 @@ nav:
           - Blueprint Events: epvc/guides/events.md
           - Debug Overlay: epvc/guides/debug.md
 
+  - The Last Template:
+      - Overview: tlt/index.md
+      - Getting started:
+          - Install and open the project: tlt/start/install_and_open.md
+          - Maps, game modes and how the game starts: tlt/start/maps_and_startup_flow.md
+          - Change the controls: tlt/start/change_the_controls.md
+      - The player character:
+          - How the player character works: tlt/player/how_the_character_works.md
+          - Change movement speeds and gaits: tlt/player/movement_speeds_and_gaits.md
+          - Weapon overlays and animation layers: tlt/player/weapon_overlays_and_layers.md
+          - Use your own animations: tlt/player/use_your_own_animations.md
+          - Add or change a traversal move: tlt/player/add_a_traversal_move.md
+          - Flashlight, listen mode, backpack and narrow passages: tlt/player/player_toolkit.md
+      - Health and damage:
+          - How a character takes damage: tlt/damage/how_damage_works.md
+          - Change health and stamina, or add a new vital: tlt/damage/health_stamina_and_new_vitals.md
+          - Fall damage, death and the ragdoll: tlt/damage/fall_damage_and_death.md
+          - Change how hard a hit throws a body: tlt/damage/tune_hit_reactions.md
+          - Put hit reactions on your own character: tlt/damage/hit_reactions_on_your_character.md
+      - Interaction and inventory:
+          - How interaction works: tlt/inventory/how_interaction_works.md
+          - Add a new item to the inventory: tlt/inventory/add_an_item.md
+          - Place ammo, weapon, throwable and gear pickups: tlt/inventory/place_other_pickups.md
+          - Set up doors and the gate button: tlt/inventory/doors_and_gate_button.md
+          - Add a crafting recipe and teach it in the level: tlt/inventory/add_a_crafting_recipe.md
+          - Add your own page to the inventory screen: tlt/inventory/add_an_inventory_page.md
+      - Inspect, collectibles and upgrades:
+          - How 3D inspection works: tlt/progression/how_inspection_works.md
+          - Add an object the player can inspect: tlt/progression/add_an_inspectable_object.md
+          - Choose what the two inspect buttons do: tlt/progression/inspect_actions_and_notes.md
+          - Add a collectible and a new category: tlt/progression/add_a_collectible.md
+          - Add or change a player upgrade: tlt/progression/add_or_change_a_skill.md
+      - Firearms and the workbench:
+          - How guns work in this template: tlt/weapons/how_guns_work.md
+          - Add a new gun: tlt/weapons/add_a_new_gun.md
+          - Change how a gun feels to shoot: tlt/weapons/change_how_a_gun_feels.md
+          - Ammo, reserves and holstered guns: tlt/weapons/ammo_and_holstered_guns.md
+          - Add a weapon upgrade: tlt/weapons/add_a_weapon_upgrade.md
+          - Put a workbench in your level: tlt/weapons/put_a_workbench_in_your_level.md
+          - Give an AI a gun and upgrades: tlt/weapons/give_an_ai_a_gun.md
+      - Melee combat:
+          - How melee combat works: tlt/melee/melee_how_it_works.md
+          - Add a new melee attack: tlt/melee/add_attack_montage.md
+          - Change the combat camera and the impact feeling: tlt/melee/combat_camera_and_impact_feel.md
+          - Add or change the dodge: tlt/melee/player_dodge.md
+          - Add a stealth finisher: tlt/melee/stealth_finishers.md
+      - Throwables and hazards:
+          - How throwables work: tlt/throwables/how_throwables_work.md
+          - Add your own throwable: tlt/throwables/add_your_own_throwable.md
+          - Change how a throw feels: tlt/throwables/change_how_a_throw_feels.md
+          - Place hazards and traps in your level: tlt/throwables/place_hazards_and_traps.md
+          - Make an actor catch fire: tlt/throwables/make_an_actor_catch_fire.md
+      - Artificial intelligence:
+          - Add an AI to your level: tlt/ai/add_an_ai_to_your_level.md
+          - How the AI sees, hears and reacts: tlt/ai/how_the_ai_sees_and_hears.md
+          - The AI settings asset: tlt/ai/ai_settings_data_asset.md
+          - Patrol paths, roam zones and stand points: tlt/ai/patrol_paths_and_roam_zones.md
+          - Noise, and how to use it: tlt/ai/noise_and_distractions.md
+          - Factions and who fights who: tlt/ai/factions_and_targets.md
+          - How AI combat is put together: tlt/ai/ai_combat_overview.md
+          - Add a new enemy type: tlt/ai/add_new_ai_type.md
+          - Tune how the AI fights with a gun: tlt/ai/tune_ranged_ai.md
+          - Tune how the AI fights up close: tlt/ai/tune_melee_ai.md
+      - HUD, menus and saving:
+          - How the HUD, menus and saving fit together: tlt/ui/screens_overview.md
+          - Change what the HUD shows: tlt/ui/hud_widgets.md
+          - Key icons and letting players rebind keys: tlt/ui/key_prompts_and_rebinding.md
+          - Add or change a menu page: tlt/ui/menu_pages_and_options.md
+          - Save and load a game: tlt/ui/saving_a_run.md
+          - Make your level objects remember what happened: tlt/ui/level_state_saveable_actors.md
+          - Translate the game into another language: tlt/ui/translate_the_game.md
+      - Look and sound:
+          - How surfaces work: tlt/look/how_surfaces_work.md
+          - Add a new surface: tlt/look/add_a_new_surface.md
+          - Change the visual effects: tlt/look/change_the_visual_effects.md
+          - Give your own meshes a material: tlt/look/material_your_own_meshes.md
+          - Change the sound and the mix: tlt/look/change_the_sound_and_mix.md
+          - The bonus mesh kit: tlt/look/the_bonus_mesh_kit.md
+      - Extras:
+          - Photo mode, tab by tab: tlt/extras/photo_mode_overview.md
+          - Put your own logo, frames and filters in photo mode: tlt/extras/photo_mode_branding.md
+          - The developer menu: tlt/extras/developer_menu.md
+
 markdown_extensions:
   - toc:
       permalink: true

@@ -18,6 +18,11 @@ Drop-in proximity voice chat over normal replication, no OnlineSubsystem, no EOS
 
 [👉 Open the Easy Proximity Voice Chat docs](epvc/index.md)
 
+### 🧟 [The Last Template](tlt/index.md)
+A third person survival action template. Locomotion and traversal, guns and melee, inventory and crafting, enemies that see and hear you, a full menu and save system, photo mode and a showcase map. 100% Blueprint, and almost every change is a Data Asset instead of a graph.
+
+[👉 Open The Last Template docs](tlt/index.md)
+
 <!-- Add new assets here as they are released. Duplicate the block above and point it to the new asset's index page. -->
 
 ---

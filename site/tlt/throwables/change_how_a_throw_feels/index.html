@@ -1,0 +1,4603 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../add_your_own_throwable/">
+      
+      
+        <link rel="next" href="../place_hazards_and_traps/">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.15">
+    
+    
+      
+        <title>Change how a throw feels - Del Studio Assets Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../overrides.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="amber" data-md-color-accent="deep-orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#change-how-a-throw-feels" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Del Studio Assets Documentation" class="md-header__button md-logo" aria-label="Del Studio Assets Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Del Studio Assets Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Change how a throw feels
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../mpsurvival/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  MPSurvival
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../epvc/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Easy Proximity Voice Chat
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  The Last Template
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Del Studio Assets Documentation" class="md-nav__button md-logo" aria-label="Del Studio Assets Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Del Studio Assets Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../mpsurvival/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    MPSurvival
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            MPSurvival
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Items
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Items
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mpsurvival/items/item_creation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Create an item
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Crafting
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Crafting
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mpsurvival/craft/crafting_creation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Create a recipe
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Gatherables
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            Gatherables
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mpsurvival/gatherable/gatherable_creation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Create a gatherable
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Wieldables
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            Wieldables
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mpsurvival/wieldable/wieldable_creation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Create a wieldable
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Equipment
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            Equipment
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mpsurvival/equipment/equipment_creation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Create an armor piece
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Vitals
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            Vitals
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mpsurvival/vital/vital_creation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Create a vital stat
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_8" id="__nav_2_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Storage
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_8">
+            <span class="md-nav__icon md-icon"></span>
+            Storage
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mpsurvival/storage/storage_creation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Create a storage system
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_9" id="__nav_2_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Interactions
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_9">
+            <span class="md-nav__icon md-icon"></span>
+            Interactions
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mpsurvival/interaction/interaction_creation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Create an interaction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../epvc/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Easy Proximity Voice Chat
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Easy Proximity Voice Chat
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Setup
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Setup
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../epvc/setup/quick_start/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Quick Start
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Guides
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Guides
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../epvc/guides/configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Configuration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../epvc/guides/channels/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Channels
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../epvc/guides/receivers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Radios & Receivers
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../epvc/guides/effects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Voice Effects
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../epvc/guides/muting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Muting
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../epvc/guides/occlusion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Occlusion
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../epvc/guides/events/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Blueprint Events
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../epvc/guides/debug/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Debug Overlay
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    The Last Template
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            The Last Template
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Getting started
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            Getting started
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start/install_and_open/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Install and open the project
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start/maps_and_startup_flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Maps, game modes and how the game starts
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start/change_the_controls/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Change the controls
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    The player character
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            The player character
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../player/how_the_character_works/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    How the player character works
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../player/movement_speeds_and_gaits/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Change movement speeds and gaits
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../player/weapon_overlays_and_layers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Weapon overlays and animation layers
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../player/use_your_own_animations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Use your own animations
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../player/add_a_traversal_move/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Add or change a traversal move
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../player/player_toolkit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Flashlight, listen mode, backpack and narrow passages
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Health and damage
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            Health and damage
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../damage/how_damage_works/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    How a character takes damage
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../damage/health_stamina_and_new_vitals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Change health and stamina, or add a new vital
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../damage/fall_damage_and_death/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Fall damage, death and the ragdoll
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../damage/tune_hit_reactions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Change how hard a hit throws a body
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../damage/hit_reactions_on_your_character/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Put hit reactions on your own character
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Interaction and inventory
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5">
+            <span class="md-nav__icon md-icon"></span>
+            Interaction and inventory
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../inventory/how_interaction_works/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    How interaction works
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../inventory/add_an_item/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Add a new item to the inventory
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../inventory/place_other_pickups/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Place ammo, weapon, throwable and gear pickups
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../inventory/doors_and_gate_button/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Set up doors and the gate button
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../inventory/add_a_crafting_recipe/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Add a crafting recipe and teach it in the level
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../inventory/add_an_inventory_page/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Add your own page to the inventory screen
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_6" id="__nav_4_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Inspect, collectibles and upgrades
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_6">
+            <span class="md-nav__icon md-icon"></span>
+            Inspect, collectibles and upgrades
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../progression/how_inspection_works/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    How 3D inspection works
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../progression/add_an_inspectable_object/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Add an object the player can inspect
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../progression/inspect_actions_and_notes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Choose what the two inspect buttons do
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../progression/add_a_collectible/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Add a collectible and a new category
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../progression/add_or_change_a_skill/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Add or change a player upgrade
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_7" id="__nav_4_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Firearms and the workbench
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_7">
+            <span class="md-nav__icon md-icon"></span>
+            Firearms and the workbench
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../weapons/how_guns_work/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    How guns work in this template
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../weapons/add_a_new_gun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Add a new gun
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../weapons/change_how_a_gun_feels/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Change how a gun feels to shoot
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../weapons/ammo_and_holstered_guns/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ammo, reserves and holstered guns
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../weapons/add_a_weapon_upgrade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Add a weapon upgrade
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../weapons/put_a_workbench_in_your_level/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Put a workbench in your level
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../weapons/give_an_ai_a_gun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Give an AI a gun and upgrades
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_8" id="__nav_4_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Melee combat
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_8">
+            <span class="md-nav__icon md-icon"></span>
+            Melee combat
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../melee/melee_how_it_works/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    How melee combat works
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../melee/add_attack_montage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Add a new melee attack
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../melee/combat_camera_and_impact_feel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Change the combat camera and the impact feeling
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../melee/player_dodge/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Add or change the dodge
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../melee/stealth_finishers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Add a stealth finisher
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_9" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4_9" id="__nav_4_9_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Throwables and hazards
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_9_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_9">
+            <span class="md-nav__icon md-icon"></span>
+            Throwables and hazards
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../how_throwables_work/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    How throwables work
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../add_your_own_throwable/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Add your own throwable
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Change how a throw feels
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Change how a throw feels
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-actually-differs-between-the-six" class="md-nav__link">
+    <span class="md-ellipsis">
+      What actually differs between the six
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#flight" class="md-nav__link">
+    <span class="md-ellipsis">
+      Flight
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#landing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Landing
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-aiming-camera" class="md-nav__link">
+    <span class="md-ellipsis">
+      The aiming camera
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#while-you-aim" class="md-nav__link">
+    <span class="md-ellipsis">
+      While you aim
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-trajectory-arc" class="md-nav__link">
+    <span class="md-ellipsis">
+      The trajectory arc
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#restyling-the-arc" class="md-nav__link">
+    <span class="md-ellipsis">
+      Restyling the arc
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sounds" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sounds
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#animation-and-the-hand" class="md-nav__link">
+    <span class="md-ellipsis">
+      Animation and the hand
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#worked-example-a-heavy-lob-against-a-light-long-throw" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example: a heavy lob against a light long throw
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../place_hazards_and_traps/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Place hazards and traps in your level
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../make_an_actor_catch_fire/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Make an actor catch fire
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_10" id="__nav_4_10_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Artificial intelligence
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_10">
+            <span class="md-nav__icon md-icon"></span>
+            Artificial intelligence
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai/add_an_ai_to_your_level/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Add an AI to your level
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai/how_the_ai_sees_and_hears/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    How the AI sees, hears and reacts
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai/ai_settings_data_asset/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    The AI settings asset
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai/patrol_paths_and_roam_zones/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Patrol paths, roam zones and stand points
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai/noise_and_distractions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Noise, and how to use it
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai/factions_and_targets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Factions and who fights who
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai/ai_combat_overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    How AI combat is put together
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai/add_new_ai_type/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Add a new enemy type
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai/tune_ranged_ai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tune how the AI fights with a gun
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai/tune_melee_ai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tune how the AI fights up close
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_11" id="__nav_4_11_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    HUD, menus and saving
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_11">
+            <span class="md-nav__icon md-icon"></span>
+            HUD, menus and saving
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ui/screens_overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    How the HUD, menus and saving fit together
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ui/hud_widgets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Change what the HUD shows
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ui/key_prompts_and_rebinding/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Key icons and letting players rebind keys
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ui/menu_pages_and_options/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Add or change a menu page
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ui/saving_a_run/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Save and load a game
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ui/level_state_saveable_actors/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Make your level objects remember what happened
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ui/translate_the_game/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Translate the game into another language
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_12" id="__nav_4_12_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Look and sound
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_12">
+            <span class="md-nav__icon md-icon"></span>
+            Look and sound
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../look/how_surfaces_work/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    How surfaces work
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../look/add_a_new_surface/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Add a new surface
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../look/change_the_visual_effects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Change the visual effects
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../look/material_your_own_meshes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Give your own meshes a material
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../look/change_the_sound_and_mix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Change the sound and the mix
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../look/the_bonus_mesh_kit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    The bonus mesh kit
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_13" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_13" id="__nav_4_13_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Extras
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_13_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_13">
+            <span class="md-nav__icon md-icon"></span>
+            Extras
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../extras/photo_mode_overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Photo mode, tab by tab
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../extras/photo_mode_branding/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Put your own logo, frames and filters in photo mode
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../extras/developer_menu/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    The developer menu
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-actually-differs-between-the-six" class="md-nav__link">
+    <span class="md-ellipsis">
+      What actually differs between the six
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#flight" class="md-nav__link">
+    <span class="md-ellipsis">
+      Flight
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#landing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Landing
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-aiming-camera" class="md-nav__link">
+    <span class="md-ellipsis">
+      The aiming camera
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#while-you-aim" class="md-nav__link">
+    <span class="md-ellipsis">
+      While you aim
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-trajectory-arc" class="md-nav__link">
+    <span class="md-ellipsis">
+      The trajectory arc
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#restyling-the-arc" class="md-nav__link">
+    <span class="md-ellipsis">
+      Restyling the arc
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sounds" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sounds
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#animation-and-the-hand" class="md-nav__link">
+    <span class="md-ellipsis">
+      Animation and the hand
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#worked-example-a-heavy-lob-against-a-light-long-throw" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example: a heavy lob against a light long throw
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="change-how-a-throw-feels">Change how a throw feels<a class="headerlink" href="#change-how-a-throw-feels" title="Permanent link">&para;</a></h1>
+<p>How far a throwable flies, how hard it arcs, whether it bounces or breaks, and what the camera does while you line the shot up: all of it is Details panel fields on one Data Asset. You change how a throw feels by opening that asset and typing numbers. No graph.</p>
+<p>The six shipped throwables live in <code>Content/TheLastTemplate/Blueprints/DataAssets/Throwables/Childs/</code>. They are named <code>DA_Throwble_*</code>, missing an "a", in the shipped project. Open one and everything on this page is in front of you.</p>
+<p>If you want to know what the four assets behind a throwable are and what happens on impact, read <a href="../how_throwables_work/">How throwables work</a> first. This page only covers the feel.</p>
+<hr />
+<h2 id="what-actually-differs-between-the-six">What actually differs between the six<a class="headerlink" href="#what-actually-differs-between-the-six" title="Permanent link">&para;</a></h2>
+<p>Almost nothing. Two fields carry the whole difference:</p>
+<table>
+<thead>
+<tr>
+<th>Data Asset</th>
+<th><code>Launch Speed</code></th>
+<th><code>Destroy on Impact</code></th>
+<th><code>Bounce Sound</code> and <code>Hit Sound</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DA_Throwble_Bomb</code></td>
+<td><code>1700</code></td>
+<td>ticked</td>
+<td><code>SC_BreakGlass</code></td>
+</tr>
+<tr>
+<td><code>DA_Throwble_Bottle</code></td>
+<td><code>1700</code></td>
+<td>ticked</td>
+<td><code>SC_BreakGlass</code></td>
+</tr>
+<tr>
+<td><code>DA_Throwble_Brick</code></td>
+<td><code>1200</code></td>
+<td>unticked</td>
+<td><code>SC_BrickHit</code></td>
+</tr>
+<tr>
+<td><code>DA_Throwble_Can</code></td>
+<td><code>1400</code></td>
+<td>unticked</td>
+<td><code>SC_MetalHit</code></td>
+</tr>
+<tr>
+<td><code>DA_Throwble_Molotov</code></td>
+<td><code>1700</code></td>
+<td>ticked</td>
+<td><code>SC_BreakGlass</code></td>
+</tr>
+<tr>
+<td><code>DA_Throwble_NailBomb</code></td>
+<td><code>1700</code></td>
+<td>ticked</td>
+<td><code>SC_MetalHit</code></td>
+</tr>
+</tbody>
+</table>
+<p>Every other field on this page holds the same value on all six. So if a change you make feels wrong on one throwable, it will feel wrong on the other five too until you edit them as well.</p>
+<hr />
+<h2 id="flight">Flight<a class="headerlink" href="#flight" title="Permanent link">&para;</a></h2>
+<p>Three fields decide the shape of the arc. They are pushed onto the projectile movement of the thrown actor the moment it spawns.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>What it does</th>
+<th>Shipped</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Launch Speed</code></td>
+<td>Speed the throwable leaves your hand at, in centimetres per second</td>
+<td><code>1200</code> to <code>1700</code></td>
+</tr>
+<tr>
+<td><code>Pitch Offset</code></td>
+<td>Degrees added above your aim line, so the throw lobs instead of going flat</td>
+<td><code>8</code></td>
+</tr>
+<tr>
+<td><code>Gravity Scale</code></td>
+<td>Multiplier on gravity while it flies. Above <code>1</code> it drops faster</td>
+<td><code>1.25</code></td>
+</tr>
+</tbody>
+</table>
+<p><code>Launch Speed</code> is the one to reach for first. It moves distance and flight time together and you feel it immediately. Only touch <code>Pitch Offset</code> when the throw goes where you want but looks too flat or too high, and only touch <code>Gravity Scale</code> when you want the object to feel heavier or lighter than the speed alone suggests.</p>
+<p>The trajectory arc is drawn from the same three numbers, so it stays honest whatever you set.</p>
+<hr />
+<h2 id="landing">Landing<a class="headerlink" href="#landing" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>What it does</th>
+<th>Shipped</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Bounciness</code></td>
+<td>How much speed survives a bounce. <code>0</code> sticks, <code>1</code> keeps everything</td>
+<td><code>0.15</code></td>
+</tr>
+<tr>
+<td><code>Friction</code></td>
+<td>How fast it loses speed sliding along a surface</td>
+<td><code>0.6</code></td>
+</tr>
+<tr>
+<td><code>Collision Radius</code></td>
+<td>Radius in centimetres of the sphere that detects the impact</td>
+<td><code>7</code></td>
+</tr>
+<tr>
+<td><code>Destroy on Impact</code></td>
+<td>Whether the first bounce ends the throw</td>
+<td>ticked on four of six</td>
+</tr>
+</tbody>
+</table>
+<p><code>Destroy on Impact</code> is the one that changes the object into a different kind of thing. Ticked, the throwable fires its payloads on the first bounce and is removed: that is the bomb, the nail bomb, the molotov and the bottle. Unticked, it keeps bouncing and rolling and the object is left lying in your level: that is the brick and the can.</p>
+<p><code>Collision Radius</code> at <code>7</code> is small on purpose. A large radius makes a throwable detonate early on door frames and railings it should have flown past.</p>
+<hr />
+<h2 id="the-aiming-camera">The aiming camera<a class="headerlink" href="#the-aiming-camera" title="Permanent link">&para;</a></h2>
+<p>Raise a throw and the camera stops using the resting values and uses these instead. They sit on the throwable's Data Asset, not on the character, so each throwable could frame its own aim. All six ship with the same numbers.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>What it does</th>
+<th>Shipped</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Spring Arm Right</code></td>
+<td>Where the camera sits while aiming. Y across the shoulder, Z up and down</td>
+<td><code>(0, -60, 0)</code></td>
+</tr>
+<tr>
+<td><code>Spring Arm Right Crouching</code></td>
+<td>The same thing, used while crouched</td>
+<td><code>(0, -60, -35)</code></td>
+</tr>
+<tr>
+<td><code>Zoom Value</code></td>
+<td>Spring arm length while aiming. Smaller means closer to the shoulder</td>
+<td><code>110</code></td>
+</tr>
+<tr>
+<td><code>Camera FOV</code></td>
+<td>Field of view while aiming</td>
+<td><code>90</code></td>
+</tr>
+</tbody>
+</table>
+<p>The throw camera pushes to <code>-60</code> on Y and back out to <code>110</code> while a gun pulls to the other shoulder and in close. That is deliberate: when you throw, you need to see the landing spot more than you need to see the character. If you copy camera numbers from a weapon Data Asset onto a throwable, expect the arc to disappear behind the shoulder.</p>
+<hr />
+<h2 id="while-you-aim">While you aim<a class="headerlink" href="#while-you-aim" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>What it does</th>
+<th>Shipped</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Aim Movement Speed</code></td>
+<td>Movement speed multiplier while aiming a throw</td>
+<td><code>0.55</code></td>
+</tr>
+<tr>
+<td><code>Enable Aim Immersive Camera</code></td>
+<td>Turns the slow aim sway on</td>
+<td>ticked</td>
+</tr>
+<tr>
+<td><code>Aim Camera Intensity</code></td>
+<td>How strong that sway is</td>
+<td><code>1.5</code></td>
+</tr>
+</tbody>
+</table>
+<p><code>0.55</code> is slower than the guns, which use <code>0.65</code>. Lining up a throw is meant to commit you more than raising a pistol does. Untick <code>Enable Aim Immersive Camera</code> if you want a dead still camera, and <code>Aim Camera Intensity</code> stops mattering.</p>
+<hr />
+<h2 id="the-trajectory-arc">The trajectory arc<a class="headerlink" href="#the-trajectory-arc" title="Permanent link">&para;</a></h2>
+<p><code>Show Trajectory</code> is a single tick box on the Data Asset, on for all six. Untick it and that throwable is aimed blind, with no arc drawn. It is a good way to make one item harder to use than the rest.</p>
+<p>The arc itself is drawn by <code>Content/TheLastTemplate/Blueprints/Throwables/BP_TrajectoryVisualizer</code>. Open it and its Details panel gives you the shape:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>What it does</th>
+<th>Shipped</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Max Segments</code></td>
+<td>How many pieces the arc can use, so how far ahead it draws</td>
+<td><code>80</code></td>
+</tr>
+<tr>
+<td><code>Segment Length</code></td>
+<td>Length in centimetres of one step of the simulated path</td>
+<td><code>20</code></td>
+</tr>
+<tr>
+<td><code>Start Width</code></td>
+<td>Thickness of the tube at the hand end</td>
+<td><code>0.15</code></td>
+</tr>
+<tr>
+<td><code>End Width</code></td>
+<td>Thickness at the far end</td>
+<td><code>0.15</code></td>
+</tr>
+</tbody>
+</table>
+<p>Eighty segments of twenty centimetres is about sixteen metres of drawn path. If your throwable flies further than that, the arc stops before the landing point. Raise <code>Max Segments</code> rather than <code>Segment Length</code>, because a longer step makes the curve visibly faceted.</p>
+<p>Set <code>End Width</code> lower than <code>Start Width</code> for an arc that tapers away, which reads well when you want the far end to feel like a guess.</p>
+<hr />
+<h2 id="restyling-the-arc">Restyling the arc<a class="headerlink" href="#restyling-the-arc" title="Permanent link">&para;</a></h2>
+<p>The tube mesh and its material are assigned from inside <code>BP_TrajectoryVisualizer</code>, so the way to restyle the arc without opening a graph is to edit the two assets in place:</p>
+<ul>
+<li><code>Content/TheLastTemplate/Meshes/Misc/SM_ArcTube</code> is the tube. Replace its geometry and every segment follows.</li>
+<li><code>Content/TheLastTemplate/Materials/Effects/MI_ThrowArc</code> is the material. It is a child of <code>M_ThrowArc</code> and exposes <code>Intensity</code>, shipped <code>2.5</code>, and <code>Opacity</code>, shipped <code>1</code>.</li>
+</ul>
+<p>Lower <code>Intensity</code> for an arc that does not glow through dark rooms. Lower <code>Opacity</code> for one you can see the level through.</p>
+<hr />
+<h2 id="sounds">Sounds<a class="headerlink" href="#sounds" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>When it plays</th>
+<th>Shipped</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Throw Sound</code></td>
+<td>As the throwable leaves your hand</td>
+<td>empty on all six</td>
+</tr>
+<tr>
+<td><code>Bounce Sound</code></td>
+<td>When the flying throwable bounces off something</td>
+<td>per throwable</td>
+</tr>
+<tr>
+<td><code>Hit Sound</code></td>
+<td>When the object lying in the level is knocked around</td>
+<td>per throwable</td>
+</tr>
+<tr>
+<td><code>Hit Cosmetic Sound Threshold</code></td>
+<td>How hard that knock has to be before <code>Hit Sound</code> plays</td>
+<td><code>20000</code></td>
+</tr>
+</tbody>
+</table>
+<p><code>Throw Sound</code> is empty on every shipped throwable, so nothing plays on the swing today. The field works, it is simply not filled in. Drop a cue in it if you want one.</p>
+<p><code>Bounce Sound</code> and <code>Hit Sound</code> are two different moments and the shipped assets set them to the same cue. <code>Bounce Sound</code> belongs to the object while it is still flying under its own launch. <code>Hit Sound</code> belongs to the object afterwards, once it is a physics prop being kicked around, and that is where <code>Hit Cosmetic Sound Threshold</code> comes in: the impact has to be stronger than <code>20000</code> before the sound plays. That is what keeps a can from clicking on every tiny settle. Lower it and light taps become audible, raise it and only real impacts speak.</p>
+<hr />
+<h2 id="animation-and-the-hand">Animation and the hand<a class="headerlink" href="#animation-and-the-hand" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>What it does</th>
+<th>Shipped</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Throw Montage</code></td>
+<td>The animation played on the character</td>
+<td><code>AM_Character_Throw</code></td>
+</tr>
+<tr>
+<td><code>Throwable Socket Name</code></td>
+<td>Socket the object is held on and thrown from</td>
+<td><code>ThrowableSocket</code></td>
+</tr>
+</tbody>
+</table>
+<p>All six throwables share <code>AM_Character_Throw</code>. The object does not leave the hand when the montage ends, it leaves on an anim notify inside the montage called <code>Release</code>. If a throw looks late or early, move that notify, do not change <code>Launch Speed</code> to compensate.</p>
+<p><code>ThrowableSocket</code> is a socket on the skeleton <code>Content/TheLastTemplate/Meshes/Characters/S_HumanoidCharacter</code>. Type a socket name that does not exist there and the object is held at the character's feet.</p>
+<p>Give a throwable its own montage by pointing <code>Throw Montage</code> at your own asset. Copy the <code>Release</code> notify onto it, otherwise the object is never let go.</p>
+<hr />
+<h2 id="worked-example-a-heavy-lob-against-a-light-long-throw">Worked example: a heavy lob against a light long throw<a class="headerlink" href="#worked-example-a-heavy-lob-against-a-light-long-throw" title="Permanent link">&para;</a></h2>
+<p>Duplicate <code>DA_Throwble_Brick</code> twice and give each copy one of these sets.</p>
+<p>A heavy short lob, for something you drop over a wall rather than throw across a street:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Launch Speed</code></td>
+<td><code>900</code></td>
+</tr>
+<tr>
+<td><code>Pitch Offset</code></td>
+<td><code>20</code></td>
+</tr>
+<tr>
+<td><code>Gravity Scale</code></td>
+<td><code>2.0</code></td>
+</tr>
+<tr>
+<td><code>Bounciness</code></td>
+<td><code>0.05</code></td>
+</tr>
+<tr>
+<td><code>Friction</code></td>
+<td><code>0.9</code></td>
+</tr>
+<tr>
+<td><code>Destroy on Impact</code></td>
+<td>unticked</td>
+</tr>
+</tbody>
+</table>
+<p>A light long throw, for something you want to skitter down a corridor and pull attention far away:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Launch Speed</code></td>
+<td><code>2200</code></td>
+</tr>
+<tr>
+<td><code>Pitch Offset</code></td>
+<td><code>4</code></td>
+</tr>
+<tr>
+<td><code>Gravity Scale</code></td>
+<td><code>0.9</code></td>
+</tr>
+<tr>
+<td><code>Bounciness</code></td>
+<td><code>0.5</code></td>
+</tr>
+<tr>
+<td><code>Friction</code></td>
+<td><code>0.25</code></td>
+</tr>
+<tr>
+<td><code>Destroy on Impact</code></td>
+<td>unticked</td>
+</tr>
+</tbody>
+</table>
+<p>Also raise <code>Max Segments</code> on <code>BP_TrajectoryVisualizer</code> before you test the second one, or its arc will be cut off well short of where it lands.</p>
+<hr />
+<p><a href="https://discord.gg/EqHCtq38jy">Join the Discord</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://discord.gg/EqHCtq38jy" target="_blank" rel="noopener" title="discord.gg" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M524.531 69.836a1.5 1.5 0 0 0-.764-.7A485 485 0 0 0 404.081 32.03a1.82 1.82 0 0 0-1.923.91 338 338 0 0 0-14.9 30.6 447.9 447.9 0 0 0-134.426 0 310 310 0 0 0-15.135-30.6 1.89 1.89 0 0 0-1.924-.91 483.7 483.7 0 0 0-119.688 37.107 1.7 1.7 0 0 0-.788.676C39.068 183.651 18.186 294.69 28.43 404.354a2.02 2.02 0 0 0 .765 1.375 487.7 487.7 0 0 0 146.825 74.189 1.9 1.9 0 0 0 2.063-.676A348 348 0 0 0 208.12 430.4a1.86 1.86 0 0 0-1.019-2.588 321 321 0 0 1-45.868-21.853 1.885 1.885 0 0 1-.185-3.126 251 251 0 0 0 9.109-7.137 1.82 1.82 0 0 1 1.9-.256c96.229 43.917 200.41 43.917 295.5 0a1.81 1.81 0 0 1 1.924.233 235 235 0 0 0 9.132 7.16 1.884 1.884 0 0 1-.162 3.126 301.4 301.4 0 0 1-45.89 21.83 1.875 1.875 0 0 0-1 2.611 391 391 0 0 0 30.014 48.815 1.86 1.86 0 0 0 2.063.7A486 486 0 0 0 610.7 405.729a1.88 1.88 0 0 0 .765-1.352c12.264-126.783-20.532-236.912-86.934-334.541M222.491 337.58c-28.972 0-52.844-26.587-52.844-59.239s23.409-59.241 52.844-59.241c29.665 0 53.306 26.82 52.843 59.239 0 32.654-23.41 59.241-52.843 59.241m195.38 0c-28.971 0-52.843-26.587-52.843-59.239s23.409-59.241 52.843-59.241c29.667 0 53.307 26.82 52.844 59.239 0 32.654-23.177 59.241-52.844 59.241"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "navigation.indexes", "content.code.annotate", "search.suggest", "search.highlight", "content.tabs.link"], "search": "../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.56ea9cef.min.js"></script>
+      
+    
+  </body>
+</html>

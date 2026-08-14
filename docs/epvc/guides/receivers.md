@@ -27,7 +27,7 @@ That's it, it works as soon as it's placed.
 |----------|-------------|
 | `Listen Channel` | Only speakers on this channel come out of this receiver. Everything else is ignored. |
 | `Receiver Enabled` | Turn the receiver on or off. Off is silent and releases its audio immediately. |
-| `Output Configuration` | A `ProximityVoiceConfig` asset used for voices coming out of **this** receiver: attenuation, volume, source effects, occlusion. Leave it empty to use each speaker's own config. |
+| `Output Configuration` | A `ProximityVoiceConfig` asset used for voices coming out of **this** receiver: attenuation, volume, sound class, source effects, occlusion. Leave it empty to use each speaker's own config. |
 | `Volume Multiplier` | Volume applied on top of the output configuration. Handy to reuse one config asset at several levels. |
 | `Attach Socket` | Mesh socket the voice plays from (e.g. a speaker grille). Falls back to the actor root. |
 | `Emitter Priority` | Used when the speaker's `Emitter Selection` is **Priority**. Defaults to `1`, a speaker's own body defaults to `0`. |
@@ -45,7 +45,8 @@ This is the whole point of `Output Configuration`: the same voice can be **clean
 1. Create a second `ProximityVoiceConfig` asset, e.g. `DA_RadioReceiver`.
 2. Give it a **short** `Proximity Attenuation` (a radio should only be heard in the room it's in).
 3. Assign a **Source Effect Chain** with your radio crunch, see [Voice Effects](effects.md).
-4. Assign that asset to the receiver's `Output Configuration`.
+4. Optionally give it its own `Voice Sound Class`, e.g. `SC_Radio`, so radios get their own volume slider, see [Sound Class & Volume](sound_class.md).
+5. Assign that asset to the receiver's `Output Configuration`.
 
 !!! tip
     Occlusion is evaluated **per emitter**, from where each one actually sits. A radio behind a wall is muffled even when the speaker is standing in the open. See [Occlusion](occlusion.md).

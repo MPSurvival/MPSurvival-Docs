@@ -31,6 +31,7 @@ How the voice sounds on receiving machines.
 | Property | Description |
 |----------|-------------|
 | `Output Volume` | Playback volume on receiving machines. |
+| `Voice Sound Class` | Sound Class the voice plays through, so a Sound Mix or an options menu slider can drive it. Empty = unclassed. See [Sound Class & Volume](sound_class.md). |
 | `Proximity Attenuation` | Sound Attenuation used for spatialized playback. If empty, engine defaults are used. |
 | `Playback Attach Socket` | Mesh socket the voice plays from (e.g. `head`). Falls back to the actor root. |
 | `Base Low Pass Frequency` | Always-on low-pass cutoff (Hz) for this speaker, independent of occlusion. `0` = off. |

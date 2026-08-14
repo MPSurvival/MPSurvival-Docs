@@ -8,13 +8,12 @@ No OnlineSubsystem. No EOS/Steam voice setup. It runs over your game's **normal 
 
 ---
 
-## 🆕 What's new in 1.1
+## 🆕 What's new in 1.2
 
-- **Radios & Receivers**: drop the new **Proximity Voice Receiver** component on any actor and it rebroadcasts a whole channel out of it. Radios, intercoms, PA speakers, walkie-talkies. See [Radios & Receivers](guides/receivers.md).
-- **Voice Effects**: run voices through a **Source Effect Chain** (bitcrusher, filter, EQ...) straight from the config asset. See [Voice Effects](guides/effects.md).
-- **Emitter selection**: a speaker heard from their body *and* a radio no longer comb-filters, one emitter wins with a smooth crossfade. See [Configuration](guides/configuration.md).
-- **Per-emitter occlusion**: a radio behind a wall is muffled even when the speaker is out in the open.
-- **Debug overlay**: one line per emitter, brightest = the one you're hearing.
+- **Sound Class**: pick a **Sound Class** on the config asset and the voice becomes a normal classed sound, so your options menu can move it like Master, Music or SFX. Radios can use a different class, so voice and radio get separate sliders. See [Sound Class & Volume](guides/sound_class.md).
+- **Voice Pitch Shift**: a pitch shift **source effect** Unreal does not ship with. Deep voices, high voices, masked voices, plus a per speaker random detune so one preset gives everyone their own voice. See [Voice Effects](guides/effects.md).
+
+Previously, **1.1** added [Radios & Receivers](guides/receivers.md), [Voice Effects](guides/effects.md), emitter selection, per-emitter occlusion and the [debug overlay](guides/debug.md).
 
 ---
 
@@ -71,8 +70,14 @@ You do **not** need to enable Steam voice, provision an EOS RTC (Voice) product,
 
 ### Voice Effects
 - Per-speaker **Source Effect Chain** (bitcrusher, filter, EQ, ring mod…)
+- Included **Voice Pitch Shift** effect, with per speaker random detune
 - Applied per emitter: clean on the pawn, crunchy on the radio
 - Swappable at runtime like any other config setting
+
+### Menu Volume & Sound Class
+- Route the voice through your own **Sound Class**
+- Sound Mixes, class volume and ducking apply live, even mid sentence
+- Receivers can carry a different class, one slider for voice, one for radio
 
 ### Occlusion
 - Voices get **muffled** by world geometry between speaker and listener
@@ -102,7 +107,8 @@ Use the navigation to set things up, in order:
 - [Configuration (Data Asset)](guides/configuration.md), tune capture, playback, latency
 - [Channels](guides/channels.md), separate who hears who
 - [Radios & Receivers](guides/receivers.md), rebroadcast a channel out of a radio or intercom
-- [Voice Effects](guides/effects.md), bitcrusher, filters and the radio crunch
+- [Voice Effects](guides/effects.md), bitcrusher, filters, pitch shift and the radio crunch
+- [Sound Class & Volume](guides/sound_class.md), wire the voice to your options menu
 - [Muting](guides/muting.md), local & server muting
 - [Occlusion](guides/occlusion.md), muffle voices through walls
 - [Blueprint Events](guides/events.md), react to voice in your UI/gameplay

@@ -1197,6 +1197,8 @@
       
         
       
+        
+      
     
     
     
@@ -1432,6 +1434,29 @@
   
   <span class="md-ellipsis">
     Voice Effects
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sound_class/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sound Class & Volume
     
   </span>
   
@@ -4124,7 +4149,7 @@
 </tr>
 <tr>
 <td><code>Output Configuration</code></td>
-<td>A <code>ProximityVoiceConfig</code> asset used for voices coming out of <strong>this</strong> receiver: attenuation, volume, source effects, occlusion. Leave it empty to use each speaker's own config.</td>
+<td>A <code>ProximityVoiceConfig</code> asset used for voices coming out of <strong>this</strong> receiver: attenuation, volume, sound class, source effects, occlusion. Leave it empty to use each speaker's own config.</td>
 </tr>
 <tr>
 <td><code>Volume Multiplier</code></td>
@@ -4155,6 +4180,7 @@
 <li>Create a second <code>ProximityVoiceConfig</code> asset, e.g. <code>DA_RadioReceiver</code>.</li>
 <li>Give it a <strong>short</strong> <code>Proximity Attenuation</code> (a radio should only be heard in the room it's in).</li>
 <li>Assign a <strong>Source Effect Chain</strong> with your radio crunch, see <a href="../effects/">Voice Effects</a>.</li>
+<li>Optionally give it its own <code>Voice Sound Class</code>, e.g. <code>SC_Radio</code>, so radios get their own volume slider, see <a href="../sound_class/">Sound Class &amp; Volume</a>.</li>
 <li>Assign that asset to the receiver's <code>Output Configuration</code>.</li>
 </ol>
 <div class="admonition tip">

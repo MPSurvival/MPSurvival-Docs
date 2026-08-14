@@ -1195,6 +1195,8 @@
       
         
       
+        
+      
     
     
     
@@ -1316,6 +1318,29 @@
   
   <span class="md-ellipsis">
     Voice Effects
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="guides/sound_class/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sound Class & Volume
     
   </span>
   
@@ -3885,9 +3910,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#whats-new-in-11" class="md-nav__link">
+  <a href="#whats-new-in-12" class="md-nav__link">
     <span class="md-ellipsis">
-      🆕 What's new in 1.1
+      🆕 What's new in 1.2
     </span>
   </a>
   
@@ -3952,6 +3977,15 @@
   <a href="#voice-effects" class="md-nav__link">
     <span class="md-ellipsis">
       Voice Effects
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#menu-volume-sound-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      Menu Volume &amp; Sound Class
     </span>
   </a>
   
@@ -4039,14 +4073,12 @@
 <p>🎯 Designed to be integrated in minutes, not weeks. Add one component, flip one setting, and talk.</p>
 </blockquote>
 <hr />
-<h2 id="whats-new-in-11">🆕 What's new in 1.1<a class="headerlink" href="#whats-new-in-11" title="Permanent link">&para;</a></h2>
+<h2 id="whats-new-in-12">🆕 What's new in 1.2<a class="headerlink" href="#whats-new-in-12" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Radios &amp; Receivers</strong>: drop the new <strong>Proximity Voice Receiver</strong> component on any actor and it rebroadcasts a whole channel out of it. Radios, intercoms, PA speakers, walkie-talkies. See <a href="guides/receivers/">Radios &amp; Receivers</a>.</li>
-<li><strong>Voice Effects</strong>: run voices through a <strong>Source Effect Chain</strong> (bitcrusher, filter, EQ...) straight from the config asset. See <a href="guides/effects/">Voice Effects</a>.</li>
-<li><strong>Emitter selection</strong>: a speaker heard from their body <em>and</em> a radio no longer comb-filters, one emitter wins with a smooth crossfade. See <a href="guides/configuration/">Configuration</a>.</li>
-<li><strong>Per-emitter occlusion</strong>: a radio behind a wall is muffled even when the speaker is out in the open.</li>
-<li><strong>Debug overlay</strong>: one line per emitter, brightest = the one you're hearing.</li>
+<li><strong>Sound Class</strong>: pick a <strong>Sound Class</strong> on the config asset and the voice becomes a normal classed sound, so your options menu can move it like Master, Music or SFX. Radios can use a different class, so voice and radio get separate sliders. See <a href="guides/sound_class/">Sound Class &amp; Volume</a>.</li>
+<li><strong>Voice Pitch Shift</strong>: a pitch shift <strong>source effect</strong> Unreal does not ship with. Deep voices, high voices, masked voices, plus a per speaker random detune so one preset gives everyone their own voice. See <a href="guides/effects/">Voice Effects</a>.</li>
 </ul>
+<p>Previously, <strong>1.1</strong> added <a href="guides/receivers/">Radios &amp; Receivers</a>, <a href="guides/effects/">Voice Effects</a>, emitter selection, per-emitter occlusion and the <a href="guides/debug/">debug overlay</a>.</p>
 <hr />
 <h2 id="what-is-easy-proximity-voice-chat">💥 What is Easy Proximity Voice Chat?<a class="headerlink" href="#what-is-easy-proximity-voice-chat" title="Permanent link">&para;</a></h2>
 <p>EPVC gives every player a <strong>spatialized voice</strong> that other nearby players hear based on distance, world geometry, and channels, without you touching any online backend. Drop the component on your player, decide <em>when</em> it transmits (push-to-talk, open mic, trigger zone), and the plugin handles capture, encoding, replication, jitter buffering, and 3D playback.</p>
@@ -4128,8 +4160,15 @@
 <h3 id="voice-effects">Voice Effects<a class="headerlink" href="#voice-effects" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Per-speaker <strong>Source Effect Chain</strong> (bitcrusher, filter, EQ, ring mod…)</li>
+<li>Included <strong>Voice Pitch Shift</strong> effect, with per speaker random detune</li>
 <li>Applied per emitter: clean on the pawn, crunchy on the radio</li>
 <li>Swappable at runtime like any other config setting</li>
+</ul>
+<h3 id="menu-volume-sound-class">Menu Volume &amp; Sound Class<a class="headerlink" href="#menu-volume-sound-class" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Route the voice through your own <strong>Sound Class</strong></li>
+<li>Sound Mixes, class volume and ducking apply live, even mid sentence</li>
+<li>Receivers can carry a different class, one slider for voice, one for radio</li>
 </ul>
 <h3 id="occlusion">Occlusion<a class="headerlink" href="#occlusion" title="Permanent link">&para;</a></h3>
 <ul>
@@ -4161,7 +4200,8 @@
 <li><a href="guides/configuration/">Configuration (Data Asset)</a>, tune capture, playback, latency</li>
 <li><a href="guides/channels/">Channels</a>, separate who hears who</li>
 <li><a href="guides/receivers/">Radios &amp; Receivers</a>, rebroadcast a channel out of a radio or intercom</li>
-<li><a href="guides/effects/">Voice Effects</a>, bitcrusher, filters and the radio crunch</li>
+<li><a href="guides/effects/">Voice Effects</a>, bitcrusher, filters, pitch shift and the radio crunch</li>
+<li><a href="guides/sound_class/">Sound Class &amp; Volume</a>, wire the voice to your options menu</li>
 <li><a href="guides/muting/">Muting</a>, local &amp; server muting</li>
 <li><a href="guides/occlusion/">Occlusion</a>, muffle voices through walls</li>
 <li><a href="guides/events/">Blueprint Events</a>, react to voice in your UI/gameplay</li>

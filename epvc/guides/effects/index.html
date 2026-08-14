@@ -12,7 +12,7 @@
         <link rel="prev" href="../receivers/">
       
       
-        <link rel="next" href="../muting/">
+        <link rel="next" href="../sound_class/">
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
@@ -1197,6 +1197,8 @@
       
         
       
+        
+      
     
     
     
@@ -1398,9 +1400,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#5-swap-effects-at-runtime" class="md-nav__link">
+  <a href="#5-pitch-shift-the-voice" class="md-nav__link">
     <span class="md-ellipsis">
-      5. Swap effects at runtime
+      5. Pitch shift the voice
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-swap-effects-at-runtime" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Swap effects at runtime
     </span>
   </a>
   
@@ -1419,6 +1430,29 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sound_class/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sound Class & Volume
+    
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -4019,9 +4053,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#5-swap-effects-at-runtime" class="md-nav__link">
+  <a href="#5-pitch-shift-the-voice" class="md-nav__link">
     <span class="md-ellipsis">
-      5. Swap effects at runtime
+      5. Pitch shift the voice
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-swap-effects-at-runtime" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Swap effects at runtime
     </span>
   </a>
   
@@ -4053,7 +4096,7 @@
 
 
 <h1 id="voice-effects">🎚️ Voice Effects<a class="headerlink" href="#voice-effects" title="Permanent link">&para;</a></h1>
-<p>Voices can run through a <strong>Source Effect Chain</strong>: bitcrusher, filter, EQ, ring modulation, whatever you assemble. That's how you get a radio crunch, a helmet filter, a possessed-monster voice, or a phone call.</p>
+<p>Voices can run through a <strong>Source Effect Chain</strong>: bitcrusher, filter, EQ, ring modulation, the <strong>pitch shifter EPVC ships with</strong>, whatever you assemble. That's how you get a radio crunch, a helmet filter, a possessed-monster voice, or a phone call.</p>
 <p>It lives on the <code>ProximityVoiceConfig</code> asset, so it follows the same rules as everything else: author presets, assign, swap at runtime.</p>
 <hr />
 <h3 id="1-build-the-chain">1. Build the chain<a class="headerlink" href="#1-build-the-chain" title="Permanent link">&para;</a></h3>
@@ -4127,7 +4170,56 @@
 <p>Just need a muffled voice, no chain at all? <code>Base Low Pass Frequency</code> on the same config gives you an always-on low-pass for free. See <a href="../configuration/">Configuration</a>.</p>
 </div>
 <hr />
-<h3 id="5-swap-effects-at-runtime">5. Swap effects at runtime<a class="headerlink" href="#5-swap-effects-at-runtime" title="Permanent link">&para;</a></h3>
+<h3 id="5-pitch-shift-the-voice">5. Pitch shift the voice<a class="headerlink" href="#5-pitch-shift-the-voice" title="Permanent link">&para;</a></h3>
+<p>Unreal ships no pitch shift source effect, so EPVC includes one: <strong><code>SourceEffectVoicePitchShift</code></strong>.</p>
+<p>Right-click → <strong>Audio → Effects → SourceEffectVoicePitchShift</strong>, tune it, then add it to a chain like any other preset.</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Pitch Shift Semitones</code></td>
+<td>Pitch offset, <code>-24</code> to <code>24</code>. Negative is deeper, positive is higher, <code>12</code> is one octave.</td>
+</tr>
+<tr>
+<td><code>Random Semitone Range</code></td>
+<td>Extra offset drawn once per source, somewhere inside ± this many semitones. One preset then gives every speaker a different voice. <code>0</code> = everyone shifted identically.</td>
+</tr>
+<tr>
+<td><code>Window Length Ms</code></td>
+<td>Window the shifter reads over, <code>10</code> to <code>100</code>. Short warbles on held vowels, long smears consonants. <code>25</code> to <code>40</code> suits speech.</td>
+</tr>
+<tr>
+<td><code>Wet Level</code></td>
+<td>Gain of the shifted signal.</td>
+</tr>
+<tr>
+<td><code>Dry Level</code></td>
+<td>Gain of the untouched signal. Leave some in and the detuned copy doubles the voice.</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><code>Random Semitone Range</code> around <code>2</code> is the cheapest way to stop a crowd sounding cloned. Each speaker draws their own offset when their voice starts, so a single preset covers your whole server.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Why not just a pitch multiplier on the audio component? Because voice is a <strong>live stream</strong>. A multiplier changes how fast the source is consumed, so playback drifts against the jitter buffer and latency creeps up over a long sentence. This effect moves the pitch and leaves the clock alone.</p>
+</div>
+<p>Retune it from Blueprint, with the <strong>preset asset</strong> as the target:</p>
+<div class="highlight"><pre><span></span><code>Set Pitch Shift Semitones (Target = SEP_VoiceDeep, In Semitones = -7.0)
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>A preset is a <strong>shared asset</strong>. Changing it at runtime affects every source currently running it, not one player. To pitch a single player, give them their own config with its own chain and swap it with <strong>Set Voice Configuration</strong>.</p>
+</div>
+<hr />
+<h3 id="6-swap-effects-at-runtime">6. Swap effects at runtime<a class="headerlink" href="#6-swap-effects-at-runtime" title="Permanent link">&para;</a></h3>
 <p>The chain is part of the config asset, so <strong>Set Voice Configuration</strong> swaps it like everything else: put on a gas mask, switch to <code>DA_MaskedVoice</code>, take it off, switch back.</p>
 <div class="highlight"><pre><span></span><code>Set Voice Configuration (New Configuration = DA_MaskedVoice)
 </code></pre></div>

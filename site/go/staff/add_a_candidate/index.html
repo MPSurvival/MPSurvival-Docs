@@ -5692,7 +5692,7 @@
   
   
   <span class="md-ellipsis">
-    The six rules the template is built on
+    Extending the template
     
   </span>
   
@@ -5838,7 +5838,7 @@
 
 
 <h1 id="add-a-candidate">Add a candidate<a class="headerlink" href="#add-a-candidate" title="Permanent link">&para;</a></h1>
-<p>Anyone you can hire is one Data Asset. Four ship with the template, and they exist to show the four combinations of skills rather than to fill the list.</p>
+<p>Anyone you can hire is one Data Asset. Four ship with the template, one per combination of skills:</p>
 <table>
 <thead>
 <tr>
@@ -5865,7 +5865,7 @@
 </tr>
 </tbody>
 </table>
-<p>The last two can do exactly the same work. They differ only in which job they reach for first, because the order of <code>Roles</code> is the priority.</p>
+<p>The last two do the same work and differ only in which job they reach for first, because the order of <code>Roles</code> is the priority.</p>
 <hr />
 <h2 id="the-recipe">The recipe<a class="headerlink" href="#the-recipe" title="Permanent link">&para;</a></h2>
 <ol>
@@ -5886,7 +5886,7 @@
 <tbody>
 <tr>
 <td><code>DisplayName</code></td>
-<td>The name shown in the hiring list and the roster. A <code>Text</code></td>
+<td>The name in the hiring list and the roster</td>
 </tr>
 <tr>
 <td><code>Portrait</code></td>
@@ -5906,7 +5906,7 @@
 </tr>
 <tr>
 <td><code>DailyWage</code></td>
-<td>Charged every day they work, with reason <code>Salary</code></td>
+<td>Charged every day they work</td>
 </tr>
 <tr>
 <td><code>CosmeticSet</code></td>
@@ -5914,28 +5914,21 @@
 </tr>
 </tbody>
 </table>
-<p><code>WorkSpeed</code> does exactly one thing: <code>TaskSeconds / WorkSpeed</code>, clamped so it cannot be zero. There is no branch of code anywhere that behaves differently for a fast worker.</p>
-<p>That is deliberate. Two stats that each do one measurable thing beat five stats where three do nothing, and the template used to have <code>Accuracy</code> and <code>Stamina</code> before they were cut for having no reader.</p>
 <hr />
 <h2 id="the-portrait">The portrait<a class="headerlink" href="#the-portrait" title="Permanent link">&para;</a></h2>
-<p>Draw it on a <strong>dark</strong> background, or at least draw it so it reads on one. The two staff apps use the same near-white ink as the rest of the interface, so a portrait that is white on white disappears.</p>
-<p>64 px square is the size it is drawn at in both lists. Something a bit larger imports fine.</p>
+<p>Draw it on a <strong>dark</strong> background, or at least so it reads on one: the staff apps use the same near-white ink as the rest of the interface, and a white-on-white portrait disappears. 64 px square is the drawn size; something larger imports fine.</p>
 <hr />
 <h2 id="wardrobe">Wardrobe<a class="headerlink" href="#wardrobe" title="Permanent link">&para;</a></h2>
-<p><code>CosmeticSet</code> works exactly as it does on a customer archetype. It points at a <code>BP_CosmeticSetDataAsset</code>, which is a list of slots, and each slot offers a list of skeletal meshes to pick from at random.</p>
-<p><code>DA_CosmeticSet_Employee</code> ships with the template so staff read as staff rather than as shoppers who wandered behind the counter.</p>
+<p><code>CosmeticSet</code> works as it does on a customer archetype: a list of slots, one option per slot drawn at random. <code>DA_CosmeticSet_Employee</code> ships so that staff read as staff rather than as shoppers who wandered behind the counter.</p>
 <p>If you add meshes, set their collision to none.</p>
 <hr />
 <h2 id="the-two-apps">The two apps<a class="headerlink" href="#the-two-apps" title="Permanent link">&para;</a></h2>
-<p>Both are apps on the office computer, so they come with the desktop rather than being separate screens.</p>
-<p><strong>Hiring</strong> lists everyone in <code>DA_App_Hiring.AvailableCandidates</code> with their portrait, name, skills, speed and daily wage, and a button that says <code>HIRE</code> or <code>ON STAFF</code>. Hiring is free at the moment of the click. The wage is what costs you.</p>
-<p><strong>Staff</strong> lists your roster. Each row shows the portrait, the name with <code>ON DUTY</code> or <code>OFF</code> beside it, the skills, seven day toggles, and start and end hours with <code>-</code> and <code>+</code> buttons.</p>
-<p>Both pages end with <code>DAILY PAYROLL</code>, the sum of the wages of everyone on the roster.</p>
-<p>Editing a shift edits <code>NextShift</code>. The change lands tomorrow morning, and the <code>ON DUTY</code> badge keeps showing today's truth in the meantime.</p>
+<p><strong>Hiring</strong> lists everyone in <code>DA_App_Hiring.AvailableCandidates</code> with their portrait, name, skills, speed and daily wage, and a <code>HIRE</code> button. Hiring costs nothing at the click; the wage is what costs you.</p>
+<p><strong>Staff</strong> lists your roster: portrait, name with <code>ON DUTY</code> or <code>OFF</code>, skills, seven day toggles, and start and end hours. Editing a shift there takes effect tomorrow morning, and the <code>ON DUTY</code> badge keeps showing today's truth in the meantime.</p>
+<p>Both pages end with <code>DAILY PAYROLL</code>, the sum of the wages on the roster.</p>
 <hr />
 <h2 id="locking-a-candidate-behind-progress">Locking a candidate behind progress<a class="headerlink" href="#locking-a-candidate-behind-progress" title="Permanent link">&para;</a></h2>
-<p>A candidate is a <code>PrimaryDataAsset</code>, so it can be a reward on an unlock like anything else. <code>DA_Unlock_SeniorStaff</code> is the shipped example.</p>
-<p>Put the candidate in an unlock's <code>Rewards</code> and they disappear from the hiring list until that unlock is granted. Leave them out of every unlock and they are available from day one. See <a href="../../progress/unlocks/">Unlocks</a>.</p>
+<p>Put the candidate in the <code>Rewards</code> of an unlock and they stay out of the hiring list until it is granted. <code>DA_Unlock_SeniorStaff</code> is the shipped example. Leave them out of every unlock and they are available from day one. See <a href="../../progress/unlocks/">Unlocks</a>.</p>
 <hr />
 <p><a href="https://discord.gg/EqHCtq38jy">Join the Discord</a></p>
 

@@ -5701,7 +5701,7 @@
   
   
   <span class="md-ellipsis">
-    The six rules the template is built on
+    Extending the template
     
   </span>
   
@@ -5860,10 +5860,10 @@
 <hr />
 <h2 id="the-recipe">The recipe<a class="headerlink" href="#the-recipe" title="Permanent link">&para;</a></h2>
 <ol>
-<li>Make the actor. A mesh, whatever components it needs, and a <strong><code>BP_PlaceableComponent</code></strong>.</li>
+<li>Make the actor: a mesh, whatever components it needs, and a <strong><code>BP_PlaceableComponent</code></strong>.</li>
 <li>Right click in <code>Blueprints/DataAssets/Structures/Childs/</code> → <strong>Data Asset</strong> → <code>BP_StructureDataAsset</code>.</li>
 <li>Name it <code>DA_Structure_&lt;Thing&gt;</code> and fill it in.</li>
-<li>Set <code>Structure</code> on the actor's <code>BP_PlaceableComponent</code> to that asset, so a copy placed by hand can also be picked up.</li>
+<li>Set <code>Structure</code> on the actor's <code>BP_PlaceableComponent</code> to that asset.</li>
 <li>Add it to <code>AvailableStructures</code> on <code>DA_App_Structures</code>, or it can never be bought.</li>
 </ol>
 <hr />
@@ -5926,11 +5926,10 @@
 </tr>
 </tbody>
 </table>
-<p><code>E_StructureCategory</code> has six values: <code>Shelf</code>, <code>Counter</code>, <code>Checkout</code>, <code>Storage</code>, <code>Decor</code>, <code>AdPanel</code>. Empty tabs are hidden in the build menu, so adding a category with nothing in it costs nothing.</p>
+<p><code>E_StructureCategory</code> has six values: <code>Shelf</code>, <code>Counter</code>, <code>Checkout</code>, <code>Storage</code>, <code>Decor</code>, <code>AdPanel</code>. Empty tabs are hidden in the build menu, so a category with nothing in it costs nothing.</p>
 <hr />
 <h2 id="getting-the-footprint-right">Getting the footprint right<a class="headerlink" href="#getting-the-footprint-right" title="Permanent link">&para;</a></h2>
-<p>Physical size is <code>FootprintCells × SnapStepCm</code>, so the two fields are chosen together.</p>
-<p>Measure the mesh bounds, then pick the step that divides them cleanly:</p>
+<p>Physical size is <code>FootprintCells × SnapStepCm</code>, so the two are chosen together. Measure the mesh bounds, then pick the step that divides them cleanly:</p>
 <table>
 <thead>
 <tr>
@@ -5961,28 +5960,26 @@
 </tr>
 </tbody>
 </table>
-<p>Round <strong>up</strong> rather than down. A footprint smaller than the mesh lets two pieces of furniture overlap without being refused; a footprint that is too generous just leaves a visible gap against a wall. The desk was 3 × 2 at a step of 50 and sat 19 cm off the wall, which read as broken. At 5 × 3 with a step of 25 it sits 6.5 cm off, which reads as a skirting board.</p>
-<p>A wall or ceiling footprint is measured <strong>in the plane of the surface</strong>, not on the floor. A 32 × 42 cm picture frame is a footprint on the wall, not a footprint underneath it.</p>
+<p><strong>Round up, and prefer a small step.</strong> A footprint smaller than the mesh lets two pieces overlap without being refused; a generous footprint on a coarse step leaves a visible gap against the wall — the desk at 3 × 2 on a step of 50 stood 19 cm off the wall, and at 5 × 3 on a step of 25 it sits 6.5 cm off, which reads as a skirting board.</p>
+<p>A wall or ceiling footprint is measured <strong>in the plane of the surface</strong>. A 32 × 42 cm picture frame is a footprint on the wall, not on the floor beneath it.</p>
 <hr />
 <h2 id="the-preview-mesh">The preview mesh<a class="headerlink" href="#the-preview-mesh" title="Permanent link">&para;</a></h2>
-<p><code>PreviewMesh</code> is what the ghost draws, and it is usually the same mesh as the actor. Where they differ is when the actor is made of several parts: give the ghost a single closed mesh so the outline reads at a glance.</p>
-<p>The ghost material comes in two instances, <code>MI_PlacementGhost_Valid</code> and <code>MI_PlacementGhost_Invalid</code>, and the footprint decal underneath uses <code>MI_PlacementFootprint</code>. All three are material instances, so changing the look of build mode is a few colour swatches.</p>
+<p><code>PreviewMesh</code> is what the ghost draws, usually the same mesh as the actor. When the actor is made of several parts, give the ghost a single closed mesh so the outline reads at a glance.</p>
+<p>To change the look of build mode, edit <code>MI_PlacementGhost_Valid</code>, <code>MI_PlacementGhost_Invalid</code> and <code>MI_PlacementFootprint</code>.</p>
 <hr />
 <h2 id="the-icon">The icon<a class="headerlink" href="#the-icon" title="Permanent link">&para;</a></h2>
-<p>Structure icons and app icons share a look: a flat white silhouette on transparency, drawn so the ink coverage is roughly the same for every icon in the set. That is what stops one tile shouting louder than its neighbours.</p>
-<p>Two things that came out of drawing the shipped set, and both apply to any icon you add:</p>
+<p>Structure icons and app icons are flat white silhouettes on transparency, drawn so every icon in the set carries roughly the same amount of ink. Two rules that matter when you draw one:</p>
 <ul>
-<li>A furniture silhouette without <strong>feet</strong> reads as a hole in a wall rather than as an object. Two points touching the ground is what says "this is a piece of furniture".</li>
-<li>Seams between parts should be gaps in the alpha, not painted lines. A painted line goes wrong the moment the widget tints the icon.</li>
+<li>A furniture silhouette needs <strong>feet</strong>. Without two points touching the ground it reads as a hole in a wall rather than as an object.</li>
+<li>Seams between parts are <strong>gaps in the alpha</strong>, not painted lines. A painted line goes wrong the moment the widget tints the icon.</li>
 </ul>
 <hr />
 <h2 id="making-a-surface-a-foundation">Making a surface a foundation<a class="headerlink" href="#making-a-surface-a-foundation" title="Permanent link">&para;</a></h2>
-<p>If your structure is meant to be stood on, like a desk or a counter, its collision has to <strong>block</strong> the <code>StructureFoundation</code> trace channel. Otherwise the trace passes straight through and the ghost hunts for the floor behind it.</p>
+<p>If your structure is meant to be stood on, like a desk or a counter, its collision has to <strong>block</strong> the <code>StructureFoundation</code> trace channel. Otherwise the trace passes through it and the ghost hunts for the floor behind.</p>
 <p>If it is not meant to be stood on, leave the channel ignored, which is the default.</p>
 <hr />
 <h2 id="structures-placed-by-hand">Structures placed by hand<a class="headerlink" href="#structures-placed-by-hand" title="Permanent link">&para;</a></h2>
-<p>Placing an actor in the editor rather than buying it works fine, but set <code>Structure</code> on its <code>BP_PlaceableComponent</code>. Without it, edit mode does not see the actor, <code>X</code> does nothing, and the piece cannot be sold.</p>
-<p>It is in <code>Settings|Placement</code> in the Details panel, and it is the one field people miss.</p>
+<p>Placing an actor in the editor rather than buying it works fine, but set <code>Structure</code> on its <code>BP_PlaceableComponent</code>, in <code>Settings|Placement</code>. Without it, edit mode does not see the actor, <code>X</code> does nothing and the piece cannot be sold. It is the field people miss.</p>
 <hr />
 <p><a href="https://discord.gg/EqHCtq38jy">Join the Discord</a></p>
 

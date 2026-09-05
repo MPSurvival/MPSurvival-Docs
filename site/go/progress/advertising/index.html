@@ -5248,27 +5248,27 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#how-campaigns-and-panels-line-up" class="md-nav__link">
+  <a href="#adding-a-campaign" class="md-nav__link">
     <span class="md-ellipsis">
-      How campaigns and panels line up
+      Adding a campaign
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-data-asset" class="md-nav__link">
+  <a href="#the-fields" class="md-nav__link">
     <span class="md-ellipsis">
-      The Data Asset
+      The fields
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-three-effects" class="md-nav__link">
+  <a href="#what-the-three-effects-do" class="md-nav__link">
     <span class="md-ellipsis">
-      The three effects
+      What the three effects do
     </span>
   </a>
   
@@ -5287,15 +5287,6 @@
   <a href="#the-easel" class="md-nav__link">
     <span class="md-ellipsis">
       The easel
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#adding-a-campaign" class="md-nav__link">
-    <span class="md-ellipsis">
-      Adding a campaign
     </span>
   </a>
   
@@ -5701,7 +5692,7 @@
   
   
   <span class="md-ellipsis">
-    The six rules the template is built on
+    Extending the template
     
   </span>
   
@@ -5777,27 +5768,27 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#how-campaigns-and-panels-line-up" class="md-nav__link">
+  <a href="#adding-a-campaign" class="md-nav__link">
     <span class="md-ellipsis">
-      How campaigns and panels line up
+      Adding a campaign
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-data-asset" class="md-nav__link">
+  <a href="#the-fields" class="md-nav__link">
     <span class="md-ellipsis">
-      The Data Asset
+      The fields
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-three-effects" class="md-nav__link">
+  <a href="#what-the-three-effects-do" class="md-nav__link">
     <span class="md-ellipsis">
-      The three effects
+      What the three effects do
     </span>
   </a>
   
@@ -5816,15 +5807,6 @@
   <a href="#the-easel" class="md-nav__link">
     <span class="md-ellipsis">
       The easel
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#adding-a-campaign" class="md-nav__link">
-    <span class="md-ellipsis">
-      Adding a campaign
     </span>
   </a>
   
@@ -5856,21 +5838,19 @@
 
 
 <h1 id="ad-campaigns-and-sidewalk-panels">Ad campaigns and sidewalk panels<a class="headerlink" href="#ad-campaigns-and-sidewalk-panels" title="Permanent link">&para;</a></h1>
-<p>A campaign is a poster and three effects. It runs from the <strong>Ads</strong> app, and it only has an effect while there is an easel out front to show it on.</p>
-<p>The rule, in one sentence: <strong>one easel shows one campaign, in the order they were started.</strong></p>
+<p>A campaign is a poster and three effects. You start it from the <strong>Ads</strong> app, and it only works while there is an easel out front to show it on.</p>
+<p><strong>One easel shows one campaign, in the order they were started.</strong> A campaign beyond the number of easels is paused: no effect, no billing, and its day counter stops. Put another easel down and it comes back; pick one up and the last campaign pauses. There is nothing to assign.</p>
 <hr />
-<h2 id="how-campaigns-and-panels-line-up">How campaigns and panels line up<a class="headerlink" href="#how-campaigns-and-panels-line-up" title="Permanent link">&para;</a></h2>
-<p><code>BP_AdManager</code> keeps two lists: <code>Runs</code>, the campaigns that are running, and <code>Panels</code>, the easels placed in the world. Panel <em>i</em> shows campaign <em>i</em>, and the number of live campaigns is <code>min(Runs, Panels)</code>.</p>
-<p>Everything else falls out of that:</p>
-<ul>
-<li>A campaign beyond the number of easels is <strong>paused</strong>. It has no effect, it is not billed, and its day counter does not move.</li>
-<li>Putting another easel down brings it back.</li>
-<li>Picking an easel up pauses the last campaign instead of orphaning it.</li>
-</ul>
-<p>There is nothing to assign. That was the trade: you cannot choose which easel shows which poster, and in exchange there is no state to keep in sync and no way to end up with a campaign nobody can see.</p>
+<h2 id="adding-a-campaign">Adding a campaign<a class="headerlink" href="#adding-a-campaign" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Draw a poster and import it.</li>
+<li>Create a <code>DA_Ad_&lt;Name&gt;</code> from <code>BP_AdCampaignDataAsset</code> in <code>Blueprints/DataAssets/Ads/Childs/</code> and fill it in.</li>
+<li>Add it to <code>AvailableCampaigns</code> on <code>DA_App_Ads</code>.</li>
+</ol>
+<p>The app row, the billing, the effects and the poster on the easel all come from the asset.</p>
+<p>Keep <strong>prices and percentages off the poster</strong>: a campaign brings customers through the door, and what they pay is set on the product asset, so a poster promising a cut price would advertise something the shelf does not do.</p>
 <hr />
-<h2 id="the-data-asset">The Data Asset<a class="headerlink" href="#the-data-asset" title="Permanent link">&para;</a></h2>
-<p><code>BP_AdCampaignDataAsset</code>, one instance per campaign.</p>
+<h2 id="the-fields">The fields<a class="headerlink" href="#the-fields" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -5909,7 +5889,7 @@
 </tr>
 </tbody>
 </table>
-<p>Three ship with the template, deliberately different:</p>
+<p>Three ship with the template:</p>
 <table>
 <thead>
 <tr>
@@ -5941,35 +5921,22 @@
 </tbody>
 </table>
 <hr />
-<h2 id="the-three-effects">The three effects<a class="headerlink" href="#the-three-effects" title="Permanent link">&para;</a></h2>
-<p><strong>Traffic</strong> multiplies. <code>GetCustomerRate</code> takes the hourly figure from <code>DA_DayConfig</code> and multiplies it by every live campaign's <code>TrafficMultiplier</code>. Two campaigns running at ×1.15 and ×1.25 give ×1.44.</p>
-<p><strong>Rating</strong> adds. The sum of every live <code>RatingDelta</code> is added to the target rating and then clamped to 0 to 5. <code>RecomputeRating</code> is still the only thing that writes the rating.</p>
-<p><strong>Categories</strong> are read <strong>once, when a customer spawns</strong>. A customer who walks in under a Fresh Deals campaign will buy fresh food even if their archetype does not normally like it, and they keep that for their whole visit even if you stop the campaign while they are in the shop.</p>
-<p>Reading it once rather than per query is a real decision: <code>IsProductWanted</code> is called per product per shelf, and rebuilding the promoted list every time would mean resolving the game state hundreds of times a minute for a value that changes once a day.</p>
+<h2 id="what-the-three-effects-do">What the three effects do<a class="headerlink" href="#what-the-three-effects-do" title="Permanent link">&para;</a></h2>
+<p><strong>Traffic</strong> multiplies the hourly figure from <code>DA_DayConfig</code>. Two campaigns at ×1.15 and ×1.25 give ×1.44.</p>
+<p><strong>Rating</strong> adds every live <code>RatingDelta</code> to the target rating, clamped to 0 - 5.</p>
+<p><strong>Categories</strong> are read <strong>when a customer spawns</strong>. Someone who walks in under a Fresh Deals campaign buys fresh food even if their archetype normally would not, and keeps that for the whole visit even if you stop the campaign while they are in the shop.</p>
 <hr />
 <h2 id="running-one">Running one<a class="headerlink" href="#running-one" title="Permanent link">&para;</a></h2>
-<p>In the <strong>Ads</strong> app, each row shows the poster, the name, the traffic and rating effects, the cost per day, the remaining days, and a <code>RUN</code> or <code>STOP</code> button.</p>
-<p><code>CanStartCampaign</code> is the single rule behind the button: there has to be a free easel, the campaign must not already be running, and you have to be able to afford one day.</p>
-<p>The first day is billed on start, the rest at the end of each day, with reason <code>Marketing</code>. It goes through <code>AddTransaction</code> like everything else, so it shows up as its own line in the daily report.</p>
+<p>Each row in the <strong>Ads</strong> app shows the poster, the name, the traffic and rating effects, the cost per day, the days left, and a <code>RUN</code> or <code>STOP</code> button.</p>
+<p><code>RUN</code> needs a free easel, a campaign that is not already running, and enough money for one day. The first day is billed on start and the rest at the end of each day, so it gets its own <code>Marketing</code> line in the daily report.</p>
 <hr />
 <h2 id="the-easel">The easel<a class="headerlink" href="#the-easel" title="Permanent link">&para;</a></h2>
-<p><code>BP_AdPanel</code> is bought from the <strong>Structures</strong> app like any other piece of furniture, through <code>DA_Structure_AdPanel</code>, and placed with the build key. It is allowed in <code>SalesFloor</code> and <code>Outside</code>, so it can go in the window or on the pavement.</p>
-<p>It holds no state at all. It registers itself with the manager at <code>BeginPlay</code>, removes itself at <code>EndPlay</code>, and exposes <code>ShowCampaign</code>, which only the manager calls.</p>
-<p>The poster is a dynamic material instance created once, on the material slot named <code>M_AdPoster</code>. <code>BlankPoster</code> is what it shows with no campaign, and it is a real protection rather than a nicety: setting a texture parameter to nothing falls back to the master material's default, which is a wood grain.</p>
-<p>The easel itself is not interactable. A campaign is chosen in the app, where you can see what it costs and what it does. Pressing <code>E</code> on the panel would have nothing to say.</p>
-<hr />
-<h2 id="adding-a-campaign">Adding a campaign<a class="headerlink" href="#adding-a-campaign" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Draw a poster and import it.</li>
-<li>Create a <code>DA_Ad_&lt;Name&gt;</code> from <code>BP_AdCampaignDataAsset</code> and fill it in.</li>
-<li>Add it to <code>AvailableCampaigns</code> on <code>DA_App_Ads</code>.</li>
-</ol>
-<p>Nothing else. The app row, the billing, the effects and the poster on the easel all come from the asset.</p>
-<p>One thing the shipped posters avoid, and yours probably should too: <strong>no prices and no percentages.</strong> There is no discount system in the template, so a poster reading "−50%" would be advertising something the game cannot do.</p>
+<p><code>BP_AdPanel</code> is bought from the <strong>Structures</strong> app like any other furniture and placed with <code>B</code>. It is allowed in <code>SalesFloor</code> and <code>Outside</code>, so it goes in the window or on the pavement.</p>
+<p>It is not interactable: the campaign is chosen in the app, where you can see what it costs.</p>
+<p>The poster is drawn on the material slot named <code>M_AdPoster</code>. <code>BlankPoster</code> is what shows with no campaign — leave it filled in, because an empty texture parameter falls back to the master material's wood grain.</p>
 <hr />
 <h2 id="before-you-test-it">Before you test it<a class="headerlink" href="#before-you-test-it" title="Permanent link">&para;</a></h2>
-<p>The Ads app and the easel are both rewards on <code>DA_Unlock_Marketing</code>, which needs day 3. Before day 3 neither of them exists.</p>
-<p>That is intended, and it is also the thing most likely to make you think the system is broken on your first run.</p>
+<p>The Ads app and the easel are both rewards on <code>DA_Unlock_Marketing</code>, which needs day 3. Before day 3 neither of them exists, which is the thing most likely to make you think the system is broken on a first run.</p>
 <hr />
 <p><a href="https://discord.gg/EqHCtq38jy">Join the Discord</a></p>
 

@@ -1,8 +1,8 @@
 # Add a customer archetype
 
-An archetype is one Data Asset, and it changes how a customer actually behaves rather than just how fast they walk.
+An archetype is one Data Asset. It changes how a customer shops, not just how fast they walk.
 
-Three ship with the template, and they are deliberately far apart:
+Three ship with the template:
 
 | Asset | Character |
 |---|---|
@@ -17,7 +17,7 @@ Three ship with the template, and they are deliberately far apart:
 1. Right click in `Blueprints/DataAssets/Customers/Childs/` → **Data Asset** → `BP_CustomerArchetypeDataAsset`.
 2. Name it `DA_Customer_<Kind>`.
 3. Fill it in.
-4. Add it to `ArchetypeMix` on `DA_DayConfig` with a weight, or it will never appear.
+4. Add it to `ArchetypeMix` on `DA_DayConfig` with a weight, or it never appears.
 
 ---
 
@@ -26,57 +26,47 @@ Three ship with the template, and they are deliberately far apart:
 | Field | What it does |
 |---|---|
 | `WalkSpeed` | Movement speed, applied at spawn |
-| `PatienceSeconds` | How long they will queue before leaving angry |
+| `PatienceSeconds` | How long they queue before leaving angry |
 | `BudgetMin` / `BudgetMax` | The wallet, rolled per customer between the two |
 | `TargetItemsMin` / `TargetItemsMax` | How many items they intend to buy, rolled per customer |
 | `PreferredCategories` | Which `E_ProductCategory` values they will buy at all |
-| `PriceSensitivity` | Declared, and nothing reads it yet |
+| `PriceSensitivity` | Declared on the archetype, for a pricing system of your own to read |
 | `BrowseSeconds` | How long they stand in front of a shelf before moving on |
 | `CosmeticSet` | A `DA_CosmeticSet_*`, the wardrobe they are dressed from |
 
-Speed, budget and item count are rolled per customer inside the archetype's bounds, so two hurried shoppers are not identical.
-
-`PriceSensitivity` has nothing to bite on because selling prices are fixed on the product and there is no in-game pricing screen. It is left in place for the day one exists rather than being wired to a constant.
+Speed, budget and item count are rolled per customer inside those bounds, so two hurried shoppers are not identical.
 
 ---
 
 ## Weighting the mix
 
-`DA_DayConfig.ArchetypeMix` is a list of `S_ArchetypeMix` rows: an archetype and a weight. Each spawn draws from it.
-
-Weights are relative, so `3 / 2 / 1` and `30 / 20 / 10` do the same thing. An archetype at weight `0` never appears, which is a useful way of switching one off without deleting it.
+`ArchetypeMix` on `DA_DayConfig` is a list of archetypes and weights, drawn from at every spawn. Weights are relative, so `3 / 2 / 1` and `30 / 20 / 10` do the same thing. Weight `0` switches an archetype off without deleting it.
 
 ---
 
 ## Dressing them
 
-`CosmeticSet` points at a `BP_CosmeticSetDataAsset`, which is a list of slots. Each slot is a `BP_CosmeticSlotDataAsset` holding a list of skeletal meshes for one part of the body.
+`CosmeticSet` points at a `BP_CosmeticSetDataAsset`, which is a list of slots. Each slot is a `BP_CosmeticSlotDataAsset` holding the meshes available for one part of the body. Two ship: `DA_CosmeticSlot_Hair` and `DA_CosmeticSlot_Torso`.
 
-Two slots ship: `DA_CosmeticSlot_Hair` and `DA_CosmeticSlot_Torso`.
+One option per slot is drawn at random when a customer spawns. **An empty entry in `Options` means that slot can be nothing**, which is how some customers get a hat and some do not.
 
-At spawn, the cosmetic component creates one skeletal mesh component per slot and picks one option at random. **An empty entry in `Options` means that slot can be nothing**, which is how you get some customers with hats and some without. There is no probability field, the draw is enough.
+**To add a body part** — legs, a bag, glasses — add one more `DA_CosmeticSlot_*` to the set. Nothing else changes.
 
-Because the wardrobe is chosen on the archetype, two customer types can dress from two different sets.
-
-Adding a body part is one more `DA_CosmeticSlot_*` in the set: legs, a bag, glasses. Nothing else changes.
-
-If you add cosmetic meshes of your own, set their collision to none. A skeletal mesh created at runtime arrives with default collision, and hair that blocks the world will block the interaction trace and the customers behind it.
+If you add cosmetic meshes of your own, **set their collision to none**. Hair that blocks the world blocks the interaction trace and the customers behind it.
 
 ---
 
 ## Overriding the buying rule
 
-`Wants(Product, Budget) → Wanted` lives on the archetype Data Asset, not on the brain. The brain just delegates to it.
-
-That means you can subclass `BP_CustomerArchetypeDataAsset`, override `Wants`, and get a customer type with a genuinely different shopping rule without touching the AI. A customer who only buys what is on ad, or who refuses anything above a certain price, is one overridden function.
+`Wants(Product, Budget)` lives on the archetype Data Asset. Subclass `BP_CustomerArchetypeDataAsset`, override it, and you have a customer type with a genuinely different shopping rule without touching the AI: one who only buys what is advertised, or refuses anything above a price.
 
 ---
 
 ## Testing one archetype on its own
 
-Put a single row in `ArchetypeMix` with your archetype at weight 1, set `CustomersPerHour` to something generous for the current hour, and play. Everyone who walks in is yours.
+Put a single row in `ArchetypeMix` with your archetype at weight 1, raise `CustomersPerHour` for the current hour, and play. Everyone who walks in is yours.
 
-Do not place a customer by hand in the level to test. A hand-placed customer never goes through `SpawnCustomer`, so it never gets initialised, and it will behave as though it has no archetype at all.
+**Do not place a customer by hand in the level to test.** A hand-placed customer never goes through the spawner, so it is never given an archetype and behaves as if it had none.
 
 ---
 

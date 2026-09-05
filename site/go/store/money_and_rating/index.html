@@ -4250,9 +4250,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#money-one-function-no-exceptions" class="md-nav__link">
+  <a href="#changing-the-balance" class="md-nav__link">
     <span class="md-ellipsis">
-      Money: one function, no exceptions
+      Changing the balance
     </span>
   </a>
   
@@ -4268,18 +4268,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#what-the-rating-is-worth" class="md-nav__link">
+  <a href="#cash-sales-record-what-changed-hands" class="md-nav__link">
     <span class="md-ellipsis">
-      What the rating is worth
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#money-never-lies-about-what-happened" class="md-nav__link">
-    <span class="md-ellipsis">
-      Money never lies about what happened
+      Cash sales record what changed hands
     </span>
   </a>
   
@@ -5674,7 +5665,7 @@
   
   
   <span class="md-ellipsis">
-    The six rules the template is built on
+    Extending the template
     
   </span>
   
@@ -5750,9 +5741,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#money-one-function-no-exceptions" class="md-nav__link">
+  <a href="#changing-the-balance" class="md-nav__link">
     <span class="md-ellipsis">
-      Money: one function, no exceptions
+      Changing the balance
     </span>
   </a>
   
@@ -5768,18 +5759,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#what-the-rating-is-worth" class="md-nav__link">
+  <a href="#cash-sales-record-what-changed-hands" class="md-nav__link">
     <span class="md-ellipsis">
-      What the rating is worth
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#money-never-lies-about-what-happened" class="md-nav__link">
-    <span class="md-ellipsis">
-      Money never lies about what happened
+      Cash sales record what changed hands
     </span>
   </a>
   
@@ -5802,13 +5784,12 @@
 
 
 <h1 id="money-and-the-store-rating">Money and the store rating<a class="headerlink" href="#money-and-the-store-rating" title="Permanent link">&para;</a></h1>
-<p>Two numbers drive the whole game, and each of them has exactly one writer.</p>
 <hr />
-<h2 id="money-one-function-no-exceptions">Money: one function, no exceptions<a class="headerlink" href="#money-one-function-no-exceptions" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>BP_StoreManager.AddTransaction(Amount, Reason, ProductId)
+<h2 id="changing-the-balance">Changing the balance<a class="headerlink" href="#changing-the-balance" title="Permanent link">&para;</a></h2>
+<p>One function moves money, on <code>BP_StoreManager</code>:</p>
+<div class="highlight"><pre><span></span><code>AddTransaction(Amount, Reason, ProductId)
 </code></pre></div>
-<p>That is the only place in the project where the balance changes. A sale, a purchase, rent, a wage, a tax, an ad campaign: all of them call it. Money in is positive, money out is negative.</p>
-<p>Every call is appended to a journal of <code>S_Transaction</code> rows, and the reason comes from <code>E_TransactionReason</code>:</p>
+<p>Money in is positive, money out is negative. Every call is written to the transaction journal with a reason from <code>E_TransactionReason</code>, and the daily report is read back from that journal.</p>
 <table>
 <thead>
 <tr>
@@ -5847,57 +5828,54 @@
 </tr>
 <tr>
 <td><code>Refund</code></td>
-<td>nothing yet</td>
+<td>yours to call</td>
 </tr>
 <tr>
 <td><code>Fine</code></td>
-<td>nothing yet</td>
+<td>yours to call</td>
 </tr>
 </tbody>
 </table>
-<p>The last two are declared and unused. They are there for you to hook up.</p>
-<p>Because everything goes through one function with a reason attached, the daily report is <strong>derived</strong> from the journal rather than accumulated alongside it. <code>SumForDay(Day, Reason)</code> gives you one line of the report; <code>CountForDay</code> and <code>HasTransaction(Day, Reason, ProductId)</code> answer the two other questions the game asks of the journal.</p>
-<p>Add a cost of your own and you get its report line for free: add a value to <code>E_TransactionReason</code>, call <code>AddTransaction</code> with it, and add the row to the report widget.</p>
-<p>The balance broadcasts <code>OnBalanceChanged</code>. The HUD, the computer's title bar and every app subscribe to it, none of them poll.</p>
+<p><strong>To add a cost or an income of your own</strong>, and get its line in the daily report:</p>
+<ol>
+<li>Add a value to <code>E_TransactionReason</code>.</li>
+<li>Call <code>AddTransaction</code> with it from wherever the money moves.</li>
+<li>Add a <code>BP_ReportRowWidget</code> for it in the report, in the Designer.</li>
+</ol>
 <hr />
 <h2 id="the-rating">The rating<a class="headerlink" href="#the-rating" title="Permanent link">&para;</a></h2>
-<p>The store rating is a float from 0 to 5, and <code>RecomputeRating()</code> is the only function that writes it.</p>
-<p>Three things feed it today, each from exactly one caller:</p>
+<p>A float from 0 to 5, shown as the ring in the top right of the HUD. Three things move it:</p>
 <table>
 <thead>
 <tr>
 <th>What</th>
-<th>Where it is reported</th>
+<th>Effect</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>A customer paid and left happy</td>
-<td><code>BP_CheckoutBase.FinishSale</code></td>
+<td>up</td>
 </tr>
 <tr>
 <td>A customer ran out of patience and left angry</td>
-<td><code>BP_CustomerBrain.LeaveAngry</code></td>
+<td>down</td>
 </tr>
 <tr>
-<td>A customer could not find anything they wanted</td>
-<td><code>BP_CustomerBrain.ReportStockOut</code></td>
+<td>A customer could not find what they came for</td>
+<td>down</td>
 </tr>
 </tbody>
 </table>
-<p>Running ad campaigns add their <code>RatingDelta</code> on top, and the result is clamped to 0 to 5.</p>
-<p>The rating does not jump to the day's satisfaction, it <strong>eases</strong> toward it. <code>RatingInertia</code> on <code>DA_StoreConfig</code> is the speed: at <code>0</code> the rating never moves, at <code>1</code> it snaps to the day's value. <code>0.15</code> is the shipped value, which means a bad day dents the rating without erasing a good week.</p>
-<p>Adding a fourth factor is one call into <code>RecomputeRating</code>. Do not write the rating from anywhere else, or the number stops meaning anything the moment two systems disagree.</p>
+<p>A running ad campaign adds its <code>RatingDelta</code> on top, and the result is clamped to 0 - 5.</p>
+<p>The rating eases toward the day's satisfaction rather than jumping to it. The speed is <code>RatingInertia</code> on <code>DA_StoreConfig</code>: <code>0.15</code> ships, which means one bad day dents the rating without erasing a good week.</p>
+<p><strong>To add a fourth thing that moves the rating</strong>, call <code>RecomputeRating</code> on <code>BP_StoreManager</code> from wherever it happens.</p>
+<p>The rating gates content: unlocks read it as a condition, so <code>DA_Unlock_ColdChain</code> needs a rating of 3. See <a href="../../progress/unlocks/">Unlocks</a>.</p>
+<p><strong>To change its colours</strong>, open <code>MI_RatingRing</code>: four swatches drive the ramp, red at 0 through green at 5.</p>
 <hr />
-<h2 id="what-the-rating-is-worth">What the rating is worth<a class="headerlink" href="#what-the-rating-is-worth" title="Permanent link">&para;</a></h2>
-<p>It is a metric the unlock system reads, so it gates content. <code>DA_Unlock_ColdChain</code> needs a rating of 3, for example. See <a href="../../progress/unlocks/">Unlocks</a>.</p>
-<p>The HUD ring shows it, and its colour is a ramp inside <code>MI_RatingRing</code>: red at 0, orange around 1.7, yellow around 3.3, green at 5. A single <code>Fill</code> input drives both the arc and the colour, so they can never disagree. Changing the mood of the rating display is four colour swatches in that material instance.</p>
-<p>When the rating crosses a whole number in either direction, a notification says so.</p>
-<hr />
-<h2 id="money-never-lies-about-what-happened">Money never lies about what happened<a class="headerlink" href="#money-never-lies-about-what-happened" title="Permanent link">&para;</a></h2>
-<p>One detail that is worth understanding, because it is the reason cash handling is a game and not a formality.</p>
-<p><code>FinishSale</code> does not record the total of the receipt. It records <strong>what actually changed hands</strong>: <code>AmountGiven − ComposedChange</code> for a cash sale, and whatever you typed into the card terminal for a card sale. Give too much change back and you lose the difference. Give too little and you keep it.</p>
-<p>There is no separate penalty rule for miscounting. The journal just records the truth, and the truth costs money.</p>
+<h2 id="cash-sales-record-what-changed-hands">Cash sales record what changed hands<a class="headerlink" href="#cash-sales-record-what-changed-hands" title="Permanent link">&para;</a></h2>
+<p>A cash sale writes what you actually took, minus the change you actually gave back, not the total on the receipt. Hand back too much and you are down by the difference; hand back too little and you keep it. Counting change badly costs money on its own, with no penalty rule anywhere.</p>
+<p>See <a href="../../checkout/payment_and_change/">Cash, change and the card terminal</a>.</p>
 <hr />
 <p><a href="https://discord.gg/EqHCtq38jy">Join the Discord</a></p>
 

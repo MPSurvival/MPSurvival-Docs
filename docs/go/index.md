@@ -6,7 +6,29 @@ You own a small shop. You order stock from a computer in the back office, the bo
 
 Everything in that loop is **single player** and built entirely with Blueprints.
 
-The idea behind the project is the same one behind every page here: the thing you want to change is almost always a **Data Asset** or a field in the **Details panel**, not a graph. A new product, a new customer type, a new piece of furniture, a new employee, a new ad campaign, a new app on the office computer. Each one is an asset you fill in.
+Almost everything you will want to change is a **Data Asset** or a field in the **Details panel**, not a graph.
+
+---
+
+## How do I...
+
+| I want to | Page |
+|---|---|
+| Add a product to the shop | [Add a product](stock/add_a_product.md) |
+| Build a shelf of my own shape | [Build your own shelf](stock/make_your_own_shelf.md) |
+| Add furniture the player can buy and place | [Add a placeable structure](build/add_a_structure.md) |
+| Add a new kind of customer | [Add a customer archetype](customers/add_an_archetype.md) |
+| Add someone to hire | [Add a candidate](staff/add_a_candidate.md) |
+| Add an ad campaign | [Ad campaigns](progress/advertising.md) |
+| Gate something behind progress | [Unlocks](progress/unlocks.md) |
+| Write an app for the office computer | [Write your own app](computer/add_an_app.md) |
+| Add a box size | [Add a box size](delivery/add_a_box_size.md) |
+| Put a checkout in my own level | [Put a checkout in your level](checkout/place_a_checkout.md) |
+| Build my own store level | [The three maps, and how a game starts](start/maps_and_startup.md) |
+| Change a key | [The controls](start/controls.md) |
+| Change the colours and fonts | [Colours, fonts and reskinning](ui/colours_and_fonts.md) |
+| Add a job employees can do | [How employees work](staff/how_employees_work.md) |
+| Add a footstep surface | [Surfaces, footsteps and sound](look/surfaces_and_sound.md) |
 
 ---
 
@@ -17,8 +39,6 @@ If you have just downloaded the template:
 1. [Install and open the project](start/install_and_open.md)
 2. [The three maps, and how a game starts](start/maps_and_startup.md)
 3. [The controls](start/controls.md)
-
-After that, go straight to the system you care about. Every chapter opens with a page that explains how the system is put together, and the pages after it each answer one question, such as "how do I add a product" or "how do I make my own shelf".
 
 ---
 
@@ -34,23 +54,19 @@ After that, go straight to the system you care about. Every chapter opens with a
 | [Customers](customers/how_a_customer_thinks.md) | Archetypes, the shopping loop, patience, traffic per hour and the spawn rules |
 | [Employees](staff/how_employees_work.md) | Hiring, shifts, wages, and the task queue the AI pulls from |
 | [Building the store](build/how_placement_works.md) | Buying furniture, the build menu, placing on floors, walls and ceilings, edit mode and zones |
-| [The office computer](computer/how_the_computer_works.md) | The diegetic desktop, the six apps, and writing an app of your own |
+| [The office computer](computer/how_the_computer_works.md) | The desktop, the six apps, and writing an app of your own |
 | [Advertising and progression](progress/advertising.md) | Campaigns, sidewalk panels, and the unlock catalogue |
 | [Interface, menus and saving](ui/hud_and_prompts.md) | The HUD, the interaction prompt, world screens, the menus, the pause and the save slots |
 | [Look and sound](look/surfaces_and_sound.md) | Physical surfaces, footsteps, the audio mix, the day/night cycle and the mesh kit |
-| [Under the hood](architecture/the_rules.md) | The six ownership rules the whole template is built on, and where every asset lives |
+| [Under the hood](architecture/the_rules.md) | The six rules to follow when you extend it, and where every asset lives |
 
 ---
 
-## What this template does not do
+## How it is played
 
-Said here so you find out now rather than three hours in.
-
-- **No multiplayer.** Nothing in the project is replicated, on purpose. The co-op version is a separate product.
-- **No options screen and no key rebinding.** The keys are the ones in `IMC_Gameplay`.
-- **No shipped translation.** Every displayed string is a `Text`, so you can translate it yourself, but there is no localisation pipeline in the box.
-- **No gamepad support.** The game is played with a keyboard and a mouse.
-- **No discounts, no shoplifting, no store expansion.** These were considered and dropped.
+- **Single player**, with a keyboard and a mouse.
+- **Every displayed string is a `Text`**, so the widgets are yours to translate.
+- **The keys live in `IMC_Gameplay`.** Dragging a mapping onto another key takes about five seconds.
 
 ---
 

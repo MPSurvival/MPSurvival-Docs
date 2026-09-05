@@ -5013,9 +5013,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#the-two-components" class="md-nav__link">
+  <a href="#the-keys" class="md-nav__link">
     <span class="md-ellipsis">
-      The two components
+      The keys
     </span>
   </a>
   
@@ -5040,18 +5040,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#refusals-are-named" class="md-nav__link">
+  <a href="#when-placement-refuses" class="md-nav__link">
     <span class="md-ellipsis">
-      Refusals are named
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#the-build-menu" class="md-nav__link">
-    <span class="md-ellipsis">
-      The build menu
+      When placement refuses
     </span>
   </a>
   
@@ -5061,6 +5052,15 @@
   <a href="#edit-mode" class="md-nav__link">
     <span class="md-ellipsis">
       Edit mode
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#making-an-actor-placeable" class="md-nav__link">
+    <span class="md-ellipsis">
+      Making an actor placeable
     </span>
   </a>
   
@@ -5701,7 +5701,7 @@
   
   
   <span class="md-ellipsis">
-    The six rules the template is built on
+    Extending the template
     
   </span>
   
@@ -5777,9 +5777,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#the-two-components" class="md-nav__link">
+  <a href="#the-keys" class="md-nav__link">
     <span class="md-ellipsis">
-      The two components
+      The keys
     </span>
   </a>
   
@@ -5804,18 +5804,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#refusals-are-named" class="md-nav__link">
+  <a href="#when-placement-refuses" class="md-nav__link">
     <span class="md-ellipsis">
-      Refusals are named
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#the-build-menu" class="md-nav__link">
-    <span class="md-ellipsis">
-      The build menu
+      When placement refuses
     </span>
   </a>
   
@@ -5825,6 +5816,15 @@
   <a href="#edit-mode" class="md-nav__link">
     <span class="md-ellipsis">
       Edit mode
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#making-an-actor-placeable" class="md-nav__link">
+    <span class="md-ellipsis">
+      Making an actor placeable
     </span>
   </a>
   
@@ -5856,39 +5856,40 @@
 
 
 <h1 id="how-placement-works">How placement works<a class="headerlink" href="#how-placement-works" title="Permanent link">&para;</a></h1>
-<p>Buying furniture and placing it are two separate things. You buy from the <strong>Structures</strong> app on the office computer, which puts the item in your stock, and you place it later with the build key, anywhere you like. That split is what stops you walking back to the office for every shelf.</p>
+<p>Buying furniture and placing it are two separate things. You buy from the <strong>Structures</strong> app on the office computer, which puts the item in your stock, then you place it later with <code>B</code>, anywhere you like.</p>
 <hr />
-<h2 id="the-two-components">The two components<a class="headerlink" href="#the-two-components" title="Permanent link">&para;</a></h2>
+<h2 id="the-keys">The keys<a class="headerlink" href="#the-keys" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>Component</th>
-<th>Where</th>
+<th>Key</th>
 <th>What it does</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>BP_PlacementManager</code></td>
-<td>On <code>BP_StoreCharacter</code></td>
-<td>Aims, validates, places, and runs edit mode</td>
+<td><code>B</code></td>
+<td>Open the build menu, and leave build mode</td>
 </tr>
 <tr>
-<td><code>BP_PlaceableComponent</code></td>
-<td>On anything placeable</td>
-<td>Marks the actor as furniture and remembers which <code>DA_Structure_*</code> it came from</td>
+<td>Left mouse</td>
+<td>Place the armed structure</td>
+</tr>
+<tr>
+<td><code>R</code></td>
+<td>Rotate a quarter turn</td>
+</tr>
+<tr>
+<td><code>X</code></td>
+<td>In edit mode, pick a placed structure back up</td>
 </tr>
 </tbody>
 </table>
-<p>The manager lives on the character rather than the controller because the aiming trace needs the camera, which is on the character, next to the interaction, carry and view components.</p>
-<p>Anything carrying a <code>BP_PlaceableComponent</code> with a valid <code>Structure</code> can be picked back up, including furniture you placed by hand in the editor. If <code>Structure</code> is empty on an actor you dropped in a level, edit mode will not see it.</p>
+<p>Clicking a tile in the menu arms that structure and closes the menu, so you go straight back to aiming. Ordinary interaction is suspended while you are in build mode, so you cannot open a fridge while placing one.</p>
+<p>The menu shows no prices: you are not buying here, and the card shows the footprint and how many you have in stock.</p>
 <hr />
 <h2 id="floors-walls-and-ceilings">Floors, walls and ceilings<a class="headerlink" href="#floors-walls-and-ceilings" title="Permanent link">&para;</a></h2>
-<p>Placement is not a floor grid. <code>TraceFoundation</code> returns the <strong>normal</strong> of whatever surface you are aiming at, snapping happens in the plane of that surface, and the ghost orients itself so its local +Z is the surface normal.</p>
-<p>That is what makes wall lamps, ceiling fans and desk clutter possible without a second system.</p>
-<p><strong>A surface is only a foundation if it says so.</strong> There is a dedicated trace channel, <code>StructureFoundation</code>, which defaults to <strong>Ignore</strong>. Floors, walls, ceilings and desk tops block it. A gondola does not, which is why you cannot balance a gift box on a shelf.</p>
-<p>Making something a foundation is one line in its Collision panel. There is no graph to open.</p>
-<p>Three booleans on the structure decide where it may go:</p>
+<p>Placement follows the surface you aim at, so wall lamps and ceiling fans work with no second system. Three booleans on the structure decide where it may go:</p>
 <table>
 <thead>
 <tr>
@@ -5911,11 +5912,11 @@
 </tr>
 </tbody>
 </table>
-<p>They are three booleans rather than one enum on purpose. A wall lamp can legitimately go on a wall <strong>and</strong> a ceiling.</p>
-<p>The ghost only tilts onto a surface it is allowed on. Aim a desk at a wall and it stays flat and red, instead of flattening itself against the wall and then telling you it is invalid.</p>
+<p>They are three booleans rather than one choice, because a wall lamp can legitimately go on a wall <strong>and</strong> a ceiling.</p>
+<p><strong>A surface only accepts furniture if it blocks the <code>StructureFoundation</code> trace channel.</strong> Floors, walls, ceilings and desk tops block it; a gondola does not, which is why you cannot balance a gift box on a shelf. Making your own mesh a foundation is one line in its Collision panel.</p>
 <hr />
 <h2 id="snapping">Snapping<a class="headerlink" href="#snapping" title="Permanent link">&para;</a></h2>
-<p>The snap step is on the <strong>structure</strong>, not on the manager:</p>
+<p>The snap settings are on the <strong>structure</strong>, so a gondola and a desk fan can use different grids:</p>
 <table>
 <thead>
 <tr>
@@ -5938,11 +5939,10 @@
 </tr>
 </tbody>
 </table>
-<p>Physical size is <code>FootprintCells × SnapStepCm</code>. A gondola snaps at half a metre, a desk fan at ten centimetres, and a 125 cm fridge works because its step is 25.</p>
-<p><code>R</code> rotates a quarter turn around the surface normal. The footprint rotates with the structure, so a 1×3 turned sideways occupies 3×1 for both the snap and the overlap test.</p>
+<p>Physical size is <code>FootprintCells × SnapStepCm</code>: a gondola snaps at half a metre, a desk fan at ten centimetres, and a 125 cm fridge works because its step is 25. The footprint rotates with the structure, so a 1×3 turned sideways occupies 3×1.</p>
 <hr />
-<h2 id="refusals-are-named">Refusals are named<a class="headerlink" href="#refusals-are-named" title="Permanent link">&para;</a></h2>
-<p><code>ValidatePlacement</code> returns an <code>S_PlacementResult</code>, and the <code>Reason</code> field is a <code>Text</code> shown under the crosshair. Nothing is ever refused in silence.</p>
+<h2 id="when-placement-refuses">When placement refuses<a class="headerlink" href="#when-placement-refuses" title="Permanent link">&para;</a></h2>
+<p>The reason is written under the crosshair, always:</p>
 <table>
 <thead>
 <tr>
@@ -5969,19 +5969,13 @@
 </tr>
 </tbody>
 </table>
-<p>The four messages are variables on the manager, so translating or rewording them means editing fields.</p>
-<p>The overlap test only considers placed structures and customers. It does not test the footprint against walls, so a shelf can still bite a few centimetres into a wall if the grid and the wall do not line up. In the shipped level they do line up: every interior wall face sits on a grid multiple, so the full cell against each wall is free.</p>
-<hr />
-<h2 id="the-build-menu">The build menu<a class="headerlink" href="#the-build-menu" title="Permanent link">&para;</a></h2>
-<p><code>B</code> opens a full-screen menu: a grid of tiles on the left, a detail card on the right, category tabs across the top. Tabs with nothing in them are hidden.</p>
-<p>Clicking a tile arms that structure <strong>and closes the menu</strong>, so you go straight back to aiming. <code>B</code> again leaves build mode entirely.</p>
-<p><code>B</code> is a two-state toggle and nothing else. Changing structure without leaving costs two presses, which is the price of a key that always does the same thing.</p>
-<p>There is no money in this menu. You do not buy here; the card shows the footprint and how many you have in stock.</p>
+<p>The four messages are variables on <code>BP_PlacementManager</code>, so rewording them means editing fields.</p>
+<p>The overlap test looks at placed structures and customers, not at walls, so a shelf can bite a few centimetres into a wall if your grid and your walls do not line up. In the shipped level they do: every interior wall face sits on a grid multiple.</p>
 <hr />
 <h2 id="edit-mode">Edit mode<a class="headerlink" href="#edit-mode" title="Permanent link">&para;</a></h2>
-<p>Edit mode is a sub-state of build mode, not a third mode. The <code>EDIT</code> button at the bottom right of the build menu enters it, and <code>EDIT MODE</code> appears under the crosshair with <code>[B] Exit</code>.</p>
+<p>The <code>EDIT</code> button at the bottom right of the build menu enters it, and <code>EDIT MODE</code> appears under the crosshair.</p>
 <p>Aim at a placed structure and the ghost snaps onto it. <code>X</code> picks it up and returns it to your stock for free, keeping its rotation, so putting it back down puts it back the way it was.</p>
-<p>Some things refuse to be picked up, and they say why:</p>
+<p>Some things refuse, and say why:</p>
 <table>
 <thead>
 <tr>
@@ -6004,12 +5998,14 @@
 </tr>
 </tbody>
 </table>
-<p>Ordinary interaction is suspended for as long as you are in build or edit mode, so you cannot accidentally open a fridge while placing one.</p>
+<hr />
+<h2 id="making-an-actor-placeable">Making an actor placeable<a class="headerlink" href="#making-an-actor-placeable" title="Permanent link">&para;</a></h2>
+<p>Add a <code>BP_PlaceableComponent</code> and set its <code>Structure</code> to the <code>DA_Structure_*</code> it came from. That is what makes it pickable in edit mode and sellable — including furniture you dropped into the level by hand in the editor. Leave <code>Structure</code> empty and edit mode will not see it.</p>
+<p>See <a href="../add_a_structure/">Add a placeable structure</a>.</p>
 <hr />
 <h2 id="buying-and-selling">Buying and selling<a class="headerlink" href="#buying-and-selling" title="Permanent link">&para;</a></h2>
-<p>The <strong>Structures</strong> app on the office computer is the shop. <code>BuyStructure</code> refuses if you cannot afford it and writes a <code>Purchase</code> transaction. <code>SellStructure</code> pays back <code>RefundRatio</code>, half by default.</p>
-<p>Stock lives in <code>OwnedStructures</code> on <code>BP_StoreManager</code>, and only that component's own two functions touch the array.</p>
-<p>One thing to be careful about, since the shipped level lets you sell the furniture you started with: <strong>you can sell your last checkout.</strong> With no till, nothing generates income, and buying one back costs twice what selling it paid. There is no guard against it. Refusing a sale when <code>stock + placed == 1</code> is one condition in <code>SellStructure</code> if you want one.</p>
+<p>The <strong>Structures</strong> app is the shop. Selling pays back <code>RefundRatio</code>, half by default.</p>
+<p>Careful with one thing, since the shipped level lets you sell the furniture you started with: <strong>selling your last checkout is allowed</strong>, and with no till nothing generates income, while buying one back costs twice what selling it paid. To hold that one back, refusing a sale when <code>stock + placed == 1</code> is one condition in <code>SellStructure</code>.</p>
 <hr />
 <p><a href="https://discord.gg/EqHCtq38jy">Join the Discord</a></p>
 

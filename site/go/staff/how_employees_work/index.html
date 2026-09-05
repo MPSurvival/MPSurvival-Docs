@@ -4905,27 +4905,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#the-task-queue" class="md-nav__link">
+  <a href="#who-does-what" class="md-nav__link">
     <span class="md-ellipsis">
-      The task queue
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#an-employee-has-skills-not-a-job" class="md-nav__link">
-    <span class="md-ellipsis">
-      An employee has skills, not a job
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#who-publishes-work" class="md-nav__link">
-    <span class="md-ellipsis">
-      Who publishes work
+      Who does what
     </span>
   </a>
   
@@ -4950,15 +4932,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#carrying-animated" class="md-nav__link">
-    <span class="md-ellipsis">
-      Carrying, animated
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#shifts-and-wages" class="md-nav__link">
     <span class="md-ellipsis">
       Shifts and wages
@@ -4971,6 +4944,15 @@
   <a href="#adding-a-job" class="md-nav__link">
     <span class="md-ellipsis">
       Adding a job
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-carry-animation" class="md-nav__link">
+    <span class="md-ellipsis">
+      The carry animation
     </span>
   </a>
   
@@ -5710,7 +5692,7 @@
   
   
   <span class="md-ellipsis">
-    The six rules the template is built on
+    Extending the template
     
   </span>
   
@@ -5786,27 +5768,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#the-task-queue" class="md-nav__link">
+  <a href="#who-does-what" class="md-nav__link">
     <span class="md-ellipsis">
-      The task queue
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#an-employee-has-skills-not-a-job" class="md-nav__link">
-    <span class="md-ellipsis">
-      An employee has skills, not a job
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#who-publishes-work" class="md-nav__link">
-    <span class="md-ellipsis">
-      Who publishes work
+      Who does what
     </span>
   </a>
   
@@ -5831,15 +5795,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#carrying-animated" class="md-nav__link">
-    <span class="md-ellipsis">
-      Carrying, animated
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#shifts-and-wages" class="md-nav__link">
     <span class="md-ellipsis">
       Shifts and wages
@@ -5852,6 +5807,15 @@
   <a href="#adding-a-job" class="md-nav__link">
     <span class="md-ellipsis">
       Adding a job
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-carry-animation" class="md-nav__link">
+    <span class="md-ellipsis">
+      The carry animation
     </span>
   </a>
   
@@ -5874,39 +5838,10 @@
 
 
 <h1 id="how-employees-work">How employees work<a class="headerlink" href="#how-employees-work" title="Permanent link">&para;</a></h1>
-<p>Employees do not look for work. Work is published to a queue, and a free employee takes the highest priority job they know how to do.</p>
-<p>That one decision is why you can add a new job to this template without touching the AI.</p>
+<p>Employees do not look for work. Work is published to a queue, and a free employee takes the highest priority job they know how to do. That is what lets you add a new job without touching the AI.</p>
 <hr />
-<h2 id="the-task-queue">The task queue<a class="headerlink" href="#the-task-queue" title="Permanent link">&para;</a></h2>
-<p><code>BP_StoreManager</code> owns the queue. A task is an <code>S_StoreTask</code>:</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>What it is</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>Type</code></td>
-<td>An <code>E_TaskType</code></td>
-</tr>
-<tr>
-<td><code>Target</code></td>
-<td>The actor the job is about</td>
-</tr>
-<tr>
-<td><code>Priority</code></td>
-<td>Higher wins</td>
-</tr>
-<tr>
-<td><code>AssignedTo</code></td>
-<td>Who took it, or nothing</td>
-</tr>
-</tbody>
-</table>
-<p>Two functions move tasks around: <code>PublishTask</code> puts one in, <code>PullTaskForRoles</code> takes the best one an employee can do.</p>
-<p><strong>What a role can do is data, not a switch.</strong> <code>RoleTaskTable</code> on <code>BP_StoreManager</code> is a list of <code>S_RoleTasks</code> rows, each mapping a role to the task types it handles:</p>
+<h2 id="who-does-what">Who does what<a class="headerlink" href="#who-does-what" title="Permanent link">&para;</a></h2>
+<p><code>RoleTaskTable</code> on <code>BP_StoreManager</code> maps a role to the task types it handles. It is in the Details panel, in <code>Settings|Tasks</code>:</p>
 <table>
 <thead>
 <tr>
@@ -5925,36 +5860,8 @@
 </tr>
 </tbody>
 </table>
-<p>It is Instance Editable, in <code>Settings|Tasks</code>, so you edit it in the Details panel.</p>
-<p>When a task finishes, the employee returns an <code>E_TaskOutcome</code>:</p>
-<table>
-<thead>
-<tr>
-<th>Outcome</th>
-<th>What happens</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>Completed</code></td>
-<td>The task leaves the queue</td>
-</tr>
-<tr>
-<td><code>Continuing</code></td>
-<td>The employee keeps it and keeps working</td>
-</tr>
-<tr>
-<td><code>Refused</code></td>
-<td>The task goes back in the queue for someone else</td>
-</tr>
-</tbody>
-</table>
-<p><code>Continuing</code> is what lets a job last longer than one trip. Manning a till returns <code>Continuing</code> for as long as the employee is standing at it, which is why a cashier does not wander off between customers.</p>
-<hr />
-<h2 id="an-employee-has-skills-not-a-job">An employee has skills, not a job<a class="headerlink" href="#an-employee-has-skills-not-a-job" title="Permanent link">&para;</a></h2>
-<p><code>Roles</code> on a candidate is an <strong>array</strong>, and the order is the priority. Chloé is <code>[Cashier, Stocker]</code> and Dmitri is <code>[Stocker, Cashier]</code>: they can do exactly the same two things, and they reach for different ones first.</p>
-<hr />
-<h2 id="who-publishes-work">Who publishes work<a class="headerlink" href="#who-publishes-work" title="Permanent link">&para;</a></h2>
+<p><code>Roles</code> on a candidate is an <strong>array, and its order is the priority</strong>. Chloé is <code>[Cashier, Stocker]</code> and Dmitri is <code>[Stocker, Cashier]</code>: same two skills, different first choice.</p>
+<p>Work is published by the things that need it:</p>
 <table>
 <thead>
 <tr>
@@ -5967,7 +5874,7 @@
 <tr>
 <td><code>BP_CheckoutBase</code></td>
 <td><code>ManCheckout</code></td>
-<td>At <code>BeginPlay</code>, and again whenever the till has no cashier</td>
+<td>At <code>BeginPlay</code>, and whenever the till has no cashier</td>
 </tr>
 <tr>
 <td><code>BP_DeliveryBoxBase</code></td>
@@ -5976,40 +5883,19 @@
 </tr>
 </tbody>
 </table>
-<p>A till that already has a cashier stops asking. Without that guard it re-published every game hour and a second employee kept coming to take the post off the first.</p>
-<p>A box the player is holding never publishes. You always win a tug of war over a box.</p>
+<p>A box you are holding never publishes, so you always win a tug of war over a box.</p>
 <hr />
 <h2 id="the-cashier">The cashier<a class="headerlink" href="#the-cashier" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Take the <code>ManCheckout</code> task and walk to the till's <code>CashierSpot</code>, which is behind the counter, not in front of it.</li>
-<li>Claim the till. <code>TryClaimCashier</code> refuses if someone else already has it and accepts the same employee re-asserting.</li>
-<li>The scanner attaches to their hand. If you were holding it, it is taken from you, and you cannot pick it up again while the till is manned.</li>
-<li>Scan one item every <code>CashierScanSeconds</code>, one second by default.</li>
-<li>Take the payment when the last item is scanned. No drawer, no counting, no card terminal. An employee is faster than you and never miscounts, and that is what you are paying for.</li>
-</ol>
-<p>"This till is manned" has one writer, the till itself, in a <code>Cashier</code> variable. <code>IsManned()</code> reads it, and it is written the day the state was created rather than bolted on later.</p>
-<p>An employee going off shift releases the till and the scanner in <code>EndPlay</code>. Releasing the post does <strong>not</strong> close the till, which was a bug worth remembering: closing it stopped every customer from entering, in front of a player who had done nothing wrong.</p>
+<p>Walks to the till's <code>CashierSpot</code> behind the counter, claims it, and the scanner attaches to their hand — if you were holding it, it is taken from you, and you cannot take it back while the till is manned. They scan one item every <code>CashierScanSeconds</code> (one second) and take the payment when the basket is done, with no drawer and no counting. An employee never miscounts, and that is what you pay them for.</p>
+<p>Going off shift releases the till and the scanner. It does not close the till.</p>
 <hr />
 <h2 id="the-stocker">The stocker<a class="headerlink" href="#the-stocker" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Take the <code>StockShelves</code> task published by a box.</li>
-<li>Work out where the contents should go. Shelves first, the first one whose <code>HasRoomFor</code> says yes; then a storage rack; and if nothing at all will take it, the task completes and the box is left where it is.</li>
-<li>Pick the box up. It is <strong>attached to a hand socket</strong>, not held by the physics grab the player uses, with its physics and collision switched off.</li>
-<li>Walk to the shelf and unload one unit per beat, using the same <code>UnloadOneInto</code> your left mouse button calls.</li>
-<li>When the shelf fills or the box empties, retarget: another shelf, then a rack, then put the box down.</li>
-</ol>
-<p>"A shelf that is empty or already holds this product" needed no extra code, because that is what <code>HasRoomFor</code> already means: the category is accepted, the row is empty or matching, and there is headroom.</p>
-<p>A rack that has just refused is not tried again, so there is no loop.</p>
-<hr />
-<h2 id="carrying-animated">Carrying, animated<a class="headerlink" href="#carrying-animated" title="Permanent link">&para;</a></h2>
-<p>An employee carrying a box is not the same rig as the player. The box is attached to a socket on <code>hand_r</code>, and the animation is a <code>Layered blend per bone</code> filtered on <code>spine_01</code>, so the legs keep walking normally while the upper body holds the box.</p>
-<p>The <strong>left</strong> hand is placed on the box by a single <code>Two Bone IK</code>, and its target comes from the box itself rather than a tuning value, so a small box and a large box are both held correctly.</p>
-<p>Two knobs on the employee brain, in <code>Settings</code>, adjust the fit: the carry pose and the hand offset. The blend speed between carrying and not carrying is <code>CarryBlendSpeed</code> on <code>ABP_Humanoid</code>.</p>
+<p>Takes the task published by a box, works out where the contents go — shelves first, then a storage rack — picks the box up, and unloads one unit at a time into the shelf. When the shelf fills or the box empties, they retarget to another shelf, then a rack, then put the box down.</p>
+<p>If nothing at all will take the contents, the box is left where it is.</p>
 <hr />
 <h2 id="shifts-and-wages">Shifts and wages<a class="headerlink" href="#shifts-and-wages" title="Permanent link">&para;</a></h2>
-<p><code>BP_StaffManager</code> is a component on the game state, next to the other managers. It owns the roster and nothing else owns any part of it.</p>
-<p>A roster line is an <code>S_HiredEmployee</code>: the candidate, their shift, and the spawned actor. The line survives the night, when no employee exists in the world at all.</p>
-<p>A shift is an <code>S_Shift</code>:</p>
+<p>The roster lives on <code>BP_StaffManager</code>, on the game state. Each line is a candidate, a shift and the actor in the world. The line survives the night, when no employee exists in the level at all.</p>
+<p>A shift is:</p>
 <table>
 <thead>
 <tr>
@@ -6032,20 +5918,50 @@
 </tr>
 </tbody>
 </table>
-<p><code>EvaluateShifts</code> runs on every <code>OnHourChanged</code> and spawns or despawns people at <code>BP_StaffEntrance</code>. <code>PayWages</code> runs on <code>OnDayEnded</code> and charges the sum of the <code>DailyWage</code> of everyone who worked, with reason <code>Salary</code>.</p>
-<p><strong>Hiring and schedule changes take effect the next day.</strong> A roster line carries a <code>NextShift</code> alongside its live <code>Shift</code>, the Staff app edits <code>NextShift</code>, and <code>ApplyNextShifts</code> copies it over at the end of the day. Someone hired at two in the afternoon starts tomorrow morning, which is how hiring works.</p>
+<p>People are spawned and despawned at <code>BP_StaffEntrance</code> as the hours pass, and wages are charged at the end of each day.</p>
+<p><strong>Hiring and schedule changes take effect the next day.</strong> The Staff app edits the shift that starts tomorrow, so someone hired at two in the afternoon starts tomorrow morning.</p>
 <hr />
 <h2 id="adding-a-job">Adding a job<a class="headerlink" href="#adding-a-job" title="Permanent link">&para;</a></h2>
-<p>The whole point of the design. A new job is:</p>
 <ol>
-<li>A new entry in <code>E_EmployeeRole</code>.</li>
-<li>A new entry in <code>E_TaskType</code>.</li>
-<li>A row in <code>RoleTaskTable</code> joining them.</li>
-<li>A <code>Work&lt;Task&gt;</code> function on <code>BP_EmployeeBrain</code>, and a branch on its <code>PerformTask</code> switch.</li>
-<li>Something, somewhere, that calls <code>PublishTask</code> with that type.</li>
+<li>Add an entry to <code>E_EmployeeRole</code>.</li>
+<li>Add an entry to <code>E_TaskType</code>.</li>
+<li>Add a row to <code>RoleTaskTable</code> joining them.</li>
+<li>Add a <code>Work&lt;Task&gt;</code> function on <code>BP_EmployeeBrain</code>, and a branch on its <code>PerformTask</code> switch.</li>
+<li>Call <code>PublishTask</code> with that type from wherever the work appears.</li>
 </ol>
-<p>Steps 1 to 3 are done in the Details panel. Step 5 is the one people forget: a task type nobody publishes gives you an employee who is qualified for a job that never appears.</p>
-<p>Write <code>RoleTaskTable</code> in <strong>both</strong> places, the <code>BP_StoreManager</code> class defaults and the component template on <code>BP_StoreGameState</code>. The template shadows the class defaults, and the template is what runs.</p>
+<p>Steps 1 to 3 are done in the Details panel. Step 5 is the one people forget: a task type nobody publishes gives you an employee qualified for a job that never comes up.</p>
+<p>Your function returns an outcome when it is done:</p>
+<table>
+<thead>
+<tr>
+<th>Outcome</th>
+<th>What happens</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Completed</code></td>
+<td>The task leaves the queue</td>
+</tr>
+<tr>
+<td><code>Continuing</code></td>
+<td>The employee keeps it and keeps working</td>
+</tr>
+<tr>
+<td><code>Refused</code></td>
+<td>The task goes back in the queue for someone else</td>
+</tr>
+</tbody>
+</table>
+<p><code>Continuing</code> is what makes a job last longer than one trip: manning a till returns it for as long as the employee stands there, so a cashier does not wander off between customers.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Write <code>RoleTaskTable</code> in <strong>both</strong> places: the <code>BP_StoreManager</code> class defaults, and the component template on <code>BP_StoreGameState</code>. The template is what runs.</p>
+</div>
+<hr />
+<h2 id="the-carry-animation">The carry animation<a class="headerlink" href="#the-carry-animation" title="Permanent link">&para;</a></h2>
+<p>A box held by an employee is attached to a socket on <code>hand_r</code>, with the upper body blended over the walk so the legs keep going normally. The left hand is placed on the box by an IK target that comes from the box itself, so a small box and a large box are both held correctly.</p>
+<p>The carry pose and the hand offset are settings on the employee brain; the blend speed is <code>CarryBlendSpeed</code> on <code>ABP_Humanoid</code>.</p>
 <hr />
 <p><a href="https://discord.gg/EqHCtq38jy">Join the Discord</a></p>
 

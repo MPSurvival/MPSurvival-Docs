@@ -4273,27 +4273,18 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#the-market" class="md-nav__link">
+  <a href="#the-settings" class="md-nav__link">
     <span class="md-ellipsis">
-      The market
+      The settings
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#how-a-quote-drifts" class="md-nav__link">
+  <a href="#the-wholesale-market" class="md-nav__link">
     <span class="md-ellipsis">
-      How a quote drifts
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#what-the-market-does-not-show" class="md-nav__link">
-    <span class="md-ellipsis">
-      What the market does not show
+      The wholesale market
     </span>
   </a>
   
@@ -5674,7 +5665,7 @@
   
   
   <span class="md-ellipsis">
-    The six rules the template is built on
+    Extending the template
     
   </span>
   
@@ -5750,27 +5741,18 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#the-market" class="md-nav__link">
+  <a href="#the-settings" class="md-nav__link">
     <span class="md-ellipsis">
-      The market
+      The settings
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#how-a-quote-drifts" class="md-nav__link">
+  <a href="#the-wholesale-market" class="md-nav__link">
     <span class="md-ellipsis">
-      How a quote drifts
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#what-the-market-does-not-show" class="md-nav__link">
-    <span class="md-ellipsis">
-      What the market does not show
+      The wholesale market
     </span>
   </a>
   
@@ -5802,30 +5784,32 @@
 
 
 <h1 id="rent-tax-and-the-wholesale-market">Rent, tax and the wholesale market<a class="headerlink" href="#rent-tax-and-the-wholesale-market" title="Permanent link">&para;</a></h1>
-<p><code>BP_EconomyManager</code> runs once a day, on <code>OnDayEnded</code>, and it does two things: it charges you, and it moves wholesale prices.</p>
-<p>Its settings are one asset, <code>DA_EconomyConfig</code>.</p>
+<p><code>BP_EconomyManager</code> runs once at the end of each day: it charges you, and it moves wholesale prices.</p>
+<hr />
+<h2 id="the-settings">The settings<a class="headerlink" href="#the-settings" title="Permanent link">&para;</a></h2>
+<p>One asset: <code>Content/GrandOpening/Blueprints/DataAssets/Store/DA_EconomyConfig</code>.</p>
 <table>
 <thead>
 <tr>
 <th>Field</th>
 <th>What it does</th>
-<th>Shipped default</th>
+<th>Shipped</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>DailyRent</code></td>
-<td>Charged every day, reason <code>Rent</code></td>
+<td>Charged every day</td>
 <td><code>75</code></td>
 </tr>
 <tr>
 <td><code>DailyUtilities</code></td>
-<td>Charged every day, reason <code>Utilities</code></td>
+<td>Charged every day</td>
 <td><code>25</code></td>
 </tr>
 <tr>
 <td><code>TaxRate</code></td>
-<td>Fraction of the day's sales revenue, reason <code>Tax</code></td>
+<td>Share of the day's sales revenue, charged after the day is closed</td>
 <td><code>0.05</code></td>
 </tr>
 <tr>
@@ -5845,33 +5829,21 @@
 </tr>
 </tbody>
 </table>
-<p>The tax is computed on the revenue of the day that just ended, read from the same <code>GetDayReport</code> the report widget uses. It is charged <strong>after</strong> the day is closed, so it always taxes a finished number.</p>
-<p>A day with no sales still writes a <code>Tax</code> line at <code>0.00</code>. One transaction per reason per day is regular and reads cleanly, and hiding the zero would have cost a branch.</p>
+<p>A day with no sales still writes a <code>Tax</code> line at <code>0.00</code>, so every reason has one row per day in the report.</p>
 <hr />
-<h2 id="the-market">The market<a class="headerlink" href="#the-market" title="Permanent link">&para;</a></h2>
-<p>Every product in the Market app's catalogue carries a <strong>quote</strong>, an <code>S_MarketQuote</code> holding the product and a multiplier that starts at <code>1.0</code>.</p>
-<p>The wholesale price of a product is:</p>
-<div class="highlight"><pre><span></span><code>GetWholesalePrice(Product) = Product.CostPrice × quote multiplier
-</code></pre></div>
-<p>That is the only place a purchase price is read anywhere in the project. The Market app calls it for the unit price, multiplies by <code>UnitsPerCase</code> for the case price, and that same number is what leaves your balance when you order.</p>
-<p>The multiplier is a multiplier and not a copied price on purpose. Change <code>CostPrice</code> on a <code>DA_Product_*</code> and the quote moves with it in the same proportion, and a product with no quote at all simply sells at its catalogue price.</p>
-<hr />
-<h2 id="how-a-quote-drifts">How a quote drifts<a class="headerlink" href="#how-a-quote-drifts" title="Permanent link">&para;</a></h2>
-<p><code>DriftMarket(Day)</code> runs once per day, one line per quote:</p>
+<h2 id="the-wholesale-market">The wholesale market<a class="headerlink" href="#the-wholesale-market" title="Permanent link">&para;</a></h2>
+<p>Every product in the Market app carries a quote: a multiplier on its <code>CostPrice</code>, starting at <code>1.0</code>. What you pay for a case is <code>CostPrice</code> times that multiplier times <code>UnitsPerCase</code>.</p>
+<p>Per day, for each product:</p>
 <ul>
-<li>If you <strong>ordered</strong> that product today, the quote goes <strong>up</strong> by <code>DemandAmplitude</code>.</li>
-<li>If you did not, it drifts back toward <code>1.0</code> by the same amount.</li>
+<li>Ordered it today, its price goes <strong>up</strong> by <code>DemandAmplitude</code>.</li>
+<li>Left it alone, its price drifts back toward its catalogue price.</li>
 </ul>
-<p>Then the whole thing wanders inside <code>MarketRange</code> at <code>MarketVolatility</code> per day.</p>
-<p>The result is that stocking up on one product every single day gets steadily more expensive, and leaving it alone brings it back to normal. Buying in bulk on a quiet day is worth something, and that is the whole point of the system.</p>
-<p>Whether you ordered a product is read from the transaction journal, not from a counter kept on the side: <code>HasTransaction(Day, Purchase, ProductId)</code>.</p>
-<hr />
-<h2 id="what-the-market-does-not-show">What the market does not show<a class="headerlink" href="#what-the-market-does-not-show" title="Permanent link">&para;</a></h2>
-<p>The Market app prints the price of the day. It does not print the difference from the catalogue price, or an arrow, or a percentage. You see prices move between two days if you were paying attention, and not otherwise.</p>
-<p>A <code>+8%</code> badge next to the unit price is about twenty minutes of widget work if you want it. <code>UnitCostOf(Product)</code> in <code>BP_MarketAppWidget</code> already has both numbers in hand.</p>
+<p>On top of that every quote wanders inside <code>MarketRange</code>, at <code>MarketVolatility</code> per day.</p>
+<p>So buying the same product every day gets steadily more expensive, and buying in bulk on a quiet day is worth something. The Market app shows the price of the day, with no arrow and no percentage.</p>
+<p><strong>To change a product's base price</strong>, edit <code>CostPrice</code> on its <code>DA_Product_*</code>. The quote is a multiplier, so the market price follows in the same proportion. See <a href="../../stock/add_a_product/">Add a product</a>.</p>
 <hr />
 <h2 id="wages">Wages<a class="headerlink" href="#wages" title="Permanent link">&para;</a></h2>
-<p>Wages are not the economy manager's job, they belong to <code>BP_StaffManager</code>. It pays the sum of the <code>DailyWage</code> of everyone on the roster who worked that day, at <code>OnDayEnded</code>, with reason <code>Salary</code>. See <a href="../../staff/how_employees_work/">How employees work</a>.</p>
+<p>Wages belong to <code>BP_StaffManager</code>, not to the economy manager. It pays the <code>DailyWage</code> of everyone on the roster who worked that day, at day end. See <a href="../../staff/how_employees_work/">How employees work</a>.</p>
 <hr />
 <p><a href="https://discord.gg/EqHCtq38jy">Join the Discord</a></p>
 

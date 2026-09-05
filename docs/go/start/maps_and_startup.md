@@ -37,7 +37,7 @@ Four objects hold everything, and each of them owns one kind of thing.
 | `BP_StoreGameMode` | The `PlayerStart`, and `CleanForNextDay()`, which resets the world between two days. |
 | `BP_StorePlayerController` | The HUD, the pause menu, and the flow that closes the store. |
 
-The managers all sit on the **game state**, not on the game instance, and that is deliberate: a game instance survives a level load and would carry the previous game's money into the next one.
+The managers all sit on the **game state**, not on the game instance, so a level change starts a clean game.
 
 | Component | What it does |
 |---|---|
@@ -72,11 +72,9 @@ The customer exit has to sit **inside** the nav mesh volume. `Move To` will not 
 
 ## The front door is a one-way lock
 
-Worth knowing before you build a store with a narrow entrance. Customer and employee capsules ignore each other, so two AI walking into the same doorway from opposite sides do not push each other aside. They both push the same door leaf and neither gives way.
+`BP_EntranceDoor` hands out the doorway in one direction at a time, and anyone travelling the other way holds position until it clears. Without that, two AI walking into the same doorway from opposite sides push the same door leaf and neither gives way, because their capsules ignore each other.
 
-`BP_EntranceDoor` solves it by owning the passage. Any agent inside `ApproachRadiusCm` of the door's `Threshold` component asks `RequestPassage`, and the door hands out the passage in one direction at a time. Anyone travelling the other way holds position until the doorway clears, which their behaviour tree does with a `Wait` branch that aborts the moment the flag drops.
-
-If you make your own door, copy `BP_EntranceDoor`, because the lock lives there. `BP_OfficeDoor` does not have it, which is fine today since no customer goes through it.
+**If you build your own front door, duplicate `BP_EntranceDoor`**: the lock lives there. `BP_OfficeDoor` does not have it, which is fine as long as no customer goes through it.
 
 ---
 

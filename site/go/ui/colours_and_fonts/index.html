@@ -5445,9 +5445,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-app-colours-are-derived-not-picked" class="md-nav__link">
+  <a href="#picking-a-colour-for-a-new-app" class="md-nav__link">
     <span class="md-ellipsis">
-      The app colours are derived, not picked
+      Picking a colour for a new app
     </span>
   </a>
   
@@ -5692,7 +5692,7 @@
   
   
   <span class="md-ellipsis">
-    The six rules the template is built on
+    Extending the template
     
   </span>
   
@@ -5786,9 +5786,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-app-colours-are-derived-not-picked" class="md-nav__link">
+  <a href="#picking-a-colour-for-a-new-app" class="md-nav__link">
     <span class="md-ellipsis">
-      The app colours are derived, not picked
+      Picking a colour for a new app
     </span>
   </a>
   
@@ -5838,11 +5838,10 @@
 
 
 <h1 id="colours-fonts-and-reskinning">Colours, fonts and reskinning<a class="headerlink" href="#colours-fonts-and-reskinning" title="Permanent link">&para;</a></h1>
-<p>There is no theme asset. Colours live in the Details panel of the widget that draws them, and this page is the table they all come from.</p>
-<p>That is a deliberate trade. A theme asset would let you reskin in one place; it also adds an asset, a load and an empty field to fill in before anything renders. With eleven colours in the whole project, the table won.</p>
+<p>Colours live in the Details panel of the widget that draws them, and this page is the table they all come from.</p>
 <hr />
 <h2 id="the-palette">The palette<a class="headerlink" href="#the-palette" title="Permanent link">&para;</a></h2>
-<p>Values are <strong>linear</strong>, which is what an Unreal colour picker expects. The <code>#</code> is the sRGB equivalent, for reference.</p>
+<p>Values are <strong>linear</strong>, which is what the Unreal colour picker expects. The hex is the sRGB equivalent, for reference.</p>
 <table>
 <thead>
 <tr>
@@ -5916,13 +5915,12 @@
 </table>
 <hr />
 <h2 id="the-currency-rule">The currency rule<a class="headerlink" href="#the-currency-rule" title="Permanent link">&para;</a></h2>
-<p><strong>Every currency symbol in the game is <code>MoneyGreen</code>, everywhere, with no exceptions.</strong> The HUD, shelf price labels, the till, the card terminal, every app, the daily report.</p>
-<p>In practice that means the symbol is its own <code>TextBlock</code> sitting next to the number, not part of the same string. It costs one widget per price and it is the single most recognisable thing about the interface.</p>
-<p>The one place it is not applied is the interaction prompt, which is a single text block. Splitting it would mean a rich text block and markup for one line of text.</p>
+<p><strong>Every currency symbol in the game is <code>MoneyGreen</code></strong>: the HUD, shelf price labels, the till, the card terminal, every app, the daily report.</p>
+<p>In practice the symbol is its own <code>TextBlock</code> next to the number, not part of the same string. One extra widget per price, and it is the most recognisable thing about the interface.</p>
+<p>The interaction prompt is the one place it is not applied, because that line is a single text block.</p>
 <hr />
-<h2 id="the-app-colours-are-derived-not-picked">The app colours are derived, not picked<a class="headerlink" href="#the-app-colours-are-derived-not-picked" title="Permanent link">&para;</a></h2>
-<p>All five app accents sit at <strong>S 0.57 · V 0.60</strong> in HSV. Only the hue moves.</p>
-<p>The hue says what the app is for:</p>
+<h2 id="picking-a-colour-for-a-new-app">Picking a colour for a new app<a class="headerlink" href="#picking-a-colour-for-a-new-app" title="Permanent link">&para;</a></h2>
+<p>All five app accents sit at <strong>S 0.57, V 0.60</strong> in HSV. Only the hue moves, and the hue says what the app is for:</p>
 <table>
 <thead>
 <tr>
@@ -5934,19 +5932,18 @@
 <tbody>
 <tr>
 <td>Cold</td>
-<td>Market 204°, Hiring 260°</td>
+<td>Market 204, Hiring 260</td>
 <td>Catalogues you buy from</td>
 </tr>
 <tr>
 <td>Warm</td>
-<td>Structures 28°, Staff 330°, Ads 60°</td>
+<td>Structures 28, Staff 330, Ads 60</td>
 <td>Things you own and manage</td>
 </tr>
 </tbody>
 </table>
-<p>A sixth app picks its camp first, then takes the widest hue gap left in it.</p>
-<p><strong>The green band is off limits.</strong> <code>MoneyGreen</code> lives at 148°, and money appears on nearly every screen.</p>
-<p>The title bar is the <strong>only</strong> accent. The rest of the chrome stays on <code>Ink</code> and <code>PanelSlate</code>, so six apps read as one machine rather than six different products.</p>
+<p>Pick your camp, then take the widest hue gap left in it. <strong>Stay out of the green band</strong>: <code>MoneyGreen</code> is at 148, and money is on nearly every screen.</p>
+<p>The title bar is the <strong>only</strong> accent. The rest of the chrome stays on <code>Ink</code> and <code>PanelSlate</code>, so six apps read as one machine.</p>
 <hr />
 <h2 id="type">Type<a class="headerlink" href="#type" title="Permanent link">&para;</a></h2>
 <p>D-DIN, and nothing else, in <code>Textures/Fonts/</code>.</p>
@@ -5976,19 +5973,14 @@
 </tr>
 </tbody>
 </table>
-<p>Two things about legibility on a world screen:</p>
-<ul>
-<li><strong>A diegetic screen halves every detail.</strong> A 2 px line on a monitor in the world is invisible. Draw for the distance you actually read it from.</li>
-<li>Type that looks fine in the Designer can be far too light in game. The shipped opacities were re-measured against the actual scene, not chosen in the editor.</li>
-</ul>
+<p><strong>A screen in the world halves every detail.</strong> A 2 px line on a monitor across the room is invisible, and type that looks right in the Designer is usually too light in game. Judge both at the distance you actually read them from.</p>
 <hr />
 <h2 id="rules-that-apply-everywhere">Rules that apply everywhere<a class="headerlink" href="#rules-that-apply-everywhere" title="Permanent link">&para;</a></h2>
-<p><strong>No tooltips.</strong> There are none in the project, and there should be none in yours. A tooltip needs a hover and a wait, which does not exist in a first person game where the mouse only appears on screens, and it hides information the screen should have shown. If a piece of text is worth reading, give it a column.</p>
-<p><strong>Colours are never built in a graph.</strong> Nobody reads <code>(0.145, 0.145, 0.145, 1.0)</code> as "dark grey". A colour is either a swatch in the Details panel, or an Instance Editable <code>LinearColor</code> variable in a <code>Style</code> category when it has to be adjustable. Opacities and line weights follow the same rule.</p>
-<p><strong>Two screens using the same control use the same colour, from the same source.</strong> The table above is that source. Read it before writing a screen rather than sampling the widget next door.</p>
+<p><strong>No tooltips.</strong> There are none in the project, and there should be none in yours. A tooltip needs a hover and a wait, which does not exist in a first person game, and it hides information the screen should have shown. If a piece of text is worth reading, give it a column.</p>
+<p><strong>Colours are never built in a graph.</strong> A colour is a swatch in the Details panel, or an Instance Editable <code>LinearColor</code> variable in a <code>Style</code> category when it has to be adjustable. Opacities and line weights follow the same rule.</p>
+<p><strong>Two screens using the same control take the same colour from the table above</strong>, rather than from the widget next door.</p>
 <hr />
 <h2 id="reskinning">Reskinning<a class="headerlink" href="#reskinning" title="Permanent link">&para;</a></h2>
-<p>Since there is no theme asset, changing the look means opening the widgets. In practice it is short:</p>
 <ol>
 <li><code>BP_HudWidget</code> for the status panel and its border.</li>
 <li><code>MI_RatingRing</code> for the four rating colours.</li>
@@ -5997,7 +5989,7 @@
 <li><code>BP_ScreenBaseWidget</code> and the two till widgets for the world screens.</li>
 <li>The menu widgets for the front end.</li>
 </ol>
-<p>The fonts are two assets. Replacing D-DIN with your own face is a swap in the font asset, and every widget follows.</p>
+<p>The fonts are two assets. Replace D-DIN with your own face in the font asset and every widget follows.</p>
 <hr />
 <p><a href="https://discord.gg/EqHCtq38jy">Join the Discord</a></p>
 

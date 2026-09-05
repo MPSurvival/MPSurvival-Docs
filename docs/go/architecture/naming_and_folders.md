@@ -41,7 +41,7 @@ Everything the template owns is under `/Game/GrandOpening`. Nothing sits at the 
 └── Demo/
 ```
 
-Four things in there are counterintuitive enough to be worth spelling out.
+Four things worth spelling out:
 
 **`Structures/` holds the structs**, not shop furniture. Furniture is in `Environments/`.
 
@@ -82,11 +82,11 @@ One prefix, one class.
 | `L_` | Level |
 | `RT_` | Render Target |
 
-`BP_` is deliberately shared by every Blueprint. Widgets are `BP_*Widget`, not `WBP_`.
+`BP_` covers every Blueprint. Widgets are `BP_*Widget`, not `WBP_`.
 
 `BP_XxxDataAsset` is the class and `DA_Xxx` is the instance. Two different things, two prefixes.
 
-Five prefixes are ambiguous in a lot of Unreal projects, and they were settled here before the first asset was made:
+Five prefixes are ambiguous in a lot of Unreal projects. Here they are settled as:
 
 | Ambiguity | Settled as |
 |---|---|

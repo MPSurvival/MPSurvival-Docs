@@ -1,66 +1,46 @@
 # Rent, tax and the wholesale market
 
-`BP_EconomyManager` runs once a day, on `OnDayEnded`, and it does two things: it charges you, and it moves wholesale prices.
+`BP_EconomyManager` runs once at the end of each day: it charges you, and it moves wholesale prices.
 
-Its settings are one asset, `DA_EconomyConfig`.
+---
 
-| Field | What it does | Shipped default |
+## The settings
+
+One asset: `Content/GrandOpening/Blueprints/DataAssets/Store/DA_EconomyConfig`.
+
+| Field | What it does | Shipped |
 |---|---|---|
-| `DailyRent` | Charged every day, reason `Rent` | `75` |
-| `DailyUtilities` | Charged every day, reason `Utilities` | `25` |
-| `TaxRate` | Fraction of the day's sales revenue, reason `Tax` | `0.05` |
+| `DailyRent` | Charged every day | `75` |
+| `DailyUtilities` | Charged every day | `25` |
+| `TaxRate` | Share of the day's sales revenue, charged after the day is closed | `0.05` |
 | `MarketVolatility` | How far a quote drifts per day | |
 | `MarketRange` | How far a quote can get from its base price | |
 | `DemandAmplitude` | How much ordering a product pushes its price up | |
 
-The tax is computed on the revenue of the day that just ended, read from the same `GetDayReport` the report widget uses. It is charged **after** the day is closed, so it always taxes a finished number.
-
-A day with no sales still writes a `Tax` line at `0.00`. One transaction per reason per day is regular and reads cleanly, and hiding the zero would have cost a branch.
+A day with no sales still writes a `Tax` line at `0.00`, so every reason has one row per day in the report.
 
 ---
 
-## The market
+## The wholesale market
 
-Every product in the Market app's catalogue carries a **quote**, an `S_MarketQuote` holding the product and a multiplier that starts at `1.0`.
+Every product in the Market app carries a quote: a multiplier on its `CostPrice`, starting at `1.0`. What you pay for a case is `CostPrice` times that multiplier times `UnitsPerCase`.
 
-The wholesale price of a product is:
+Per day, for each product:
 
-```
-GetWholesalePrice(Product) = Product.CostPrice × quote multiplier
-```
+- Ordered it today, its price goes **up** by `DemandAmplitude`.
+- Left it alone, its price drifts back toward its catalogue price.
 
-That is the only place a purchase price is read anywhere in the project. The Market app calls it for the unit price, multiplies by `UnitsPerCase` for the case price, and that same number is what leaves your balance when you order.
+On top of that every quote wanders inside `MarketRange`, at `MarketVolatility` per day.
 
-The multiplier is a multiplier and not a copied price on purpose. Change `CostPrice` on a `DA_Product_*` and the quote moves with it in the same proportion, and a product with no quote at all simply sells at its catalogue price.
+So buying the same product every day gets steadily more expensive, and buying in bulk on a quiet day is worth something. The Market app shows the price of the day, with no arrow and no percentage.
 
----
-
-## How a quote drifts
-
-`DriftMarket(Day)` runs once per day, one line per quote:
-
-- If you **ordered** that product today, the quote goes **up** by `DemandAmplitude`.
-- If you did not, it drifts back toward `1.0` by the same amount.
-
-Then the whole thing wanders inside `MarketRange` at `MarketVolatility` per day.
-
-The result is that stocking up on one product every single day gets steadily more expensive, and leaving it alone brings it back to normal. Buying in bulk on a quiet day is worth something, and that is the whole point of the system.
-
-Whether you ordered a product is read from the transaction journal, not from a counter kept on the side: `HasTransaction(Day, Purchase, ProductId)`.
-
----
-
-## What the market does not show
-
-The Market app prints the price of the day. It does not print the difference from the catalogue price, or an arrow, or a percentage. You see prices move between two days if you were paying attention, and not otherwise.
-
-A `+8%` badge next to the unit price is about twenty minutes of widget work if you want it. `UnitCostOf(Product)` in `BP_MarketAppWidget` already has both numbers in hand.
+**To change a product's base price**, edit `CostPrice` on its `DA_Product_*`. The quote is a multiplier, so the market price follows in the same proportion. See [Add a product](../stock/add_a_product.md).
 
 ---
 
 ## Wages
 
-Wages are not the economy manager's job, they belong to `BP_StaffManager`. It pays the sum of the `DailyWage` of everyone on the roster who worked that day, at `OnDayEnded`, with reason `Salary`. See [How employees work](../staff/how_employees_work.md).
+Wages belong to `BP_StaffManager`, not to the economy manager. It pays the `DailyWage` of everyone on the roster who worked that day, at day end. See [How employees work](../staff/how_employees_work.md).
 
 ---
 

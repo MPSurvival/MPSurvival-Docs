@@ -5674,7 +5674,7 @@
   
   
   <span class="md-ellipsis">
-    The six rules the template is built on
+    Extending the template
     
   </span>
   
@@ -5803,7 +5803,7 @@
 
 <h1 id="zones-where-things-are-allowed-to-go">Zones: where things are allowed to go<a class="headerlink" href="#zones-where-things-are-allowed-to-go" title="Permanent link">&para;</a></h1>
 <p>A zone is a volume with a name on it. Structures declare which zones they accept, and placement refuses anywhere else.</p>
-<p>Without at least one zone volume in your level, nothing can be placed anywhere.</p>
+<p><strong>Without at least one zone volume in your level, nothing can be placed anywhere.</strong></p>
 <hr />
 <h2 id="the-volume">The volume<a class="headerlink" href="#the-volume" title="Permanent link">&para;</a></h2>
 <p><code>BP_StoreZoneVolume</code> is a box with one field: which <code>E_StoreZone</code> it is.</p>
@@ -5838,21 +5838,20 @@
 </tbody>
 </table>
 <p>Three are placed in <code>L_ExampleMap</code>: the sales floor, the office, and a strip of pavement outside the window.</p>
-<p>Zones can overlap and a structure can allow several of them. The ad panel easel allows both <code>SalesFloor</code> and <code>Outside</code>, so you can put it in the window or on the pavement.</p>
+<p>Zones can overlap, and a structure can allow several. The ad panel easel allows <code>SalesFloor</code> and <code>Outside</code>, so it goes in the window or on the pavement.</p>
 <hr />
 <h2 id="sizing-a-volume">Sizing a volume<a class="headerlink" href="#sizing-a-volume" title="Permanent link">&para;</a></h2>
-<p>Match the box to the <strong>inside faces</strong> of the room, not to the wall centre lines. In the shipped level every interior wall face sits on a multiple of 50, which is the placement grid, so the full cell against each wall is usable.</p>
-<p>If your own walls are drawn on the module lines with thickness centred on them, the cell against the wall will be half in the wall and half out, and every shelf you push against a wall will look wrong by 15 cm. Move the walls, not the grid.</p>
+<p>Match the box to the <strong>inside faces</strong> of the room, not to the wall centre lines. In the shipped level every interior wall face sits on a multiple of 50, the placement grid, so the full cell against each wall is usable. Walls drawn on the module lines with their thickness centred leave that cell half inside the wall, and every shelf pushed against a wall is then out by 15 cm.</p>
 <p>Two practical notes:</p>
 <ul>
-<li>Give the volume enough height. A ceiling fan is placed against a ceiling and still has to be inside the zone.</li>
-<li>Do not stretch the sales floor volume over the street. Customers walk from the spawner to the door across ground you do not want anyone building on.</li>
+<li>Give the volume enough <strong>height</strong>. A ceiling fan is placed against a ceiling and still has to be inside the zone.</li>
+<li>Do not stretch the sales floor over the street. Customers walk from the spawner to the door across ground you do not want anyone building on.</li>
 </ul>
 <hr />
 <h2 id="the-one-trap">The one trap<a class="headerlink" href="#the-one-trap" title="Permanent link">&para;</a></h2>
 <p><strong>A zone volume must not block the <code>Visibility</code> channel.</strong></p>
-<p>Customers pick a spot to stand in front of a shelf by tracing from eye height to the shelf. A volume that blocks <code>Visibility</code> blocks that trace, every approach point is rejected, every shelf is struck off, and nobody in the store does any shopping at all. Nothing is logged; they just walk in and leave.</p>
-<p>It took a while to find the first time. If your customers stop shopping right after you add a volume, this is it.</p>
+<p>Customers choose where to stand by tracing from eye height to the shelf. A volume that blocks <code>Visibility</code> blocks that trace, every shelf is struck off, and nobody in the store shops at all — they walk in and leave, with nothing logged.</p>
+<p>If your customers stop shopping right after you add a volume, this is it.</p>
 <hr />
 <h2 id="adding-a-zone-of-your-own">Adding a zone of your own<a class="headerlink" href="#adding-a-zone-of-your-own" title="Permanent link">&para;</a></h2>
 <ol>
@@ -5860,7 +5859,7 @@
 <li>Place a <code>BP_StoreZoneVolume</code> and set it to the new value.</li>
 <li>Add the value to <code>AllowedZones</code> on the structures that belong there.</li>
 </ol>
-<p>A zone with no structure allowing it is a volume nobody can build in, which is a valid thing to want: a corridor, a staff area, an aisle you want kept clear.</p>
+<p>A zone no structure allows is a volume nobody can build in, which is a valid thing to want: a corridor, a staff area, an aisle you want kept clear.</p>
 <hr />
 <p><a href="https://discord.gg/EqHCtq38jy">Join the Discord</a></p>
 

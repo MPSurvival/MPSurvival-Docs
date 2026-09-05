@@ -1,6 +1,6 @@
 # Write your own app
 
-An app is one Data Asset and one Widget Blueprint. The computer never learns its name.
+An app is one Data Asset and one Widget Blueprint.
 
 ---
 
@@ -16,27 +16,22 @@ That is all. The desktop icon, the window, the title bar, the balance readout an
 
 ---
 
-## If your app needs settings
+## The two functions to override
 
-Subclass the Data Asset rather than adding fields to the base.
+| Function | What to do with it |
+|---|---|
+| `BindApp` | Clear your rows and rebuild them. Called every time the app is opened, so it must be safe to call twice |
+| `RefreshBalance` | Called when the balance changes. Update what each row can afford, without rebuilding the list |
 
-`BP_MarketAppDataAsset` is the example: it is a child of `BP_AppDataAsset` and adds one field, `AvailableProducts`. `DA_App_Market` is an instance of that child.
+Do not rebuild from `RefreshBalance`: walk your existing rows and update them, as the Structures app does with `SetAffordable`. Rebuilding destroys the row the player has just clicked.
 
-The same pattern gives you `BP_StructureAppDataAsset`, `BP_HiringAppDataAsset` and `BP_AdsAppDataAsset`. Nothing goes on the base class that only one app would read.
+`SetApp` is called by the computer and stores the asset before calling `BindApp`. Leave it alone.
 
 ---
 
-## The two functions to know
+## If your app needs settings of its own
 
-| Function | Contract |
-|---|---|
-| `SetApp(NewApp)` | Called by the computer. It stores the asset and calls `BindApp`. Do not override it |
-| `BindApp` | Empty in the base. Override it. Clear your rows and rebuild them |
-| `RefreshBalance` | Called when the balance changes. Update affordability without rebuilding |
-
-`BindApp` has to be safe to call more than once, because it is called every time the app is opened. Clear before you fill.
-
-Do not rebuild the list from `RefreshBalance`. Walk your existing rows and update them, the way the Structures app does with `SetAffordable`.
+Subclass the Data Asset rather than adding fields to the base. `BP_MarketAppDataAsset` is the example: a child of `BP_AppDataAsset` that adds `AvailableProducts`, with `DA_App_Market` as its instance. The Structures, Hiring and Ads apps do the same.
 
 ---
 
@@ -48,9 +43,9 @@ Every app resolves what it needs at the top of `BindApp`, from the game state:
 Get Game State  →  Cast To BP_StoreGameState  →  Get Component By Class
 ```
 
-That gives you `BP_StoreManager` for money and the clock, `BP_ProgressionManager` for unlock filtering, `BP_EconomyManager` for wholesale prices, `BP_StaffManager` for the roster, and so on.
+That gives you `BP_StoreManager` for money and the clock, `BP_ProgressionManager` for unlock filtering, `BP_EconomyManager` for wholesale prices, `BP_StaffManager` for the roster.
 
-Spending money goes through `BP_StoreManager.AddTransaction` with a reason from `E_TransactionReason`, and nothing else. It is the only writer of the balance in the whole project, which is what makes the daily report trustworthy.
+Money moves through `BP_StoreManager.AddTransaction`, with a reason from `E_TransactionReason`. See [Money and the store rating](../store/money_and_rating.md).
 
 ---
 
@@ -64,15 +59,15 @@ For Each item
         True  →  make the row
 ```
 
-Filter **inside** the loop with a `Branch`. A function returning a filtered array does not compile here, because Blueprint arrays are invariant and an array of `PrimaryDataAsset` will not connect to a loop typed to your own asset class.
+Filter **inside** the loop with a `Branch`. A function returning a filtered array does not compile here: Blueprint arrays are invariant, and an array of `PrimaryDataAsset` will not connect to a loop typed to your own asset class.
 
-Anything not mentioned in any unlock's `Rewards` is considered unlocked, so this costs nothing until you actually write an unlock for it.
+Anything not mentioned in any unlock's `Rewards` counts as unlocked, so this costs nothing until you write an unlock for it.
 
 ---
 
 ## Layout and style
 
-Follow the shipped apps rather than inventing a look. They are all on the same grid, and the point of the chrome is that six apps read as one machine.
+Follow the shipped apps rather than inventing a look: six apps have to read as one machine.
 
 | Rule | Value |
 |---|---|
@@ -82,22 +77,20 @@ Follow the shipped apps rather than inventing a look. They are all on the same g
 | Type | D-DIN, at the sizes the other apps use |
 | Text colour | The `Ink` token, full opacity for data and 0.55 for labels |
 | Background | The `PanelSlate` token |
-| Accent | Your `TitleColor`, on the title bar and the desktop icon, and nowhere else |
+| Accent | Your `TitleColor`, on the title bar and the desktop icon, nowhere else |
 
-Pick your title colour from the same family as the others. They all sit at S 0.57 and V 0.60 in HSV, with only the hue moving: cold hues are catalogues you buy from, warm hues are things you already own and manage. The green band is off limits, because it belongs to the currency symbol and money appears on nearly every screen.
+Pick your title colour from the same family as the others: they all sit at S 0.57 and V 0.60 in HSV, with only the hue moving. Cold hues are catalogues you buy from, warm hues are things you already own and manage. Leave the green band alone — it belongs to the currency symbol, which appears on nearly every screen.
 
-Two things that apply to every button you add:
+For every button you add:
 
 - Turn **Is Focusable** off, or `Tab` starts walking a focus rectangle around your app.
-- Never add a tooltip. There are none anywhere in the project. A tooltip needs a hover and a wait, and it hides information the screen should have shown. If a piece of text is worth reading, give it a column.
+- **Never add a tooltip.** There are none anywhere in the project. A tooltip needs a hover and a wait, and it hides information the screen should have shown. If a piece of text is worth reading, give it a column.
 
 ---
 
 ## Currency
 
-Every currency symbol in the template is a **separate text block** in `MoneyGreen`, next to the number. Not part of the same string.
-
-That is a template-wide rule, and it applies to the HUD, price labels, the till, the terminal and every app.
+Every currency symbol in the template is a **separate text block** in `MoneyGreen`, next to the number, never part of the same string. That holds on the HUD, price labels, the till, the terminal and every app.
 
 ---
 

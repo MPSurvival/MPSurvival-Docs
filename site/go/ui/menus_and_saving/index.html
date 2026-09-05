@@ -5422,18 +5422,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#continue" class="md-nav__link">
+  <a href="#what-is-saved" class="md-nav__link">
     <span class="md-ellipsis">
-      Continue
+      What is saved
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#how-saving-is-put-together" class="md-nav__link">
+  <a href="#adding-your-own-state-to-the-save" class="md-nav__link">
     <span class="md-ellipsis">
-      How saving is put together
+      Adding your own state to the save
     </span>
   </a>
   
@@ -5443,15 +5443,6 @@
   <a href="#the-thumbnail" class="md-nav__link">
     <span class="md-ellipsis">
       The thumbnail
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#what-is-saved-and-what-is-not" class="md-nav__link">
-    <span class="md-ellipsis">
-      What is saved, and what is not
     </span>
   </a>
   
@@ -5719,7 +5710,7 @@
   
   
   <span class="md-ellipsis">
-    The six rules the template is built on
+    Extending the template
     
   </span>
   
@@ -5813,18 +5804,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#continue" class="md-nav__link">
+  <a href="#what-is-saved" class="md-nav__link">
     <span class="md-ellipsis">
-      Continue
+      What is saved
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#how-saving-is-put-together" class="md-nav__link">
+  <a href="#adding-your-own-state-to-the-save" class="md-nav__link">
     <span class="md-ellipsis">
-      How saving is put together
+      Adding your own state to the save
     </span>
   </a>
   
@@ -5834,15 +5825,6 @@
   <a href="#the-thumbnail" class="md-nav__link">
     <span class="md-ellipsis">
       The thumbnail
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#what-is-saved-and-what-is-not" class="md-nav__link">
-    <span class="md-ellipsis">
-      What is saved, and what is not
     </span>
   </a>
   
@@ -5892,7 +5874,7 @@
 
 
 <h1 id="menus-pause-and-saving">Menus, pause and saving<a class="headerlink" href="#menus-pause-and-saving" title="Permanent link">&para;</a></h1>
-<p>There is no options screen. The menu is New Game, Continue, Load and Quit, and the pause menu adds Resume and Save.</p>
+<p>The menu is New Game, Continue, Load and Quit, and the pause menu adds Resume and Save.</p>
 <hr />
 <h2 id="the-screens">The screens<a class="headerlink" href="#the-screens" title="Permanent link">&para;</a></h2>
 <table>
@@ -5913,11 +5895,11 @@
 </tr>
 <tr>
 <td><code>BP_MenuEntryWidget</code></td>
-<td>One line, 384 × 56</td>
+<td>One line, 384 x 56</td>
 </tr>
 <tr>
 <td><code>BP_SlotPickerWidget</code></td>
-<td>The slot list, used for all three of new, load and save</td>
+<td>The slot list, used for new, load and save</td>
 </tr>
 <tr>
 <td><code>BP_SaveSlotWidget</code></td>
@@ -5925,12 +5907,14 @@
 </tr>
 </tbody>
 </table>
-<p>A menu screen is a <strong>complete Widget Blueprint</strong>, not a page built from data. Its entries are <code>BP_MenuEntryWidget</code> instances dropped in the Designer with their <code>Id</code> and <code>Label</code> filled in.</p>
-<p>Adding a screen means duplicating a widget. Adding an entry means dragging a row in and adding a branch in the controller.</p>
-<p><strong>An entry's identity is its <code>Id</code>, a <code>Name</code>, not its label.</strong> An entry placed in the Designer with an empty <code>Id</code> does nothing when clicked, silently, and only with the mouse. It is the first thing to check when a menu button feels dead.</p>
+<p>A menu is a complete Widget Blueprint, not a page built from data. <strong>To add an entry</strong>, drag a <code>BP_MenuEntryWidget</code> into the Designer, fill in its <code>Id</code> and <code>Label</code>, and add a branch for that <code>Id</code> in the controller.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>An entry's identity is its <code>Id</code>, a <code>Name</code>, not its label. An entry with an empty <code>Id</code> does nothing when clicked, silently. It is the first thing to check when a menu button feels dead.</p>
+</div>
 <hr />
 <h2 id="the-slot-picker">The slot picker<a class="headerlink" href="#the-slot-picker" title="Permanent link">&para;</a></h2>
-<p>One widget serves three jobs, chosen by <code>Mode</code>, an <code>E_SlotPickerMode</code>:</p>
+<p>One widget serves three jobs, chosen by <code>Mode</code>:</p>
 <table>
 <thead>
 <tr>
@@ -5953,96 +5937,61 @@
 </tr>
 </tbody>
 </table>
-<p><code>SlotCount</code> is five, and it lives on the game instance because the Continue logic needs it too.</p>
-<p>A row shows the thumbnail, <code>SLOT N</code>, the day and balance, and the date it was written. An empty slot says <code>EMPTY</code>. The slot you are currently playing is marked <code>CURRENT</code>.</p>
+<p><code>SlotCount</code> is five, on the game instance. A row shows the thumbnail, <code>SLOT N</code>, the day and balance, and when it was written. An empty slot says <code>EMPTY</code>, and the one you are playing says <code>CURRENT</code>.</p>
+<p><code>Continue</code> loads the most recently written slot, and hides itself when there is none.</p>
 <hr />
-<h2 id="continue">Continue<a class="headerlink" href="#continue" title="Permanent link">&para;</a></h2>
-<p><code>Continue</code> loads the most recently written slot. <code>ResolveContinueSlotIndex</code> reads the five headers, returns the one with the newest timestamp, and returns <code>-1</code> if there are none.</p>
-<p>It is the only answer to "which save do I resume", and the Continue entry hides itself when it returns <code>-1</code>.</p>
-<hr />
-<h2 id="how-saving-is-put-together">How saving is put together<a class="headerlink" href="#how-saving-is-put-together" title="Permanent link">&para;</a></h2>
-<p>One rule explains the whole design: <strong>the game instance is the only thing that talks to disk, and each manager is the only thing that talks about its own state.</strong></p>
-<p><code>BP_StoreGameInstance</code> owns the slot naming convention, writing, reading, deleting and the thumbnail. Each of the six managers exposes two functions:</p>
-<table>
-<thead>
-<tr>
-<th>Function</th>
-<th>What it does</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>CollectInto(Save)</code></td>
-<td>Writes its own state into the payload</td>
-</tr>
-<tr>
-<td><code>RestoreFromSave()</code></td>
-<td>Reads its own state back</td>
-</tr>
-</tbody>
-</table>
-<p>Nobody touches another manager's variables. <code>AddTransaction</code> stays the only writer of money <strong>during play</strong>, and <code>RestoreFromSave</code> is the only writer <strong>at load</strong>.</p>
-<p>Two objects go to disk per slot:</p>
-<table>
-<thead>
-<tr>
-<th>Object</th>
-<th>What it holds</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>SG_SlotHeader</code></td>
-<td>Day, balance, rating, timestamp. This is all the menu loads to draw a row</td>
-</tr>
-<tr>
-<td><code>SG_StoreSave</code></td>
-<td>The whole game</td>
-</tr>
-</tbody>
-</table>
-<p>The menu never deserialises a whole game to show you a list.</p>
-<p><strong>There is no <code>BeginPlay</code> order to respect.</strong> Every manager calls <code>RestoreFromSave</code> last in its own <code>BeginPlay</code>, after initialising itself fresh. The world always starts as a new game and the save then overwrites it. One branch, no dependency between components, and the HUD reads the right numbers because restoration happens at the same moment the old initialisation did.</p>
-<hr />
-<h2 id="the-thumbnail">The thumbnail<a class="headerlink" href="#the-thumbnail" title="Permanent link">&para;</a></h2>
-<p>A <code>SaveGame</code> object cannot hold a texture, so the thumbnail is a real <code>.png</code> written next to the save in <code>Saved/SaveGames/</code>.</p>
-<p>It is rendered from your actual point of view with a <code>SceneCapture2D</code> at save time, and read back with <code>ImportFileAsTexture2D</code> when the menu draws the row.</p>
-<p>One consequence: deleting a slot leaves its <code>.png</code> behind, because there is no Blueprint node to delete an arbitrary file. It is harmless. The thumbnail is only loaded when a header exists, and the next save to that slot overwrites it.</p>
-<hr />
-<h2 id="what-is-saved-and-what-is-not">What is saved, and what is not<a class="headerlink" href="#what-is-saved-and-what-is-not" title="Permanent link">&para;</a></h2>
-<p>Saved:</p>
+<h2 id="what-is-saved">What is saved<a class="headerlink" href="#what-is-saved" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Money, the journal, the rating, the day, the hour.</li>
 <li>Shelf contents, row by row.</li>
-<li>Placed structures, matched back by their <code>DA_</code> and transform rather than rebuilt from scratch.</li>
+<li>Placed structures, matched back by their <code>DA_</code> and transform.</li>
 <li>Boxes and what is in them.</li>
 <li>The roster and its shifts.</li>
 <li>Pending orders, market quotes, running campaigns, granted unlocks.</li>
 <li><strong>Customers</strong>, because their baskets hold stock that has already left your shelves.</li>
 </ul>
-<p>Not saved:</p>
-<ul>
-<li>Any AI's current target, task or held object. Those are actor references, which come back as nothing, and a behaviour tree restarts at its root anyway.</li>
-<li>Employee positions. <code>EvaluateShifts</code> puts them back from the roster, and an employee carries nothing that matters.</li>
-<li>Your position. You come back at the <code>PlayerStart</code>.</li>
-<li>A sale in progress. It is cancelled and the goods are returned, which is exact rather than approximate: money only moves in <code>FinishSale</code>, and that call is all or nothing.</li>
-</ul>
-<p>Boxes are razed and respawned rather than reconciled, because they hold no hand-authored settings and their contents are rebuilt from the product anyway.</p>
+<p>Not saved: any AI's current target or task, employee positions (the roster puts them back), your own position (you return to the <code>PlayerStart</code>), and a sale in progress, which is cancelled with its goods returned.</p>
+<hr />
+<h2 id="adding-your-own-state-to-the-save">Adding your own state to the save<a class="headerlink" href="#adding-your-own-state-to-the-save" title="Permanent link">&para;</a></h2>
+<p>Every manager implements two functions, and the game instance calls them:</p>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>What to do with it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CollectInto(Save)</code></td>
+<td>Write your own state into the payload</td>
+</tr>
+<tr>
+<td><code>RestoreFromSave()</code></td>
+<td>Read your own state back. Call it last in your <code>BeginPlay</code></td>
+</tr>
+</tbody>
+</table>
+<p>Add your fields to <code>SG_StoreSave</code>, then fill them in those two functions. Nothing else needs to change: the world always starts as a new game and the save overwrites it afterwards, so there is no start-up order to respect.</p>
+<p><code>SG_SlotHeader</code> is the second, tiny object per slot - day, balance, rating, timestamp - and it is all the menu reads to draw a row.</p>
+<hr />
+<h2 id="the-thumbnail">The thumbnail<a class="headerlink" href="#the-thumbnail" title="Permanent link">&para;</a></h2>
+<p>It is a real <code>.png</code> written next to the save, captured from your point of view at save time and loaded back when the menu draws the row.</p>
+<p>Deleting a slot leaves its <code>.png</code> behind, harmlessly: it is only loaded when a header exists, and the next save to that slot overwrites it.</p>
 <hr />
 <h2 id="pause">Pause<a class="headerlink" href="#pause" title="Permanent link">&para;</a></h2>
-<p>Pause lives in <code>BP_StorePlayerController</code>, next to the store-closing flow. It refuses while the closing modal or the daily report is up.</p>
-<p>One thing to know if you extend it: <strong>world timers do not run while the game is paused.</strong> Anything a paused screen depends on has to be driven from a widget <code>Tick</code>, which does run, or called directly.</p>
+<p>Pause lives in <code>BP_StorePlayerController</code>, and it refuses while the closing modal or the daily report is up.</p>
+<p>If you extend it, remember that <strong>world timers do not run while the game is paused</strong>. Anything a paused screen depends on has to be driven from a widget <code>Tick</code>, which does run.</p>
 <hr />
 <h2 id="the-menu-map">The menu map<a class="headerlink" href="#the-menu-map" title="Permanent link">&para;</a></h2>
-<p><code>L_MainMenu</code> is a copy of the street with all the gameplay taken out, and a slowly drifting camera.</p>
-<p>Two things caught out during that build, both worth knowing if you make your own menu level:</p>
+<p><code>L_MainMenu</code> is a copy of the street with the gameplay taken out and a slowly drifting camera. Two things to watch if you build your own:</p>
 <ul>
 <li>A child of <code>CameraActor</code> <strong>constrains the aspect ratio by default</strong>, which puts black bars either side of the menu. Turn it off on the class defaults <strong>and</strong> on the placed instance.</li>
-<li><code>UI Only</code> input mode survives <code>OpenLevel</code>. The store controller re-asserts <code>Game Only</code> at <code>BeginPlay</code>, otherwise you spawn in the shop unable to move.</li>
+<li><code>UI Only</code> input mode survives <code>OpenLevel</code>, so the gameplay controller has to re-assert <code>Game Only</code> at <code>BeginPlay</code> or you spawn in the shop unable to move.</li>
 </ul>
 <hr />
 <h2 id="sounds">Sounds<a class="headerlink" href="#sounds" title="Permanent link">&para;</a></h2>
-<p>Every button in the project plays the same two sounds, and they live in the <strong>button style</strong>, not in a graph.</p>
+<p>Every button plays the same two sounds, and they live in the <strong>button style</strong>, not in a graph:</p>
 <table>
 <thead>
 <tr>
@@ -6053,16 +6002,15 @@
 <tbody>
 <tr>
 <td><code>SC_UIHover</code></td>
-<td><code>Style → Hovered Sound</code></td>
+<td><code>Style -&gt; Hovered Sound</code></td>
 </tr>
 <tr>
 <td><code>SC_UIClick</code></td>
-<td><code>Style → Pressed Sound</code></td>
+<td><code>Style -&gt; Pressed Sound</code></td>
 </tr>
 </tbody>
 </table>
-<p>Only those two slots are actually played by Slate. Changing a UI sound is a field in the Details panel of a button.</p>
-<p>They are short and low. A high, tonal beep reads as science fiction, which is not what a shop sounds like.</p>
+<p>Those are the only two slots Slate actually plays. Keep replacements short and low: a high tonal beep reads as science fiction, which is not what a shop sounds like.</p>
 <hr />
 <p><a href="https://discord.gg/EqHCtq38jy">Join the Discord</a></p>
 

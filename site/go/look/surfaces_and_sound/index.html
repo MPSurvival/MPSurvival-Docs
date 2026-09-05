@@ -5521,15 +5521,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#making-a-material-sound-like-something" class="md-nav__link">
-    <span class="md-ellipsis">
-      Making a material sound like something
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#adding-a-surface" class="md-nav__link">
     <span class="md-ellipsis">
       Adding a surface
@@ -5539,18 +5530,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#two-footstep-systems-and-why" class="md-nav__link">
+  <a href="#who-plays-footsteps" class="md-nav__link">
     <span class="md-ellipsis">
-      Two footstep systems, and why
+      Who plays footsteps
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-sound-is-attached-not-placed" class="md-nav__link">
+  <a href="#play-sounds-attached" class="md-nav__link">
     <span class="md-ellipsis">
-      The sound is attached, not placed
+      Play sounds attached
     </span>
   </a>
   
@@ -5575,9 +5566,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-look" class="md-nav__link">
+  <a href="#the-two-post-process-looks" class="md-nav__link">
     <span class="md-ellipsis">
-      The look
+      The two post process looks
     </span>
   </a>
   
@@ -5710,7 +5701,7 @@
   
   
   <span class="md-ellipsis">
-    The six rules the template is built on
+    Extending the template
     
   </span>
   
@@ -5795,15 +5786,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#making-a-material-sound-like-something" class="md-nav__link">
-    <span class="md-ellipsis">
-      Making a material sound like something
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#adding-a-surface" class="md-nav__link">
     <span class="md-ellipsis">
       Adding a surface
@@ -5813,18 +5795,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#two-footstep-systems-and-why" class="md-nav__link">
+  <a href="#who-plays-footsteps" class="md-nav__link">
     <span class="md-ellipsis">
-      Two footstep systems, and why
+      Who plays footsteps
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-sound-is-attached-not-placed" class="md-nav__link">
+  <a href="#play-sounds-attached" class="md-nav__link">
     <span class="md-ellipsis">
-      The sound is attached, not placed
+      Play sounds attached
     </span>
   </a>
   
@@ -5849,9 +5831,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-look" class="md-nav__link">
+  <a href="#the-two-post-process-looks" class="md-nav__link">
     <span class="md-ellipsis">
-      The look
+      The two post process looks
     </span>
   </a>
   
@@ -5877,7 +5859,7 @@
 <p>Footsteps are chosen from the surface you are standing on, and the surface is declared on the <strong>material</strong>, never on a component.</p>
 <hr />
 <h2 id="the-five-surfaces">The five surfaces<a class="headerlink" href="#the-five-surfaces" title="Permanent link">&para;</a></h2>
-<p>They are declared in <code>Config/DefaultEngine.ini</code>:</p>
+<p>Declared in <code>Config/DefaultEngine.ini</code>:</p>
 <table>
 <thead>
 <tr>
@@ -5908,26 +5890,21 @@
 </tr>
 </tbody>
 </table>
-<p>Each one has a physical material in <code>Materials/Surfaces/</code> and a folder of sounds in <code>Audios/Footsteps/</code>.</p>
-<p><strong>Adding a surface takes a restart.</strong> A new entry in that ini does not appear in a Blueprint switch until the editor is restarted; before that the switch shows the 62 raw enum entries instead.</p>
-<hr />
-<h2 id="making-a-material-sound-like-something">Making a material sound like something<a class="headerlink" href="#making-a-material-sound-like-something" title="Permanent link">&para;</a></h2>
-<p>Assign the physical material to the <strong>material instance</strong>, not to the mesh component.</p>
-<p>There is no <code>PhysMaterialOverride</code> anywhere in the project, on purpose. A component override wins over the material and separates how a surface looks from how it sounds, which then goes wrong the first time somebody swaps a material.</p>
-<p>So: <code>MI_Surface_Concrete</code> carries <code>PM_Concrete</code>, and anything wearing it sounds like concrete.</p>
+<p>Each has a physical material in <code>Materials/Surfaces/</code> and a folder of sounds in <code>Audios/Footsteps/</code>.</p>
+<p><strong>A material sounds like something because it carries a physical material.</strong> <code>MI_Surface_Concrete</code> carries <code>PM_Concrete</code>, and anything wearing it sounds like concrete. Do not use <code>PhysMaterialOverride</code> on a component: there is none in the project, and an override splits how a surface looks from how it sounds the first time somebody swaps a material.</p>
 <hr />
 <h2 id="adding-a-surface">Adding a surface<a class="headerlink" href="#adding-a-surface" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Add a <code>SurfaceType</code> line in <code>Config/DefaultEngine.ini</code>.</li>
-<li>Restart the editor.</li>
+<li><strong>Restart the editor.</strong> A new entry does not appear in a Blueprint switch until you do, and before that the switch shows 62 raw enum entries.</li>
 <li>Create a <code>PM_&lt;Name&gt;</code> physical material and set its surface type.</li>
 <li>Assign it to the material instances that should sound like it.</li>
-<li>Record or import six variations and build an <code>SC_Footstep_&lt;Name&gt;</code> cue.</li>
+<li>Import six variations and build an <code>SC_Footstep_&lt;Name&gt;</code> cue.</li>
 <li>Assign the cue to the new slot in the footstep settings.</li>
 </ol>
-<p>Steps 4 to 6 are Details panel work. Only step 1 touches a config file.</p>
+<p>Only step 1 touches a config file.</p>
 <hr />
-<h2 id="two-footstep-systems-and-why">Two footstep systems, and why<a class="headerlink" href="#two-footstep-systems-and-why" title="Permanent link">&para;</a></h2>
+<h2 id="who-plays-footsteps">Who plays footsteps<a class="headerlink" href="#who-plays-footsteps" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -5938,23 +5915,19 @@
 <tbody>
 <tr>
 <td>The player</td>
-<td><code>BP_ViewMotionComponent.AdvanceFootsteps</code></td>
+<td><code>BP_ViewMotionComponent</code>, on distance travelled, so the sound stays locked to the head bob and speeds up with sprint</td>
 </tr>
 <tr>
 <td>Customers and employees</td>
-<td><code>BP_FootstepComponent</code>, driven by anim notifies</td>
+<td><code>BP_FootstepComponent</code>, on anim notifies, so the sound lands with the foot</td>
 </tr>
 </tbody>
 </table>
-<p>The player's steps are <strong>indexed on distance travelled</strong>, not on a timer. A step fires every time the stride phase passes 180 degrees, so the sound is locked to the head bob by construction and speeds up on its own when you sprint. A timer-driven footstep drifts the moment you change pace.</p>
-<p>The AI's steps come from notifies on the walk animation, because a character with legs you can see should step when the foot lands. Note that the <code>L</code> and <code>R</code> markers on the shipped walk are <strong>sync markers</strong>, which line two animations up and emit nothing. Real notifies had to be added on top.</p>
-<p>Both paths end in the same place: trace down, read the surface, switch, and play one sound.</p>
+<p>If you put notifies on your own walk animation, note that the <code>L</code> and <code>R</code> markers on the shipped one are <strong>sync markers</strong>, which line two animations up and emit nothing. Real notifies have to be added on top.</p>
 <hr />
-<h2 id="the-sound-is-attached-not-placed">The sound is attached, not placed<a class="headerlink" href="#the-sound-is-attached-not-placed" title="Permanent link">&para;</a></h2>
-<p>Every diegetic sound in the project is played with <strong>Spawn Sound Attached</strong>, not Play Sound at Location, and that is a rule rather than a preference.</p>
-<p>A sound played at a location has no owning actor, so the occlusion trace does not ignore the object making it. The till plays its sound at the actor origin, which is inside the counter, and the trace hits the counter before it reaches your ears. The result is a cash register that sounds like it is in the next room.</p>
-<p>Attaching it makes the component belong to the actor, so the engine ignores that actor in the trace, and the sound comes from the component you point at rather than from the pivot.</p>
-<p>Footsteps are attached to the capsule root at zero offset, roughly 88 cm off the floor, rather than at the contact point. Nothing is born inside the floor.</p>
+<h2 id="play-sounds-attached">Play sounds attached<a class="headerlink" href="#play-sounds-attached" title="Permanent link">&para;</a></h2>
+<p>Every diegetic sound in the project uses <strong>Spawn Sound Attached</strong>, not Play Sound at Location.</p>
+<p>A sound played at a location has no owning actor, so the occlusion trace does not ignore the object making it: the till's sound starts inside the counter, the trace hits the counter, and the cash register sounds like it is in the next room. Attaching the sound makes the engine ignore that actor.</p>
 <hr />
 <h2 id="occlusion">Occlusion<a class="headerlink" href="#occlusion" title="Permanent link">&para;</a></h2>
 <p>Two attenuation assets carry it: <code>ATT_Footstep</code> and <code>ATT_Default</code>.</p>
@@ -5963,51 +5936,43 @@
 <tr>
 <th>Setting</th>
 <th>Value</th>
-<th>Why</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>Enable Occlusion</td>
 <td>on</td>
-<td></td>
 </tr>
 <tr>
 <td>Trace Channel</td>
 <td><strong><code>Visibility</code></strong></td>
-<td></td>
 </tr>
 <tr>
 <td>Low Pass Filter Frequency</td>
 <td><code>500</code> Hz</td>
-<td></td>
 </tr>
 <tr>
 <td>Volume Attenuation</td>
 <td><code>0.4</code></td>
-<td></td>
 </tr>
 <tr>
 <td>Interpolation Time</td>
 <td><code>0.1</code> s</td>
-<td></td>
 </tr>
 </tbody>
 </table>
-<p>Two things here are easy to get wrong, and both were:</p>
-<p><strong>Ticking the box does nothing on its own.</strong> It starts the trace. The two values that produce the effect default to 20000 Hz, above audible, and 1.0, which is no attenuation at all. Both have to be set.</p>
-<p><strong>The channel must be one that pawns ignore.</strong> The occlusion trace runs from the source to the listener, and the listener is the camera, which lives inside the player capsule. On <code>WorldStatic</code> the capsule blocks the trace, so every sound is occluded all the time, indoors and out. On <code>Visibility</code>, pawn capsules and character meshes ignore it by profile and the world blocks it.</p>
+<p>Two things that are easy to get wrong:</p>
+<p><strong>Ticking the box does nothing on its own.</strong> It only starts the trace. The two values that produce the effect default to 20000 Hz, above audible, and 1.0, which is no attenuation at all. Set both.</p>
+<p><strong>The channel must be one that pawns ignore.</strong> The trace runs to the listener, which is the camera inside the player capsule. On <code>WorldStatic</code> the capsule blocks it and every sound is occluded all the time, indoors and out.</p>
 <hr />
 <h2 id="sound-classes">Sound classes<a class="headerlink" href="#sound-classes" title="Permanent link">&para;</a></h2>
-<p>Six, in <code>Audios/</code>: <code>SCLS_Master</code> with <code>Effects</code>, <code>UI</code>, <code>Music</code>, <code>Dialogue</code> and <code>Cinematics</code> under it.</p>
-<p>Everything routes through one of them, so a mix is set in one place.</p>
+<p>Six, in <code>Audios/</code>: <code>SCLS_Master</code> with <code>Effects</code>, <code>UI</code>, <code>Music</code>, <code>Dialogue</code> and <code>Cinematics</code> under it. Everything routes through one of them, so the mix is set in one place.</p>
 <hr />
-<h2 id="the-look">The look<a class="headerlink" href="#the-look" title="Permanent link">&para;</a></h2>
-<p>Two post process materials ship, both in <code>Materials/PostProcess/</code>.</p>
-<p><strong><code>M_PostProcess_Outline</code></strong> draws an ink outline around marked objects. It works on a <code>CustomStencil</code> mask rather than on scene depth, so it draws silhouettes only, with no internal edges, and only on the objects that ask for it. It has four parameters on <code>MI_PostProcess_Outline</code> and no external dependency.</p>
-<p><strong>A painterly filter</strong> is included as an optional look: an anisotropic Kuwahara filter in three passes, chained through User Scene Textures, running after tone mapping so it is not smeared by temporal anti-aliasing. It never reads the G-buffer, so no material, shading model or blend mode can break it.</p>
-<p>Both are blendables in the post process volume. Set the weight of the one you want to 1 and the other to 0.</p>
-<p>One thing to know if you write your own: <strong>a dithered masked material turns black under the outline</strong>, because the outline reads a depth discontinuity and a dither pattern is one at every pixel. Use a translucent material or an opaque tint instead.</p>
+<h2 id="the-two-post-process-looks">The two post process looks<a class="headerlink" href="#the-two-post-process-looks" title="Permanent link">&para;</a></h2>
+<p>Both live in <code>Materials/PostProcess/</code> and both are blendables on the post process volume. Set the weight of the one you want to 1 and the other to 0.</p>
+<p><strong><code>M_PostProcess_Outline</code></strong> draws an ink outline around marked objects, from a <code>CustomStencil</code> mask, so it draws silhouettes only and only on objects that ask for it. Four parameters on <code>MI_PostProcess_Outline</code>.</p>
+<p><strong>The painterly filter</strong> is an anisotropic Kuwahara in three passes, running after tone mapping. It never reads the G-buffer, so no material or shading model can break it.</p>
+<p>If you write your own materials: <strong>a dithered masked material turns black under the outline</strong>, because a dither pattern is a depth discontinuity at every pixel. Use a translucent material or an opaque tint instead.</p>
 <hr />
 <p><a href="https://discord.gg/EqHCtq38jy">Join the Discord</a></p>
 

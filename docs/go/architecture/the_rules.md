@@ -1,85 +1,42 @@
-# The six rules the template is built on
+# Extending the template
 
-Six ownership decisions were taken before the first line was written, and every system in the project obeys them. If you extend the template, they are the part worth keeping.
-
-They exist because the previous template in the studio's catalogue was refactored three times mid-project after several systems ended up writing the same piece of state.
+Six rules the whole project follows. Follow them in what you add and your system will fit in with the rest of it.
 
 ---
 
-## D1: Money has one writer
+## 1. Money goes through one function
 
-`BP_StoreManager.AddTransaction(Amount, Reason, ProductId)` is the only place in the project where the balance changes. Everything else calls it.
+`BP_StoreManager.AddTransaction(Amount, Reason, ProductId)` is the only place the balance changes. Call it, with a reason from `E_TransactionReason`, and your cost or income shows up in the daily report on its own. See [Money and the store rating](../store/money_and_rating.md).
 
-Every call lands in a journal with a reason attached, which is what makes the daily report **derived** rather than accumulated. A second writer, and the report starts lying.
+## 2. Subscribe to the clock, do not start a timer
 
----
+`BP_StoreManager` holds the day and the hour and broadcasts `OnHourChanged` and `OnDayEnded`. Subscribe to those, and freezing the clock at closing time freezes your system too, with nothing written to make that happen.
 
-## D2: Time has one owner
+World timers also do not run while the game is paused. Anything a paused screen depends on has to run from a widget `Tick`.
 
-`BP_StoreManager` holds the day and the hour. Nobody else advances time, and no gameplay logic runs on a timer. The hour is broadcast with `OnHourChanged` and the day with `OnDayEnded`, and everything subscribes.
+## 3. Reuse the storage component
 
-That is why freezing the clock at closing time freezes the sun, the deliveries and the spawner without a line being written in any of them.
+Shelves, the back room rack and delivery boxes all store things with `BP_StorageComponent` and `BP_StorageRow`. If your system holds goods, use them rather than writing a second stock system. See [How shelves and storage work](../stock/how_storage_works.md).
 
-A related trap: **world timers do not run while the game is paused.** Anything a paused screen depends on has to run from a widget `Tick` or be called directly.
+## 4. AI decisions go in the brain, not in the tree
 
----
+`UpdateTarget()` on the customer brain is the only thing that sets where a customer goes and what they look at, and the employee brain works the same way. A behaviour tree task writes a value into the brain and lets the brain decide; it never sets a destination or a focus itself.
 
-## D3: One storage component, used by three things
+## 5. Give employees work through the task queue
 
-The shelf, the storage rack and the delivery box all use the same storage machinery. Same placement, same stacking, same rules.
+Publish a task, and a free employee qualified for it will take it. That is how you add a job without touching any existing AI. See [How employees work](../staff/how_employees_work.md).
 
-Three implementations would be three behaviours that diverge at the first bug fix.
+## 6. Camera moves go through the view component
 
----
-
-## D4: A customer's target has one writer
-
-`BP_CustomerBrain.UpdateTarget()` is the only thing that writes where a customer is going and what they are looking at. It is called from a service on the root of the behaviour tree, so it runs in every state.
-
-**No task touches the target or the focus.** A task writes a value into the brain and the brain decides.
-
-The employee brain follows the same shape.
+`BP_ViewMotionComponent` is the only thing that writes the view root's position and the camera's rotation. Add an input to it rather than calling `SetRelativeRotation` on the camera, and head bob, breathing and sway keep working on top of your move.
 
 ---
 
-## D5: Employees pull from a task queue
+## Two habits
 
-Work is published to a queue on `BP_StoreManager`. A free employee takes the highest priority task they are qualified for. They do not go looking for work.
+**Find out which native system already owns the value.** The character movement component owns velocity and rotation, the AI controller owns focus, the nav mesh owns pathing, the attachment graph keeps a widget beside an object. Drive it with its own flags rather than writing the value every frame.
 
-That is what lets you add a job without touching any existing AI, and it is what will make the multiplayer version possible without rewriting the logic.
-
----
-
-## D6: The view has one writer
-
-`BP_ViewMotionComponent` is the only thing that writes the view root's position and the camera's rotation. The camera has `bUsePawnControlRotation` **off**, and the component recomposes the control rotation's pitch plus its own procedural offsets every tick.
-
-Anything that wants to move the view goes through an input on that component. Nothing calls `SetRelativeRotation` on the camera from the side.
-
-That is why leaning into a screen still has head bob and breathing living on top of it, and why it does not fight the camera manager.
-
----
-
-## Two habits that go with them
-
-**Drive the native system rather than writing the value yourself.** Before writing gameplay logic, find which subsystem already owns the quantity: the character movement component for velocity and rotation, the AI controller for focus, the nav mesh for pathing, the attachment graph for keeping a widget beside an object. Then drive it with its own flags.
-
-A per-frame writer is justified only after you have established that no native owner exists, and it should be said out loud when it happens.
-
-**A persistent native state gets one owner that re-asserts it every tick.** Not several places that clean up after themselves. The sun's rotation, a customer's focus, the walk speed. Decide the owner on the day the system is born, not on the day the bug appears.
-
----
-
-## What follows from all of this for you
-
-If you add a system:
-
-- Route its money through `AddTransaction`.
-- Subscribe to `OnHourChanged` or `OnDayEnded` rather than starting a timer.
-- If it involves storing goods, reuse the storage component.
-- If it involves an AI decision, put it in the brain and leave the tree thin.
-- If it involves the camera, add an input to the view component.
-- Decide who owns each piece of state before writing the first node.
+**A state that persists gets one owner that re-asserts it**, not several places cleaning up after each other. Decide who owns it when you write the system, not when the bug appears.
 
 ---
 

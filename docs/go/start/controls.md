@@ -2,7 +2,7 @@
 
 Input goes through **Enhanced Input**. There is one mapping context, `Content/GrandOpening/Inputs/IMC_Gameplay`, and the actions live next to it in `Inputs/Inputs/`.
 
-There is no options menu and no rebinding screen in the template. Changing a key means opening `IMC_Gameplay` and dragging the mapping onto another key, which takes about five seconds.
+The keys live in `IMC_Gameplay`. Changing one means opening that asset and dragging the mapping onto another key, which takes about five seconds.
 
 ---
 
@@ -50,7 +50,7 @@ Each line reads its letter from the `InputAction` itself. Remap the key and the 
 | Leave build mode | `B` |
 | Pick a placed structure back up (edit mode) | `X` |
 
-`B` is a plain toggle with two states. Clicking a tile in the menu arms that structure and closes the menu, so you go straight back to aiming. Pressing `B` again drops out of build mode entirely. Changing structure without leaving costs two presses, which was the trade taken so the key always does the same thing.
+Clicking a tile in the menu arms that structure and closes the menu, so you go straight back to aiming. Pressing `B` again drops out of build mode entirely.
 
 Edit mode is entered from the `EDIT` button at the bottom right of the build menu. See [How placement works](../build/how_placement_works.md).
 
@@ -64,7 +64,7 @@ The office computer, the checkout display and the card terminal all work the sam
 
 `Tab` or `E` leans you back out.
 
-Movement and look are frozen while you are reading, through the controller's own `SetIgnoreMoveInput` and `SetIgnoreLookInput`, so nothing in the view code has to know a screen is open.
+Movement and look are frozen while you are reading.
 
 ---
 

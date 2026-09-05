@@ -1,28 +1,24 @@
 # Ad campaigns and sidewalk panels
 
-A campaign is a poster and three effects. It runs from the **Ads** app, and it only has an effect while there is an easel out front to show it on.
+A campaign is a poster and three effects. You start it from the **Ads** app, and it only works while there is an easel out front to show it on.
 
-The rule, in one sentence: **one easel shows one campaign, in the order they were started.**
-
----
-
-## How campaigns and panels line up
-
-`BP_AdManager` keeps two lists: `Runs`, the campaigns that are running, and `Panels`, the easels placed in the world. Panel *i* shows campaign *i*, and the number of live campaigns is `min(Runs, Panels)`.
-
-Everything else falls out of that:
-
-- A campaign beyond the number of easels is **paused**. It has no effect, it is not billed, and its day counter does not move.
-- Putting another easel down brings it back.
-- Picking an easel up pauses the last campaign instead of orphaning it.
-
-There is nothing to assign. That was the trade: you cannot choose which easel shows which poster, and in exchange there is no state to keep in sync and no way to end up with a campaign nobody can see.
+**One easel shows one campaign, in the order they were started.** A campaign beyond the number of easels is paused: no effect, no billing, and its day counter stops. Put another easel down and it comes back; pick one up and the last campaign pauses. There is nothing to assign.
 
 ---
 
-## The Data Asset
+## Adding a campaign
 
-`BP_AdCampaignDataAsset`, one instance per campaign.
+1. Draw a poster and import it.
+2. Create a `DA_Ad_<Name>` from `BP_AdCampaignDataAsset` in `Blueprints/DataAssets/Ads/Childs/` and fill it in.
+3. Add it to `AvailableCampaigns` on `DA_App_Ads`.
+
+The app row, the billing, the effects and the poster on the easel all come from the asset.
+
+Keep **prices and percentages off the poster**: a campaign brings customers through the door, and what they pay is set on the product asset, so a poster promising a cut price would advertise something the shelf does not do.
+
+---
+
+## The fields
 
 | Field | What it does |
 |---|---|
@@ -34,7 +30,7 @@ There is nothing to assign. That was the trade: you cannot choose which easel sh
 | `PromotedCategories` | Categories customers will buy even outside their preferences |
 | `RatingDelta` | Added to the store rating while it runs |
 
-Three ship with the template, deliberately different:
+Three ship with the template:
 
 | Campaign | Cost/day | Days | Effect |
 |---|---|---|---|
@@ -44,57 +40,37 @@ Three ship with the template, deliberately different:
 
 ---
 
-## The three effects
+## What the three effects do
 
-**Traffic** multiplies. `GetCustomerRate` takes the hourly figure from `DA_DayConfig` and multiplies it by every live campaign's `TrafficMultiplier`. Two campaigns running at ×1.15 and ×1.25 give ×1.44.
+**Traffic** multiplies the hourly figure from `DA_DayConfig`. Two campaigns at ×1.15 and ×1.25 give ×1.44.
 
-**Rating** adds. The sum of every live `RatingDelta` is added to the target rating and then clamped to 0 to 5. `RecomputeRating` is still the only thing that writes the rating.
+**Rating** adds every live `RatingDelta` to the target rating, clamped to 0 - 5.
 
-**Categories** are read **once, when a customer spawns**. A customer who walks in under a Fresh Deals campaign will buy fresh food even if their archetype does not normally like it, and they keep that for their whole visit even if you stop the campaign while they are in the shop.
-
-Reading it once rather than per query is a real decision: `IsProductWanted` is called per product per shelf, and rebuilding the promoted list every time would mean resolving the game state hundreds of times a minute for a value that changes once a day.
+**Categories** are read **when a customer spawns**. Someone who walks in under a Fresh Deals campaign buys fresh food even if their archetype normally would not, and keeps that for the whole visit even if you stop the campaign while they are in the shop.
 
 ---
 
 ## Running one
 
-In the **Ads** app, each row shows the poster, the name, the traffic and rating effects, the cost per day, the remaining days, and a `RUN` or `STOP` button.
+Each row in the **Ads** app shows the poster, the name, the traffic and rating effects, the cost per day, the days left, and a `RUN` or `STOP` button.
 
-`CanStartCampaign` is the single rule behind the button: there has to be a free easel, the campaign must not already be running, and you have to be able to afford one day.
-
-The first day is billed on start, the rest at the end of each day, with reason `Marketing`. It goes through `AddTransaction` like everything else, so it shows up as its own line in the daily report.
+`RUN` needs a free easel, a campaign that is not already running, and enough money for one day. The first day is billed on start and the rest at the end of each day, so it gets its own `Marketing` line in the daily report.
 
 ---
 
 ## The easel
 
-`BP_AdPanel` is bought from the **Structures** app like any other piece of furniture, through `DA_Structure_AdPanel`, and placed with the build key. It is allowed in `SalesFloor` and `Outside`, so it can go in the window or on the pavement.
+`BP_AdPanel` is bought from the **Structures** app like any other furniture and placed with `B`. It is allowed in `SalesFloor` and `Outside`, so it goes in the window or on the pavement.
 
-It holds no state at all. It registers itself with the manager at `BeginPlay`, removes itself at `EndPlay`, and exposes `ShowCampaign`, which only the manager calls.
+It is not interactable: the campaign is chosen in the app, where you can see what it costs.
 
-The poster is a dynamic material instance created once, on the material slot named `M_AdPoster`. `BlankPoster` is what it shows with no campaign, and it is a real protection rather than a nicety: setting a texture parameter to nothing falls back to the master material's default, which is a wood grain.
-
-The easel itself is not interactable. A campaign is chosen in the app, where you can see what it costs and what it does. Pressing `E` on the panel would have nothing to say.
-
----
-
-## Adding a campaign
-
-1. Draw a poster and import it.
-2. Create a `DA_Ad_<Name>` from `BP_AdCampaignDataAsset` and fill it in.
-3. Add it to `AvailableCampaigns` on `DA_App_Ads`.
-
-Nothing else. The app row, the billing, the effects and the poster on the easel all come from the asset.
-
-One thing the shipped posters avoid, and yours probably should too: **no prices and no percentages.** There is no discount system in the template, so a poster reading "−50%" would be advertising something the game cannot do.
+The poster is drawn on the material slot named `M_AdPoster`. `BlankPoster` is what shows with no campaign — leave it filled in, because an empty texture parameter falls back to the master material's wood grain.
 
 ---
 
 ## Before you test it
 
-The Ads app and the easel are both rewards on `DA_Unlock_Marketing`, which needs day 3. Before day 3 neither of them exists.
-
-That is intended, and it is also the thing most likely to make you think the system is broken on your first run.
+The Ads app and the easel are both rewards on `DA_Unlock_Marketing`, which needs day 3. Before day 3 neither of them exists, which is the thing most likely to make you think the system is broken on a first run.
 
 ---
 

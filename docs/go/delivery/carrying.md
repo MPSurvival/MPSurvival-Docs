@@ -1,31 +1,6 @@
 # Carrying, placing and throwing
 
-There is one way to carry something in this template, and it is a physics grab. The object you are holding is a real simulated body pulled toward your hands by a `PhysicsHandleComponent`, not a mesh welded to the camera.
-
-That is why a box you are carrying bumps into door frames, rests on a counter when you lower it, and swings a little when you turn. It is also why the code that does it is short.
-
----
-
-## Making an actor carryable
-
-Two things, and neither of them is a parent class:
-
-1. Implement **`BPI_Carryable`**.
-2. Set **Can Character Step Up On = No** on its collision body.
-
-The second one is not optional. Without it, a box on the floor becomes the character's movement base: the movement component presses down on it, the simulated body squirts out from under your feet, and you get launched across the room.
-
-The interface has three entries:
-
-| Function | Returns | What it is for |
-|---|---|---|
-| `GetCarryBody` | `Static Mesh Component` | Which body the physics handle grabs |
-| `GetCarryOffset` | `Transform` | How the object sits in your hands |
-| `PickUp(Interactor)` | | What happens when it is picked up |
-
-The object decides its own pose. `GetCarryOffset` is on the object rather than on the player because only the object knows how it wants to be held.
-
-To make it pickable with `E`, give it a `BP_InteractableComponent` and wire its `OnInteracted` to `PickUp`, which casts the interactor to `BP_StoreCharacter` and calls `CarryObject(self)`. That is the whole hookup, and it is the same shape as every other interaction in the project.
+Carrying is a physics grab: the object in your hands is a simulated body pulled toward them, not a mesh welded to the camera. It bumps into door frames, rests on a counter when you lower it, and swings a little when you turn.
 
 ---
 
@@ -37,49 +12,61 @@ To make it pickable with `E`, give it a `BP_InteractableComponent` and wire its 
 | `G` | Put it down where you are looking |
 | `R` | Throw it |
 
-`G` is a place, not a drop. It traces where you are aiming, up to the interaction range of 220 cm, and sets the object down with its **base** on that point, killing its linear and angular velocity. Aim at a table and the box lands on the table. Aim at nothing and it lands at the end of the trace.
+`G` is a place, not a drop: it traces where you are aiming, up to 220 cm, and sets the object down with its base on that point. Aim at a table and the box lands on the table. `R` does the same, then adds an impulse at `ThrowSpeed` (450 cm/s).
 
-`R` is a place followed by an impulse, at `ThrowSpeed`, 450 cm/s.
+Carrying slows you down, by `CarrySpeedScale` on `BP_CarryComponent`.
 
-Carrying slows you down. `CarrySpeedScale` composes with sprint in `RefreshWalkSpeed`, which is the only place walk speed is ever written.
+---
+
+## Making your own actor carryable
+
+Two things:
+
+1. Implement **`BPI_Carryable`**.
+2. Set **Can Character Step Up On = No** on its collision body.
+
+The second one is not optional. Without it the box becomes the character's movement base, and the simulated body squirts out from under your feet and launches you across the room.
+
+The interface has three entries:
+
+| Function | Returns | What it is for |
+|---|---|---|
+| `GetCarryBody` | `Static Mesh Component` | Which body is grabbed |
+| `GetCarryOffset` | `Transform` | How the object sits in your hands |
+| `PickUp(Interactor)` | | What happens when it is picked up |
+
+To make it pickable with `E`, add a `BP_InteractableComponent` and wire its `OnInteracted` to `PickUp`, which casts the interactor to `BP_StoreCharacter` and calls `CarryObject(self)`.
 
 ---
 
 ## The panel next to your hands
 
-While you are carrying something, a small panel of key prompts is attached beside the object. The player fills it first with *Put down* and *Throw*, then hands it to the object, which adds its own lines.
-
-A box adds *Open* / *Close*, and adds *Stock* and *Take back* only when the shelf you are looking at will actually accept the gesture. Look at a rack with a free slot and *Store* appears; look at a full one and it does not.
+While you carry something, a small panel of key prompts sits beside it. It always shows *Put down* and *Throw*, and the object adds its own lines: a box adds *Open* / *Close*, and adds *Stock* or *Take back* only when the shelf you are looking at will accept the gesture.
 
 Each line reads its letter from the `InputAction` it is bound to, so remapping a key updates the panel with no work.
-
-The panel is **attached** to the object rather than positioned every frame, which is why it does not jitter when you walk. Its height is measured once, in the object's own space, from the carry body's local bounds.
 
 ---
 
 ## Going through a doorway
 
-Push a carried object into a wall and the physics handle cannot reach its target. Left alone, the body would grind against the wall forever.
+Push a carried object into a wall and it would otherwise grind there. Instead, once it falls far enough behind your hands it stops colliding with the world and goes pale, then turns solid again as it catches up.
 
-When the gap between the body and the handle's target passes `GhostDistanceCm` (150 cm), the object stops colliding with the world and takes on a pale tint. Below `SolidDistanceCm` (20 cm) it goes solid again. The two thresholds are far apart on purpose, so it does not flicker while the object trails behind you.
+Both distances are on `BP_CarryComponent`, in `Settings|Carry`:
 
-Both values are on `BP_CarryComponent`, in `Settings|Carry`. The tint is a parameter on `M_PropsMaster`, in the `Ghost` group:
-
-| Parameter | What it does |
+| Field | Shipped |
 |---|---|
-| `GhostAmount` | Driven by the component, 0 or 1 |
-| `GhostColor` | The colour it fades toward |
-| `GhostFade` | How far it fades. `0.4` washes the box out without whitening it |
+| `GhostDistanceCm` | `150` |
+| `SolidDistanceCm` | `20` |
 
-A material without a `GhostAmount` parameter simply ignores the call, so your own props do not have to opt in.
+The pale tint comes from the `Ghost` group on `M_PropsMaster`: `GhostColor` is the colour it fades toward and `GhostFade` how far (`0.4` washes the box out without whitening it). A material without those parameters simply ignores it, so your own props do not have to opt in.
 
-Releasing the object always makes it solid again, whichever way you release it.
+Releasing the object always makes it solid again.
 
 ---
 
-## Two things it does not do
+## Two things to know about the hold
 
-- **The object is not attached to a hand bone.** It is a body on a spring. If you want it welded, you are changing the whole component, not a setting.
+- **The object is a body on a spring, not a bone attachment.** Welding it to a hand means changing the whole component, not a setting.
 - **The object follows your yaw only.** Look up or down and the box stays level. That is the right behaviour for something held in two hands, and it is a `MakeRotator(0, 0, camera yaw)` in `AdvanceCarryPose` if you want it otherwise.
 
 ---

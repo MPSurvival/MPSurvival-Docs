@@ -5692,7 +5692,7 @@
   
   
   <span class="md-ellipsis">
-    The six rules the template is built on
+    Extending the template
     
   </span>
   
@@ -5838,8 +5838,8 @@
 
 
 <h1 id="add-a-customer-archetype">Add a customer archetype<a class="headerlink" href="#add-a-customer-archetype" title="Permanent link">&para;</a></h1>
-<p>An archetype is one Data Asset, and it changes how a customer actually behaves rather than just how fast they walk.</p>
-<p>Three ship with the template, and they are deliberately far apart:</p>
+<p>An archetype is one Data Asset. It changes how a customer shops, not just how fast they walk.</p>
+<p>Three ship with the template:</p>
 <table>
 <thead>
 <tr>
@@ -5868,7 +5868,7 @@
 <li>Right click in <code>Blueprints/DataAssets/Customers/Childs/</code> → <strong>Data Asset</strong> → <code>BP_CustomerArchetypeDataAsset</code>.</li>
 <li>Name it <code>DA_Customer_&lt;Kind&gt;</code>.</li>
 <li>Fill it in.</li>
-<li>Add it to <code>ArchetypeMix</code> on <code>DA_DayConfig</code> with a weight, or it will never appear.</li>
+<li>Add it to <code>ArchetypeMix</code> on <code>DA_DayConfig</code> with a weight, or it never appears.</li>
 </ol>
 <hr />
 <h2 id="the-fields">The fields<a class="headerlink" href="#the-fields" title="Permanent link">&para;</a></h2>
@@ -5886,7 +5886,7 @@
 </tr>
 <tr>
 <td><code>PatienceSeconds</code></td>
-<td>How long they will queue before leaving angry</td>
+<td>How long they queue before leaving angry</td>
 </tr>
 <tr>
 <td><code>BudgetMin</code> / <code>BudgetMax</code></td>
@@ -5902,7 +5902,7 @@
 </tr>
 <tr>
 <td><code>PriceSensitivity</code></td>
-<td>Declared, and nothing reads it yet</td>
+<td>Declared on the archetype, for a pricing system of your own to read</td>
 </tr>
 <tr>
 <td><code>BrowseSeconds</code></td>
@@ -5914,28 +5914,23 @@
 </tr>
 </tbody>
 </table>
-<p>Speed, budget and item count are rolled per customer inside the archetype's bounds, so two hurried shoppers are not identical.</p>
-<p><code>PriceSensitivity</code> has nothing to bite on because selling prices are fixed on the product and there is no in-game pricing screen. It is left in place for the day one exists rather than being wired to a constant.</p>
+<p>Speed, budget and item count are rolled per customer inside those bounds, so two hurried shoppers are not identical.</p>
 <hr />
 <h2 id="weighting-the-mix">Weighting the mix<a class="headerlink" href="#weighting-the-mix" title="Permanent link">&para;</a></h2>
-<p><code>DA_DayConfig.ArchetypeMix</code> is a list of <code>S_ArchetypeMix</code> rows: an archetype and a weight. Each spawn draws from it.</p>
-<p>Weights are relative, so <code>3 / 2 / 1</code> and <code>30 / 20 / 10</code> do the same thing. An archetype at weight <code>0</code> never appears, which is a useful way of switching one off without deleting it.</p>
+<p><code>ArchetypeMix</code> on <code>DA_DayConfig</code> is a list of archetypes and weights, drawn from at every spawn. Weights are relative, so <code>3 / 2 / 1</code> and <code>30 / 20 / 10</code> do the same thing. Weight <code>0</code> switches an archetype off without deleting it.</p>
 <hr />
 <h2 id="dressing-them">Dressing them<a class="headerlink" href="#dressing-them" title="Permanent link">&para;</a></h2>
-<p><code>CosmeticSet</code> points at a <code>BP_CosmeticSetDataAsset</code>, which is a list of slots. Each slot is a <code>BP_CosmeticSlotDataAsset</code> holding a list of skeletal meshes for one part of the body.</p>
-<p>Two slots ship: <code>DA_CosmeticSlot_Hair</code> and <code>DA_CosmeticSlot_Torso</code>.</p>
-<p>At spawn, the cosmetic component creates one skeletal mesh component per slot and picks one option at random. <strong>An empty entry in <code>Options</code> means that slot can be nothing</strong>, which is how you get some customers with hats and some without. There is no probability field, the draw is enough.</p>
-<p>Because the wardrobe is chosen on the archetype, two customer types can dress from two different sets.</p>
-<p>Adding a body part is one more <code>DA_CosmeticSlot_*</code> in the set: legs, a bag, glasses. Nothing else changes.</p>
-<p>If you add cosmetic meshes of your own, set their collision to none. A skeletal mesh created at runtime arrives with default collision, and hair that blocks the world will block the interaction trace and the customers behind it.</p>
+<p><code>CosmeticSet</code> points at a <code>BP_CosmeticSetDataAsset</code>, which is a list of slots. Each slot is a <code>BP_CosmeticSlotDataAsset</code> holding the meshes available for one part of the body. Two ship: <code>DA_CosmeticSlot_Hair</code> and <code>DA_CosmeticSlot_Torso</code>.</p>
+<p>One option per slot is drawn at random when a customer spawns. <strong>An empty entry in <code>Options</code> means that slot can be nothing</strong>, which is how some customers get a hat and some do not.</p>
+<p><strong>To add a body part</strong> — legs, a bag, glasses — add one more <code>DA_CosmeticSlot_*</code> to the set. Nothing else changes.</p>
+<p>If you add cosmetic meshes of your own, <strong>set their collision to none</strong>. Hair that blocks the world blocks the interaction trace and the customers behind it.</p>
 <hr />
 <h2 id="overriding-the-buying-rule">Overriding the buying rule<a class="headerlink" href="#overriding-the-buying-rule" title="Permanent link">&para;</a></h2>
-<p><code>Wants(Product, Budget) → Wanted</code> lives on the archetype Data Asset, not on the brain. The brain just delegates to it.</p>
-<p>That means you can subclass <code>BP_CustomerArchetypeDataAsset</code>, override <code>Wants</code>, and get a customer type with a genuinely different shopping rule without touching the AI. A customer who only buys what is on ad, or who refuses anything above a certain price, is one overridden function.</p>
+<p><code>Wants(Product, Budget)</code> lives on the archetype Data Asset. Subclass <code>BP_CustomerArchetypeDataAsset</code>, override it, and you have a customer type with a genuinely different shopping rule without touching the AI: one who only buys what is advertised, or refuses anything above a price.</p>
 <hr />
 <h2 id="testing-one-archetype-on-its-own">Testing one archetype on its own<a class="headerlink" href="#testing-one-archetype-on-its-own" title="Permanent link">&para;</a></h2>
-<p>Put a single row in <code>ArchetypeMix</code> with your archetype at weight 1, set <code>CustomersPerHour</code> to something generous for the current hour, and play. Everyone who walks in is yours.</p>
-<p>Do not place a customer by hand in the level to test. A hand-placed customer never goes through <code>SpawnCustomer</code>, so it never gets initialised, and it will behave as though it has no archetype at all.</p>
+<p>Put a single row in <code>ArchetypeMix</code> with your archetype at weight 1, raise <code>CustomersPerHour</code> for the current hour, and play. Everyone who walks in is yours.</p>
+<p><strong>Do not place a customer by hand in the level to test.</strong> A hand-placed customer never goes through the spawner, so it is never given an archetype and behaves as if it had none.</p>
 <hr />
 <p><a href="https://discord.gg/EqHCtq38jy">Join the Discord</a></p>
 

@@ -5271,18 +5271,18 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#why-that-matters" class="md-nav__link">
+  <a href="#adding-one" class="md-nav__link">
     <span class="md-ellipsis">
-      Why that matters
+      Adding one
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-data-asset" class="md-nav__link">
+  <a href="#the-fields" class="md-nav__link">
     <span class="md-ellipsis">
-      The Data Asset
+      The fields
     </span>
   </a>
   
@@ -5298,27 +5298,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#free-or-paid-decided-by-the-data" class="md-nav__link">
-    <span class="md-ellipsis">
-      Free or paid, decided by the data
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#what-unlocked-means" class="md-nav__link">
     <span class="md-ellipsis">
       What "unlocked" means
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#when-it-is-evaluated" class="md-nav__link">
-    <span class="md-ellipsis">
-      When it is evaluated
     </span>
   </a>
   
@@ -5337,15 +5319,6 @@
   <a href="#the-upgrades-app" class="md-nav__link">
     <span class="md-ellipsis">
       The Upgrades app
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#adding-one" class="md-nav__link">
-    <span class="md-ellipsis">
-      Adding one
     </span>
   </a>
   
@@ -5719,7 +5692,7 @@
   
   
   <span class="md-ellipsis">
-    The six rules the template is built on
+    Extending the template
     
   </span>
   
@@ -5795,18 +5768,18 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#why-that-matters" class="md-nav__link">
+  <a href="#adding-one" class="md-nav__link">
     <span class="md-ellipsis">
-      Why that matters
+      Adding one
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-data-asset" class="md-nav__link">
+  <a href="#the-fields" class="md-nav__link">
     <span class="md-ellipsis">
-      The Data Asset
+      The fields
     </span>
   </a>
   
@@ -5822,27 +5795,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#free-or-paid-decided-by-the-data" class="md-nav__link">
-    <span class="md-ellipsis">
-      Free or paid, decided by the data
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#what-unlocked-means" class="md-nav__link">
     <span class="md-ellipsis">
       What "unlocked" means
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#when-it-is-evaluated" class="md-nav__link">
-    <span class="md-ellipsis">
-      When it is evaluated
     </span>
   </a>
   
@@ -5866,15 +5821,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#adding-one" class="md-nav__link">
-    <span class="md-ellipsis">
-      Adding one
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -5893,14 +5839,18 @@
 
 <h1 id="unlocks">Unlocks<a class="headerlink" href="#unlocks" title="Permanent link">&para;</a></h1>
 <p>Progression gates content behind metrics. Reach a rating, a balance, a day or a customer count, and a set of assets becomes available, either free or for a price.</p>
-<p>The key of an unlock is <strong>the Data Asset itself</strong>, never an identifier string.</p>
 <hr />
-<h2 id="why-that-matters">Why that matters<a class="headerlink" href="#why-that-matters" title="Permanent link">&para;</a></h2>
-<p>Products, structures, apps, campaigns and employee candidates all derive from <code>PrimaryDataAsset</code>. So a single field, <code>Rewards</code>, typed as an array of <code>PrimaryDataAsset</code>, covers all five, and it covers whatever kind of asset you add later without the manager changing.</p>
-<p>An identifier would have meant a lookup table per family, and it would have covered none of what you write yourself.</p>
+<h2 id="adding-one">Adding one<a class="headerlink" href="#adding-one" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Create a <code>DA_Unlock_&lt;Name&gt;</code> from <code>BP_UnlockDataAsset</code>.</li>
+<li>Put one or more <code>Requirements</code> in it.</li>
+<li>Put the assets it releases in <code>Rewards</code>.</li>
+<li>Set <code>Price</code> to <code>0</code> for automatic, or a number to make it purchasable in the Upgrades app.</li>
+<li>Add it to <code>Catalog</code> on <code>BP_ProgressionManager</code>, in the Details panel of the game state.</li>
+</ol>
+<p>Step 5 is the one that matters. An unlock that is not in the catalogue never gates anything, and its rewards stay available from the start.</p>
 <hr />
-<h2 id="the-data-asset">The Data Asset<a class="headerlink" href="#the-data-asset" title="Permanent link">&para;</a></h2>
-<p><code>BP_UnlockDataAsset</code>, one instance per unlock.</p>
+<h2 id="the-fields">The fields<a class="headerlink" href="#the-fields" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -5923,7 +5873,7 @@
 </tr>
 <tr>
 <td><code>Requirements</code></td>
-<td>A list of <code>S_UnlockRequirement</code>: a metric and a value. <strong>All</strong> must be met</td>
+<td>A list of metric-and-value pairs. <strong>All</strong> must be met</td>
 </tr>
 <tr>
 <td><code>Requires</code></td>
@@ -5935,14 +5885,13 @@
 </tr>
 <tr>
 <td><code>Price</code></td>
-<td>See below</td>
+<td><code>0</code> grants it as soon as the conditions are met; above <code>0</code> makes it available to buy</td>
 </tr>
 </tbody>
 </table>
-<p><code>Requires</code> is a typed field rather than a metric, because an enum and a float cannot name an asset.</p>
+<p><code>Rewards</code> takes <strong>any</strong> Data Asset: a product, a structure, an app, a campaign, a hiring candidate, or a kind of asset you add yourself.</p>
 <hr />
 <h2 id="the-five-metrics">The five metrics<a class="headerlink" href="#the-five-metrics" title="Permanent link">&para;</a></h2>
-<p><code>E_UnlockCondition</code> holds what the manager can read without anyone adding a counter:</p>
 <table>
 <thead>
 <tr>
@@ -5957,7 +5906,7 @@
 </tr>
 <tr>
 <td><code>TotalRevenue</code></td>
-<td>The journal, filtered to <code>Sale</code></td>
+<td>Everything sold so far</td>
 </tr>
 <tr>
 <td><code>Rating</code></td>
@@ -5973,44 +5922,14 @@
 </tr>
 </tbody>
 </table>
-<p><code>GetMetric(Condition)</code> is a single switch and the only place a metric is read. Adding a sixth is an enum entry and a branch.</p>
-<p>There is no <code>UnitsSold</code>, because <code>S_Transaction</code> does not carry a quantity, and adding one would have meant changing the checkout to satisfy a progression goal.</p>
-<hr />
-<h2 id="free-or-paid-decided-by-the-data">Free or paid, decided by the data<a class="headerlink" href="#free-or-paid-decided-by-the-data" title="Permanent link">&para;</a></h2>
-<p><code>Price</code> picks the model:</p>
-<table>
-<thead>
-<tr>
-<th><code>Price</code></th>
-<th>Behaviour</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>0</code></td>
-<td>Meeting the conditions grants it on its own</td>
-</tr>
-<tr>
-<td><code>&gt; 0</code></td>
-<td>Meeting the conditions makes it <strong>available</strong>, and you buy it in the Upgrades app</td>
-</tr>
-</tbody>
-</table>
-<p>One field, two progression systems, no branch anywhere else.</p>
+<p><strong>To add a sixth</strong>, add an entry to <code>E_UnlockCondition</code> and a branch to <code>GetMetric</code> on <code>BP_ProgressionManager</code>, plus a branch in the Upgrades app for its label.</p>
 <hr />
 <h2 id="what-unlocked-means">What "unlocked" means<a class="headerlink" href="#what-unlocked-means" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>IsUnlocked(Asset)  =  granted somewhere  OR  not mentioned by any unlock
-</code></pre></div>
-<p><strong>An asset nobody mentions is available.</strong> Adding a product does not require writing an unlock for it. That is what keeps the system opt-in instead of turning into paperwork.</p>
-<p>Five lists filter through it: the Market, Structures, Hiring and Ads apps, and the desktop itself. Placement follows for free, because you can only place what you own.</p>
-<hr />
-<h2 id="when-it-is-evaluated">When it is evaluated<a class="headerlink" href="#when-it-is-evaluated" title="Permanent link">&para;</a></h2>
-<p><code>Evaluate</code> runs at the end of each day, and again when the Upgrades app is opened.</p>
-<p>Not on every transaction. Three more subscriptions for something you would see in the evening report anyway was not worth it.</p>
-<p>A granted unlock records <strong>the day it was granted</strong>, not just the fact. Without the date, an unlock earned at rating 3.0 and then read back at rating 2.4 would show <code>RATING 2.4 / 3</code> and <code>UNLOCKED</code> on the same line, which reads like a bug. With it, the line says <code>UNLOCKED (on day 2)</code>.</p>
+<p><strong>An asset nobody mentions is available.</strong> Adding a product does not require writing an unlock for it, so the system stays opt-in.</p>
+<p>Five lists filter through it: the Market, Structures, Hiring and Ads apps, and the desktop itself. Placement follows for free, since you can only place what you own.</p>
+<p>Unlocks are evaluated at the end of each day, and again when the Upgrades app is opened. A granted unlock keeps the day it was granted on, so a line reads <code>UNLOCKED (on day 2)</code> even if the rating has since dropped back below the bar.</p>
 <hr />
 <h2 id="the-six-shipped-unlocks">The six shipped unlocks<a class="headerlink" href="#the-six-shipped-unlocks" title="Permanent link">&para;</a></h2>
-<p>Chosen so all five metrics, the prerequisite field and both price models are visible.</p>
 <table>
 <thead>
 <tr>
@@ -6045,21 +5964,10 @@
 </tr>
 </tbody>
 </table>
+<p>Between them they use all five metrics, the prerequisite field and both price models.</p>
 <hr />
 <h2 id="the-upgrades-app">The Upgrades app<a class="headerlink" href="#the-upgrades-app" title="Permanent link">&para;</a></h2>
-<p>One row per unlock: thumbnail, name, description underneath, a progress column, a price, and a button.</p>
-<p>The progress column names the metric and shows both numbers: <code>RATING 3.2 / 4.0</code>. The label comes from a switch on <code>E_UnlockCondition</code>, so a sixth metric needs a branch there too.</p>
-<p>A free unlock shows no price and no button. There is nothing to click.</p>
-<hr />
-<h2 id="adding-one">Adding one<a class="headerlink" href="#adding-one" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Create a <code>DA_Unlock_&lt;Name&gt;</code> from <code>BP_UnlockDataAsset</code>.</li>
-<li>Put one or more <code>Requirements</code> in it.</li>
-<li>Put the assets it releases in <code>Rewards</code>.</li>
-<li>Set <code>Price</code> to <code>0</code> for automatic, or a number to make it purchasable.</li>
-<li>Add it to <code>Catalog</code> on <code>BP_ProgressionManager</code>, in the Details panel of the game state.</li>
-</ol>
-<p>Step 5 is the one that matters. An unlock that is not in the catalogue never gates anything, and its rewards stay available from the start.</p>
+<p>One row per unlock: thumbnail, name, description, a progress column reading <code>RATING 3.2 / 4.0</code>, a price and a button. A free unlock shows no price and no button.</p>
 <hr />
 <p><a href="https://discord.gg/EqHCtq38jy">Join the Discord</a></p>
 

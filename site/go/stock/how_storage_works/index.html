@@ -4358,9 +4358,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#a-row-is-a-curve-not-a-grid" class="md-nav__link">
+  <a href="#a-row-is-a-spline-you-draw" class="md-nav__link">
     <span class="md-ellipsis">
-      A row is a curve, not a grid
+      A row is a spline you draw
     </span>
   </a>
   
@@ -4376,9 +4376,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-shelf-on-top" class="md-nav__link">
+  <a href="#the-shelf" class="md-nav__link">
     <span class="md-ellipsis">
-      The shelf on top
+      The shelf
     </span>
   </a>
   
@@ -5683,7 +5683,7 @@
   
   
   <span class="md-ellipsis">
-    The six rules the template is built on
+    Extending the template
     
   </span>
   
@@ -5759,9 +5759,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#a-row-is-a-curve-not-a-grid" class="md-nav__link">
+  <a href="#a-row-is-a-spline-you-draw" class="md-nav__link">
     <span class="md-ellipsis">
-      A row is a curve, not a grid
+      A row is a spline you draw
     </span>
   </a>
   
@@ -5777,9 +5777,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-shelf-on-top" class="md-nav__link">
+  <a href="#the-shelf" class="md-nav__link">
     <span class="md-ellipsis">
-      The shelf on top
+      The shelf
     </span>
   </a>
   
@@ -5820,16 +5820,10 @@
 
 
 <h1 id="how-shelves-and-storage-work">How shelves and storage work<a class="headerlink" href="#how-shelves-and-storage-work" title="Permanent link">&para;</a></h1>
-<p>Every place a product can sit uses the same two components: a <strong>storage component</strong> that arbitrates, and one or more <strong>storage rows</strong> that hold things. A gondola, a round display, a fridge and the inside of a cardboard box are all the same machinery with different rows drawn on them.</p>
-<p>This page is the mental model. The pages after it are the recipes.</p>
+<p>Every place a product can sit — a gondola, a round display, a fridge, the inside of a cardboard box — is built from the same two components: <code>BP_StorageComponent</code>, and one or more <code>BP_StorageRow</code>.</p>
 <hr />
-<h2 id="a-row-is-a-curve-not-a-grid">A row is a curve, not a grid<a class="headerlink" href="#a-row-is-a-curve-not-a-grid" title="Permanent link">&para;</a></h2>
-<p><code>BP_StorageRow</code> is a child of <code>SplineComponent</code>. You draw it along the front edge of a shelf in the viewport, and it works out on its own how many units fit.</p>
-<div class="highlight"><pre><span></span><code>along  =  SplineLength / product width
-deep   =  DepthCm      / product depth
-up     =  min( StackMax , ClearanceCm / StackHeightCm )
-</code></pre></div>
-<p>Nothing about the layout is written down anywhere. Change which product goes on the shelf and the row re-slices itself.</p>
+<h2 id="a-row-is-a-spline-you-draw">A row is a spline you draw<a class="headerlink" href="#a-row-is-a-spline-you-draw" title="Permanent link">&para;</a></h2>
+<p><code>BP_StorageRow</code> is a spline component. You draw it along the front edge of a shelf board in the viewport and it works out on its own how many units fit, from the size of whatever product is on it. Nothing about the layout is written down anywhere: change the product and the row re-slices itself.</p>
 <table>
 <thead>
 <tr>
@@ -5848,15 +5842,15 @@ up     =  min( StackMax , ClearanceCm / StackHeightCm )
 </tr>
 </tbody>
 </table>
-<p>The template used to use a rectangular 2D grid here, and it was replaced for one reason: a grid forces the furniture to be a rectangle. With a curve you can build a round display, an L-shaped bin or a slanted magazine rack without touching the component.</p>
-<p><strong>Two rules follow from that, and they are the only two you have to remember:</strong></p>
+<p><strong>Two things to get right, and they are the only two:</strong></p>
 <ol>
-<li><strong>Draw the spline along the front edge of the shelf, left to right, and depth pushes toward the spline's Right vector.</strong> A row drawn backwards fills toward the front of the shelf and the products hang in the air. It is the one trap in the system, and it is obvious the first time you see it in game.</li>
-<li><strong><code>ClearanceCm</code> is a real constraint.</strong> A 34 cm cereal box will not go on a shelf with 35 cm of pitch once you account for the shelf board, but it goes on the top row where there is nothing above it. That is a real shop behaving like a real shop, not a bug.</li>
+<li><strong>Draw the spline along the front edge, left to right.</strong> Depth pushes toward the spline's Right vector. A row drawn backwards fills toward the front of the shelf and the products hang in the air.</li>
+<li><strong><code>ClearanceCm</code> really refuses things.</strong> A 34 cm cereal box will not go on a row with 35 cm of clearance once the shelf board is accounted for, but it goes on the top row where there is nothing above it.</li>
 </ol>
+<p>A row does not have to be straight: <code>BP_Shelf_Round</code> draws its rows as circles.</p>
 <hr />
 <h2 id="the-storage-component">The storage component<a class="headerlink" href="#the-storage-component" title="Permanent link">&para;</a></h2>
-<p><code>BP_StorageComponent</code> is a child of <code>SceneComponent</code>. At <code>BeginPlay</code> it collects every <code>BP_StorageRow</code> on its actor, and from then on it is the thing that answers questions:</p>
+<p><code>BP_StorageComponent</code> collects the rows on its actor and answers the questions the rest of the game asks:</p>
 <table>
 <thead>
 <tr>
@@ -5871,11 +5865,11 @@ up     =  min( StackMax , ClearanceCm / StackHeightCm )
 </tr>
 <tr>
 <td><code>HasUnitOf(Product)</code></td>
-<td>Is there at least one of these on me</td>
+<td>Is there at least one of these here</td>
 </tr>
 <tr>
 <td><code>StockedProducts()</code></td>
-<td>Which products am I actually holding right now</td>
+<td>What is being held right now</td>
 </tr>
 <tr>
 <td><code>AddUnit</code> / <code>RemoveUnit</code></td>
@@ -5883,11 +5877,10 @@ up     =  min( StackMax , ClearanceCm / StackHeightCm )
 </tr>
 </tbody>
 </table>
-<p>It also owns the display. There is one <code>InstancedStaticMeshComponent</code> per product being stored, and one instance per unit. The rows are the single source of truth: <code>RefreshDisplay</code> throws the instances away and rebuilds them from the rows, so there is no parallel list to keep in sync and no way for the visuals to drift from the stock.</p>
-<p>The component knows nothing about products, shelf types or the shop. That is what lets the delivery box reuse it without inheriting anything from a shelf.</p>
+<p>It also draws the units, and it rebuilds that display from the rows whenever the stock changes.</p>
 <hr />
-<h2 id="the-shelf-on-top">The shelf on top<a class="headerlink" href="#the-shelf-on-top" title="Permanent link">&para;</a></h2>
-<p><code>BP_ShelfBase</code> is the actor. It adds four things to the storage component:</p>
+<h2 id="the-shelf">The shelf<a class="headerlink" href="#the-shelf" title="Permanent link">&para;</a></h2>
+<p><code>BP_ShelfBase</code> is the actor. It adds four fields on top of the storage component:</p>
 <table>
 <thead>
 <tr>
@@ -5898,15 +5891,15 @@ up     =  min( StackMax , ClearanceCm / StackHeightCm )
 <tbody>
 <tr>
 <td><code>ShelfMesh</code></td>
-<td>The mesh, applied in the construction script</td>
+<td>The mesh</td>
 </tr>
 <tr>
 <td><code>ShelfType</code></td>
-<td>A <code>DA_ShelfType_*</code>, which is nothing but a list of accepted categories</td>
+<td>A <code>DA_ShelfType_*</code>, a list of accepted categories</td>
 </tr>
 <tr>
 <td><code>InitialProduct</code></td>
-<td>What the shelf is stocked with when the level starts</td>
+<td>What it is stocked with when the level starts</td>
 </tr>
 <tr>
 <td><code>InitialUnits</code></td>
@@ -5914,8 +5907,8 @@ up     =  min( StackMax , ClearanceCm / StackHeightCm )
 </tr>
 </tbody>
 </table>
-<p>The category rule lives on the shelf, not in the storage component. A shelf refuses a product whose <code>Category</code> is not in its <code>ShelfType.AcceptedCategories</code>, and the refusal happens before the unit ever leaves the box.</p>
-<p>Three children ship with the template:</p>
+<p>A shelf refuses a product whose <code>Category</code> is not in its <code>ShelfType.AcceptedCategories</code>, before the unit leaves the box.</p>
+<p>Three ship with the template:</p>
 <table>
 <thead>
 <tr>
@@ -5934,22 +5927,37 @@ up     =  min( StackMax , ClearanceCm / StackHeightCm )
 </tr>
 <tr>
 <td><code>BP_Shelf_FridgeTwoDoor</code></td>
-<td>Ten rows, five levels across two compartments, behind two glass doors</td>
+<td>Ten rows over two compartments, behind two glass doors</td>
 </tr>
 </tbody>
 </table>
+<p>To build your own, see <a href="../make_your_own_shelf/">Build your own shelf</a>.</p>
 <hr />
 <h2 id="filling-and-emptying">Filling and emptying<a class="headerlink" href="#filling-and-emptying" title="Permanent link">&para;</a></h2>
-<p>With a box in your hands, look at a shelf and press <strong>left mouse</strong> to move one unit from the box to the shelf, or <strong>right mouse</strong> to take one back. The unit flies between the two on a short arc.</p>
-<p>That flight is <code>BP_ProductFlight</code>, and it deserves a mention because it is reused everywhere: the scanned item flying into the bag at the checkout, the payment card flying to the terminal. It knows nothing about shops. It takes a mesh, a start point, a <strong>target component</strong> with a local offset, an arc height and a duration, and broadcasts <code>OnArrived</code>.</p>
-<p>Targeting a component rather than a world point matters. The box is in your hands and it moves during the flight, so the unit lands in the box even if you turn around while it is in the air.</p>
-<p>The unit is removed from the source at the click and added to the target on arrival, never both and never neither. One transfer per box can be in the air at a time.</p>
-<p>Bare-handed, <code>PlaceOne</code> and <code>TakeOne</code> do the same thing with no box involved.</p>
+<p>With a box in your hands, look at a shelf:</p>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Left mouse</strong></td>
+<td>Move one unit from the box to the shelf</td>
+</tr>
+<tr>
+<td><strong>Right mouse</strong></td>
+<td>Take one unit back off the shelf</td>
+</tr>
+</tbody>
+</table>
+<p>The unit flies between the two on a short arc. Bare-handed, the same two gestures move one unit at a time with no box involved.</p>
 <hr />
 <h2 id="locking-a-shelf-behind-a-condition">Locking a shelf behind a condition<a class="headerlink" href="#locking-a-shelf-behind-a-condition" title="Permanent link">&para;</a></h2>
-<p><code>BP_ShelfBase.IsAccessible()</code> returns <code>true</code>. Override it on a child and both gestures and both action lines disappear together, because the box asks that one function before it offers to stock or take back.</p>
-<p>The fridge is the shipped example: it overrides <code>IsAccessible</code> to return <code>DoorsOpen</code>, so a closed fridge cannot be stocked from, and the panel next to your box does not offer to.</p>
-<p>A closed fridge still <em>has</em> room and still <em>has</em> stock, so <code>HasRoomFor</code> and <code>HasUnitOf</code> are left alone. Availability and accessibility are two different questions.</p>
+<p>Override <code>IsAccessible()</code> on a child of <code>BP_ShelfBase</code> and return your own state. Both gestures and both prompt lines disappear together while it returns <code>false</code>.</p>
+<p><code>BP_Shelf_FridgeTwoDoor</code> is the shipped example: it returns <code>DoorsOpen</code>, so a fridge with its doors shut cannot be stocked from.</p>
 <hr />
 <p><a href="https://discord.gg/EqHCtq38jy">Join the Discord</a></p>
 

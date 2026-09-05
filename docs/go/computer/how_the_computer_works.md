@@ -1,20 +1,18 @@
 # The office computer
 
-Management does not happen in a menu. It happens on a computer sitting on the desk in the back office, and you walk over to it.
+Management happens on a computer on the desk in the back office, and you walk over to it.
 
-Press `E` and the camera leans in, the crosshair and prompt disappear, whatever you were carrying is put down, and the mouse cursor appears. From there it is a desktop: icons, windows with title bars, a taskbar with the time on it. `Tab` or `E` leans you back out.
+Press `E` and the camera leans in: the crosshair and prompt go away, whatever you were carrying is put down, and the mouse cursor appears. From there it is a desktop — icons, a window with a title bar, a taskbar with the time on it. `Tab` or `E` leans you back out.
 
 ---
 
 ## The desktop
 
-`BP_Computer` is a child of `BP_ScreenBase` and adds almost nothing. It inherits the interactable, the reading pose, the focus and the exit key.
+`BP_Computer` holds one thing you edit: `Apps`, an array of `BP_AppDataAsset` in its Details panel. It draws an icon for each entry, in the order of the array, and opens the widget class the asset names.
 
-What it does own is `Apps`, an array of `BP_AppDataAsset` in its Details panel. The computer knows nothing about any app: it reads that array, draws an icon for each entry, and instantiates the widget class the asset names.
+**To add or remove an app on a computer**, edit that array. See [Write your own app](add_an_app.md).
 
-The order of the array is the order on the desktop. There is no sort field, because nothing would read one.
-
-The chrome is three bands on a 1920 × 1080 canvas:
+The chrome is three bands:
 
 | Band | Height | Contents |
 |---|---|---|
@@ -22,24 +20,18 @@ The chrome is three bands on a 1920 × 1080 canvas:
 | App area | 960 | Whatever the app draws |
 | Taskbar | 56 | Time and day |
 
-The title bar takes the app's own colour, and that is the only accent anywhere in the interface. Everything else stays on the two colours the rest of the game uses. See [Colours and fonts](../ui/colours_and_fonts.md).
-
-The close button closes the **app**, not the computer. You leave the computer by stepping back.
+The title bar takes the app's own colour, and that is the only accent in the interface. The close button closes the **app**, not the computer — you leave the computer by stepping back.
 
 ---
 
 ## The mouse
 
-It is the real mouse cursor, not a drawn one. The controller switches to **Game and UI** input mode with the cursor shown, and a `WidgetInteractionComponent` aimed from the cursor position does the pointing.
+It is the real cursor, so hover, click, scroll and drag all behave as you expect, with nothing wired.
 
-Hover, click, scroll and drag are all the engine's own, which is why scroll boxes and buttons behave the way you expect without anything being wired.
+Two things to copy if you build a screen of your own, both checkboxes, both already set on the shipped screens:
 
-Two consequences worth knowing if you build your own screen:
-
-- **Buttons on a world screen have to be non-focusable.** Otherwise `Tab` walks a focus rectangle around them instead of leaving the screen.
+- **Buttons on a world screen must be non-focusable**, or `Tab` walks a focus rectangle around them instead of leaving the screen.
 - **The widget component's window must not be focusable either**, or it swallows keyboard input.
-
-Both are checkboxes, and both are already set on the shipped screens.
 
 ---
 
@@ -54,60 +46,15 @@ Both are checkboxes, and both are already set on the shipped screens.
 | Ads | Start and stop ad campaigns |
 | Upgrades | See and buy unlocks |
 
-Five of them filter their list through `IsUnlocked`, so a product, a structure, a candidate or a campaign that is locked behind progression is simply not there. The desktop filters its own icons the same way, which is why the Ads app does not exist until day 3.
+Five of them hide what is still locked behind progression, and the desktop hides its own icons the same way, which is why the Ads app does not appear until day 3. See [Unlocks](../progress/unlocks.md).
 
 ---
 
-## How an app talks to the game
+## The reading pose
 
-Two entry points, and no polling.
+`ReadPose` is a scene component on `BP_ScreenBase`: it is where the camera goes when you lean in, so you can nudge the reading distance by dragging it in the viewport. The field of view drops by 30 while reading.
 
-| Function | When it runs |
-|---|---|
-| `BindApp` | When the app is opened. It rebuilds the whole list |
-| `RefreshBalance` | When your balance changes |
-
-`BindApp` clears the rows and refills them, which is what makes reopening an app show the truth after you bought something. `RefreshBalance` only updates the affordability state of the rows that are already there.
-
-Keeping them separate matters: an early version rebuilt the entire list on every balance change, so buying something destroyed and recreated the row you had just clicked.
-
-The balance itself arrives through the store manager's `OnBalanceChanged` dispatcher. The clock is polled once a second, because the clock is the one thing nothing broadcasts per minute.
-
----
-
-## Why the screens are sharp
-
-Two numbers have to agree for a world screen to look right, and they are easy to get wrong.
-
-**The render target must be at least as big as the screen's footprint in pixels.** A widget drawn at 1024 across but covering 1411 pixels of your monitor is being magnified, and magnified UI looks soft no matter what anti-aliasing you use.
-
-The rule:
-
-```
-DrawSize  ≈  the footprint in pixels when you are leaning in
-Scale     =  physical width in cm  /  DrawSize
-```
-
-**Lay the widget out at a design size, then scale it.** The shipped screens use a `DesignScale` scale box wrapping a `DesignSize` sized box. Without that, changing `DrawSize` re-flows the whole layout instead of just re-rendering it.
-
-Any new screen should start with the same pair.
-
----
-
-## Reading pose
-
-`ReadPose` is a scene component on `BP_ScreenBase`, and it is where the camera goes when you lean in. It is a component rather than a computed value so you can nudge the reading distance by dragging it in the viewport.
-
-Its distance is picked so the screen fills a sensible part of the frame. The field of view drops by 30 while reading, which is enough to feel like leaning in without reading as a camera move.
-
-Leaning in also does four things you will want if you build a screen of your own, and all four are in the base class:
-
-- Hides the crosshair and the interaction prompt.
-- Releases whatever you are carrying.
-- Freezes movement and look through the controller's ignore counters.
-- Shows the mouse cursor.
-
-Stepping back undoes all four, and there is exactly one exit path, so a third way out would have to go through it.
+Leaning in also hides the crosshair and the prompt, releases whatever you are carrying, freezes movement and look, and shows the cursor. Stepping back undoes all four. Any screen you build on `BP_ScreenBase` gets that for free — see [Screens in the world](../ui/diegetic_screens.md).
 
 ---
 

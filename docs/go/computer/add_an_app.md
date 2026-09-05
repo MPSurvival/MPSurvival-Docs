@@ -37,11 +37,7 @@ Subclass the Data Asset rather than adding fields to the base. `BP_MarketAppData
 
 ## Getting at the game
 
-Every app resolves what it needs at the top of `BindApp`, from the game state:
-
-```
-Get Game State  →  Cast To BP_StoreGameState  →  Get Component By Class
-```
+Every app resolves what it needs at the top of `BindApp`: get the game state, cast it to `BP_StoreGameState`, and take the component you need off it.
 
 That gives you `BP_StoreManager` for money and the clock, `BP_ProgressionManager` for unlock filtering, `BP_EconomyManager` for wholesale prices, `BP_StaffManager` for the roster.
 
@@ -51,13 +47,7 @@ Money moves through `BP_StoreManager.AddTransaction`, with a reason from `E_Tran
 
 ## Hiding entries behind progression
 
-If your app lists things that should be unlocked over time, filter them:
-
-```
-For Each item
-    Branch  →  ProgressionManager.IsUnlocked(item)
-        True  →  make the row
-```
+If your app lists things that should be unlocked over time, loop over your list and make the row only when `IsUnlocked` on `BP_ProgressionManager` returns true for that asset.
 
 Filter **inside** the loop with a `Branch`. A function returning a filtered array does not compile here: Blueprint arrays are invariant, and an array of `PrimaryDataAsset` will not connect to a loop typed to your own asset class.
 

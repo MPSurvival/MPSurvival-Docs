@@ -63,7 +63,7 @@ A shelf type has one field, `AcceptedCategories`.
 
 - **Put the pivot on the floor**, centred in the footprint. Placement snaps the pivot to the grid.
 - **Give it a `UCX_` collision hull.** The automatic hull swallows the shelf openings, and customers then refuse to approach it.
-- **Name the material slots semantically** (`M_Wood`, `M_Metal`, `M_SteelPainted`): the props master material is assigned by slot name. See [The mesh kit](../look/mesh_kit.md).
+- **Name the material slots semantically** (`M_Wood`, `M_Metal`, `M_SteelPainted`): the props master material is assigned by slot name.
 
 ---
 

@@ -15,11 +15,6 @@ When you add a widget, the question that places it is **whose information is thi
 
 ## The status panel
 
-```
-       DAY 1 · MON        8:00 AM
-  ◯    $1,240.00
-```
-
 | Element | Detail |
 |---|---|
 | Balance | Thousands separator, two decimals, full opacity |

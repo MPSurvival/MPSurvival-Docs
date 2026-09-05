@@ -31,14 +31,9 @@ The drawer is open exactly when you owe change.
 
 ## The panel on the drawer
 
-While the drawer is open, a readout sits on it:
+While the drawer is open, a readout sits on it: what you received, the total, and the change due, with `GIVEN` underneath.
 
-```
-RECEIVED  −  TOTAL   =   CHANGE DUE
-                GIVEN
-```
-
-`GIVEN` is what you have put on the counter so far, red while it does not add up and green when it does, with an arrow saying whether to add more or take some back. It does not show you the remainder — the subtraction is yours to do.
+`GIVEN` is what you have put on the counter so far. It is red while it does not add up and green when it does, with an arrow saying whether to add more or take some back. It does not show you the remainder — the subtraction is yours to do.
 
 Give too much back and you are down by the difference. Give too little and you keep it.
 

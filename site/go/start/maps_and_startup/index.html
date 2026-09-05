@@ -3931,10 +3931,6 @@
       
         
       
-        
-      
-        
-      
     
     
     
@@ -4119,9 +4115,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#the-startup-chain" class="md-nav__link">
+  <a href="#the-game-modes" class="md-nav__link">
     <span class="md-ellipsis">
-      The startup chain
+      The game modes
     </span>
   </a>
   
@@ -5479,243 +5475,6 @@
 
               
             
-              
-                
-  
-  
-  
-  
-    
-    
-      
-        
-      
-        
-      
-        
-      
-    
-    
-    
-      
-      
-        
-          
-          
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_13" >
-        
-          
-          <label class="md-nav__link" for="__nav_5_13" id="__nav_5_13_label" tabindex="">
-            
-  
-  
-  <span class="md-ellipsis">
-    Look and sound
-    
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_13_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5_13">
-            <span class="md-nav__icon md-icon"></span>
-            Look and sound
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../look/surfaces_and_sound/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Surfaces, footsteps and sound
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../look/day_night_cycle/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    The day/night cycle
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../look/mesh_kit/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    The mesh kit
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-      
-        
-      
-        
-      
-    
-    
-    
-      
-      
-        
-          
-          
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_14" >
-        
-          
-          <label class="md-nav__link" for="__nav_5_14" id="__nav_5_14_label" tabindex="">
-            
-  
-  
-  <span class="md-ellipsis">
-    Under the hood
-    
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_14_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5_14">
-            <span class="md-nav__icon md-icon"></span>
-            Under the hood
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../architecture/the_rules/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Extending the template
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../architecture/naming_and_folders/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Folders and naming
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
           </ul>
         </nav>
       
@@ -5750,9 +5509,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#the-startup-chain" class="md-nav__link">
+  <a href="#the-game-modes" class="md-nav__link">
     <span class="md-ellipsis">
-      The startup chain
+      The game modes
     </span>
   </a>
   
@@ -5827,11 +5586,7 @@
 </table>
 <p><code>L_ExampleMap</code> is the project's editor startup map, so opening the project drops you straight in the shop.</p>
 <hr />
-<h2 id="the-startup-chain">The startup chain<a class="headerlink" href="#the-startup-chain" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>L_MainMenu  →  BP_MenuGameMode  →  BP_MenuPlayerController
-                                     ↓  NEW GAME / LOAD
-L_ExampleMap  →  BP_StoreGameMode  →  BP_StorePlayerController  →  BP_StoreCharacter
-</code></pre></div>
+<h2 id="the-game-modes">The game modes<a class="headerlink" href="#the-game-modes" title="Permanent link">&para;</a></h2>
 <p><code>BP_StoreGameMode</code> is the project's default game mode, set in <strong>Project Settings → Maps &amp; Modes</strong>. <code>L_MainMenu</code> overrides it with <code>BP_MenuGameMode</code> in its World Settings.</p>
 <p>The level the menu opens is not written into a graph. It is <code>GameLevel</code>, a soft level reference on <code>BP_MenuPlayerController</code> in the <code>Settings|Menu</code> category. Point it at your own level and the whole menu follows.</p>
 <hr />

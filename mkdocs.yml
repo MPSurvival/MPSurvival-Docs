@@ -183,13 +183,6 @@ nav:
           - Screens in the world: go/ui/diegetic_screens.md
           - Menus, pause and saving: go/ui/menus_and_saving.md
           - Colours, fonts and reskinning: go/ui/colours_and_fonts.md
-      - Look and sound:
-          - Surfaces, footsteps and sound: go/look/surfaces_and_sound.md
-          - The day/night cycle: go/look/day_night_cycle.md
-          - The mesh kit: go/look/mesh_kit.md
-      - Under the hood:
-          - Extending the template: go/architecture/the_rules.md
-          - Folders and naming: go/architecture/naming_and_folders.md
 
 markdown_extensions:
   - toc:

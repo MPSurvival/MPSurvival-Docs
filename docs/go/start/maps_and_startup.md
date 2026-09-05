@@ -12,13 +12,7 @@ The template ships three levels. They do different jobs, and only one of them is
 
 ---
 
-## The startup chain
-
-```
-L_MainMenu  →  BP_MenuGameMode  →  BP_MenuPlayerController
-                                     ↓  NEW GAME / LOAD
-L_ExampleMap  →  BP_StoreGameMode  →  BP_StorePlayerController  →  BP_StoreCharacter
-```
+## The game modes
 
 `BP_StoreGameMode` is the project's default game mode, set in **Project Settings → Maps & Modes**. `L_MainMenu` overrides it with `BP_MenuGameMode` in its World Settings.
 

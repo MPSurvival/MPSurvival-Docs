@@ -4,11 +4,7 @@
 
 ## Changing the balance
 
-One function moves money, on `BP_StoreManager`:
-
-```
-AddTransaction(Amount, Reason, ProductId)
-```
+One function moves money: `AddTransaction(Amount, Reason, ProductId)` on `BP_StoreManager`.
 
 Money in is positive, money out is negative. Every call is written to the transaction journal with a reason from `E_TransactionReason`, and the daily report is read back from that journal.
 

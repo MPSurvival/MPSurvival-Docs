@@ -6,12 +6,7 @@ A customer walks in, finds a shelf that has something they want, browses it, tak
 
 ## The states
 
-`E_CustomerState` drives the loop:
-
-```
-Entering → Browsing → Picking → Queuing → WaitingForCheckout → PayingCash / PayingCard → Leaving
-                                                                                     ↘ LeavingAngry
-```
+`E_CustomerState` drives the loop, in this order:
 
 | State | What is happening |
 |---|---|

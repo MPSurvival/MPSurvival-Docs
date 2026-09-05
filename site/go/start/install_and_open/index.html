@@ -3931,10 +3931,6 @@
       
         
       
-        
-      
-        
-      
     
     
     
@@ -5479,243 +5475,6 @@
 
               
             
-              
-                
-  
-  
-  
-  
-    
-    
-      
-        
-      
-        
-      
-        
-      
-    
-    
-    
-      
-      
-        
-          
-          
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_13" >
-        
-          
-          <label class="md-nav__link" for="__nav_5_13" id="__nav_5_13_label" tabindex="">
-            
-  
-  
-  <span class="md-ellipsis">
-    Look and sound
-    
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_13_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5_13">
-            <span class="md-nav__icon md-icon"></span>
-            Look and sound
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../look/surfaces_and_sound/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Surfaces, footsteps and sound
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../look/day_night_cycle/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    The day/night cycle
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../look/mesh_kit/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    The mesh kit
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-      
-        
-      
-        
-      
-    
-    
-    
-      
-      
-        
-          
-          
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_14" >
-        
-          
-          <label class="md-nav__link" for="__nav_5_14" id="__nav_5_14_label" tabindex="">
-            
-  
-  
-  <span class="md-ellipsis">
-    Under the hood
-    
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_14_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5_14">
-            <span class="md-nav__icon md-icon"></span>
-            Under the hood
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../architecture/the_rules/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Extending the template
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../architecture/naming_and_folders/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Folders and naming
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
           </ul>
         </nav>
       
@@ -5812,30 +5571,66 @@
 <p>The only engine plugin the template leans on is <strong>Cable Component</strong>, which draws the coiled cord between a checkout and its barcode scanner. It ships enabled with the engine, so there is nothing to turn on.</p>
 <hr />
 <h2 id="the-folder-you-get">The folder you get<a class="headerlink" href="#the-folder-you-get" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>Content/GrandOpening/
-├── Blueprints/
-│   ├── PlayerCharacter/   the character, the controller, the game mode
-│   ├── ActorComponents/   every component and every manager
-│   ├── AI/                the customer and the employee, with their trees
-│   ├── Environments/      the furniture you place in the world
-│   ├── DataAssets/        one folder per family, class and instances together
-│   ├── Widgets/           Gameplay/ World/ Menu/
-│   ├── Menu/              the main menu map&#39;s mode, controller and camera
-│   ├── Enumerations/      the E_ enums
-│   ├── Structures/        the S_ structs
-│   ├── Interfaces/        the BPI_ interfaces
-│   ├── Functions/         the BFL_ function libraries
-│   └── Misc/              game instance, game state, save games
-├── Meshes/
-├── Materials/
-├── Textures/
-├── Audios/
-├── Inputs/
-├── DataTables/
-├── Maps/
-└── Demo/
-</code></pre></div>
-<p><code>Blueprints/Structures/</code> holds the <strong>structs</strong>, not the store furniture. Furniture lives in <code>Blueprints/Environments/</code>, sorted by family: <code>Boxes/</code>, <code>Checkout/</code>, <code>Shelves/</code>, <code>Screens/</code>, <code>Lights/</code>, <code>Openings/</code>, <code>Misc/</code>. The full naming table is in <a href="../../architecture/naming_and_folders/">Folders and naming</a>.</p>
+<table>
+<thead>
+<tr>
+<th>Folder</th>
+<th>What is in it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Blueprints/PlayerCharacter/</code></td>
+<td>The character, the controller, the game mode</td>
+</tr>
+<tr>
+<td><code>Blueprints/ActorComponents/</code></td>
+<td>Every component and every manager</td>
+</tr>
+<tr>
+<td><code>Blueprints/AI/</code></td>
+<td>The customer and the employee, with their trees</td>
+</tr>
+<tr>
+<td><code>Blueprints/Environments/</code></td>
+<td>The furniture placed in the world, one folder per family</td>
+</tr>
+<tr>
+<td><code>Blueprints/DataAssets/</code></td>
+<td>One folder per family: the class, and its <code>DA_</code> instances in <code>Childs/</code></td>
+</tr>
+<tr>
+<td><code>Blueprints/Widgets/</code></td>
+<td><code>Gameplay/</code>, <code>World/</code> and <code>Menu/</code></td>
+</tr>
+<tr>
+<td><code>Blueprints/Menu/</code></td>
+<td>The main menu map's mode, controller and camera</td>
+</tr>
+<tr>
+<td><code>Blueprints/Enumerations/</code> <code>Structures/</code> <code>Interfaces/</code> <code>Functions/</code></td>
+<td>The <code>E_</code>, <code>S_</code>, <code>BPI_</code> and <code>BFL_</code> assets</td>
+</tr>
+<tr>
+<td><code>Blueprints/Misc/</code></td>
+<td>Game instance, game state, save games</td>
+</tr>
+<tr>
+<td><code>Meshes/</code> <code>Materials/</code> <code>Textures/</code> <code>Audios/</code></td>
+<td>The art and the sound</td>
+</tr>
+<tr>
+<td><code>Inputs/</code></td>
+<td><code>IMC_Gameplay</code> and the <code>IA_</code> actions</td>
+</tr>
+<tr>
+<td><code>Maps/</code></td>
+<td>The three levels</td>
+</tr>
+</tbody>
+</table>
+<p><code>Blueprints/Structures/</code> holds the <strong>structs</strong>, not the store furniture. Furniture lives in <code>Blueprints/Environments/</code>, sorted by family: <code>Boxes/</code>, <code>Checkout/</code>, <code>Shelves/</code>, <code>Screens/</code>, <code>Lights/</code>, <code>Openings/</code>, <code>Misc/</code>.</p>
+<p>A Data Asset class is <code>BP_XxxDataAsset</code> and its instances are <code>DA_Xxx</code>, in the <code>Childs/</code> folder beside it. Widgets are <code>BP_*Widget</code>.</p>
 <hr />
 <h2 id="press-play-what-you-should-see">Press Play, what you should see<a class="headerlink" href="#press-play-what-you-should-see" title="Permanent link">&para;</a></h2>
 <p>The project opens on <code>L_ExampleMap</code>, the playable store. Press Play and you spawn as <code>BP_StoreCharacter</code> on the shop floor, with the HUD in the top right corner. You can walk, sprint, crouch, pick up boxes, fill shelves, use the office computer, serve a customer and close the store for the day.</p>
@@ -5865,7 +5660,7 @@
 </tr>
 </tbody>
 </table>
-<p>The surface names matter because footstep sounds are chosen from them. See <a href="../../look/surfaces_and_sound/">Surfaces and sound</a>.</p>
+<p>The surface names matter because footstep sounds are chosen from them.</p>
 <p>You also need one custom trace channel, <code>StructureFoundation</code>, set to <strong>Ignore</strong> by default. That is the channel the build mode traces against to find a floor, a wall or a ceiling. Without it nothing can be placed. See <a href="../../build/how_placement_works/">How placement works</a>.</p>
 <hr />
 <p><a href="https://discord.gg/EqHCtq38jy">Join the Discord</a></p>

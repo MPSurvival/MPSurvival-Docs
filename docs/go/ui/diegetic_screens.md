@@ -41,14 +41,7 @@ There is a matching `BeginRead(Reader)` on the actor, called when someone leans 
 
 ## Sizing the display
 
-Do this with numbers, not by eye — it is what decides whether the screen looks sharp or soft.
-
-```
-DrawSize  ≈  how many screen pixels the panel covers when you lean in
-Scale     =  physical width in cm  /  DrawSize
-```
-
-A widget rendered at 1024 across but covering 1411 pixels on the monitor is being magnified, and no anti-aliasing hides that.
+Set `DrawSize` to how many screen pixels the panel covers when you lean in, and `Scale` to the physical width in centimetres divided by that `DrawSize`. A widget rendered at 1024 across but covering 1411 pixels on the monitor is magnified, and no anti-aliasing hides that.
 
 Then lay the widget out at a fixed design size inside a scale box, so changing `DrawSize` re-renders instead of re-flowing your layout.
 

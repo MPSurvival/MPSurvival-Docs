@@ -28,7 +28,6 @@ Almost everything you will want to change is a **Data Asset** or a field in the 
 | Change a key | [The controls](start/controls.md) |
 | Change the colours and fonts | [Colours, fonts and reskinning](ui/colours_and_fonts.md) |
 | Add a job employees can do | [How employees work](staff/how_employees_work.md) |
-| Add a footstep surface | [Surfaces, footsteps and sound](look/surfaces_and_sound.md) |
 
 ---
 
@@ -57,8 +56,6 @@ If you have just downloaded the template:
 | [The office computer](computer/how_the_computer_works.md) | The desktop, the six apps, and writing an app of your own |
 | [Advertising and progression](progress/advertising.md) | Campaigns, sidewalk panels, and the unlock catalogue |
 | [Interface, menus and saving](ui/hud_and_prompts.md) | The HUD, the interaction prompt, world screens, the menus, the pause and the save slots |
-| [Look and sound](look/surfaces_and_sound.md) | Physical surfaces, footsteps, the audio mix, the day/night cycle and the mesh kit |
-| [Under the hood](architecture/the_rules.md) | The six rules to follow when you extend it, and where every asset lives |
 
 ---
 

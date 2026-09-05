@@ -138,6 +138,59 @@ nav:
           - Put your own logo, frames and filters in photo mode: tlt/extras/photo_mode_branding.md
           - The developer menu: tlt/extras/developer_menu.md
 
+  - Grand Opening:
+      - Overview: go/index.md
+      - Getting started:
+          - Install and open the project: go/start/install_and_open.md
+          - The three maps, and how a game starts: go/start/maps_and_startup.md
+          - The controls: go/start/controls.md
+      - The store day:
+          - How a day works: go/store/how_a_day_works.md
+          - Money and the store rating: go/store/money_and_rating.md
+          - Rent, tax and the wholesale market: go/store/economy.md
+      - Products and shelves:
+          - How shelves and storage work: go/stock/how_storage_works.md
+          - Add a product: go/stock/add_a_product.md
+          - Build your own shelf: go/stock/make_your_own_shelf.md
+      - Deliveries and the back room:
+          - From an order to a box on the floor: go/delivery/orders_and_boxes.md
+          - Carrying, placing and throwing: go/delivery/carrying.md
+          - The back room rack: go/delivery/storage_rack.md
+          - Add a box size: go/delivery/add_a_box_size.md
+      - The checkout:
+          - How the checkout works: go/checkout/how_checkout_works.md
+          - Cash, change and the card terminal: go/checkout/payment_and_change.md
+          - Put a checkout in your level: go/checkout/place_a_checkout.md
+      - Customers:
+          - How a customer thinks: go/customers/how_a_customer_thinks.md
+          - Add a customer archetype: go/customers/add_an_archetype.md
+          - Traffic, and when a customer is born: go/customers/traffic_and_spawning.md
+      - Employees:
+          - How employees work: go/staff/how_employees_work.md
+          - Add a candidate: go/staff/add_a_candidate.md
+      - Building the store:
+          - How placement works: go/build/how_placement_works.md
+          - Add a placeable structure: go/build/add_a_structure.md
+          - Zones, and where things are allowed to go: go/build/zones.md
+      - The office computer:
+          - How the computer works: go/computer/how_the_computer_works.md
+          - Write your own app: go/computer/add_an_app.md
+      - Advertising and progression:
+          - Ad campaigns and sidewalk panels: go/progress/advertising.md
+          - Unlocks: go/progress/unlocks.md
+      - Interface, menus and saving:
+          - The HUD and the interaction prompt: go/ui/hud_and_prompts.md
+          - Screens in the world: go/ui/diegetic_screens.md
+          - Menus, pause and saving: go/ui/menus_and_saving.md
+          - Colours, fonts and reskinning: go/ui/colours_and_fonts.md
+      - Look and sound:
+          - Surfaces, footsteps and sound: go/look/surfaces_and_sound.md
+          - The day/night cycle: go/look/day_night_cycle.md
+          - The mesh kit: go/look/mesh_kit.md
+      - Under the hood:
+          - The six rules the template is built on: go/architecture/the_rules.md
+          - Folders and naming: go/architecture/naming_and_folders.md
+
 markdown_extensions:
   - toc:
       permalink: true

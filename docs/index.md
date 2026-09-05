@@ -23,6 +23,11 @@ A third person survival action template. Locomotion and traversal, guns and mele
 
 [👉 Open The Last Template docs](tlt/index.md)
 
+### 🛒 [Grand Opening](go/index.md)
+A first person store management template. Order stock from the office computer, carry the boxes in, fill the shelves, serve customers at the till and count their change by hand. Employees, deliveries, a wholesale market, ad campaigns, build mode and multi-slot saving. 100% Blueprint, and the low poly mesh kit is included.
+
+[👉 Open the Grand Opening docs](go/index.md)
+
 <!-- Add new assets here as they are released. Duplicate the block above and point it to the new asset's index page. -->
 
 ---

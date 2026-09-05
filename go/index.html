@@ -5594,7 +5594,7 @@
   
   
   <span class="md-ellipsis">
-    The six rules the template is built on
+    Extending the template
     
   </span>
   
@@ -5670,6 +5670,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#how-do-i" class="md-nav__link">
+    <span class="md-ellipsis">
+      How do I...
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#where-to-start" class="md-nav__link">
     <span class="md-ellipsis">
       Where to start
@@ -5688,9 +5697,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#what-this-template-does-not-do" class="md-nav__link">
+  <a href="#how-it-is-played" class="md-nav__link">
     <span class="md-ellipsis">
-      What this template does not do
+      How it is played
     </span>
   </a>
   
@@ -5716,7 +5725,79 @@
 <p>Welcome to the documentation for <strong>Grand Opening</strong>, a first person store management template for Unreal Engine.</p>
 <p>You own a small shop. You order stock from a computer in the back office, the boxes arrive on the delivery bay, you carry them to the shelves and fill them one unit at a time. Customers come in, pick what they want, queue at your till, and you scan their items, take their money and count their change back by hand. At the end of the day you close the sign, read the report, and start again with whatever you made.</p>
 <p>Everything in that loop is <strong>single player</strong> and built entirely with Blueprints.</p>
-<p>The idea behind the project is the same one behind every page here: the thing you want to change is almost always a <strong>Data Asset</strong> or a field in the <strong>Details panel</strong>, not a graph. A new product, a new customer type, a new piece of furniture, a new employee, a new ad campaign, a new app on the office computer. Each one is an asset you fill in.</p>
+<p>Almost everything you will want to change is a <strong>Data Asset</strong> or a field in the <strong>Details panel</strong>, not a graph.</p>
+<hr />
+<h2 id="how-do-i">How do I...<a class="headerlink" href="#how-do-i" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>I want to</th>
+<th>Page</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Add a product to the shop</td>
+<td><a href="stock/add_a_product/">Add a product</a></td>
+</tr>
+<tr>
+<td>Build a shelf of my own shape</td>
+<td><a href="stock/make_your_own_shelf/">Build your own shelf</a></td>
+</tr>
+<tr>
+<td>Add furniture the player can buy and place</td>
+<td><a href="build/add_a_structure/">Add a placeable structure</a></td>
+</tr>
+<tr>
+<td>Add a new kind of customer</td>
+<td><a href="customers/add_an_archetype/">Add a customer archetype</a></td>
+</tr>
+<tr>
+<td>Add someone to hire</td>
+<td><a href="staff/add_a_candidate/">Add a candidate</a></td>
+</tr>
+<tr>
+<td>Add an ad campaign</td>
+<td><a href="progress/advertising/">Ad campaigns</a></td>
+</tr>
+<tr>
+<td>Gate something behind progress</td>
+<td><a href="progress/unlocks/">Unlocks</a></td>
+</tr>
+<tr>
+<td>Write an app for the office computer</td>
+<td><a href="computer/add_an_app/">Write your own app</a></td>
+</tr>
+<tr>
+<td>Add a box size</td>
+<td><a href="delivery/add_a_box_size/">Add a box size</a></td>
+</tr>
+<tr>
+<td>Put a checkout in my own level</td>
+<td><a href="checkout/place_a_checkout/">Put a checkout in your level</a></td>
+</tr>
+<tr>
+<td>Build my own store level</td>
+<td><a href="start/maps_and_startup/">The three maps, and how a game starts</a></td>
+</tr>
+<tr>
+<td>Change a key</td>
+<td><a href="start/controls/">The controls</a></td>
+</tr>
+<tr>
+<td>Change the colours and fonts</td>
+<td><a href="ui/colours_and_fonts/">Colours, fonts and reskinning</a></td>
+</tr>
+<tr>
+<td>Add a job employees can do</td>
+<td><a href="staff/how_employees_work/">How employees work</a></td>
+</tr>
+<tr>
+<td>Add a footstep surface</td>
+<td><a href="look/surfaces_and_sound/">Surfaces, footsteps and sound</a></td>
+</tr>
+</tbody>
+</table>
 <hr />
 <h2 id="where-to-start">Where to start<a class="headerlink" href="#where-to-start" title="Permanent link">&para;</a></h2>
 <p>If you have just downloaded the template:</p>
@@ -5725,7 +5806,6 @@
 <li><a href="start/maps_and_startup/">The three maps, and how a game starts</a></li>
 <li><a href="start/controls/">The controls</a></li>
 </ol>
-<p>After that, go straight to the system you care about. Every chapter opens with a page that explains how the system is put together, and the pages after it each answer one question, such as "how do I add a product" or "how do I make my own shelf".</p>
 <hr />
 <h2 id="the-chapters">The chapters<a class="headerlink" href="#the-chapters" title="Permanent link">&para;</a></h2>
 <table>
@@ -5770,7 +5850,7 @@
 </tr>
 <tr>
 <td><a href="computer/how_the_computer_works/">The office computer</a></td>
-<td>The diegetic desktop, the six apps, and writing an app of your own</td>
+<td>The desktop, the six apps, and writing an app of your own</td>
 </tr>
 <tr>
 <td><a href="progress/advertising/">Advertising and progression</a></td>
@@ -5786,19 +5866,16 @@
 </tr>
 <tr>
 <td><a href="architecture/the_rules/">Under the hood</a></td>
-<td>The six ownership rules the whole template is built on, and where every asset lives</td>
+<td>The six rules to follow when you extend it, and where every asset lives</td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h2 id="what-this-template-does-not-do">What this template does not do<a class="headerlink" href="#what-this-template-does-not-do" title="Permanent link">&para;</a></h2>
-<p>Said here so you find out now rather than three hours in.</p>
+<h2 id="how-it-is-played">How it is played<a class="headerlink" href="#how-it-is-played" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>No multiplayer.</strong> Nothing in the project is replicated, on purpose. The co-op version is a separate product.</li>
-<li><strong>No options screen and no key rebinding.</strong> The keys are the ones in <code>IMC_Gameplay</code>.</li>
-<li><strong>No shipped translation.</strong> Every displayed string is a <code>Text</code>, so you can translate it yourself, but there is no localisation pipeline in the box.</li>
-<li><strong>No gamepad support.</strong> The game is played with a keyboard and a mouse.</li>
-<li><strong>No discounts, no shoplifting, no store expansion.</strong> These were considered and dropped.</li>
+<li><strong>Single player</strong>, with a keyboard and a mouse.</li>
+<li><strong>Every displayed string is a <code>Text</code></strong>, so the widgets are yours to translate.</li>
+<li><strong>The keys live in <code>IMC_Gameplay</code>.</strong> Dragging a mapping onto another key takes about five seconds.</li>
 </ul>
 <hr />
 <p><a href="https://discord.gg/EqHCtq38jy">Join the Discord</a></p>

@@ -4227,9 +4227,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#the-clock" class="md-nav__link">
+  <a href="#the-settings" class="md-nav__link">
     <span class="md-ellipsis">
-      The clock
+      The settings
     </span>
   </a>
   
@@ -4245,9 +4245,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#what-gets-reset-between-two-days" class="md-nav__link">
+  <a href="#what-resets-between-two-days" class="md-nav__link">
     <span class="md-ellipsis">
-      What gets reset between two days
+      What resets between two days
     </span>
   </a>
   
@@ -5683,7 +5683,7 @@
   
   
   <span class="md-ellipsis">
-    The six rules the template is built on
+    Extending the template
     
   </span>
   
@@ -5759,9 +5759,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#the-clock" class="md-nav__link">
+  <a href="#the-settings" class="md-nav__link">
     <span class="md-ellipsis">
-      The clock
+      The settings
     </span>
   </a>
   
@@ -5777,9 +5777,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#what-gets-reset-between-two-days" class="md-nav__link">
+  <a href="#what-resets-between-two-days" class="md-nav__link">
     <span class="md-ellipsis">
-      What gets reset between two days
+      What resets between two days
     </span>
   </a>
   
@@ -5820,18 +5820,16 @@
 
 
 <h1 id="how-a-day-works">How a day works<a class="headerlink" href="#how-a-day-works" title="Permanent link">&para;</a></h1>
-<p>A day in Grand Opening is a segment, not a loop. The clock starts at opening time, runs forward, and then <strong>stops</strong>. It never rolls over on its own. The next day only starts when you decide it does.</p>
-<p>That decision is the OPEN sign by the door.</p>
+<p>The clock starts at opening time, runs forward and then freezes. It never rolls over on its own: the next day starts when <strong>you</strong> close the store, on the OPEN sign by the front door.</p>
 <hr />
-<h2 id="the-clock">The clock<a class="headerlink" href="#the-clock" title="Permanent link">&para;</a></h2>
-<p><code>BP_StoreManager</code> owns the day number and the hour, and nothing else in the project moves time forward. It broadcasts <code>OnHourChanged</code> every game hour and <code>OnDayEnded</code> when a day is closed, and everything that cares subscribes to those two.</p>
-<p>Its settings live in <code>DA_StoreConfig</code>:</p>
+<h2 id="the-settings">The settings<a class="headerlink" href="#the-settings" title="Permanent link">&para;</a></h2>
+<p>One asset holds the whole day: <code>Content/GrandOpening/Blueprints/DataAssets/Store/DA_StoreConfig</code>.</p>
 <table>
 <thead>
 <tr>
 <th>Field</th>
 <th>What it does</th>
-<th>Shipped default</th>
+<th>Shipped</th>
 </tr>
 </thead>
 <tbody>
@@ -5862,53 +5860,49 @@
 </tr>
 <tr>
 <td><code>RatingInertia</code></td>
-<td>How fast the rating chases the day's satisfaction</td>
+<td>How fast the rating follows the day's satisfaction. <code>0</code> never moves, <code>1</code> snaps</td>
 <td><code>0.15</code></td>
 </tr>
 </tbody>
 </table>
-<p>At the shipped values a day is <strong>14 real minutes</strong> long. The sun sets at 18:00, so the last four hours are played at dusk and then at night with the street lamps on. See <a href="../../look/day_night_cycle/">The day/night cycle</a>.</p>
-<p><code>ClockStopHour</code> is not a closing time. Nothing shuts at 22:00, customers keep coming, sales keep happening. The clock simply stops counting, which gives you as long as you want to finish serving the queue, tidy up and walk to the sign.</p>
+<p>At the shipped values a day lasts <strong>14 real minutes</strong>. For longer days, raise <code>HourDurationSeconds</code>. For more hours in a day, raise <code>ClockStopHour</code>.</p>
+<p><code>ClockStopHour</code> is not a closing time. Nothing shuts at 22:00, customers keep coming and sales keep happening. The clock only stops counting, which gives you as long as you want to finish the queue and tidy up.</p>
 <hr />
 <h2 id="closing-the-store">Closing the store<a class="headerlink" href="#closing-the-store" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Interact with the <strong>OPEN sign</strong> by the front door.</li>
-<li>A modal asks you to confirm.</li>
+<li>Confirm on the modal.</li>
 <li>The day report animates in, line by line.</li>
-<li><code>START A NEW DAY</code> fades the screen to black, cleans the world and starts the next day.</li>
+<li><code>START A NEW DAY</code> fades to black and starts the next day.</li>
 </ol>
-<p>The sign refuses while a customer is still shopping. It polls twice a second and disables itself unless every customer left in the level is in <code>Leaving</code> or <code>LeavingAngry</code>, so you cannot close on someone standing at your till with a full basket. When it refuses, the outline and the prompt go away entirely rather than showing a prompt that does nothing.</p>
+<p>The sign refuses while a customer is still shopping, so you cannot close on someone standing at your till. When it refuses, its outline and prompt disappear entirely.</p>
 <hr />
-<h2 id="what-gets-reset-between-two-days">What gets reset between two days<a class="headerlink" href="#what-gets-reset-between-two-days" title="Permanent link">&para;</a></h2>
-<p><code>BP_StoreGameMode.CleanForNextDay()</code> is three calls, in this order, and it is the extension point for anything you add:</p>
+<h2 id="what-resets-between-two-days">What resets between two days<a class="headerlink" href="#what-resets-between-two-days" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>Step</th>
-<th>What it does</th>
+<th>Reset</th>
+<th>Kept</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>DespawnCustomers</code></td>
-<td>Destroys every customer in the level</td>
+<td>Every customer in the level</td>
+<td>Boxes left on the floor</td>
 </tr>
 <tr>
-<td><code>ResetCheckouts</code></td>
-<td>Clears the belt, the receipt, the basket, the till state and the queue on every checkout</td>
+<td>The belt, receipt, basket, till and queue of every checkout</td>
+<td>Stock on the shelves</td>
 </tr>
 <tr>
-<td><code>MovePlayerToStart</code></td>
-<td>Teleports you back to the <code>PlayerStart</code> and points the camera the right way</td>
+<td>Your own position, back at the <code>PlayerStart</code></td>
+<td>Furniture you placed, your balance, your rating</td>
 </tr>
 </tbody>
 </table>
-<p>Then <code>FinishCurrentDay</code> runs: it fires <code>OnDayEnded</code> (which is what charges rent, drifts the market, pays wages and re-evaluates unlocks), moves the day counter on, and sets the clock back to <code>OpeningHour</code>.</p>
-<p>If you add a system that has to start each day clean, put its call in <code>CleanForNextDay</code> rather than subscribing to something. That function is deliberately a flat list of calls so it stays readable.</p>
-<p><strong>The world is not wiped.</strong> Boxes you left on the floor are still there, shelves keep their stock, placed furniture stays placed. Only the customers, the checkout state and your own position reset.</p>
+<p>If you add a system that has to start each day clean, add its call to <code>CleanForNextDay</code> in <code>BP_StoreGameMode</code>. That function is a flat list of calls, so a new line is all it takes.</p>
 <hr />
 <h2 id="the-daily-report">The daily report<a class="headerlink" href="#the-daily-report" title="Permanent link">&para;</a></h2>
-<p><code>GetDayReport(Day)</code> builds an <code>S_DayReport</code> by reading the transaction journal, and that is the only place the numbers come from. Nothing is counted twice or kept in a parallel total.</p>
 <p>The report reads in four blocks:</p>
 <table>
 <thead>
@@ -5936,12 +5930,11 @@
 </tr>
 </tbody>
 </table>
-<p><strong>Total Customers is served plus lost</strong>, not the sum of the four lines above it. A stock-out counts a customer who will also be counted as served or lost, so adding all four would double them.</p>
-<p>Every line is a <code>BP_ReportRowWidget</code> dropped in the Designer, and the reveal cascade follows the order they sit in. Adding a line to the report means adding a widget in the Designer, not editing a graph.</p>
+<p><code>Total Customers</code> is Served plus Lost. A stock-out is a customer who also shows up in one of those two, so the four lines are not meant to be added together.</p>
+<p><strong>To add a line</strong>, drop another <code>BP_ReportRowWidget</code> into the report in the Designer. The reveal cascade follows the order the widgets sit in. No graph to edit.</p>
 <hr />
 <h2 id="the-hud-while-the-day-runs">The HUD while the day runs<a class="headerlink" href="#the-hud-while-the-day-runs" title="Permanent link">&para;</a></h2>
-<p>Top right, one panel: the store rating as a coloured ring, the balance in large type, and the day and clock on a secondary line reading <code>DAY 1 · MON</code> and <code>8:00 AM</code>.</p>
-<p>Top left, notifications stack up and fade out. They are posted for things you would otherwise miss: a customer waiting at an unattended checkout, the store rating crossing a whole number in either direction.</p>
+<p>Top right: the store rating as a coloured ring, the balance in large type, and the day and clock underneath. Top left: notifications, posted when a customer is waiting at an unattended checkout or when the rating crosses a whole number.</p>
 <p>See <a href="../../ui/hud_and_prompts/">The HUD and the prompt</a>.</p>
 <hr />
 <p><a href="https://discord.gg/EqHCtq38jy">Join the Discord</a></p>

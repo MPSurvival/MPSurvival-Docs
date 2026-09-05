@@ -4537,45 +4537,27 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#how-the-slots-work" class="md-nav__link">
+  <a href="#the-slots" class="md-nav__link">
     <span class="md-ellipsis">
-      How the slots work
+      The slots
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#a-stored-box-is-frozen" class="md-nav__link">
+  <a href="#what-it-does-not-do" class="md-nav__link">
     <span class="md-ellipsis">
-      A stored box is frozen
+      What it does not do
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#taking-a-box-back-needs-no-code" class="md-nav__link">
+  <a href="#placing-one-by-hand" class="md-nav__link">
     <span class="md-ellipsis">
-      Taking a box back needs no code
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#the-action-line" class="md-nav__link">
-    <span class="md-ellipsis">
-      The action line
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#what-it-is-not" class="md-nav__link">
-    <span class="md-ellipsis">
-      What it is not
+      Placing one by hand
     </span>
   </a>
   
@@ -5683,7 +5665,7 @@
   
   
   <span class="md-ellipsis">
-    The six rules the template is built on
+    Extending the template
     
   </span>
   
@@ -5759,45 +5741,27 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#how-the-slots-work" class="md-nav__link">
+  <a href="#the-slots" class="md-nav__link">
     <span class="md-ellipsis">
-      How the slots work
+      The slots
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#a-stored-box-is-frozen" class="md-nav__link">
+  <a href="#what-it-does-not-do" class="md-nav__link">
     <span class="md-ellipsis">
-      A stored box is frozen
+      What it does not do
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#taking-a-box-back-needs-no-code" class="md-nav__link">
+  <a href="#placing-one-by-hand" class="md-nav__link">
     <span class="md-ellipsis">
-      Taking a box back needs no code
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#the-action-line" class="md-nav__link">
-    <span class="md-ellipsis">
-      The action line
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#what-it-is-not" class="md-nav__link">
-    <span class="md-ellipsis">
-      What it is not
+      Placing one by hand
     </span>
   </a>
   
@@ -5820,17 +5784,17 @@
 
 
 <h1 id="the-back-room-rack">The back room rack<a class="headerlink" href="#the-back-room-rack" title="Permanent link">&para;</a></h1>
-<p><code>BP_StorageRack</code> stores <strong>whole boxes</strong>, not units. That is the point of it, and it is what makes it different from a shelf.</p>
-<p>You carry a box, look at the rack, press <code>E</code>, and the box goes on the first free slot. To get it back you look at the box on the rack and press <code>E</code>. It is still the same box, still holding whatever was in it.</p>
+<p><code>BP_StorageRack</code> stores <strong>whole boxes</strong>, not units. Carry a box, look at the rack, press <code>E</code>, and it goes on the first free slot. Look at a box on the rack and press <code>E</code> to take it back, still holding whatever was in it.</p>
+<p><em>Store</em> only appears in the carry panel when there is a free slot, so the prompt never lies about what the key will do.</p>
 <hr />
-<h2 id="how-the-slots-work">How the slots work<a class="headerlink" href="#how-the-slots-work" title="Permanent link">&para;</a></h2>
-<p>The rack has no slot list to fill in. Its positions are computed from two fields:</p>
+<h2 id="the-slots">The slots<a class="headerlink" href="#the-slots" title="Permanent link">&para;</a></h2>
+<p>There is no slot list to fill in. The positions come from three fields:</p>
 <table>
 <thead>
 <tr>
 <th>Field</th>
 <th>What it does</th>
-<th>Shipped default</th>
+<th>Shipped</th>
 </tr>
 </thead>
 <tbody>
@@ -5851,24 +5815,14 @@
 </tr>
 </tbody>
 </table>
-<p>Four decks times three slots is twelve boxes. Making the rack longer is one more entry in <code>LevelHeightsCm</code> or a higher <code>SlotsPerLevel</code>, and the mesh to go with it.</p>
-<p>Whether a slot is free is <strong>read from the world</strong>, not stored. <code>IsSlotFree</code> does a sphere overlap filtered to delivery boxes, ignoring the one you are carrying. Nothing has to be kept in sync, and a box that ends up on the rack some other way is seen straight away.</p>
-<p><code>FindFreeSlotFor</code> returns the first free slot, so the rack fills left to right and bottom to top and stops at the first gap.</p>
+<p>Four decks times three slots is twelve boxes. <strong>To make a bigger rack</strong>, add an entry to <code>LevelHeightsCm</code> or raise <code>SlotsPerLevel</code>, and give it the mesh to match.</p>
+<p>The rack fills left to right and bottom to top, stopping at the first gap. A stored box has its physics turned off so the next one sliding in cannot push it off the deck, and turned back on when you pick it up.</p>
 <hr />
-<h2 id="a-stored-box-is-frozen">A stored box is frozen<a class="headerlink" href="#a-stored-box-is-frozen" title="Permanent link">&para;</a></h2>
-<p>When a box is placed on the rack, its physics simulation is turned off. Without that, walking past it or sliding the next box in would push it off the deck.</p>
-<p>It is turned back on when you pick it up. Two writers on the same flag, ordered by the gesture: you cannot store a box you are not holding, and you cannot hold a box that is on the rack.</p>
+<h2 id="what-it-does-not-do">What it does not do<a class="headerlink" href="#what-it-does-not-do" title="Permanent link">&para;</a></h2>
+<p>The rack holds no products of its own. It cannot be restocked from, customers never take anything off it, and employees do not unpack from it. It is a place to put boxes.</p>
 <hr />
-<h2 id="taking-a-box-back-needs-no-code">Taking a box back needs no code<a class="headerlink" href="#taking-a-box-back-needs-no-code" title="Permanent link">&para;</a></h2>
-<p>The stored box keeps its own <code>BP_InteractableComponent</code>. Look at it, press <code>E</code>, and <code>PickUp</code> puts it back in your hands.</p>
-<p>That falls out for free because the rack never takes ownership of the box. It puts it down in a place and forgets about it.</p>
-<hr />
-<h2 id="the-action-line">The action line<a class="headerlink" href="#the-action-line" title="Permanent link">&para;</a></h2>
-<p><em>Store</em> appears in the carry panel only when you are looking at a rack <strong>and</strong> there is a free slot. <code>CanStoreInto</code> checks both, so the prompt never lies about what the key will do.</p>
-<hr />
-<h2 id="what-it-is-not">What it is not<a class="headerlink" href="#what-it-is-not" title="Permanent link">&para;</a></h2>
-<p>The rack holds no products and no storage component. It cannot be restocked from, a customer will never take anything off it, and an employee will not unpack from it. It is a place to put boxes.</p>
-<p>One thing to check before you place one by hand: <code>DA_Structure_StorageRack</code> exists, but a rack dropped in a level only becomes editable and sellable once you set <code>Structure</code> on its <code>BP_PlaceableComponent</code> to that asset. Leave it empty and edit mode will not pick the rack up. See <a href="../../build/add_a_structure/">Add a placeable structure</a>.</p>
+<h2 id="placing-one-by-hand">Placing one by hand<a class="headerlink" href="#placing-one-by-hand" title="Permanent link">&para;</a></h2>
+<p><code>DA_Structure_StorageRack</code> exists, but a rack you drop in a level only becomes editable and sellable once you set <code>Structure</code> on its <code>BP_PlaceableComponent</code> to that asset. Leave it empty and edit mode will not pick the rack up. See <a href="../../build/add_a_structure/">Add a placeable structure</a>.</p>
 <hr />
 <p><a href="https://discord.gg/EqHCtq38jy">Join the Discord</a></p>
 

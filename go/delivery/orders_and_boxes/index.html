@@ -4491,15 +4491,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#the-chain" class="md-nav__link">
-    <span class="md-ellipsis">
-      The chain
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#when-a-box-arrives" class="md-nav__link">
     <span class="md-ellipsis">
       When a box arrives
@@ -4527,9 +4518,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#what-is-inside-a-box" class="md-nav__link">
+  <a href="#the-box" class="md-nav__link">
     <span class="md-ellipsis">
-      What is inside a box
+      The box
     </span>
   </a>
   
@@ -5692,7 +5683,7 @@
   
   
   <span class="md-ellipsis">
-    The six rules the template is built on
+    Extending the template
     
   </span>
   
@@ -5768,15 +5759,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#the-chain" class="md-nav__link">
-    <span class="md-ellipsis">
-      The chain
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#when-a-box-arrives" class="md-nav__link">
     <span class="md-ellipsis">
       When a box arrives
@@ -5804,9 +5786,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#what-is-inside-a-box" class="md-nav__link">
+  <a href="#the-box" class="md-nav__link">
     <span class="md-ellipsis">
-      What is inside a box
+      The box
     </span>
   </a>
   
@@ -5838,20 +5820,11 @@
 
 
 <h1 id="from-an-order-to-a-box-on-the-floor">From an order to a box on the floor<a class="headerlink" href="#from-an-order-to-a-box-on-the-floor" title="Permanent link">&para;</a></h1>
-<p>You order cases in the Market app. Hours later, boxes land on the delivery bay. Nothing in between is faked: the box that arrives is a real actor, sized to the product, holding the right number of units, with the product's icon printed on its docket.</p>
-<hr />
-<h2 id="the-chain">The chain<a class="headerlink" href="#the-chain" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>Market app  →  BP_DeliveryManager.QueueOrder  →  S_PendingOrder
-                                                     ↓  OnHourChanged
-                                              DeliverDueOrders
-                                                     ↓
-                          BP_DeliveryBay.TakeNextSlot  →  a box is spawned
-</code></pre></div>
-<p><code>BP_DeliveryManager</code> is a component on the game state, and it is the only owner of pending orders. It subscribes to the store clock's <code>OnHourChanged</code> rather than running a timer, so nothing ticks and orders cannot arrive while the clock is frozen.</p>
-<p>An <code>S_PendingOrder</code> holds the product, the number of cases, and the arrival day and hour. The arrival time is computed by the clock's owner, <code>BP_StoreManager.ClockAfterHours</code>, so there is only one calendar in the project.</p>
+<p>You order cases in the Market app on the office computer. Hours later, boxes land on the delivery bay: real actors, sized to the product, holding the right number of units, with the product's icon on the docket.</p>
+<p>Orders arrive on the store clock, so nothing is delivered while the clock is frozen.</p>
 <hr />
 <h2 id="when-a-box-arrives">When a box arrives<a class="headerlink" href="#when-a-box-arrives" title="Permanent link">&para;</a></h2>
-<p>Two fields on the product decide, and they are on the product because delivery speed is a property of what you are buying:</p>
+<p>Two fields on the product decide:</p>
 <table>
 <thead>
 <tr>
@@ -5866,30 +5839,24 @@
 </tr>
 <tr>
 <td><code>DeliversNextDay</code></td>
-<td>The box arrives at opening time the next day, whatever the hour you ordered</td>
+<td>The box arrives at the next opening time, whatever the hour you ordered</td>
 </tr>
 </tbody>
 </table>
-<p><code>DeliversNextDay</code> wins when both are set. Ordering at 20:00 with next-day delivery gets you a box at 08:00 tomorrow, and ordering at 06:00 gets you one at 08:00 today, because "the next opening" is computed rather than assumed to be tomorrow.</p>
+<p><code>DeliversNextDay</code> wins when both are set. Order at 20:00 and the box is there at 08:00 tomorrow; order at 06:00 and it is there at 08:00 today.</p>
 <hr />
 <h2 id="which-box-you-get">Which box you get<a class="headerlink" href="#which-box-you-get" title="Permanent link">&para;</a></h2>
-<p>You do not pick a box size. <code>PickBoxFor</code> picks the <strong>smallest</strong> box whose capacity covers <code>UnitsPerCase</code> for that product, and falls back to the largest one if nothing fits.</p>
-<p>Capacity is derived from the two Data Assets without spawning anything:</p>
-<div class="highlight"><pre><span></span><code>floor( InteriorSizeCm.X / FootprintCm.X )
-    × floor( InteriorSizeCm.Y / FootprintCm.Y )
-    × min( StackMax , floor( InteriorSizeCm.Z / StackHeightCm ) )
-</code></pre></div>
-<p>The list of box sizes the manager can choose from is <code>BoxSizes</code> in its Details panel. Adding a size is <a href="../add_a_box_size/">one Data Asset and one child Blueprint</a>.</p>
-<p>If a case is bigger than the biggest box, the extra units are silently refused when the box is filled. Either lower <code>UnitsPerCase</code> or add a bigger box.</p>
+<p>You do not pick a box size. The delivery takes the <strong>smallest</strong> box that holds one case of that product, from the <code>BoxSizes</code> list on <code>BP_DeliveryManager</code> in the game state's Details panel.</p>
+<p>How many units fit is worked out from the interior size of the box and the <code>FootprintCm</code>, <code>StackHeightCm</code> and <code>StackMax</code> of the product. If a case is bigger than the biggest box, the units that do not fit are dropped: lower <code>UnitsPerCase</code> on the product, or <a href="../add_a_box_size/">add a bigger box</a>.</p>
 <hr />
 <h2 id="the-delivery-bay">The delivery bay<a class="headerlink" href="#the-delivery-bay" title="Permanent link">&para;</a></h2>
-<p><code>BP_DeliveryBay</code> is the actor that says where boxes land. Drop one in your level and it registers itself with the manager at <code>BeginPlay</code>, so the manager never goes looking for it.</p>
+<p><code>BP_DeliveryBay</code> says where boxes land. Drop one in your level and deliveries find it on their own.</p>
 <table>
 <thead>
 <tr>
 <th>Field</th>
 <th>What it does</th>
-<th>Shipped default</th>
+<th>Shipped</th>
 </tr>
 </thead>
 <tbody>
@@ -5915,22 +5882,21 @@
 </tr>
 </tbody>
 </table>
-<p><code>TakeNextSlot</code> hands out the next slot and wraps around after <code>SlotsPerRow × SlotRows</code>, so a very large delivery starts stacking on top of the first slots rather than marching off into the street.</p>
-<p>The bay has no mesh. Nothing in the world tells the player where boxes will fall, so put it somewhere the level makes obvious, like a roller door or a painted rectangle on the floor.</p>
+<p>Twelve slots at the shipped values, and a delivery larger than that starts again on the first slot rather than marching off into the street.</p>
+<p>The bay has no mesh of its own, so put it somewhere the level makes obvious: a roller door, or a painted rectangle on the floor.</p>
 <hr />
-<h2 id="what-is-inside-a-box">What is inside a box<a class="headerlink" href="#what-is-inside-a-box" title="Permanent link">&para;</a></h2>
-<p>A box is a storage row, the same one shelves use. It works out its own interior layout from the product's footprint and the box's interior dimensions, and shows one instanced mesh per unit, aligned to the inside corner rather than to the mesh origin.</p>
+<h2 id="the-box">The box<a class="headerlink" href="#the-box" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>Field on the box</th>
+<th>Field</th>
 <th>What it does</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>Size</code></td>
-<td>A <code>DA_Box_*</code>. Everything about the shape comes from here</td>
+<td>A <code>DA_Box_*</code>. The shape comes entirely from here</td>
 </tr>
 <tr>
 <td><code>Product</code></td>
@@ -5942,15 +5908,12 @@
 </tr>
 </tbody>
 </table>
-<p>All three are <strong>Expose on Spawn</strong>, which is why a delivery does not need the <code>_Small</code> / <code>_Medium</code> / <code>_Large</code> child Blueprints. The manager spawns the base class with the right values and the construction script builds the right box.</p>
-<p>The three children exist for boxes you place by hand in a level.</p>
-<p>Opening a box swings both flaps on a timeline, <code>150</code> degrees, and the contents are hidden until it is open. Press <code>F</code> to open the box you are carrying, or the one you are looking at if your hands are empty.</p>
-<p>The docket on the front flap is a real widget in the world showing the product's icon, painted at actual size, and it is read from above because that is how you look at a box on the floor.</p>
+<p>All three are Expose on Spawn, so a delivery spawns the base class with the right values. The <code>_Small</code> / <code>_Medium</code> / <code>_Large</code> children are there for boxes you place by hand in a level.</p>
+<p>Press <code>F</code> to open the box you are carrying, or the one you are looking at if your hands are empty. The contents are hidden until it is open.</p>
 <hr />
 <h2 id="emptying-it">Emptying it<a class="headerlink" href="#emptying-it" title="Permanent link">&para;</a></h2>
-<p>Carry the box, look at a shelf, and press left mouse to move one unit across. Right mouse takes one back. See <a href="../../stock/how_storage_works/">How shelves and storage work</a>.</p>
-<p>The box has to be open, or you would watch a bottle pass through closed cardboard.</p>
-<p>When you are done with a box, look at the trash bin with it in your hands and press <code>E</code>. The bin destroys it. Only boxes go in the bin, so a barcode scanner in your hands does nothing.</p>
+<p>Carry an open box, look at a shelf, <strong>left mouse</strong> moves one unit across and <strong>right mouse</strong> takes one back. See <a href="../../stock/how_storage_works/">How shelves and storage work</a>.</p>
+<p>To get rid of an empty box, carry it to the trash bin and press <code>E</code>. Only boxes go in the bin.</p>
 <hr />
 <p><a href="https://discord.gg/EqHCtq38jy">Join the Discord</a></p>
 

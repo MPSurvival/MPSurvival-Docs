@@ -4514,18 +4514,18 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#making-an-actor-carryable" class="md-nav__link">
+  <a href="#the-keys" class="md-nav__link">
     <span class="md-ellipsis">
-      Making an actor carryable
+      The keys
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-keys" class="md-nav__link">
+  <a href="#making-your-own-actor-carryable" class="md-nav__link">
     <span class="md-ellipsis">
-      The keys
+      Making your own actor carryable
     </span>
   </a>
   
@@ -4550,9 +4550,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#two-things-it-does-not-do" class="md-nav__link">
+  <a href="#two-things-to-know-about-the-hold" class="md-nav__link">
     <span class="md-ellipsis">
-      Two things it does not do
+      Two things to know about the hold
     </span>
   </a>
   
@@ -5683,7 +5683,7 @@
   
   
   <span class="md-ellipsis">
-    The six rules the template is built on
+    Extending the template
     
   </span>
   
@@ -5759,18 +5759,18 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#making-an-actor-carryable" class="md-nav__link">
+  <a href="#the-keys" class="md-nav__link">
     <span class="md-ellipsis">
-      Making an actor carryable
+      The keys
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-keys" class="md-nav__link">
+  <a href="#making-your-own-actor-carryable" class="md-nav__link">
     <span class="md-ellipsis">
-      The keys
+      Making your own actor carryable
     </span>
   </a>
   
@@ -5795,9 +5795,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#two-things-it-does-not-do" class="md-nav__link">
+  <a href="#two-things-to-know-about-the-hold" class="md-nav__link">
     <span class="md-ellipsis">
-      Two things it does not do
+      Two things to know about the hold
     </span>
   </a>
   
@@ -5820,45 +5820,7 @@
 
 
 <h1 id="carrying-placing-and-throwing">Carrying, placing and throwing<a class="headerlink" href="#carrying-placing-and-throwing" title="Permanent link">&para;</a></h1>
-<p>There is one way to carry something in this template, and it is a physics grab. The object you are holding is a real simulated body pulled toward your hands by a <code>PhysicsHandleComponent</code>, not a mesh welded to the camera.</p>
-<p>That is why a box you are carrying bumps into door frames, rests on a counter when you lower it, and swings a little when you turn. It is also why the code that does it is short.</p>
-<hr />
-<h2 id="making-an-actor-carryable">Making an actor carryable<a class="headerlink" href="#making-an-actor-carryable" title="Permanent link">&para;</a></h2>
-<p>Two things, and neither of them is a parent class:</p>
-<ol>
-<li>Implement <strong><code>BPI_Carryable</code></strong>.</li>
-<li>Set <strong>Can Character Step Up On = No</strong> on its collision body.</li>
-</ol>
-<p>The second one is not optional. Without it, a box on the floor becomes the character's movement base: the movement component presses down on it, the simulated body squirts out from under your feet, and you get launched across the room.</p>
-<p>The interface has three entries:</p>
-<table>
-<thead>
-<tr>
-<th>Function</th>
-<th>Returns</th>
-<th>What it is for</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>GetCarryBody</code></td>
-<td><code>Static Mesh Component</code></td>
-<td>Which body the physics handle grabs</td>
-</tr>
-<tr>
-<td><code>GetCarryOffset</code></td>
-<td><code>Transform</code></td>
-<td>How the object sits in your hands</td>
-</tr>
-<tr>
-<td><code>PickUp(Interactor)</code></td>
-<td></td>
-<td>What happens when it is picked up</td>
-</tr>
-</tbody>
-</table>
-<p>The object decides its own pose. <code>GetCarryOffset</code> is on the object rather than on the player because only the object knows how it wants to be held.</p>
-<p>To make it pickable with <code>E</code>, give it a <code>BP_InteractableComponent</code> and wire its <code>OnInteracted</code> to <code>PickUp</code>, which casts the interactor to <code>BP_StoreCharacter</code> and calls <code>CarryObject(self)</code>. That is the whole hookup, and it is the same shape as every other interaction in the project.</p>
+<p>Carrying is a physics grab: the object in your hands is a simulated body pulled toward them, not a mesh welded to the camera. It bumps into door frames, rests on a counter when you lower it, and swings a little when you turn.</p>
 <hr />
 <h2 id="the-keys">The keys<a class="headerlink" href="#the-keys" title="Permanent link">&para;</a></h2>
 <table>
@@ -5883,48 +5845,76 @@
 </tr>
 </tbody>
 </table>
-<p><code>G</code> is a place, not a drop. It traces where you are aiming, up to the interaction range of 220 cm, and sets the object down with its <strong>base</strong> on that point, killing its linear and angular velocity. Aim at a table and the box lands on the table. Aim at nothing and it lands at the end of the trace.</p>
-<p><code>R</code> is a place followed by an impulse, at <code>ThrowSpeed</code>, 450 cm/s.</p>
-<p>Carrying slows you down. <code>CarrySpeedScale</code> composes with sprint in <code>RefreshWalkSpeed</code>, which is the only place walk speed is ever written.</p>
+<p><code>G</code> is a place, not a drop: it traces where you are aiming, up to 220 cm, and sets the object down with its base on that point. Aim at a table and the box lands on the table. <code>R</code> does the same, then adds an impulse at <code>ThrowSpeed</code> (450 cm/s).</p>
+<p>Carrying slows you down, by <code>CarrySpeedScale</code> on <code>BP_CarryComponent</code>.</p>
 <hr />
-<h2 id="the-panel-next-to-your-hands">The panel next to your hands<a class="headerlink" href="#the-panel-next-to-your-hands" title="Permanent link">&para;</a></h2>
-<p>While you are carrying something, a small panel of key prompts is attached beside the object. The player fills it first with <em>Put down</em> and <em>Throw</em>, then hands it to the object, which adds its own lines.</p>
-<p>A box adds <em>Open</em> / <em>Close</em>, and adds <em>Stock</em> and <em>Take back</em> only when the shelf you are looking at will actually accept the gesture. Look at a rack with a free slot and <em>Store</em> appears; look at a full one and it does not.</p>
-<p>Each line reads its letter from the <code>InputAction</code> it is bound to, so remapping a key updates the panel with no work.</p>
-<p>The panel is <strong>attached</strong> to the object rather than positioned every frame, which is why it does not jitter when you walk. Its height is measured once, in the object's own space, from the carry body's local bounds.</p>
-<hr />
-<h2 id="going-through-a-doorway">Going through a doorway<a class="headerlink" href="#going-through-a-doorway" title="Permanent link">&para;</a></h2>
-<p>Push a carried object into a wall and the physics handle cannot reach its target. Left alone, the body would grind against the wall forever.</p>
-<p>When the gap between the body and the handle's target passes <code>GhostDistanceCm</code> (150 cm), the object stops colliding with the world and takes on a pale tint. Below <code>SolidDistanceCm</code> (20 cm) it goes solid again. The two thresholds are far apart on purpose, so it does not flicker while the object trails behind you.</p>
-<p>Both values are on <code>BP_CarryComponent</code>, in <code>Settings|Carry</code>. The tint is a parameter on <code>M_PropsMaster</code>, in the <code>Ghost</code> group:</p>
+<h2 id="making-your-own-actor-carryable">Making your own actor carryable<a class="headerlink" href="#making-your-own-actor-carryable" title="Permanent link">&para;</a></h2>
+<p>Two things:</p>
+<ol>
+<li>Implement <strong><code>BPI_Carryable</code></strong>.</li>
+<li>Set <strong>Can Character Step Up On = No</strong> on its collision body.</li>
+</ol>
+<p>The second one is not optional. Without it the box becomes the character's movement base, and the simulated body squirts out from under your feet and launches you across the room.</p>
+<p>The interface has three entries:</p>
 <table>
 <thead>
 <tr>
-<th>Parameter</th>
-<th>What it does</th>
+<th>Function</th>
+<th>Returns</th>
+<th>What it is for</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>GhostAmount</code></td>
-<td>Driven by the component, 0 or 1</td>
+<td><code>GetCarryBody</code></td>
+<td><code>Static Mesh Component</code></td>
+<td>Which body is grabbed</td>
 </tr>
 <tr>
-<td><code>GhostColor</code></td>
-<td>The colour it fades toward</td>
+<td><code>GetCarryOffset</code></td>
+<td><code>Transform</code></td>
+<td>How the object sits in your hands</td>
 </tr>
 <tr>
-<td><code>GhostFade</code></td>
-<td>How far it fades. <code>0.4</code> washes the box out without whitening it</td>
+<td><code>PickUp(Interactor)</code></td>
+<td></td>
+<td>What happens when it is picked up</td>
 </tr>
 </tbody>
 </table>
-<p>A material without a <code>GhostAmount</code> parameter simply ignores the call, so your own props do not have to opt in.</p>
-<p>Releasing the object always makes it solid again, whichever way you release it.</p>
+<p>To make it pickable with <code>E</code>, add a <code>BP_InteractableComponent</code> and wire its <code>OnInteracted</code> to <code>PickUp</code>, which casts the interactor to <code>BP_StoreCharacter</code> and calls <code>CarryObject(self)</code>.</p>
 <hr />
-<h2 id="two-things-it-does-not-do">Two things it does not do<a class="headerlink" href="#two-things-it-does-not-do" title="Permanent link">&para;</a></h2>
+<h2 id="the-panel-next-to-your-hands">The panel next to your hands<a class="headerlink" href="#the-panel-next-to-your-hands" title="Permanent link">&para;</a></h2>
+<p>While you carry something, a small panel of key prompts sits beside it. It always shows <em>Put down</em> and <em>Throw</em>, and the object adds its own lines: a box adds <em>Open</em> / <em>Close</em>, and adds <em>Stock</em> or <em>Take back</em> only when the shelf you are looking at will accept the gesture.</p>
+<p>Each line reads its letter from the <code>InputAction</code> it is bound to, so remapping a key updates the panel with no work.</p>
+<hr />
+<h2 id="going-through-a-doorway">Going through a doorway<a class="headerlink" href="#going-through-a-doorway" title="Permanent link">&para;</a></h2>
+<p>Push a carried object into a wall and it would otherwise grind there. Instead, once it falls far enough behind your hands it stops colliding with the world and goes pale, then turns solid again as it catches up.</p>
+<p>Both distances are on <code>BP_CarryComponent</code>, in <code>Settings|Carry</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Shipped</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GhostDistanceCm</code></td>
+<td><code>150</code></td>
+</tr>
+<tr>
+<td><code>SolidDistanceCm</code></td>
+<td><code>20</code></td>
+</tr>
+</tbody>
+</table>
+<p>The pale tint comes from the <code>Ghost</code> group on <code>M_PropsMaster</code>: <code>GhostColor</code> is the colour it fades toward and <code>GhostFade</code> how far (<code>0.4</code> washes the box out without whitening it). A material without those parameters simply ignores it, so your own props do not have to opt in.</p>
+<p>Releasing the object always makes it solid again.</p>
+<hr />
+<h2 id="two-things-to-know-about-the-hold">Two things to know about the hold<a class="headerlink" href="#two-things-to-know-about-the-hold" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>The object is not attached to a hand bone.</strong> It is a body on a spring. If you want it welded, you are changing the whole component, not a setting.</li>
+<li><strong>The object is a body on a spring, not a bone attachment.</strong> Welding it to a hand means changing the whole component, not a setting.</li>
 <li><strong>The object follows your yaw only.</strong> Look up or down and the box stays level. That is the right behaviour for something held in two hands, and it is a <code>MakeRotator(0, 0, camera yaw)</code> in <code>AdvanceCarryPose</code> if you want it otherwise.</li>
 </ul>
 <hr />

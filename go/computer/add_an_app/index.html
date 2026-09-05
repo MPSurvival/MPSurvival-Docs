@@ -5174,18 +5174,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#if-your-app-needs-settings" class="md-nav__link">
+  <a href="#the-two-functions-to-override" class="md-nav__link">
     <span class="md-ellipsis">
-      If your app needs settings
+      The two functions to override
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-two-functions-to-know" class="md-nav__link">
+  <a href="#if-your-app-needs-settings-of-its-own" class="md-nav__link">
     <span class="md-ellipsis">
-      The two functions to know
+      If your app needs settings of its own
     </span>
   </a>
   
@@ -5701,7 +5701,7 @@
   
   
   <span class="md-ellipsis">
-    The six rules the template is built on
+    Extending the template
     
   </span>
   
@@ -5786,18 +5786,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#if-your-app-needs-settings" class="md-nav__link">
+  <a href="#the-two-functions-to-override" class="md-nav__link">
     <span class="md-ellipsis">
-      If your app needs settings
+      The two functions to override
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-two-functions-to-know" class="md-nav__link">
+  <a href="#if-your-app-needs-settings-of-its-own" class="md-nav__link">
     <span class="md-ellipsis">
-      The two functions to know
+      If your app needs settings of its own
     </span>
   </a>
   
@@ -5856,7 +5856,7 @@
 
 
 <h1 id="write-your-own-app">Write your own app<a class="headerlink" href="#write-your-own-app" title="Permanent link">&para;</a></h1>
-<p>An app is one Data Asset and one Widget Blueprint. The computer never learns its name.</p>
+<p>An app is one Data Asset and one Widget Blueprint.</p>
 <hr />
 <h2 id="the-recipe">The recipe<a class="headerlink" href="#the-recipe" title="Permanent link">&para;</a></h2>
 <ol>
@@ -5868,43 +5868,37 @@
 </ol>
 <p>That is all. The desktop icon, the window, the title bar, the balance readout and the close button come from the chrome.</p>
 <hr />
-<h2 id="if-your-app-needs-settings">If your app needs settings<a class="headerlink" href="#if-your-app-needs-settings" title="Permanent link">&para;</a></h2>
-<p>Subclass the Data Asset rather than adding fields to the base.</p>
-<p><code>BP_MarketAppDataAsset</code> is the example: it is a child of <code>BP_AppDataAsset</code> and adds one field, <code>AvailableProducts</code>. <code>DA_App_Market</code> is an instance of that child.</p>
-<p>The same pattern gives you <code>BP_StructureAppDataAsset</code>, <code>BP_HiringAppDataAsset</code> and <code>BP_AdsAppDataAsset</code>. Nothing goes on the base class that only one app would read.</p>
-<hr />
-<h2 id="the-two-functions-to-know">The two functions to know<a class="headerlink" href="#the-two-functions-to-know" title="Permanent link">&para;</a></h2>
+<h2 id="the-two-functions-to-override">The two functions to override<a class="headerlink" href="#the-two-functions-to-override" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
 <th>Function</th>
-<th>Contract</th>
+<th>What to do with it</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>SetApp(NewApp)</code></td>
-<td>Called by the computer. It stores the asset and calls <code>BindApp</code>. Do not override it</td>
-</tr>
-<tr>
 <td><code>BindApp</code></td>
-<td>Empty in the base. Override it. Clear your rows and rebuild them</td>
+<td>Clear your rows and rebuild them. Called every time the app is opened, so it must be safe to call twice</td>
 </tr>
 <tr>
 <td><code>RefreshBalance</code></td>
-<td>Called when the balance changes. Update affordability without rebuilding</td>
+<td>Called when the balance changes. Update what each row can afford, without rebuilding the list</td>
 </tr>
 </tbody>
 </table>
-<p><code>BindApp</code> has to be safe to call more than once, because it is called every time the app is opened. Clear before you fill.</p>
-<p>Do not rebuild the list from <code>RefreshBalance</code>. Walk your existing rows and update them, the way the Structures app does with <code>SetAffordable</code>.</p>
+<p>Do not rebuild from <code>RefreshBalance</code>: walk your existing rows and update them, as the Structures app does with <code>SetAffordable</code>. Rebuilding destroys the row the player has just clicked.</p>
+<p><code>SetApp</code> is called by the computer and stores the asset before calling <code>BindApp</code>. Leave it alone.</p>
+<hr />
+<h2 id="if-your-app-needs-settings-of-its-own">If your app needs settings of its own<a class="headerlink" href="#if-your-app-needs-settings-of-its-own" title="Permanent link">&para;</a></h2>
+<p>Subclass the Data Asset rather than adding fields to the base. <code>BP_MarketAppDataAsset</code> is the example: a child of <code>BP_AppDataAsset</code> that adds <code>AvailableProducts</code>, with <code>DA_App_Market</code> as its instance. The Structures, Hiring and Ads apps do the same.</p>
 <hr />
 <h2 id="getting-at-the-game">Getting at the game<a class="headerlink" href="#getting-at-the-game" title="Permanent link">&para;</a></h2>
 <p>Every app resolves what it needs at the top of <code>BindApp</code>, from the game state:</p>
 <div class="highlight"><pre><span></span><code>Get Game State  →  Cast To BP_StoreGameState  →  Get Component By Class
 </code></pre></div>
-<p>That gives you <code>BP_StoreManager</code> for money and the clock, <code>BP_ProgressionManager</code> for unlock filtering, <code>BP_EconomyManager</code> for wholesale prices, <code>BP_StaffManager</code> for the roster, and so on.</p>
-<p>Spending money goes through <code>BP_StoreManager.AddTransaction</code> with a reason from <code>E_TransactionReason</code>, and nothing else. It is the only writer of the balance in the whole project, which is what makes the daily report trustworthy.</p>
+<p>That gives you <code>BP_StoreManager</code> for money and the clock, <code>BP_ProgressionManager</code> for unlock filtering, <code>BP_EconomyManager</code> for wholesale prices, <code>BP_StaffManager</code> for the roster.</p>
+<p>Money moves through <code>BP_StoreManager.AddTransaction</code>, with a reason from <code>E_TransactionReason</code>. See <a href="../../store/money_and_rating/">Money and the store rating</a>.</p>
 <hr />
 <h2 id="hiding-entries-behind-progression">Hiding entries behind progression<a class="headerlink" href="#hiding-entries-behind-progression" title="Permanent link">&para;</a></h2>
 <p>If your app lists things that should be unlocked over time, filter them:</p>
@@ -5912,11 +5906,11 @@
     Branch  →  ProgressionManager.IsUnlocked(item)
         True  →  make the row
 </code></pre></div>
-<p>Filter <strong>inside</strong> the loop with a <code>Branch</code>. A function returning a filtered array does not compile here, because Blueprint arrays are invariant and an array of <code>PrimaryDataAsset</code> will not connect to a loop typed to your own asset class.</p>
-<p>Anything not mentioned in any unlock's <code>Rewards</code> is considered unlocked, so this costs nothing until you actually write an unlock for it.</p>
+<p>Filter <strong>inside</strong> the loop with a <code>Branch</code>. A function returning a filtered array does not compile here: Blueprint arrays are invariant, and an array of <code>PrimaryDataAsset</code> will not connect to a loop typed to your own asset class.</p>
+<p>Anything not mentioned in any unlock's <code>Rewards</code> counts as unlocked, so this costs nothing until you write an unlock for it.</p>
 <hr />
 <h2 id="layout-and-style">Layout and style<a class="headerlink" href="#layout-and-style" title="Permanent link">&para;</a></h2>
-<p>Follow the shipped apps rather than inventing a look. They are all on the same grid, and the point of the chrome is that six apps read as one machine.</p>
+<p>Follow the shipped apps rather than inventing a look: six apps have to read as one machine.</p>
 <table>
 <thead>
 <tr>
@@ -5951,20 +5945,19 @@
 </tr>
 <tr>
 <td>Accent</td>
-<td>Your <code>TitleColor</code>, on the title bar and the desktop icon, and nowhere else</td>
+<td>Your <code>TitleColor</code>, on the title bar and the desktop icon, nowhere else</td>
 </tr>
 </tbody>
 </table>
-<p>Pick your title colour from the same family as the others. They all sit at S 0.57 and V 0.60 in HSV, with only the hue moving: cold hues are catalogues you buy from, warm hues are things you already own and manage. The green band is off limits, because it belongs to the currency symbol and money appears on nearly every screen.</p>
-<p>Two things that apply to every button you add:</p>
+<p>Pick your title colour from the same family as the others: they all sit at S 0.57 and V 0.60 in HSV, with only the hue moving. Cold hues are catalogues you buy from, warm hues are things you already own and manage. Leave the green band alone — it belongs to the currency symbol, which appears on nearly every screen.</p>
+<p>For every button you add:</p>
 <ul>
 <li>Turn <strong>Is Focusable</strong> off, or <code>Tab</code> starts walking a focus rectangle around your app.</li>
-<li>Never add a tooltip. There are none anywhere in the project. A tooltip needs a hover and a wait, and it hides information the screen should have shown. If a piece of text is worth reading, give it a column.</li>
+<li><strong>Never add a tooltip.</strong> There are none anywhere in the project. A tooltip needs a hover and a wait, and it hides information the screen should have shown. If a piece of text is worth reading, give it a column.</li>
 </ul>
 <hr />
 <h2 id="currency">Currency<a class="headerlink" href="#currency" title="Permanent link">&para;</a></h2>
-<p>Every currency symbol in the template is a <strong>separate text block</strong> in <code>MoneyGreen</code>, next to the number. Not part of the same string.</p>
-<p>That is a template-wide rule, and it applies to the HUD, price labels, the till, the terminal and every app.</p>
+<p>Every currency symbol in the template is a <strong>separate text block</strong> in <code>MoneyGreen</code>, next to the number, never part of the same string. That holds on the HUD, price labels, the till, the terminal and every app.</p>
 <hr />
 <p><a href="https://discord.gg/EqHCtq38jy">Join the Discord</a></p>
 

@@ -5594,7 +5594,7 @@
   
   
   <span class="md-ellipsis">
-    The six rules the template is built on
+    Extending the template
     
   </span>
   
@@ -5854,7 +5854,7 @@
 ├── Maps/
 └── Demo/
 </code></pre></div>
-<p>Four things in there are counterintuitive enough to be worth spelling out.</p>
+<p>Four things worth spelling out:</p>
 <p><strong><code>Structures/</code> holds the structs</strong>, not shop furniture. Furniture is in <code>Environments/</code>.</p>
 <p><strong>Data Assets are not in a separate <code>Data/</code> folder.</strong> The class and its instances live together: <code>DataAssets/&lt;Family&gt;/BP_XxxDataAsset</code> with <code>&lt;Family&gt;/Childs/DA_Xxx</code> beside it.</p>
 <p><strong>The game mode and the player controller are in <code>PlayerCharacter/</code></strong>, not in a <code>Core/</code> folder.</p>
@@ -5960,9 +5960,9 @@
 </tr>
 </tbody>
 </table>
-<p><code>BP_</code> is deliberately shared by every Blueprint. Widgets are <code>BP_*Widget</code>, not <code>WBP_</code>.</p>
+<p><code>BP_</code> covers every Blueprint. Widgets are <code>BP_*Widget</code>, not <code>WBP_</code>.</p>
 <p><code>BP_XxxDataAsset</code> is the class and <code>DA_Xxx</code> is the instance. Two different things, two prefixes.</p>
-<p>Five prefixes are ambiguous in a lot of Unreal projects, and they were settled here before the first asset was made:</p>
+<p>Five prefixes are ambiguous in a lot of Unreal projects. Here they are settled as:</p>
 <table>
 <thead>
 <tr>

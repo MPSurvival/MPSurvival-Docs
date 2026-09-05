@@ -5674,7 +5674,7 @@
   
   
   <span class="md-ellipsis">
-    The six rules the template is built on
+    Extending the template
     
   </span>
   
@@ -5863,7 +5863,7 @@ L_ExampleMap  →  BP_StoreGameMode  →  BP_StorePlayerController  →  BP_Stor
 </tr>
 </tbody>
 </table>
-<p>The managers all sit on the <strong>game state</strong>, not on the game instance, and that is deliberate: a game instance survives a level load and would carry the previous game's money into the next one.</p>
+<p>The managers all sit on the <strong>game state</strong>, not on the game instance, so a level change starts a clean game.</p>
 <table>
 <thead>
 <tr>
@@ -5950,9 +5950,8 @@ L_ExampleMap  →  BP_StoreGameMode  →  BP_StorePlayerController  →  BP_Stor
 <p>The customer exit has to sit <strong>inside</strong> the nav mesh volume. <code>Move To</code> will not project a destination that falls outside it, and the customer stands there instead of leaving.</p>
 <hr />
 <h2 id="the-front-door-is-a-one-way-lock">The front door is a one-way lock<a class="headerlink" href="#the-front-door-is-a-one-way-lock" title="Permanent link">&para;</a></h2>
-<p>Worth knowing before you build a store with a narrow entrance. Customer and employee capsules ignore each other, so two AI walking into the same doorway from opposite sides do not push each other aside. They both push the same door leaf and neither gives way.</p>
-<p><code>BP_EntranceDoor</code> solves it by owning the passage. Any agent inside <code>ApproachRadiusCm</code> of the door's <code>Threshold</code> component asks <code>RequestPassage</code>, and the door hands out the passage in one direction at a time. Anyone travelling the other way holds position until the doorway clears, which their behaviour tree does with a <code>Wait</code> branch that aborts the moment the flag drops.</p>
-<p>If you make your own door, copy <code>BP_EntranceDoor</code>, because the lock lives there. <code>BP_OfficeDoor</code> does not have it, which is fine today since no customer goes through it.</p>
+<p><code>BP_EntranceDoor</code> hands out the doorway in one direction at a time, and anyone travelling the other way holds position until it clears. Without that, two AI walking into the same doorway from opposite sides push the same door leaf and neither gives way, because their capsules ignore each other.</p>
+<p><strong>If you build your own front door, duplicate <code>BP_EntranceDoor</code></strong>: the lock lives there. <code>BP_OfficeDoor</code> does not have it, which is fine as long as no customer goes through it.</p>
 <hr />
 <p><a href="https://discord.gg/EqHCtq38jy">Join the Discord</a></p>
 

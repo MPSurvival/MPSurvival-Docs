@@ -5683,7 +5683,7 @@
   
   
   <span class="md-ellipsis">
-    The six rules the template is built on
+    Extending the template
     
   </span>
   
@@ -5821,7 +5821,7 @@
 
 <h1 id="the-controls">The controls<a class="headerlink" href="#the-controls" title="Permanent link">&para;</a></h1>
 <p>Input goes through <strong>Enhanced Input</strong>. There is one mapping context, <code>Content/GrandOpening/Inputs/IMC_Gameplay</code>, and the actions live next to it in <code>Inputs/Inputs/</code>.</p>
-<p>There is no options menu and no rebinding screen in the template. Changing a key means opening <code>IMC_Gameplay</code> and dragging the mapping onto another key, which takes about five seconds.</p>
+<p>The keys live in <code>IMC_Gameplay</code>. Changing one means opening that asset and dragging the mapping onto another key, which takes about five seconds.</p>
 <hr />
 <h2 id="on-foot">On foot<a class="headerlink" href="#on-foot" title="Permanent link">&para;</a></h2>
 <table>
@@ -5946,14 +5946,14 @@
 </tr>
 </tbody>
 </table>
-<p><code>B</code> is a plain toggle with two states. Clicking a tile in the menu arms that structure and closes the menu, so you go straight back to aiming. Pressing <code>B</code> again drops out of build mode entirely. Changing structure without leaving costs two presses, which was the trade taken so the key always does the same thing.</p>
+<p>Clicking a tile in the menu arms that structure and closes the menu, so you go straight back to aiming. Pressing <code>B</code> again drops out of build mode entirely.</p>
 <p>Edit mode is entered from the <code>EDIT</code> button at the bottom right of the build menu. See <a href="../../build/how_placement_works/">How placement works</a>.</p>
 <hr />
 <h2 id="in-front-of-a-screen">In front of a screen<a class="headerlink" href="#in-front-of-a-screen" title="Permanent link">&para;</a></h2>
 <p>The office computer, the checkout display and the card terminal all work the same way, because they all inherit from <code>BP_ScreenBase</code>.</p>
 <p><code>E</code> leans you in. The camera moves to the screen's <code>ReadPose</code>, the crosshair and the interaction prompt hide, whatever you were carrying is put down, and the mouse cursor appears. From there the screen is a normal mouse surface: hover, click, scroll and drag all work.</p>
 <p><code>Tab</code> or <code>E</code> leans you back out.</p>
-<p>Movement and look are frozen while you are reading, through the controller's own <code>SetIgnoreMoveInput</code> and <code>SetIgnoreLookInput</code>, so nothing in the view code has to know a screen is open.</p>
+<p>Movement and look are frozen while you are reading.</p>
 <hr />
 <h2 id="changing-a-key">Changing a key<a class="headerlink" href="#changing-a-key" title="Permanent link">&para;</a></h2>
 <ol>

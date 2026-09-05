@@ -4399,9 +4399,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#getting-the-footprint-right" class="md-nav__link">
+  <a href="#getting-the-size-right" class="md-nav__link">
     <span class="md-ellipsis">
-      Getting the footprint right
+      Getting the size right
     </span>
   </a>
   
@@ -4417,9 +4417,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#where-a-new-product-shows-up-on-its-own" class="md-nav__link">
+  <a href="#what-you-get-for-free" class="md-nav__link">
     <span class="md-ellipsis">
-      Where a new product shows up on its own
+      What you get for free
     </span>
   </a>
   
@@ -5683,7 +5683,7 @@
   
   
   <span class="md-ellipsis">
-    The six rules the template is built on
+    Extending the template
     
   </span>
   
@@ -5777,9 +5777,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#getting-the-footprint-right" class="md-nav__link">
+  <a href="#getting-the-size-right" class="md-nav__link">
     <span class="md-ellipsis">
-      Getting the footprint right
+      Getting the size right
     </span>
   </a>
   
@@ -5795,9 +5795,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#where-a-new-product-shows-up-on-its-own" class="md-nav__link">
+  <a href="#what-you-get-for-free" class="md-nav__link">
     <span class="md-ellipsis">
-      Where a new product shows up on its own
+      What you get for free
     </span>
   </a>
   
@@ -5820,8 +5820,8 @@
 
 
 <h1 id="add-a-product">Add a product<a class="headerlink" href="#add-a-product" title="Permanent link">&para;</a></h1>
-<p>A product is one Data Asset. There is no graph to open, no list to register it in, and no ID to keep unique by hand.</p>
-<p>Six ship with the template, in <code>Blueprints/DataAssets/Products/Childs/</code>: a cereal box, a can of soup, a soda can, a shampoo bottle, laundry detergent and a battery pack. They are deliberately different sizes, because size is what drives the shelf layout.</p>
+<p>A product is one Data Asset. No graph to open, no list to register it in, no ID to keep unique by hand.</p>
+<p>Six ship with the template, in <code>Blueprints/DataAssets/Products/Childs/</code>: a cereal box, a can of soup, a soda can, a shampoo bottle, laundry detergent and a battery pack.</p>
 <hr />
 <h2 id="the-recipe">The recipe<a class="headerlink" href="#the-recipe" title="Permanent link">&para;</a></h2>
 <ol>
@@ -5830,7 +5830,7 @@
 <li>Fill it in.</li>
 <li>Add it to <code>DA_App_Market.AvailableProducts</code> so it can be ordered.</li>
 </ol>
-<p>That last step is the only one people forget. A product that is not in the Market app's catalogue exists, works on a shelf and can be scanned, but nothing can ever order it.</p>
+<p>Step 4 is the one people forget. A product that is not in the Market app's catalogue works on a shelf and scans at the till, but nothing can ever order it.</p>
 <hr />
 <h2 id="the-fields">The fields<a class="headerlink" href="#the-fields" title="Permanent link">&para;</a></h2>
 <table>
@@ -5843,7 +5843,7 @@
 <tbody>
 <tr>
 <td><code>DisplayName</code></td>
-<td>The name shown on the market row, the receipt and the checkout screen. It is a <code>Text</code>, so it can be translated</td>
+<td>The name on the market row, the receipt and the checkout screen</td>
 </tr>
 <tr>
 <td><code>Category</code></td>
@@ -5851,7 +5851,7 @@
 </tr>
 <tr>
 <td><code>Mesh</code></td>
-<td>The static mesh, used on shelves, in boxes, on the belt and in flight</td>
+<td>The static mesh, used on shelves, in boxes and on the belt</td>
 </tr>
 <tr>
 <td><code>Icon</code></td>
@@ -5859,7 +5859,7 @@
 </tr>
 <tr>
 <td><code>CostPrice</code></td>
-<td>What you pay per unit. The market quote multiplies this</td>
+<td>What you pay per unit</td>
 </tr>
 <tr>
 <td><code>SuggestedPrice</code></td>
@@ -5871,7 +5871,7 @@
 </tr>
 <tr>
 <td><code>StackHeightCm</code></td>
-<td>The height of one unit, used for stacking</td>
+<td>The height of one unit</td>
 </tr>
 <tr>
 <td><code>StackMax</code></td>
@@ -5889,40 +5889,40 @@
 <td><code>DeliversNextDay</code></td>
 <td>If ticked, the box arrives at opening time the next day instead, whatever the hour</td>
 </tr>
+<tr>
+<td><code>RequiresRefrigeration</code></td>
+<td>Declared for you to read. The fridge already restricts by category</td>
+</tr>
 </tbody>
 </table>
 <p><code>DeliversNextDay</code> wins over <code>DeliveryDelayHours</code> when both are set.</p>
-<p><code>RequiresRefrigeration</code> is also on the asset and nothing reads it yet. The fridge restricts what it accepts by category like any other shelf, through its <code>DA_ShelfType_FridgeTwoDoor</code>.</p>
 <hr />
-<h2 id="getting-the-footprint-right">Getting the footprint right<a class="headerlink" href="#getting-the-footprint-right" title="Permanent link">&para;</a></h2>
-<p><code>FootprintCm</code> and <code>StackHeightCm</code> are not cosmetic. They decide how many units fit on a shelf and how many fit in a cardboard box, and both are computed at runtime from these numbers.</p>
-<p>Measure the mesh rather than guessing:</p>
+<h2 id="getting-the-size-right">Getting the size right<a class="headerlink" href="#getting-the-size-right" title="Permanent link">&para;</a></h2>
+<p><code>FootprintCm</code> and <code>StackHeightCm</code> decide how many units fit on a shelf and how many fit in a cardboard box. Measure the mesh rather than guessing:</p>
 <ol>
 <li>Open the static mesh.</li>
-<li>Read the <strong>Bounds</strong> in the details panel, or use the top and side orthographic views.</li>
+<li>Read the <strong>Bounds</strong> in the details panel.</li>
 <li><code>FootprintCm.X</code> is the width, <code>FootprintCm.Y</code> is the depth, <code>StackHeightCm</code> is the height.</li>
 </ol>
-<p>Add a millimetre or two if you want visible gaps between units on a shelf. Take one away and units interpenetrate.</p>
-<p>The consequences are immediate and worth knowing:</p>
+<p>Add a millimetre or two for a visible gap between units on the shelf. Take one away and they interpenetrate.</p>
+<p>What follows from the numbers:</p>
 <ul>
-<li>A wide product means fewer facings per row.</li>
-<li>A tall product means a row with low clearance refuses it, and it ends up on the top shelf.</li>
-<li>A large product means fewer units per case, because the box capacity is derived from the same numbers.</li>
+<li>A wide product gives fewer facings per row.</li>
+<li>A tall product is refused by rows with low clearance and ends up on a top shelf.</li>
+<li>A large product gives fewer units per case, since the box capacity comes from the same numbers.</li>
 </ul>
 <hr />
 <h2 id="pricing">Pricing<a class="headerlink" href="#pricing" title="Permanent link">&para;</a></h2>
-<p><code>CostPrice</code> is your buying price per unit and <code>SuggestedPrice</code> is the selling price. The margin between them is the whole business.</p>
-<p>A case costs <code>CostPrice × UnitsPerCase × market quote</code>, and that is what the Market app shows in its <code>TOTAL</code> column and what leaves your balance. A sale brings in <code>SuggestedPrice</code> per unit.</p>
-<p>The selling price is fixed on the asset. There is no in-game price setting screen, so <code>PriceSensitivity</code> on the customer archetypes has nothing to bite on yet and is left unread on purpose.</p>
+<p><code>CostPrice</code> is what you pay per unit, <code>SuggestedPrice</code> is what you sell it for. A case costs <code>CostPrice</code> times <code>UnitsPerCase</code>, times the market quote of the day. See <a href="../../store/economy/">Rent, tax and the wholesale market</a>.</p>
 <hr />
-<h2 id="where-a-new-product-shows-up-on-its-own">Where a new product shows up on its own<a class="headerlink" href="#where-a-new-product-shows-up-on-its-own" title="Permanent link">&para;</a></h2>
+<h2 id="what-you-get-for-free">What you get for free<a class="headerlink" href="#what-you-get-for-free" title="Permanent link">&para;</a></h2>
 <p>Once the asset exists and it is in <code>DA_App_Market.AvailableProducts</code>:</p>
 <ul>
 <li>It appears in the Market app, with its icon, price and case size.</li>
-<li>Ordering it spawns a cardboard box sized to fit it, with the right number of units inside and its icon printed on the docket.</li>
-<li>It can be put on any shelf whose type accepts its category.</li>
-<li>Customers whose archetype prefers that category will come looking for it.</li>
-<li>It scans at the checkout, groups on the receipt and shows up in the transaction journal.</li>
+<li>Ordering it spawns a cardboard box sized to fit it, with the right number of units inside and its icon on the docket.</li>
+<li>It goes on any shelf whose type accepts its category.</li>
+<li>Customers whose archetype prefers that category come looking for it.</li>
+<li>It scans at the checkout, groups on the receipt and shows up in the daily report.</li>
 </ul>
 <p>None of that needs a line of Blueprint.</p>
 <hr />

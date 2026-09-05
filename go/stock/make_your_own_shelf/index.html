@@ -4422,18 +4422,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#what-the-child-overrides-and-what-it-does-not" class="md-nav__link">
+  <a href="#what-you-set-on-the-child" class="md-nav__link">
     <span class="md-ellipsis">
-      What the child overrides, and what it does not
+      What you set on the child
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#doors-lids-and-anything-that-has-to-be-opened" class="md-nav__link">
+  <a href="#doors-and-lids" class="md-nav__link">
     <span class="md-ellipsis">
-      Doors, lids and anything that has to be opened
+      Doors and lids
     </span>
   </a>
   
@@ -4449,9 +4449,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-mesh-side" class="md-nav__link">
+  <a href="#if-you-are-modelling-the-furniture" class="md-nav__link">
     <span class="md-ellipsis">
-      The mesh side
+      If you are modelling the furniture
     </span>
   </a>
   
@@ -5692,7 +5692,7 @@
   
   
   <span class="md-ellipsis">
-    The six rules the template is built on
+    Extending the template
     
   </span>
   
@@ -5786,18 +5786,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#what-the-child-overrides-and-what-it-does-not" class="md-nav__link">
+  <a href="#what-you-set-on-the-child" class="md-nav__link">
     <span class="md-ellipsis">
-      What the child overrides, and what it does not
+      What you set on the child
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#doors-lids-and-anything-that-has-to-be-opened" class="md-nav__link">
+  <a href="#doors-and-lids" class="md-nav__link">
     <span class="md-ellipsis">
-      Doors, lids and anything that has to be opened
+      Doors and lids
     </span>
   </a>
   
@@ -5813,9 +5813,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-mesh-side" class="md-nav__link">
+  <a href="#if-you-are-modelling-the-furniture" class="md-nav__link">
     <span class="md-ellipsis">
-      The mesh side
+      If you are modelling the furniture
     </span>
   </a>
   
@@ -5838,8 +5838,7 @@
 
 
 <h1 id="build-your-own-shelf">Build your own shelf<a class="headerlink" href="#build-your-own-shelf" title="Permanent link">&para;</a></h1>
-<p>A shelf type is not a Data Asset here, it is a <strong>child Blueprint</strong>. That is the one thing the Data Asset could not give you: a shape.</p>
-<p>You duplicate <code>BP_Shelf_Gondola100</code>, swap the mesh, drag the splines onto your own shelf boards, and you have your furniture.</p>
+<p>A shelf is a child Blueprint, because what changes from one shelf to the next is a <strong>shape</strong>. You duplicate the gondola, swap the mesh, drag the splines onto your own boards, and you have your furniture.</p>
 <hr />
 <h2 id="the-recipe">The recipe<a class="headerlink" href="#the-recipe" title="Permanent link">&para;</a></h2>
 <ol>
@@ -5847,34 +5846,32 @@
 <li>Open it and set <code>ShelfMesh</code> to your own mesh.</li>
 <li>Delete or add <code>BP_StorageRow</code> components until you have one per shelf board.</li>
 <li>For each row, drag its spline points onto the <strong>front edge</strong> of its board, and set <code>DepthCm</code> and <code>ClearanceCm</code>.</li>
-<li>Make a <code>DA_ShelfType_&lt;Name&gt;</code> and put the categories it accepts in <code>AcceptedCategories</code>.</li>
+<li>Create a <code>DA_ShelfType_&lt;Name&gt;</code> and list the categories it accepts in <code>AcceptedCategories</code>.</li>
 <li>Set <code>ShelfType</code> on your Blueprint to it.</li>
-<li>If you want to be able to buy and place it, make a <code>DA_Structure_&lt;Name&gt;</code> and add it to <code>DA_App_Structures.AvailableStructures</code>. See <a href="../../build/add_a_structure/">Add a placeable structure</a>.</li>
+<li>To be able to buy and place it in game, create a <code>DA_Structure_&lt;Name&gt;</code> and add it to <code>DA_App_Structures.AvailableStructures</code>. See <a href="../../build/add_a_structure/">Add a placeable structure</a>.</li>
 </ol>
 <hr />
 <h2 id="drawing-the-rows">Drawing the rows<a class="headerlink" href="#drawing-the-rows" title="Permanent link">&para;</a></h2>
-<p>This is the part that takes the time, and it is the part that pays off.</p>
 <ul>
-<li>The spline runs <strong>along the front edge</strong> of the board. Points are in the actor's local space, so you can drag them in the Blueprint viewport.</li>
-<li>Depth goes toward the spline's <strong>Right</strong> vector. Walk the spline from its first point to its last: depth pushes to your right.</li>
-<li><code>DepthCm</code> is how far back the board is usable. Measure the board, do not guess.</li>
-<li><code>ClearanceCm</code> is the gap up to the next board. On the top row it is whatever headroom you want to allow, which is why the shipped gondola uses <code>200</code> up there.</li>
+<li>The spline runs <strong>along the front edge</strong> of the board. Points are in local space, so you drag them in the Blueprint viewport.</li>
+<li>Depth goes toward the spline's <strong>Right</strong> vector: walk the spline from its first point to its last, and depth pushes to your right.</li>
+<li><code>DepthCm</code> is how far back the board is usable. Measure the board.</li>
+<li><code>ClearanceCm</code> is the gap up to the next board. On a top row it is whatever headroom you allow — the shipped gondola uses <code>200</code>.</li>
 </ul>
-<p>A row does not have to be straight. <code>BP_Shelf_Round</code> uses three circular splines for a round display, and the products follow the curve, each one rotated to sit square on the tier it is on.</p>
+<p>A row does not have to be straight. <code>BP_Shelf_Round</code> uses three circular splines, and the products follow the curve.</p>
 <hr />
-<h2 id="what-the-child-overrides-and-what-it-does-not">What the child overrides, and what it does not<a class="headerlink" href="#what-the-child-overrides-and-what-it-does-not" title="Permanent link">&para;</a></h2>
-<p>The whole system lives on <code>BP_ShelfBase</code>. A child sets values, it does not add graphs.</p>
+<h2 id="what-you-set-on-the-child">What you set on the child<a class="headerlink" href="#what-you-set-on-the-child" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
 <th>On the child</th>
-<th>Why</th>
+<th></th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>ShelfMesh</code></td>
-<td>A variable, so it can differ per child. A component template cannot</td>
+<td>Your mesh</td>
 </tr>
 <tr>
 <td>The <code>BP_StorageRow</code> components</td>
@@ -5890,12 +5887,11 @@
 </tr>
 </tbody>
 </table>
-<p>The interaction, the stocking, the take-back, the display rebuild and the customer-facing queries all come from the base and need no work.</p>
+<p>The interaction, the stocking, the take-back and the display all come from <code>BP_ShelfBase</code>. There is no graph to write.</p>
 <hr />
-<h2 id="doors-lids-and-anything-that-has-to-be-opened">Doors, lids and anything that has to be opened<a class="headerlink" href="#doors-lids-and-anything-that-has-to-be-opened" title="Permanent link">&para;</a></h2>
-<p>If your shelf has to be opened before it can be used, override <code>IsAccessible()</code> on your child and return your own state.</p>
-<p><code>BP_Shelf_FridgeTwoDoor</code> is the shipped example. It inherits the interactable from the base, so <code>E</code> on the fridge swings both doors on a timeline, and <code>IsAccessible</code> returns <code>DoorsOpen</code>. Both stocking gestures and both action lines go away together when the doors are shut, because they all read that one function.</p>
-<p>Leave <code>HasRoomFor</code> and <code>HasUnitOf</code> alone. A closed fridge still has room and still has stock, it just cannot be reached.</p>
+<h2 id="doors-and-lids">Doors and lids<a class="headerlink" href="#doors-and-lids" title="Permanent link">&para;</a></h2>
+<p>If your shelf has to be opened before it can be used, override <code>IsAccessible()</code> on your child and return your own state. Both stocking gestures and both prompt lines disappear while it returns <code>false</code>.</p>
+<p><code>BP_Shelf_FridgeTwoDoor</code> is the shipped example: <code>E</code> swings both doors, and <code>IsAccessible</code> returns <code>DoorsOpen</code>.</p>
 <hr />
 <h2 id="shelf-types-that-ship">Shelf types that ship<a class="headerlink" href="#shelf-types-that-ship" title="Permanent link">&para;</a></h2>
 <table>
@@ -5916,14 +5912,13 @@
 </tr>
 </tbody>
 </table>
-<p>A shelf type has exactly one field, <code>AcceptedCategories</code>. If you find yourself wanting to put more on it, ask whether it belongs on the product or on the shelf Blueprint instead.</p>
+<p>A shelf type has one field, <code>AcceptedCategories</code>.</p>
 <hr />
-<h2 id="the-mesh-side">The mesh side<a class="headerlink" href="#the-mesh-side" title="Permanent link">&para;</a></h2>
-<p>If you are modelling the furniture rather than reusing a kit piece, three things matter:</p>
+<h2 id="if-you-are-modelling-the-furniture">If you are modelling the furniture<a class="headerlink" href="#if-you-are-modelling-the-furniture" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>The pivot goes on the floor</strong>, centred in the footprint. Placement snaps the pivot to the grid.</li>
-<li><strong>Give it a <code>UCX_</code> collision hull.</strong> Without one, the automatic hull will usually swallow the shelf openings and customers will refuse to approach it.</li>
-<li><strong>Keep the material slots named semantically</strong> (<code>M_Wood</code>, <code>M_Metal</code>, <code>M_SteelPainted</code>), because the props master material is assigned by slot name. See <a href="../../look/mesh_kit/">The mesh kit</a>.</li>
+<li><strong>Put the pivot on the floor</strong>, centred in the footprint. Placement snaps the pivot to the grid.</li>
+<li><strong>Give it a <code>UCX_</code> collision hull.</strong> The automatic hull swallows the shelf openings, and customers then refuse to approach it.</li>
+<li><strong>Name the material slots semantically</strong> (<code>M_Wood</code>, <code>M_Metal</code>, <code>M_SteelPainted</code>): the props master material is assigned by slot name. See <a href="../../look/mesh_kit/">The mesh kit</a>.</li>
 </ul>
 <hr />
 <p><a href="https://discord.gg/EqHCtq38jy">Join the Discord</a></p>

@@ -4695,15 +4695,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#what-gets-recorded" class="md-nav__link">
-    <span class="md-ellipsis">
-      What gets recorded
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#card" class="md-nav__link">
     <span class="md-ellipsis">
       Card
@@ -5692,7 +5683,7 @@
   
   
   <span class="md-ellipsis">
-    The six rules the template is built on
+    Extending the template
     
   </span>
   
@@ -5795,15 +5786,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#what-gets-recorded" class="md-nav__link">
-    <span class="md-ellipsis">
-      What gets recorded
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#card" class="md-nav__link">
     <span class="md-ellipsis">
       Card
@@ -5838,53 +5820,41 @@
 
 
 <h1 id="cash-change-and-the-card-terminal">Cash, change and the card terminal<a class="headerlink" href="#cash-change-and-the-card-terminal" title="Permanent link">&para;</a></h1>
-<p>Taking payment is a set of gestures on objects in the world. There is no payment screen, and there is no confirmation dialog. You take what the customer holds out, and you finish the sale with your hands.</p>
-<p>The rule underneath all of it: <strong>what you actually do is what gets recorded.</strong> Miscount the change and you lose the difference. Type the wrong amount into the terminal and that is what you charge.</p>
+<p>There is no payment screen. You take what the customer holds out, and you finish the sale by hand.</p>
+<p>The rule underneath all of it: <strong>what you do is what gets recorded.</strong> Miscount the change and you lose the difference. Type the wrong amount into the terminal and that is what you charge.</p>
 <hr />
 <h2 id="what-the-customer-holds-out">What the customer holds out<a class="headerlink" href="#what-the-customer-holds-out" title="Permanent link">&para;</a></h2>
-<p>When the last item is scanned, <code>BeginPayment</code> picks a payment type from the till's <code>AcceptedPayments</code> and the customer holds something out. Not their hand: a real object, <code>BP_PaymentOffer</code>, sitting in a child actor component in their right hand.</p>
-<p>It is one actor that adapts, with two verbs, <code>OfferCard()</code> and <code>OfferCash()</code>. It shows a card or a banknote, turns its collision and its interactable on, and waits.</p>
-<p>You click the object, not the person. Customers are not interactable at all, which is why the outline lands on the card and not on a shopper's chest.</p>
-<p>A till set to <code>Cash</code> only means you count out change on every single sale. That is its whole effect, and it is enough.</p>
+<p>When the last item is scanned, the customer holds out a real object — a card or a banknote — in their right hand. You click the object, not the person: customers are not interactable, so the outline lands on the card and never on a shopper's chest.</p>
+<p>Which one they offer comes from <code>AcceptedPayments</code> on the till. Set it to <code>Cash</code> only and you count out change on every single sale.</p>
 <hr />
 <h2 id="cash">Cash<a class="headerlink" href="#cash" title="Permanent link">&para;</a></h2>
 <ol>
-<li>The customer holds out a note. <code>CashOffer()</code> is the smallest note from <code>BillValues</code> that covers the total: <code>$6.40</code> gets a <code>$10</code>, <code>$63</code> gets two <code>$50</code>s worth.</li>
-<li>Press <code>E</code>. The note leaves their hand, goes into the till, and the drawer slides open.</li>
+<li>The customer holds out the smallest note from <code>BillValues</code> that covers the total: <code>$6.40</code> gets a <code>$10</code>.</li>
+<li>Press <code>E</code>. The note goes into the till and the drawer slides open.</li>
 <li>Click the money piles in the drawer, one at a time, to build the change.</li>
 <li>Push the drawer shut to finish the sale.</li>
 </ol>
-<p>The drawer is open exactly when you owe change. There is no separate "drawer open" state, because two names for one truth is a desynchronisation waiting to happen.</p>
-<p><strong>Each pile of money is its own actor.</strong> Four bundles of notes and four trays of coins, each a <code>BP_DrawerMoney</code> carrying its own denomination and its own label. Aiming at the <code>$20</code> bundle prompts <code>$20</code> and clicking it adds <code>$20</code>. The prompt and the amount are two fields on the same actor, so they cannot disagree.</p>
-<p>Changing what a drawer holds is moving those child actors around in the Details panel and setting their denomination. Adding a fifth denomination needs a mesh and a row in the money texture atlas as well.</p>
+<p>The drawer is open exactly when you owe change.</p>
+<p><strong>Each pile of money is its own actor.</strong> Four bundles of notes and four trays of coins, each carrying its own denomination: aiming at the <code>$20</code> bundle prompts <code>$20</code>, and clicking it adds <code>$20</code>.</p>
+<p><strong>To change what a drawer holds</strong>, move those <code>BP_DrawerMoney</code> child actors around in the Details panel and set their denomination. A fifth denomination also needs a mesh and a row in the money texture atlas.</p>
 <hr />
 <h2 id="the-panel-on-the-drawer">The panel on the drawer<a class="headerlink" href="#the-panel-on-the-drawer" title="Permanent link">&para;</a></h2>
-<p>While the drawer is open, a small readout sits on it:</p>
+<p>While the drawer is open, a readout sits on it:</p>
 <div class="highlight"><pre><span></span><code>RECEIVED  −  TOTAL   =   CHANGE DUE
                 GIVEN
 </code></pre></div>
-<p><code>GIVEN</code> is what you have put on the counter so far. It is red while it does not add up and green when it does, with an arrow telling you whether to add more or take some back.</p>
-<p><strong>It does not show you the remainder.</strong> The subtraction is yours to do, otherwise counting change is just watching a number reach zero.</p>
-<p>The panel disappears with the drawer.</p>
-<hr />
-<h2 id="what-gets-recorded">What gets recorded<a class="headerlink" href="#what-gets-recorded" title="Permanent link">&para;</a></h2>
-<p><code>FinishSale</code> does not log the receipt total. For a cash sale it logs:</p>
-<div class="highlight"><pre><span></span><code>Total + ( ChangeDue − ComposedChange )
-</code></pre></div>
-<p>Give too much back and you are down. Give too little and you are up. There is no penalty rule anywhere, because none is needed.</p>
+<p><code>GIVEN</code> is what you have put on the counter so far, red while it does not add up and green when it does, with an arrow saying whether to add more or take some back. It does not show you the remainder — the subtraction is yours to do.</p>
+<p>Give too much back and you are down by the difference. Give too little and you keep it.</p>
 <hr />
 <h2 id="card">Card<a class="headerlink" href="#card" title="Permanent link">&para;</a></h2>
-<p>The card terminal is <code>BP_CardTerminal</code>, a child of <code>BP_ScreenBase</code>, mounted on the counter and <strong>facing the cashier</strong>, not the queue. That is what decides where it sits on the counter.</p>
+<p>The terminal is mounted on the counter <strong>facing the cashier</strong>, not the queue.</p>
 <ol>
-<li>The customer holds out a card. Click it. The card flies to the terminal and the terminal wakes up.</li>
-<li>Press <code>E</code> to lean into the terminal. The keypad appears.</li>
+<li>The customer holds out a card. Click it: the card flies to the terminal, which wakes up.</li>
+<li>Press <code>E</code> to lean in. The keypad appears.</li>
 <li><strong>Type the amount</strong> on the keypad.</li>
 <li>Green approves, red closes without charging.</li>
 </ol>
-<p>Typing the amount is the same design as counting the change: what you enter is what is charged. Getting it wrong costs or earns you money, with no extra rule.</p>
-<p>The customer does not enter a PIN. That belongs to them.</p>
-<p>Because the sale is closed by the terminal rather than by the customer, you can back out at any point before you press green. The customer stays at the front of the queue until the sale actually completes.</p>
-<p>The terminal is dark until a card is in it. <code>PowerOn</code> shows the display and the card and enables the interactable in one call, <code>PowerOff</code> puts it back to sleep.</p>
+<p>What you type is what is charged. You can back out at any point before green, and the customer stays at the front of the queue until the sale actually completes. They do not enter a PIN.</p>
 <hr />
 <h2 id="where-to-change-things">Where to change things<a class="headerlink" href="#where-to-change-things" title="Permanent link">&para;</a></h2>
 <table>
@@ -5909,7 +5879,7 @@
 </tr>
 <tr>
 <td>How far and how fast the drawer slides</td>
-<td><code>DrawerTravelCm</code> (34) and <code>DrawerSpeedCmS</code> (60)</td>
+<td><code>DrawerTravelCm</code> (<code>34</code>) and <code>DrawerSpeedCmS</code> (<code>60</code>)</td>
 </tr>
 <tr>
 <td>The sale sound</td>
@@ -5917,7 +5887,7 @@
 </tr>
 </tbody>
 </table>
-<p><code>SaleSoundSpot</code> exists because a sound played at an actor's origin plays from inside the furniture, and the occlusion trace then hits the counter before it reaches your ears. It is a plain scene component sitting 10 cm above the counter top, and you can drag it.</p>
+<p><code>SaleSoundSpot</code> is a plain scene component 10 cm above the counter top, and you can drag it. A sound played at the actor's origin would play from inside the furniture.</p>
 <hr />
 <p><a href="https://discord.gg/EqHCtq38jy">Join the Discord</a></p>
 

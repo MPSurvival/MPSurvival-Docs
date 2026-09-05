@@ -5169,27 +5169,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#how-an-app-talks-to-the-game" class="md-nav__link">
+  <a href="#the-reading-pose" class="md-nav__link">
     <span class="md-ellipsis">
-      How an app talks to the game
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#why-the-screens-are-sharp" class="md-nav__link">
-    <span class="md-ellipsis">
-      Why the screens are sharp
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#reading-pose" class="md-nav__link">
-    <span class="md-ellipsis">
-      Reading pose
+      The reading pose
     </span>
   </a>
   
@@ -5692,7 +5674,7 @@
   
   
   <span class="md-ellipsis">
-    The six rules the template is built on
+    Extending the template
     
   </span>
   
@@ -5795,27 +5777,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#how-an-app-talks-to-the-game" class="md-nav__link">
+  <a href="#the-reading-pose" class="md-nav__link">
     <span class="md-ellipsis">
-      How an app talks to the game
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#why-the-screens-are-sharp" class="md-nav__link">
-    <span class="md-ellipsis">
-      Why the screens are sharp
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#reading-pose" class="md-nav__link">
-    <span class="md-ellipsis">
-      Reading pose
+      The reading pose
     </span>
   </a>
   
@@ -5838,14 +5802,13 @@
 
 
 <h1 id="the-office-computer">The office computer<a class="headerlink" href="#the-office-computer" title="Permanent link">&para;</a></h1>
-<p>Management does not happen in a menu. It happens on a computer sitting on the desk in the back office, and you walk over to it.</p>
-<p>Press <code>E</code> and the camera leans in, the crosshair and prompt disappear, whatever you were carrying is put down, and the mouse cursor appears. From there it is a desktop: icons, windows with title bars, a taskbar with the time on it. <code>Tab</code> or <code>E</code> leans you back out.</p>
+<p>Management happens on a computer on the desk in the back office, and you walk over to it.</p>
+<p>Press <code>E</code> and the camera leans in: the crosshair and prompt go away, whatever you were carrying is put down, and the mouse cursor appears. From there it is a desktop — icons, a window with a title bar, a taskbar with the time on it. <code>Tab</code> or <code>E</code> leans you back out.</p>
 <hr />
 <h2 id="the-desktop">The desktop<a class="headerlink" href="#the-desktop" title="Permanent link">&para;</a></h2>
-<p><code>BP_Computer</code> is a child of <code>BP_ScreenBase</code> and adds almost nothing. It inherits the interactable, the reading pose, the focus and the exit key.</p>
-<p>What it does own is <code>Apps</code>, an array of <code>BP_AppDataAsset</code> in its Details panel. The computer knows nothing about any app: it reads that array, draws an icon for each entry, and instantiates the widget class the asset names.</p>
-<p>The order of the array is the order on the desktop. There is no sort field, because nothing would read one.</p>
-<p>The chrome is three bands on a 1920 × 1080 canvas:</p>
+<p><code>BP_Computer</code> holds one thing you edit: <code>Apps</code>, an array of <code>BP_AppDataAsset</code> in its Details panel. It draws an icon for each entry, in the order of the array, and opens the widget class the asset names.</p>
+<p><strong>To add or remove an app on a computer</strong>, edit that array. See <a href="../add_an_app/">Write your own app</a>.</p>
+<p>The chrome is three bands:</p>
 <table>
 <thead>
 <tr>
@@ -5872,18 +5835,15 @@
 </tr>
 </tbody>
 </table>
-<p>The title bar takes the app's own colour, and that is the only accent anywhere in the interface. Everything else stays on the two colours the rest of the game uses. See <a href="../../ui/colours_and_fonts/">Colours and fonts</a>.</p>
-<p>The close button closes the <strong>app</strong>, not the computer. You leave the computer by stepping back.</p>
+<p>The title bar takes the app's own colour, and that is the only accent in the interface. The close button closes the <strong>app</strong>, not the computer — you leave the computer by stepping back.</p>
 <hr />
 <h2 id="the-mouse">The mouse<a class="headerlink" href="#the-mouse" title="Permanent link">&para;</a></h2>
-<p>It is the real mouse cursor, not a drawn one. The controller switches to <strong>Game and UI</strong> input mode with the cursor shown, and a <code>WidgetInteractionComponent</code> aimed from the cursor position does the pointing.</p>
-<p>Hover, click, scroll and drag are all the engine's own, which is why scroll boxes and buttons behave the way you expect without anything being wired.</p>
-<p>Two consequences worth knowing if you build your own screen:</p>
+<p>It is the real cursor, so hover, click, scroll and drag all behave as you expect, with nothing wired.</p>
+<p>Two things to copy if you build a screen of your own, both checkboxes, both already set on the shipped screens:</p>
 <ul>
-<li><strong>Buttons on a world screen have to be non-focusable.</strong> Otherwise <code>Tab</code> walks a focus rectangle around them instead of leaving the screen.</li>
+<li><strong>Buttons on a world screen must be non-focusable</strong>, or <code>Tab</code> walks a focus rectangle around them instead of leaving the screen.</li>
 <li><strong>The widget component's window must not be focusable either</strong>, or it swallows keyboard input.</li>
 </ul>
-<p>Both are checkboxes, and both are already set on the shipped screens.</p>
 <hr />
 <h2 id="the-six-apps">The six apps<a class="headerlink" href="#the-six-apps" title="Permanent link">&para;</a></h2>
 <table>
@@ -5920,53 +5880,11 @@
 </tr>
 </tbody>
 </table>
-<p>Five of them filter their list through <code>IsUnlocked</code>, so a product, a structure, a candidate or a campaign that is locked behind progression is simply not there. The desktop filters its own icons the same way, which is why the Ads app does not exist until day 3.</p>
+<p>Five of them hide what is still locked behind progression, and the desktop hides its own icons the same way, which is why the Ads app does not appear until day 3. See <a href="../../progress/unlocks/">Unlocks</a>.</p>
 <hr />
-<h2 id="how-an-app-talks-to-the-game">How an app talks to the game<a class="headerlink" href="#how-an-app-talks-to-the-game" title="Permanent link">&para;</a></h2>
-<p>Two entry points, and no polling.</p>
-<table>
-<thead>
-<tr>
-<th>Function</th>
-<th>When it runs</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>BindApp</code></td>
-<td>When the app is opened. It rebuilds the whole list</td>
-</tr>
-<tr>
-<td><code>RefreshBalance</code></td>
-<td>When your balance changes</td>
-</tr>
-</tbody>
-</table>
-<p><code>BindApp</code> clears the rows and refills them, which is what makes reopening an app show the truth after you bought something. <code>RefreshBalance</code> only updates the affordability state of the rows that are already there.</p>
-<p>Keeping them separate matters: an early version rebuilt the entire list on every balance change, so buying something destroyed and recreated the row you had just clicked.</p>
-<p>The balance itself arrives through the store manager's <code>OnBalanceChanged</code> dispatcher. The clock is polled once a second, because the clock is the one thing nothing broadcasts per minute.</p>
-<hr />
-<h2 id="why-the-screens-are-sharp">Why the screens are sharp<a class="headerlink" href="#why-the-screens-are-sharp" title="Permanent link">&para;</a></h2>
-<p>Two numbers have to agree for a world screen to look right, and they are easy to get wrong.</p>
-<p><strong>The render target must be at least as big as the screen's footprint in pixels.</strong> A widget drawn at 1024 across but covering 1411 pixels of your monitor is being magnified, and magnified UI looks soft no matter what anti-aliasing you use.</p>
-<p>The rule:</p>
-<div class="highlight"><pre><span></span><code>DrawSize  ≈  the footprint in pixels when you are leaning in
-Scale     =  physical width in cm  /  DrawSize
-</code></pre></div>
-<p><strong>Lay the widget out at a design size, then scale it.</strong> The shipped screens use a <code>DesignScale</code> scale box wrapping a <code>DesignSize</code> sized box. Without that, changing <code>DrawSize</code> re-flows the whole layout instead of just re-rendering it.</p>
-<p>Any new screen should start with the same pair.</p>
-<hr />
-<h2 id="reading-pose">Reading pose<a class="headerlink" href="#reading-pose" title="Permanent link">&para;</a></h2>
-<p><code>ReadPose</code> is a scene component on <code>BP_ScreenBase</code>, and it is where the camera goes when you lean in. It is a component rather than a computed value so you can nudge the reading distance by dragging it in the viewport.</p>
-<p>Its distance is picked so the screen fills a sensible part of the frame. The field of view drops by 30 while reading, which is enough to feel like leaning in without reading as a camera move.</p>
-<p>Leaning in also does four things you will want if you build a screen of your own, and all four are in the base class:</p>
-<ul>
-<li>Hides the crosshair and the interaction prompt.</li>
-<li>Releases whatever you are carrying.</li>
-<li>Freezes movement and look through the controller's ignore counters.</li>
-<li>Shows the mouse cursor.</li>
-</ul>
-<p>Stepping back undoes all four, and there is exactly one exit path, so a third way out would have to go through it.</p>
+<h2 id="the-reading-pose">The reading pose<a class="headerlink" href="#the-reading-pose" title="Permanent link">&para;</a></h2>
+<p><code>ReadPose</code> is a scene component on <code>BP_ScreenBase</code>: it is where the camera goes when you lean in, so you can nudge the reading distance by dragging it in the viewport. The field of view drops by 30 while reading.</p>
+<p>Leaning in also hides the crosshair and the prompt, releases whatever you are carrying, freezes movement and look, and shows the cursor. Stepping back undoes all four. Any screen you build on <code>BP_ScreenBase</code> gets that for free — see <a href="../../ui/diegetic_screens/">Screens in the world</a>.</p>
 <hr />
 <p><a href="https://discord.gg/EqHCtq38jy">Join the Discord</a></p>
 

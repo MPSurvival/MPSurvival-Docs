@@ -5367,15 +5367,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-rating-ring" class="md-nav__link">
-    <span class="md-ellipsis">
-      The rating ring
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#notifications" class="md-nav__link">
     <span class="md-ellipsis">
       Notifications
@@ -5701,7 +5692,7 @@
   
   
   <span class="md-ellipsis">
-    The six rules the template is built on
+    Extending the template
     
   </span>
   
@@ -5786,15 +5777,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-rating-ring" class="md-nav__link">
-    <span class="md-ellipsis">
-      The rating ring
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#notifications" class="md-nav__link">
     <span class="md-ellipsis">
       Notifications
@@ -5856,7 +5838,7 @@
 
 
 <h1 id="the-hud-and-the-interaction-prompt">The HUD and the interaction prompt<a class="headerlink" href="#the-hud-and-the-interaction-prompt" title="Permanent link">&para;</a></h1>
-<p>The interface is organised into four layers, and they never mix.</p>
+<p>The interface is in four layers, and they never mix.</p>
 <table>
 <thead>
 <tr>
@@ -5888,10 +5870,9 @@
 </tr>
 </tbody>
 </table>
-<p>The question that decides where a widget goes is <strong>whose information is this</strong>. The till display shows the till's receipt, so it lives on the till. The carry panel shows your available keys, so it belongs to you even though it is drawn next to the box.</p>
+<p>When you add a widget, the question that places it is <strong>whose information is this</strong>. The till display shows the till's receipt, so it lives on the till. The carry panel shows your keys, so it belongs to you even though it is drawn next to the box.</p>
 <hr />
 <h2 id="the-status-panel">The status panel<a class="headerlink" href="#the-status-panel" title="Permanent link">&para;</a></h2>
-<p>One block, top right, on a grid. The rating ring on the left, the balance in large type, and the day and clock on a secondary line.</p>
 <div class="highlight"><pre><span></span><code>       DAY 1 · MON        8:00 AM
   ◯    $1,240.00
 </code></pre></div>
@@ -5917,7 +5898,7 @@
 </tr>
 <tr>
 <td>Clock</td>
-<td>Right-aligned on the balance's width, no separator in the middle</td>
+<td>Right-aligned on the balance's width</td>
 </tr>
 <tr>
 <td>Rating ring</td>
@@ -5925,12 +5906,8 @@
 </tr>
 </tbody>
 </table>
-<p>The weekday names are <code>WeekdayNames</code> on the HUD, in <code>Settings</code>. The day number maps to a weekday through one function on the store manager, so payroll, shift toggles and the HUD all agree on what day it is.</p>
-<p>The panel is a <code>Border</code> using a native <code>RoundedBox</code>, radius 6, with no texture behind it. Reskinning it is the Details panel, not an asset.</p>
-<p>Money and rating arrive through the store manager's dispatchers. Only the clock is on a tick, and the text is rebuilt only when the minute changes.</p>
-<hr />
-<h2 id="the-rating-ring">The rating ring<a class="headerlink" href="#the-rating-ring" title="Permanent link">&para;</a></h2>
-<p><code>MI_RatingRing</code> draws the arc and its colour from one input.</p>
+<p>The weekday names are <code>WeekdayNames</code> on the HUD, in <code>Settings</code>. The panel is a <code>Border</code> using a native <code>RoundedBox</code>, radius 6, with no texture behind it, so reskinning it is the Details panel and not an asset.</p>
+<p><strong>To restyle the rating ring</strong>, open <code>MI_RatingRing</code>:</p>
 <table>
 <thead>
 <tr>
@@ -5957,20 +5934,14 @@
 </tr>
 </tbody>
 </table>
-<p>The colour ramp is inside the material: red at 0, orange around 1.7, yellow around 3.3, green at 5, all desaturated. Because one input drives both the arc and the colour, they cannot disagree, and changing the mood of the rating is four colour swatches.</p>
+<p>Its colour ramp is inside the material: red at 0, orange around 1.7, yellow around 3.3, green at 5.</p>
 <hr />
 <h2 id="notifications">Notifications<a class="headerlink" href="#notifications" title="Permanent link">&para;</a></h2>
-<p>They stack at the top left and fade out after <code>NotificationSeconds</code>.</p>
-<p>Two things post them today:</p>
-<ul>
-<li>A customer arriving at a checkout with nobody within <code>AttendedRadiusCm</code>.</li>
-<li>The store rating crossing a whole number, in either direction.</li>
-</ul>
-<p>Posting one from your own code is a call to the manager's notification dispatcher. The HUD subscribes to it exactly like it subscribes to money and rating.</p>
+<p>They stack at the top left and fade out after <code>NotificationSeconds</code>. Two things post them today: a customer arriving at a checkout with nobody within <code>AttendedRadiusCm</code>, and the store rating crossing a whole number.</p>
+<p><strong>To post one of your own</strong>, call the store manager's notification dispatcher.</p>
 <hr />
 <h2 id="the-crosshair-and-the-prompt">The crosshair and the prompt<a class="headerlink" href="#the-crosshair-and-the-prompt" title="Permanent link">&para;</a></h2>
-<p><code>BP_InteractionComponent</code> is the only thing that decides what you are looking at, and the only thing that drives the crosshair.</p>
-<p>It sphere traces from the camera every frame, up to <code>TraceLength</code> (220 cm), and the result feeds two things: the crosshair material's <code>Focus</code> parameter, which is interpolated rather than snapped, and a single line of text underneath.</p>
+<p><code>BP_InteractionComponent</code> on the character decides what you are looking at and drives the crosshair. Settings, in <code>Settings|Interaction</code>:</p>
 <table>
 <thead>
 <tr>
@@ -5981,7 +5952,7 @@
 <tbody>
 <tr>
 <td><code>TraceLength</code></td>
-<td>How far you can reach. Also how far <code>G</code> will place an object</td>
+<td>How far you can reach. Also how far <code>G</code> places an object</td>
 </tr>
 <tr>
 <td><code>FocusBlendSpeed</code></td>
@@ -5993,13 +5964,15 @@
 </tr>
 </tbody>
 </table>
-<p>The label is deliberately quiet: D-DIN at 16, 0.55 opacity, no outline. It says what the thing is, not which key to press. The key is <code>E</code> everywhere and does not need announcing.</p>
-<p>There is no key badge and no hold ring. Both were built and removed. <strong>Hold-to-interact still works</strong> in code, through <code>HoldSeconds</code> on the interactable, it just has no visual feedback, and nothing in the shipped project uses it. If you need it, the fill belongs in <code>M_Crosshair</code> rather than on a new badge.</p>
-<p><strong>If <code>CrosshairClass</code> is empty on the interaction component, nothing ever gets a prompt.</strong> The component refuses to start ticking rather than half working. It is the first place to look if interaction stops entirely.</p>
+<p>The label is quiet: D-DIN at 16, 0.55 opacity, no outline. It says what the thing is, not which key to press, since the key is <code>E</code> everywhere.</p>
+<p>The crosshair is the whole prompt: no key badge, no hold ring. <strong>Hold-to-interact works</strong> through <code>HoldSeconds</code> on the interactable, and when you use it, the fill belongs in <code>M_Crosshair</code>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If <code>CrosshairClass</code> is empty on the interaction component, nothing ever gets a prompt. It is the first place to look if interaction stops entirely.</p>
+</div>
 <hr />
 <h2 id="making-something-interactive">Making something interactive<a class="headerlink" href="#making-something-interactive" title="Permanent link">&para;</a></h2>
-<p>Add a <code>BP_InteractableComponent</code> and wire its <code>OnInteracted</code> event in the actor's own graph.</p>
-<p>There is no interface to implement and no parent class to inherit.</p>
+<p>Add a <code>BP_InteractableComponent</code> and wire its <code>OnInteracted</code> event in the actor's own graph. There is no interface to implement and no parent class to inherit.</p>
 <table>
 <thead>
 <tr>
@@ -6014,7 +5987,7 @@
 </tr>
 <tr>
 <td><code>HoldSeconds</code></td>
-<td>0 for a press, more for a hold</td>
+<td><code>0</code> for a press, more for a hold</td>
 </tr>
 <tr>
 <td><code>Enabled</code></td>
@@ -6022,16 +5995,15 @@
 </tr>
 </tbody>
 </table>
-<p><code>Enabled</code> also controls the outline. An interactable switched off at runtime loses its outline in the same frame, which matters because a disabled interactable still blocks the trace and would otherwise look live.</p>
-<p>The component broadcasts <code>OnFocusChanged</code> when the aimed target changes, at the edge rather than every tick. That is how a carried box knows what you are pointing at without ever looking for the player.</p>
+<p><code>Enabled</code> also controls the outline, so an interactable switched off at runtime stops looking live in the same frame.</p>
+<p>The component broadcasts <code>OnFocusChanged</code> when the aimed target changes, which is how a carried box knows what you are pointing at without looking for the player.</p>
 <hr />
 <h2 id="the-action-panel">The action panel<a class="headerlink" href="#the-action-panel" title="Permanent link">&para;</a></h2>
 <p>While you are carrying something, a panel of key prompts sits beside it. See <a href="../../delivery/carrying/">Carrying</a>.</p>
 <p>It also carries a hint line: when edit mode refuses to pick something up, the reason is printed under the keys in the <code>Danger</code> colour.</p>
 <hr />
 <h2 id="numbers-and-locale">Numbers and locale<a class="headerlink" href="#numbers-and-locale" title="Permanent link">&para;</a></h2>
-<p>Numbers are formatted in the machine's culture, because <code>To Text (Float)</code> goes through the engine's number formatter.</p>
-<p>On a French machine the balance reads <code>$1 000,00</code> and the rating <code>3,0</code>; on an English one, <code>$1,000.00</code> and <code>3.0</code>. That is the right behaviour for a shipped game. It is worth knowing if you are taking screenshots, since a dollar sign next to a decimal comma reads as a bug.</p>
+<p>Numbers are formatted in the machine's culture. On a French machine the balance reads <code>$1 000,00</code> and the rating <code>3,0</code>; on an English one, <code>$1,000.00</code> and <code>3.0</code>. Worth knowing when you take screenshots.</p>
 <hr />
 <p><a href="https://discord.gg/EqHCtq38jy">Join the Discord</a></p>
 

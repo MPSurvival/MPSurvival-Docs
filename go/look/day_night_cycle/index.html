@@ -5535,18 +5535,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#how-it-works" class="md-nav__link">
+  <a href="#setting-it-up" class="md-nav__link">
     <span class="md-ellipsis">
-      How it works
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#the-suns-intensity-is-not-driven" class="md-nav__link">
-    <span class="md-ellipsis">
-      The sun's intensity is not driven
+      Setting it up
     </span>
   </a>
   
@@ -5574,15 +5565,6 @@
   <a href="#timing" class="md-nav__link">
     <span class="md-ellipsis">
       Timing
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#what-it-does-not-do" class="md-nav__link">
-    <span class="md-ellipsis">
-      What it does not do
     </span>
   </a>
   
@@ -5692,7 +5674,7 @@
   
   
   <span class="md-ellipsis">
-    The six rules the template is built on
+    Extending the template
     
   </span>
   
@@ -5768,18 +5750,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#how-it-works" class="md-nav__link">
+  <a href="#setting-it-up" class="md-nav__link">
     <span class="md-ellipsis">
-      How it works
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#the-suns-intensity-is-not-driven" class="md-nav__link">
-    <span class="md-ellipsis">
-      The sun's intensity is not driven
+      Setting it up
     </span>
   </a>
   
@@ -5812,15 +5785,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#what-it-does-not-do" class="md-nav__link">
-    <span class="md-ellipsis">
-      What it does not do
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -5838,20 +5802,16 @@
 
 
 <h1 id="the-daynight-cycle">The day/night cycle<a class="headerlink" href="#the-daynight-cycle" title="Permanent link">&para;</a></h1>
-<p>The sun follows the store clock. There is no separate time of day, no weather, and nothing to synchronise.</p>
+<p>The sun follows the store clock. There is no separate time of day to set and nothing to synchronise: freeze the clock at closing time and the sun stops with it.</p>
 <hr />
-<h2 id="how-it-works">How it works<a class="headerlink" href="#how-it-works" title="Permanent link">&para;</a></h2>
+<h2 id="setting-it-up">Setting it up<a class="headerlink" href="#setting-it-up" title="Permanent link">&para;</a></h2>
 <p><code>BP_DayNightCycle</code> is an actor you place in the level. Fill in its <code>Sun</code> and <code>Moon</code> references with the eyedropper in the Details panel and it does the rest.</p>
-<p>It reads <code>GetClockHours()</code> from the store manager, which is the continuous decimal hour, and turns it into a rotation:</p>
-<div class="highlight"><pre><span></span><code>Pitch = −180 × ( Hours − SunriseHour ) / ( SunsetHour − SunriseHour )
-</code></pre></div>
-<p>At sunrise the sun is on the horizon, at midday it is overhead, at sunset it is on the opposite horizon.</p>
 <table>
 <thead>
 <tr>
 <th>Field</th>
 <th>What it does</th>
-<th>Shipped default</th>
+<th>Shipped</th>
 </tr>
 </thead>
 <tbody>
@@ -5877,40 +5837,29 @@
 </tr>
 </tbody>
 </table>
-<p>The actor is the <strong>only</strong> thing that writes the sun's rotation. Everything else about the sky follows: <strong>Atmosphere Sun Light</strong> is ticked on the directional light and the sky light is in <strong>Real Time Capture</strong>, so the horizon colour, the fog and the sky all move on their own.</p>
-<p>Because it reads the clock rather than ticking its own timer, it <strong>stops when the clock stops</strong>. Freeze the clock at closing time and the sun stops with it, with nothing written to make that happen.</p>
-<hr />
-<h2 id="the-suns-intensity-is-not-driven">The sun's intensity is not driven<a class="headerlink" href="#the-suns-intensity-is-not-driven" title="Permanent link">&para;</a></h2>
-<p>Worth stating plainly, because it looks like an obvious thing to add: <strong>do not drive <code>Intensity</code> on the directional light</strong>.</p>
-<p>An intensity curve tied to elevation looks right for one frame and then blackens the sky, because the atmosphere derives the sky colour from the light's intensity as well as its direction. Set the intensity once in the Details panel and only write the rotation.</p>
+<p>At sunrise the sun is on the horizon, at midday overhead, at sunset on the opposite horizon. <strong>Atmosphere Sun Light</strong> is ticked on the directional light and the sky light is in <strong>Real Time Capture</strong>, so the horizon colour, the fog and the sky follow on their own.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><strong>Do not drive <code>Intensity</code> on the directional light.</strong> The atmosphere derives the sky colour from the intensity as well as the direction, so an intensity curve blackens the sky. Set the intensity once in the Details panel and write only the rotation.</p>
+</div>
 <hr />
 <h2 id="the-moon">The moon<a class="headerlink" href="#the-moon" title="Permanent link">&para;</a></h2>
-<p>The moon is a directional light plus a sprite, locked 180 degrees from the sun. Its own yaw and peak elevation are separate, so it crosses the sky on a believable arc rather than retracing the sun's path with an offset.</p>
-<p>Its light is dim, around 0.15 lux at 12000 K. It is there so the store is not pitch black at night, not so you can read by it.</p>
-<p>The sprite is a real photograph from NASA's Scientific Visualization Studio, public domain, so it can be redistributed. <code>M_Moon</code> draws it unlit, translucent and two sided, with fog and cloud fog turned off.</p>
-<p>Two things about it that are deliberately wrong, and one that is deliberately right:</p>
-<ul>
-<li><strong>It is always full.</strong> A real moon moves about 13 degrees a day relative to the sun, which is what produces phases. Locking it opposite the sun means it is always full. Two played days are fourteen real minutes apart, so nobody compares.</li>
-<li><strong>It is never visible during the day.</strong> A full moon rises at sunset by definition, so showing one at noon would be more wrong than leaving it out.</li>
-<li><strong>Its motion across a night is correct.</strong> It travels the same arc at the same rate as the sun does across a day.</li>
-</ul>
-<p>If you want real phases, it is a <code>MoonPhaseOffset</code> advancing about 12.2 degrees a day, plus a terminator mask in <code>M_Moon</code>.</p>
+<p>A directional light plus a sprite, locked opposite the sun, with its own yaw and peak elevation so it crosses the sky on its own arc. Its light is dim, around 0.15 lux at 12000 K: enough that the store is not pitch black at night, not enough to read by.</p>
+<p>Because it is locked opposite the sun it is always full, and it never appears during the day. If you want phases, it is a <code>MoonPhaseOffset</code> advancing about 12.2 degrees a day plus a terminator mask in <code>M_Moon</code>.</p>
+<p>The sprite is a public domain NASA photograph, so it redistributes with the template.</p>
 <hr />
 <h2 id="night">Night<a class="headerlink" href="#night" title="Permanent link">&para;</a></h2>
-<p>Night is made at the <strong>exposure</strong>, not by turning lights down. With auto exposure, dimming lights just makes the eye adapt and you get a grey night instead of a dark one.</p>
-<p>The street lamps come on with the clock. <code>BP_StreetLamp</code> reads the same hour as everything else.</p>
-<p>Two lighting notes for a level of your own:</p>
+<p>Night is made at the <strong>exposure</strong>, not by turning lights down: with auto exposure, dimming lights just makes the eye adapt and you get a grey night instead of a dark one.</p>
+<p>The street lamps come on with the clock, from the same hour as everything else.</p>
+<p>Two notes for a level of your own:</p>
 <ul>
-<li><code>Cast Shadows</code> stays on for the moon light. Turning it off would save shadow maps and let moonlight pass through walls and light the shop interior at night, which is far more visible than its cost.</li>
-<li>Forward shading priority is set so the <strong>sun</strong> is the light that affects translucency and volumetric fog. At night the sun is below the horizon so they receive almost nothing, which is the right result. Giving the moon priority would light the fog at midday from a 0.5 lux source.</li>
+<li>Leave <code>Cast Shadows</code> on for the moon light, or moonlight passes through walls and lights the shop interior at night.</li>
+<li>Forward shading priority is set so the <strong>sun</strong> is the light that affects translucency and volumetric fog. Giving it to the moon would light the fog at midday from a 0.5 lux source.</li>
 </ul>
 <hr />
 <h2 id="timing">Timing<a class="headerlink" href="#timing" title="Permanent link">&para;</a></h2>
 <p>At the shipped values a day is 14 real minutes: 08:00 to 22:00 at 60 real seconds per game hour.</p>
-<p>The sun sets at 18:00, so the last four hours are played at dusk and then at night. If you want the shop to close in daylight, move <code>SunsetHour</code> rather than <code>ClockStopHour</code>, since the clock hour is also the pace of the whole day.</p>
-<hr />
-<h2 id="what-it-does-not-do">What it does not do<a class="headerlink" href="#what-it-does-not-do" title="Permanent link">&para;</a></h2>
-<p>No weather. No rain, no overcast, no wind. Adding one is a whole system, and it is not in the template.</p>
+<p>The sun sets at 18:00, so the last four hours are played at dusk and then at night. To close the shop in daylight, move <code>SunsetHour</code> rather than <code>ClockStopHour</code>, since the clock hour is also the pace of the whole day.</p>
 <hr />
 <p><a href="https://discord.gg/EqHCtq38jy">Join the Discord</a></p>
 

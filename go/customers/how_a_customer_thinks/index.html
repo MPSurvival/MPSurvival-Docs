@@ -4812,15 +4812,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#where-they-look" class="md-nav__link">
-    <span class="md-ellipsis">
-      Where they look
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#speech-bubbles" class="md-nav__link">
     <span class="md-ellipsis">
       Speech bubbles
@@ -4830,9 +4821,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#what-a-customer-carries" class="md-nav__link">
+  <a href="#customers-and-the-save-file" class="md-nav__link">
     <span class="md-ellipsis">
-      What a customer carries
+      Customers and the save file
     </span>
   </a>
   
@@ -5701,7 +5692,7 @@
   
   
   <span class="md-ellipsis">
-    The six rules the template is built on
+    Extending the template
     
   </span>
   
@@ -5813,15 +5804,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#where-they-look" class="md-nav__link">
-    <span class="md-ellipsis">
-      Where they look
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#speech-bubbles" class="md-nav__link">
     <span class="md-ellipsis">
       Speech bubbles
@@ -5831,9 +5813,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#what-a-customer-carries" class="md-nav__link">
+  <a href="#customers-and-the-save-file" class="md-nav__link">
     <span class="md-ellipsis">
-      What a customer carries
+      Customers and the save file
     </span>
   </a>
   
@@ -5856,14 +5838,7 @@
 
 
 <h1 id="how-a-customer-thinks">How a customer thinks<a class="headerlink" href="#how-a-customer-thinks" title="Permanent link">&para;</a></h1>
-<p>A customer is a Character with a brain component and a very small behaviour tree. Almost all of the decision making is in the brain, and the tree does two things: move, and act when you arrive.</p>
-<div class="highlight"><pre><span></span><code>BT_Customer
-└── Sequence   (service: BTS_CustomerBrain)
-    ├── Move To  (TargetLocation)
-    └── BTT_ActAtTarget
-</code></pre></div>
-<p>The service calls <code>BP_CustomerBrain.UpdateTarget()</code> and writes the result into the blackboard. The task calls <code>ActAtTarget()</code>. Neither of them decides anything.</p>
-<p><strong><code>UpdateTarget</code> is the only thing in the project that writes a customer's destination or what they are looking at.</strong> No task touches either. That rule exists because the alternative was tried in another template: seven tasks setting a focus and three clearing it, and characters staring at things forever.</p>
+<p>A customer walks in, finds a shelf that has something they want, browses it, takes a unit, repeats until their basket is full, queues, pays and leaves. Everything they decide is in <code>BP_CustomerBrain</code>; the behaviour tree only moves them and acts when they arrive.</p>
 <hr />
 <h2 id="the-states">The states<a class="headerlink" href="#the-states" title="Permanent link">&para;</a></h2>
 <p><code>E_CustomerState</code> drives the loop:</p>
@@ -5884,7 +5859,7 @@
 </tr>
 <tr>
 <td><code>Browsing</code></td>
-<td>Standing in front of a shelf, looking at it, waiting out <code>BrowseSeconds</code></td>
+<td>Standing in front of a shelf, waiting out <code>BrowseSeconds</code></td>
 </tr>
 <tr>
 <td><code>Picking</code></td>
@@ -5908,44 +5883,26 @@
 </tr>
 <tr>
 <td><code>LeavingAngry</code></td>
-<td>The same walk, with the rating docked</td>
+<td>The same walk, with the store rating docked</td>
 </tr>
 </tbody>
 </table>
 <hr />
 <h2 id="choosing-a-shelf">Choosing a shelf<a class="headerlink" href="#choosing-a-shelf" title="Permanent link">&para;</a></h2>
-<p>A customer only walks to a shelf that has something they want. That sounds obvious and it was not the first implementation: before it, an empty store had customers wandering from shelf to shelf forever.</p>
-<p><code>ChooseShelf</code> looks at every shelf, asks what it is actually holding, and keeps the ones carrying a product this archetype wants and can afford. A shelf that fails is struck off for this customer's visit.</p>
-<p>When the list comes up empty, the customer does not loop. They report a stock-out, which dents the store rating, and then either go and pay for whatever is already in their basket or walk out.</p>
-<p>The purchase rule lives on the <strong>archetype</strong>, not on the brain:</p>
-<div class="highlight"><pre><span></span><code>DA_Customer_*.Wants(Product, Budget) → bool
-</code></pre></div>
-<p>Preferred category, and price under the remaining budget. Overriding it in your own archetype child is where you would put "never buys frozen food after 6pm" or anything else.</p>
+<p>A customer only walks to a shelf that is actually holding something their archetype wants and can afford. A shelf that fails is struck off for the rest of their visit.</p>
+<p>When nothing is left on the list, they report a stock-out — which dents the store rating — and either pay for what is already in their basket or walk out. They never wander in circles.</p>
+<p>The buying rule is a function on the archetype, <code>Wants(Product, Budget)</code>: preferred category, and price under the remaining budget. Overriding it in your own archetype is how you get "never buys frozen food after 6pm". See <a href="../add_an_archetype/">Add a customer archetype</a>.</p>
 <hr />
 <h2 id="standing-in-front-of-a-shelf">Standing in front of a shelf<a class="headerlink" href="#standing-in-front-of-a-shelf" title="Permanent link">&para;</a></h2>
-<p>Customers do not all walk to the same point. <code>ApproachPointFor</code> picks a random spot on a ring at <code>StandOffCm</code> from the shelf and traces from eye height to check the shelf is actually visible from there. It tries <code>ApproachTries</code> times and gives up, striking the shelf off, rather than walking into a wall.</p>
-<p>That is what spreads four customers around a round display instead of stacking them on one side, and it is also what stops a shelf pushed against a wall from sending customers outside the building.</p>
-<p>Two known limits, said plainly:</p>
-<ul>
-<li>A partition <strong>lower than eye height</strong> does not block the trace, so a point behind a low wall can be accepted.</li>
-<li>Nothing reserves the point. Two customers can pick spots next to each other.</li>
-</ul>
+<p>They pick a random spot on a ring at <code>StandOffCm</code> from the shelf and check that the shelf can be seen from there, which spreads four customers around a round display instead of stacking them on one side. A shelf they cannot see from anywhere is struck off rather than walked into.</p>
+<p>Two limits worth knowing: a partition <strong>lower than eye height</strong> does not block that check, and nothing reserves a spot, so two customers can end up side by side.</p>
 <hr />
 <h2 id="patience">Patience<a class="headerlink" href="#patience" title="Permanent link">&para;</a></h2>
-<p><code>PatienceSeconds</code> on the archetype only drains <strong>while queuing</strong>, and it stops for the customer currently being served. Taking a long time to scan a big basket does not make the person you are serving angry, which is the right way round.</p>
-<p>When it runs out, the customer leaves the queue cleanly, goes to <code>LeavingAngry</code>, and the store rating drops.</p>
-<hr />
-<h2 id="where-they-look">Where they look<a class="headerlink" href="#where-they-look" title="Permanent link">&para;</a></h2>
-<p>The service reasserts orientation every tick, with one writer and two regimes:</p>
-<ul>
-<li><strong>Moving</strong>: the character rotates toward movement, the engine's own <code>bOrientRotationToMovement</code>.</li>
-<li><strong>Stopped with something to look at</strong>: the AI controller's focus points them at it.</li>
-</ul>
-<p>They only look at something once they have stopped. Walking toward a queue slot while already staring at it made them approach sideways.</p>
-<p>While browsing, the thing they look at is the shelf, and the focus is cleared when browsing ends.</p>
+<p><code>PatienceSeconds</code> on the archetype drains <strong>only while queuing</strong>, and it stops for the customer being served. Taking a long time to scan a big basket does not make the person in front of you angry.</p>
+<p>When it runs out they leave the queue, go to <code>LeavingAngry</code>, and the store rating drops.</p>
 <hr />
 <h2 id="speech-bubbles">Speech bubbles<a class="headerlink" href="#speech-bubbles" title="Permanent link">&para;</a></h2>
-<p>Customers and employees say things over their heads at specific moments. It is a Data Asset system, so a new line is content and not code.</p>
+<p>Customers and employees say things over their heads at set moments. It is a Data Asset system, so a new line is content and not code.</p>
 <table>
 <thead>
 <tr>
@@ -5964,7 +5921,7 @@
 </tr>
 <tr>
 <td><code>BP_ReactionComponent</code></td>
-<td>A screen-space widget component 110 cm above the capsule centre, on both the customer and the employee</td>
+<td>The bubble itself, on the customer and on the employee</td>
 </tr>
 <tr>
 <td><code>DT_ReactionTextStyles</code></td>
@@ -5972,12 +5929,11 @@
 </tr>
 </tbody>
 </table>
-<p>A line is a <code>Text</code> with two pieces of markup: an <code>Accent</code> rich text tag around the word to emphasise, and <code>{Subject}</code> where the caller's subject goes. A customer who cannot find anything says <code>Couldn't find any {Subject}…</code> with their preferred category in amber.</p>
-<p>Adding a moment is an enum entry, a <code>DA_Reaction_*</code>, and one call to <code>React</code> from wherever it happens.</p>
+<p>A line is a <code>Text</code> with two pieces of markup: an <code>Accent</code> tag around the word to emphasise, and <code>{Subject}</code> where the caller's subject goes. A customer who cannot find anything says <code>Couldn't find any {Subject}…</code> with their preferred category in amber.</p>
+<p><strong>To add a moment:</strong> add an entry to <code>E_ReactionEvent</code>, create a <code>DA_Reaction_*</code>, and call <code>React</code> from wherever it happens.</p>
 <hr />
-<h2 id="what-a-customer-carries">What a customer carries<a class="headerlink" href="#what-a-customer-carries" title="Permanent link">&para;</a></h2>
-<p>A customer's basket holds real stock that has already left your shelves. That is why customers are written into the save file: losing them mid-visit would quietly destroy inventory you paid for.</p>
-<p>An in-progress sale is not saved. It is cancelled and the goods are returned, which is exact rather than approximate, because money only moves in <code>FinishSale</code> and that call is all or nothing.</p>
+<h2 id="customers-and-the-save-file">Customers and the save file<a class="headerlink" href="#customers-and-the-save-file" title="Permanent link">&para;</a></h2>
+<p>Customers are written into the save, basket included, because a basket holds stock that has already left your shelves. A sale in progress is cancelled on load and its goods are returned.</p>
 <hr />
 <p><a href="https://discord.gg/EqHCtq38jy">Join the Discord</a></p>
 

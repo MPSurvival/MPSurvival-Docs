@@ -5381,27 +5381,27 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#bp_screenbase" class="md-nav__link">
-    <span class="md-ellipsis">
-      BP_ScreenBase
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#bp_screenbasewidget" class="md-nav__link">
-    <span class="md-ellipsis">
-      BP_ScreenBaseWidget
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#building-one" class="md-nav__link">
     <span class="md-ellipsis">
       Building one
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-you-get-from-the-base" class="md-nav__link">
+    <span class="md-ellipsis">
+      What you get from the base
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-widget-side" class="md-nav__link">
+    <span class="md-ellipsis">
+      The widget side
     </span>
   </a>
   
@@ -5426,9 +5426,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-one-exception-to-leaning-in" class="md-nav__link">
+  <a href="#screen-space-instead" class="md-nav__link">
     <span class="md-ellipsis">
-      The one exception to leaning in
+      Screen space instead
     </span>
   </a>
   
@@ -5692,7 +5692,7 @@
   
   
   <span class="md-ellipsis">
-    The six rules the template is built on
+    Extending the template
     
   </span>
   
@@ -5768,27 +5768,27 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#bp_screenbase" class="md-nav__link">
-    <span class="md-ellipsis">
-      BP_ScreenBase
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#bp_screenbasewidget" class="md-nav__link">
-    <span class="md-ellipsis">
-      BP_ScreenBaseWidget
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#building-one" class="md-nav__link">
     <span class="md-ellipsis">
       Building one
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-you-get-from-the-base" class="md-nav__link">
+    <span class="md-ellipsis">
+      What you get from the base
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-widget-side" class="md-nav__link">
+    <span class="md-ellipsis">
+      The widget side
     </span>
   </a>
   
@@ -5813,9 +5813,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-one-exception-to-leaning-in" class="md-nav__link">
+  <a href="#screen-space-instead" class="md-nav__link">
     <span class="md-ellipsis">
-      The one exception to leaning in
+      Screen space instead
     </span>
   </a>
   
@@ -5838,11 +5838,19 @@
 
 
 <h1 id="screens-in-the-world">Screens in the world<a class="headerlink" href="#screens-in-the-world" title="Permanent link">&para;</a></h1>
-<p>Three screens ship with the template: the checkout display, the card terminal and the office computer. All three are children of one class, and two of them have no graph at all.</p>
-<p>If you want a screen of your own, this is the page.</p>
+<p>Three screens ship with the template: the checkout display, the card terminal and the office computer. All three are children of <code>BP_ScreenBase</code>, and two of them have no graph at all.</p>
 <hr />
-<h2 id="bp_screenbase"><code>BP_ScreenBase</code><a class="headerlink" href="#bp_screenbase" title="Permanent link">&para;</a></h2>
-<p>Two components and everything else inherited.</p>
+<h2 id="building-one">Building one<a class="headerlink" href="#building-one" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Create a child of <code>BP_ScreenBase</code>.</li>
+<li>Set <code>ScreenMesh</code> to your monitor mesh.</li>
+<li>Set <code>Display.WidgetClass</code> to your widget, a child of <code>BP_ScreenBaseWidget</code>.</li>
+<li>Position and scale <code>Display</code> so it sits on the glass.</li>
+<li>Move <code>ReadPose</code> until leaning in frames the screen the way you want.</li>
+</ol>
+<p><code>BP_CheckoutScreen</code> is exactly that and nothing more: two values in the Details panel and an empty graph. It is the one to copy.</p>
+<hr />
+<h2 id="what-you-get-from-the-base">What you get from the base<a class="headerlink" href="#what-you-get-from-the-base" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -5857,40 +5865,28 @@
 </tr>
 <tr>
 <td><code>Display</code></td>
-<td>A <code>WidgetComponent</code> for the panel itself</td>
+<td>The <code>WidgetComponent</code> for the panel</td>
 </tr>
 <tr>
 <td><code>ReadPose</code></td>
-<td>A scene component marking where the camera goes</td>
+<td>Where the camera goes when you lean in</td>
 </tr>
 </tbody>
 </table>
-<p>What the base already does, so no child has to:</p>
-<ul>
-<li>Carries a <code>BP_InteractableComponent</code>, so it has an outline and a prompt.</li>
-<li>On <code>E</code>, moves the camera to <code>ReadPose</code> and blends the field of view in.</li>
-<li>Hides the crosshair and the interaction prompt.</li>
-<li>Releases whatever you are carrying.</li>
-<li>Freezes movement and look through the controller's ignore counters.</li>
-<li>Shows the mouse cursor.</li>
-<li>Leaves again on <code>Tab</code> or a second <code>E</code>, undoing all of it.</li>
-<li>Turns off cleanly with <code>SetPowered(false)</code>, which hides the display and disables the interactable.</li>
-</ul>
-<p>The lean-in is generated by the view motion component, not by a camera actor. Head bob, breathing and look sway keep living on top of it, and the movement dips before it settles instead of easing flatly in.</p>
+<p>And the behaviour, with nothing to wire: an outline and a prompt, <code>E</code> to lean in with the field of view blending, the crosshair and prompt hidden, whatever you were carrying released, movement and look frozen, the mouse cursor shown, <code>Tab</code> or <code>E</code> to leave, and <code>SetPowered(false)</code> to switch the whole thing off.</p>
 <hr />
-<h2 id="bp_screenbasewidget"><code>BP_ScreenBaseWidget</code><a class="headerlink" href="#bp_screenbasewidget" title="Permanent link">&para;</a></h2>
-<p>The widget side is two functions.</p>
+<h2 id="the-widget-side">The widget side<a class="headerlink" href="#the-widget-side" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
 <th>Function</th>
-<th>Contract</th>
+<th>What to do with it</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>SetHost(NewHost)</code></td>
-<td>Called by the screen. Stores the host actor and calls <code>BindHost</code></td>
+<td>Called by the screen. Leave it alone</td>
 </tr>
 <tr>
 <td><code>BindHost</code></td>
@@ -5898,27 +5894,16 @@
 </tr>
 </tbody>
 </table>
-<p>That pair is what lets the checkout display bind to its checkout without the base knowing what a checkout is.</p>
-<p>There is a matching <code>BeginRead(Reader)</code> on the actor, also empty in the base, called when someone leans in. Override it if your screen has to wake up, not simply be looked at.</p>
-<hr />
-<h2 id="building-one">Building one<a class="headerlink" href="#building-one" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Create a child of <code>BP_ScreenBase</code>.</li>
-<li>Set <code>ScreenMesh</code> to your monitor mesh.</li>
-<li>Set <code>Display.WidgetClass</code> to your widget.</li>
-<li>Position and scale <code>Display</code> so it sits on the glass.</li>
-<li>Move <code>ReadPose</code> until leaning in frames the screen the way you want.</li>
-</ol>
-<p><code>BP_CheckoutScreen</code> is exactly that and nothing else: two values in the Details panel and an empty graph. It is the template to copy.</p>
+<p>There is a matching <code>BeginRead(Reader)</code> on the actor, called when someone leans in. Override it if your screen has to wake up rather than simply be looked at.</p>
 <hr />
 <h2 id="sizing-the-display">Sizing the display<a class="headerlink" href="#sizing-the-display" title="Permanent link">&para;</a></h2>
-<p>This is the part that decides whether your screen looks sharp or soft, and it is worth doing with numbers instead of by eye.</p>
+<p>Do this with numbers, not by eye — it is what decides whether the screen looks sharp or soft.</p>
 <div class="highlight"><pre><span></span><code>DrawSize  ≈  how many screen pixels the panel covers when you lean in
 Scale     =  physical width in cm  /  DrawSize
 </code></pre></div>
-<p>A widget rendered at 1024 across and covering 1411 pixels on the monitor is being magnified, and no amount of anti-aliasing hides that.</p>
-<p>Then lay the widget out at a fixed design size inside a scale box, so changing <code>DrawSize</code> re-renders rather than re-flows.</p>
-<p>Two more settings on the widget component:</p>
+<p>A widget rendered at 1024 across but covering 1411 pixels on the monitor is being magnified, and no anti-aliasing hides that.</p>
+<p>Then lay the widget out at a fixed design size inside a scale box, so changing <code>DrawSize</code> re-renders instead of re-flowing your layout.</p>
+<p>Two settings on the widget component, and one on every button inside it:</p>
 <table>
 <thead>
 <tr>
@@ -5938,19 +5923,21 @@ Scale     =  physical width in cm  /  DrawSize
 <td>off</td>
 <td>A focusable window steals keyboard input</td>
 </tr>
+<tr>
+<td>Is Focusable, on each button</td>
+<td>off</td>
+<td>Otherwise <code>Tab</code> walks a focus rectangle around the screen</td>
+</tr>
 </tbody>
 </table>
-<p>And on every button inside: <strong>Is Focusable off</strong>, or <code>Tab</code> walks a focus rectangle around the screen instead of leaving it.</p>
 <hr />
 <h2 id="positioning-the-panel-on-the-mesh">Positioning the panel on the mesh<a class="headerlink" href="#positioning-the-panel-on-the-mesh" title="Permanent link">&para;</a></h2>
-<p>Two things learned doing it three times:</p>
-<p><strong>A mesh's bounds do not tell you where a face is.</strong> The bounding box of a monitor includes its stand, so reading <code>max X</code> off the bounds and calling it the front of the glass puts the panel in the wrong place. Measure the glass.</p>
-<p><strong>A real screen's bezel is not symmetrical.</strong> The shipped POS display has 1.6 cm at the top and 3.3 at the bottom. Centre the panel in the mesh and you get something that looks like a laptop, not a till.</p>
-<p>The panel position and scale are Details panel values. If you re-export the mesh, they are fields to nudge, not a calculation to redo.</p>
+<p><strong>Measure the glass, not the bounds.</strong> A monitor's bounding box includes its stand, so the front face of the box is not the front of the screen.</p>
+<p><strong>A real bezel is not symmetrical.</strong> The shipped POS display has 1.6 cm at the top and 3.3 at the bottom; a panel centred in the mesh looks like a laptop, not a till.</p>
+<p>Position and scale are Details panel values, so re-exporting the mesh means nudging two fields.</p>
 <hr />
-<h2 id="the-one-exception-to-leaning-in">The one exception to leaning in<a class="headerlink" href="#the-one-exception-to-leaning-in" title="Permanent link">&para;</a></h2>
-<p><code>BP_DrawerWidget</code>, the change readout on the till drawer, is in <strong>screen space</strong> rather than world space, so it stays readable while you move your head over the drawer.</p>
-<p>It still belongs to the drawer, and it still lives in the <code>World/</code> widget folder, because the question is whose information it is and not how it is drawn.</p>
+<h2 id="screen-space-instead">Screen space instead<a class="headerlink" href="#screen-space-instead" title="Permanent link">&para;</a></h2>
+<p><code>BP_DrawerWidget</code>, the change readout on the till drawer, is in <strong>screen space</strong> rather than world space so it stays readable while you move your head over the drawer. It still belongs to the drawer, and it still lives in the <code>World/</code> widget folder.</p>
 <hr />
 <p><a href="https://discord.gg/EqHCtq38jy">Join the Discord</a></p>
 

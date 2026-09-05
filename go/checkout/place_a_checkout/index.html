@@ -4700,18 +4700,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-checks-that-catch-most-problems" class="md-nav__link">
+  <a href="#when-something-is-wrong" class="md-nav__link">
     <span class="md-ellipsis">
-      The checks that catch most problems
+      When something is wrong
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#instance-overrides" class="md-nav__link">
+  <a href="#a-till-placed-before-a-change-to-the-blueprint" class="md-nav__link">
     <span class="md-ellipsis">
-      Instance overrides
+      A till placed before a change to the Blueprint
     </span>
   </a>
   
@@ -5683,7 +5683,7 @@
   
   
   <span class="md-ellipsis">
-    The six rules the template is built on
+    Extending the template
     
   </span>
   
@@ -5768,18 +5768,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-checks-that-catch-most-problems" class="md-nav__link">
+  <a href="#when-something-is-wrong" class="md-nav__link">
     <span class="md-ellipsis">
-      The checks that catch most problems
+      When something is wrong
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#instance-overrides" class="md-nav__link">
+  <a href="#a-till-placed-before-a-change-to-the-blueprint" class="md-nav__link">
     <span class="md-ellipsis">
-      Instance overrides
+      A till placed before a change to the Blueprint
     </span>
   </a>
   
@@ -5820,21 +5820,21 @@
 
 
 <h1 id="put-a-checkout-in-your-level">Put a checkout in your level<a class="headerlink" href="#put-a-checkout-in-your-level" title="Permanent link">&para;</a></h1>
-<p>A till is one actor, <code>BP_Checkout</code>, plus a scanner it has to know about. Getting the second half wrong is the most common reason a store produces no customers at all.</p>
+<p>A till is one actor, <code>BP_Checkout</code>, plus a scanner it has to know about. Forgetting the second half is the most common reason a store produces no customers at all.</p>
 <hr />
 <h2 id="the-steps">The steps<a class="headerlink" href="#the-steps" title="Permanent link">&para;</a></h2>
 <ol>
-<li>Drag <code>BP_Checkout</code> into the level and place the counter where you want it.</li>
-<li>Drag a <code>BP_BarcodeScanner</code> in, or use the one that comes with the counter, and drop it in the cradle.</li>
+<li>Drag <code>BP_Checkout</code> into the level and place the counter.</li>
+<li>Drag in a <code>BP_BarcodeScanner</code>, or use the one that comes with the counter, and drop it in the cradle.</li>
 <li>Select the checkout and set <strong><code>PairedScanner</code></strong> to that scanner.</li>
 <li>Check that <code>Open</code> is ticked.</li>
 <li>Select the <code>BP_QueueComponent</code> and drag its spline points to draw the queue. <strong>Point 0 stays at the counter</strong>, the rest run backwards.</li>
 <li>Move <code>BuyerSpot</code> and <code>CashierSpot</code> if your counter is not the shipped one.</li>
 <li>Make sure the nav mesh covers the whole queue, and that the queue does not run through a shelf.</li>
 </ol>
-<p>Then walk it in game once. A queue that reads well is a queue whose last point you can reach without squeezing past a gondola.</p>
+<p>Then walk it once in game. A queue that reads well is one whose last point you can reach without squeezing past a gondola.</p>
 <hr />
-<h2 id="the-checks-that-catch-most-problems">The checks that catch most problems<a class="headerlink" href="#the-checks-that-catch-most-problems" title="Permanent link">&para;</a></h2>
+<h2 id="when-something-is-wrong">When something is wrong<a class="headerlink" href="#when-something-is-wrong" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -5861,7 +5861,7 @@
 </tr>
 <tr>
 <td>The customer being served stands off to the side</td>
-<td><code>BuyerSpot</code> has drifted, or the actor has stale instance overrides</td>
+<td><code>BuyerSpot</code> has drifted on that instance</td>
 </tr>
 <tr>
 <td>The cord hangs oddly or points at nothing</td>
@@ -5869,26 +5869,21 @@
 </tr>
 </tbody>
 </table>
-<p>The queue length is worth a second look. Distance along the spline is clamped to the curve's length, so a short curve piles everyone at the far end rather than throwing them into the void, and it does not look broken so much as wrong.</p>
 <hr />
-<h2 id="instance-overrides">Instance overrides<a class="headerlink" href="#instance-overrides" title="Permanent link">&para;</a></h2>
-<p>This one is not specific to the checkout, but the checkout is where it bites hardest.</p>
-<p>When a component or a variable is added to a Blueprint, actors <strong>already placed</strong> in a level do not get it. They keep the engine defaults, or empty values, and writing the property on the class does not reach them.</p>
-<p>The fix is to delete the placed actor and place a fresh one. Everything that lives on the class comes back, including the queue spline, whose shape lives on the component template rather than on the instance.</p>
-<p>What does <strong>not</strong> come back is anything you set on that instance: <code>PairedScanner</code> and <code>SaleSound</code> in particular. Note them down before you delete.</p>
+<h2 id="a-till-placed-before-a-change-to-the-blueprint">A till placed before a change to the Blueprint<a class="headerlink" href="#a-till-placed-before-a-change-to-the-blueprint" title="Permanent link">&para;</a></h2>
+<p>An actor <strong>already placed</strong> in a level does not gain components or variables added to its Blueprint afterwards. Delete the placed actor and place a fresh one.</p>
+<p>What comes back with it is everything that lives on the class, including the shape of the queue spline. What does not is anything you set on that instance — <code>PairedScanner</code> and <code>SaleSound</code> in particular. Note them down before you delete.</p>
 <hr />
 <h2 id="two-or-more-tills">Two or more tills<a class="headerlink" href="#two-or-more-tills" title="Permanent link">&para;</a></h2>
-<p>Nothing stops you. Each one has its own queue, its own scanner and its own drawer, and a customer picks a checkout when it decides to pay.</p>
-<p>Two things to be aware of:</p>
+<p>Each one has its own queue, its own scanner and its own drawer, and a customer picks a checkout when it decides to pay.</p>
 <ul>
 <li>Each till needs its <strong>own</strong> scanner. They do not share.</li>
-<li>The counter mesh sticks out about 23 cm past its placement footprint on one side, so two tills placed edge to edge in build mode will overlap slightly without being refused. Leave a cell between them.</li>
+<li>The counter mesh sticks out about 23 cm past its placement footprint on one side, so two tills placed edge to edge in build mode overlap slightly without being refused. Leave a cell between them.</li>
 </ul>
 <hr />
 <h2 id="opening-and-closing">Opening and closing<a class="headerlink" href="#opening-and-closing" title="Permanent link">&para;</a></h2>
-<p><code>SetOpen(NewOpen)</code> is the only way <code>Open</code> changes, and it refreshes the screen at the same time, so there is no way to end up with a closed till showing a live display.</p>
-<p>Nothing calls it automatically today except an employee taking the <code>ManCheckout</code> task. Trading hours, a power cut, or a till that closes when nobody is around are all one call to that function.</p>
-<p>A closed till keeps whoever is already in its queue. It just stops accepting anyone new.</p>
+<p><code>SetOpen(NewOpen)</code> on the checkout opens or closes a till and refreshes its screen. An employee taking the <code>ManCheckout</code> task is what calls it today; trading hours, a power cut or a till that closes when nobody is around are one call to the same function.</p>
+<p>A closed till keeps whoever is already in its queue and stops accepting anyone new.</p>
 <hr />
 <p><a href="https://discord.gg/EqHCtq38jy">Join the Discord</a></p>
 

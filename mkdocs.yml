@@ -184,10 +184,74 @@ nav:
           - Menus, pause and saving: go/ui/menus_and_saving.md
           - Colours, fonts and reskinning: go/ui/colours_and_fonts.md
 
+  - MPFriendslopV2:
+      - Overview: mpfriendslopv2/index.md
+      - Getting started:
+          - The maps, and how a game starts: mpfriendslopv2/start/maps_and_game_flow.md
+          - The controls, and adding an input: mpfriendslopv2/start/controls.md
+          - How multiplayer works: mpfriendslopv2/start/how_multiplayer_works.md
+      - The player character:
+          - How the player character works: mpfriendslopv2/player/how_the_player_works.md
+          - Movement, stamina and the camera: mpfriendslopv2/player/movement_stamina_and_camera.md
+          - Health, damage and new vitals: mpfriendslopv2/player/health_and_damage.md
+      - Interaction, doors and levers:
+          - How interaction works: mpfriendslopv2/interaction/how_interaction_works.md
+          - Make any actor interactable: mpfriendslopv2/interaction/make_an_actor_interactable.md
+          - Link a button or a lever to a door: mpfriendslopv2/interaction/doors_buttons_and_levers.md
+          - Make your own door, switch or lever: mpfriendslopv2/interaction/make_your_own_door_or_lever.md
+      - Grabbing and carrying:
+          - How grabbing works, and tuning the weight: mpfriendslopv2/grab/how_grabbing_works.md
+          - Make any actor grabbable: mpfriendslopv2/grab/make_an_actor_grabbable.md
+      - Loot and extraction:
+          - How a run works: mpfriendslopv2/loot/how_a_run_works.md
+          - Add a loot item: mpfriendslopv2/loot/add_a_loot_item.md
+          - Make a loot item breakable: mpfriendslopv2/loot/make_loot_breakable.md
+          - Place loot spawn points and loot tables: mpfriendslopv2/loot/place_loot_spawn_points.md
+          - Place an extraction point: mpfriendslopv2/loot/place_an_extraction_point.md
+          - Change the quota, the run length and the recap: mpfriendslopv2/loot/tune_the_run.md
+          - The Last Loser Standing arena: mpfriendslopv2/loot/the_arena.md
+      - Items, inventory and the shop:
+          - How items and the inventory work: mpfriendslopv2/items/how_items_work.md
+          - Add an inventory item: mpfriendslopv2/items/add_an_item.md
+          - Make a held item, its hold pose and hand IK: mpfriendslopv2/items/make_a_held_item.md
+          - Add an item to the shop: mpfriendslopv2/items/the_shop.md
+      - Weapons and melee:
+          - How weapons work: mpfriendslopv2/weapons/how_weapons_work.md
+          - Add a new gun: mpfriendslopv2/weapons/add_a_new_gun.md
+          - Turn any grabbable object into a melee weapon: mpfriendslopv2/weapons/make_a_melee_weapon.md
+      - Enemies:
+          - How the enemy AI works, and what it hears: mpfriendslopv2/ai/how_the_enemy_ai_works.md
+          - Place a Warden and its patrol: mpfriendslopv2/ai/place_a_warden.md
+          - Doors the Warden can open: mpfriendslopv2/ai/doors_the_warden_can_open.md
+          - Make an enemy variant or your own enemy: mpfriendslopv2/ai/make_your_own_enemy.md
+      - Death, revive and spectating:
+          - Death, revive and the spectator: mpfriendslopv2/death/how_death_works.md
+          - Place a revive bay: mpfriendslopv2/death/place_a_revive_bay.md
+      - Cosmetics, emotes and the crew:
+          - How cosmetics work: mpfriendslopv2/crew/how_cosmetics_work.md
+          - Add a hat, an accessory or a pattern: mpfriendslopv2/crew/add_a_cosmetic.md
+          - Add an emote or a face: mpfriendslopv2/crew/add_an_emote_or_a_face.md
+          - Player colours, nameplates and pings: mpfriendslopv2/crew/colours_nameplates_and_pings.md
+      - Menus, lobby, HUD and settings:
+          - How the menus work, and adding a page: mpfriendslopv2/ui/how_the_menus_work.md
+          - Sessions and the lobby: mpfriendslopv2/ui/sessions_and_the_lobby.md
+          - The HUD, and adding to it: mpfriendslopv2/ui/the_hud.md
+          - Settings and volume sliders: mpfriendslopv2/ui/settings_and_audio.md
+          - Use your own game framework classes: mpfriendslopv2/ui/use_your_own_framework.md
+      - Building a level:
+          - How procedural levels work: mpfriendslopv2/world/how_procedural_levels_work.md
+          - Make a new module: mpfriendslopv2/world/make_a_new_module.md
+          - Tune the generator: mpfriendslopv2/world/tune_the_generator.md
+          - How levels are built: mpfriendslopv2/world/how_levels_are_built.md
+          - Build your own level: mpfriendslopv2/world/build_your_own_level.md
+          - Place, switch and make lamps: mpfriendslopv2/world/lamps_and_lights.md
+          - Sounds, footsteps and surfaces: mpfriendslopv2/world/sounds_and_footsteps.md
+
 markdown_extensions:
   - toc:
       permalink: true
   - admonition
+  - attr_list
   - codehilite
   - pymdownx.highlight
   - pymdownx.superfences

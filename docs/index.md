@@ -28,6 +28,11 @@ A first person store management template. Order stock from the office computer, 
 
 [👉 Open the Grand Opening docs](go/index.md)
 
+### 🔦 [MPFriendslopV2](mpfriendslopv2/index.md)
+A first person co-op extraction horror template. Loot a dark map with your crew, carry every item with physics, sell it at the extraction trap to meet the quota, and jump into the shaft to get out. A patrolling enemy that hears you, a revive bay for lost heads, a shop terminal, a gun and melee, cosmetics, emotes, pings, and sessions with a lobby. 100% Blueprint on a listen server, and almost every change is a Data Asset instead of a graph.
+
+[👉 Open the MPFriendslopV2 docs](mpfriendslopv2/index.md)
+
 <!-- Add new assets here as they are released. Duplicate the block above and point it to the new asset's index page. -->
 
 ---

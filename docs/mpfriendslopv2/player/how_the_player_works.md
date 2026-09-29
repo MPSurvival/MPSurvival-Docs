@@ -161,7 +161,7 @@ Keep the speeds in step with your clips or the feet slide: walk at `200`, run at
 
 If you write your own AnimBP instead, keep two slots: `DefaultSlot` after the locomotion, for `AM_Land` and any full body montage, and `UpperBody`, for the emotes and the third person reload. Implement `BPI_HandIKSuspend` as `ABP_FriendslopLocomotion` does: count `PushHandIKSuspend` and `PopHandIKSuspend`, and fade the hand IK out while the count is above zero. Without it, the left hand stays glued to the grip during reloads and emotes. What a held item gives the AnimBP is in [Make a held item, its hold pose and hand IK](../items/make_a_held_item.md).
 
-For another skeleton, retarget the animations with Unreal's IK Rig and IK Retargeter, or build a new AnimBP on your skeleton. The robot's clips come from an automatic retarget, kept in `Demo/Retargeting/`. Every name of the socket table then has to exist on your skeleton or your mesh.
+For another skeleton, retarget the animations with Unreal's IK Rig and IK Retargeter, or build a new AnimBP on your skeleton. Every name of the socket table then has to exist on your skeleton or your mesh.
 
 ---
 

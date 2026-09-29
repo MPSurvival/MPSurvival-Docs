@@ -7956,7 +7956,7 @@
 </ol>
 <p>Keep the speeds in step with your clips or the feet slide: walk at <code>200</code>, run at <code>500</code>, crouch at <code>130</code> (the crouch clips play at a rate of <code>0.65</code>).</p>
 <p>If you write your own AnimBP instead, keep two slots: <code>DefaultSlot</code> after the locomotion, for <code>AM_Land</code> and any full body montage, and <code>UpperBody</code>, for the emotes and the third person reload. Implement <code>BPI_HandIKSuspend</code> as <code>ABP_FriendslopLocomotion</code> does: count <code>PushHandIKSuspend</code> and <code>PopHandIKSuspend</code>, and fade the hand IK out while the count is above zero. Without it, the left hand stays glued to the grip during reloads and emotes. What a held item gives the AnimBP is in <a href="../../items/make_a_held_item/">Make a held item, its hold pose and hand IK</a>.</p>
-<p>For another skeleton, retarget the animations with Unreal's IK Rig and IK Retargeter, or build a new AnimBP on your skeleton. The robot's clips come from an automatic retarget, kept in <code>Demo/Retargeting/</code>. Every name of the socket table then has to exist on your skeleton or your mesh.</p>
+<p>For another skeleton, retarget the animations with Unreal's IK Rig and IK Retargeter, or build a new AnimBP on your skeleton. Every name of the socket table then has to exist on your skeleton or your mesh.</p>
 <hr />
 <h2 id="where-to-go-next">Where to go next<a class="headerlink" href="#where-to-go-next" title="Permanent link">&para;</a></h2>
 <ul>

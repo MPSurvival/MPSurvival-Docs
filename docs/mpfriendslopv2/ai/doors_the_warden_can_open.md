@@ -67,19 +67,6 @@ To make another safe room, place a `NavModifierVolume` over it and set `Area Cla
 
 ---
 
-## Mistakes that cost time
-
-- **The Warden stops in front of every door.** A moving part still has `Can Ever Affect Navigation` ticked. The closed door cuts the nav mesh, so no path goes through it. Press `P` in the viewport during play: the green floor should run through the doorway.
-- **The door opens on the host only.** `Replicates` is not ticked on your door.
-- **The Warden walks into the door and nothing happens.** The moving part has no collision, or its collision does not block `Pawn`. No hit, no event.
-- **The Warden stops in the doorway, its head against the top.** The frame of a single door is clear to `220` cm across its full width, and `250` cm in the middle only. The Warden is `220` cm tall. A taller enemy needs a taller frame, and a taller `Agent Height` on the nav mesh so its paths avoid what it cannot fit under.
-- **Players open the door by walking into it.** That is not this component: it only reacts to pawns possessed by an `AIController`. Look for another event on your door.
-
-!!! warning
-    A `BP_AIDoorOpenerComponent` on the extraction trap, or on a parent the trap inherits from, lets the Warden open it just by walking into it. There is no error message. Add the component to the doors themselves, never to `BP_DoorBase`.
-
----
-
 Next: [Make an enemy variant or your own enemy](make_your_own_enemy.md).
 
 ---

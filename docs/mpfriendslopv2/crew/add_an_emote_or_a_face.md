@@ -94,14 +94,6 @@ A gesture also stops when the player's health drops below what it was when the g
 
 ---
 
-## Mistakes that cost time
-
-- **The list that counts is the one on the character's component.** The wheel shows the `Emotes` of the `BP_EmoteComponent` on the pawn, and the server refuses any emote that is not in it.
-- **A new face has to be in `Faces`.** Adding the entry to `E_FaceState` and making the Data Asset is not enough.
-- **Stopping an emote never overwrites your own face.** Releasing on the centre puts `Resting Face` back only if the screen still shows the emote's face. A face set by your own code with `Server_SetFace` stays.
-
----
-
 ## The dispatchers
 
 | Dispatcher | Component | When it fires | Fires on |

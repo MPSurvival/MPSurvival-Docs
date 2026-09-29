@@ -106,16 +106,6 @@ Nothing goes in the packaging settings: the Data Asset brings the module level i
 
 ---
 
-## Mistakes that cost time
-
-- **A wall or a prop in a doorway.** Something sits in the middle cell of an exit side. Clear the whole cell.
-- **The room is black.** No lamp in it. Every doorway gets a door, so a room cannot borrow light from its neighbour.
-- **The module never shows up.** It is not in `Modules`, or the other modules of its type have a much higher `Weight`.
-- **The run never starts.** A module has something on its centre, or no floor there, so the nav mesh never reaches it. Clear the centre of every module.
-- **A doorway opens onto a void.** A `DA_Module_` has an empty `Level`. The generator skips that cell and the run starts anyway, but the walls and doors around it are still built. Pick the level in the Data Asset.
-
----
-
 Next: [Tune the generator](tune_the_generator.md).
 
 ---

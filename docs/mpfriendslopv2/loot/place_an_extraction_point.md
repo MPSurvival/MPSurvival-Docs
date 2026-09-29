@@ -79,16 +79,6 @@ A decal paints everything inside its box, loot included. Keep `Decal Size` X at 
 
 ---
 
-## Mistakes that cost time
-
-- **Loot on the hatch, status stays `Empty`.** The trap only counts actors that implement `BPI_Grabbable` and whose collision object type is in `Detection Object Types`. Selling in the chute only needs a `BP_LootValueComponent`, so an item can sell when dropped in by hand and still never make the hatch `Ready`.
-- **The button does nothing.** Someone is standing on the hatch (the sign says so), or the button's `Targets` points at another actor.
-
-!!! warning
-    A zone set to `No Collision` detects nothing. The trap stays `Empty`, the button does nothing, and there is no error or log. The zones need query collision.
-
----
-
 ## Two extraction points
 
 Place a second `BP_ExtractionTrap` with its own shaft and its own button. Each trap has its own zones and its own sign. They sell into the same team bank, and both open for good when the quota is met.

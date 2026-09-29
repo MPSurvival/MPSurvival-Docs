@@ -74,12 +74,4 @@ To change the quota or the run length, see [Change the quota, the run length and
 
 ---
 
-## Mistakes that cost time
-
-- **Pressing Play skips the menu.** The editor opens on `L_Procedural`, so Play starts a run directly. Open `L_MainMenu` first when you want to test the menu, the lobby or `START THE RUN`.
-- **A value set on the placed `BP_MainMenu` wins over its Blueprint.** If you change `Menu Widget Class` on the actor in `L_MainMenu`, a later change of the class default does nothing there. Check the placed actor when the wrong menu opens.
-- **`START THE RUN` or `RESTART` seems dead.** Both change map with a `servertravel` command. When it is refused, the only trace is `Command not recognized: servertravel ...` in the Output Log, with no Blueprint error. Look there first.
-
----
-
 [Join the Discord](https://discord.gg/EqHCtq38jy)

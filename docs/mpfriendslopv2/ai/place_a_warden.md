@@ -43,14 +43,6 @@ With `Patrol Points` empty, the Warden stands where you placed it until it sees 
 
 ---
 
-## Mistakes that cost time
-
-- **The Warden does nothing at all.** `Enemy Data` is empty. The controller starts nothing without it.
-- **The Warden never reaches a point.** The point sits outside the nav mesh, or the nav mesh does not reach it. Press `P` and check.
-- **Changing `Patrol Points` during play has no effect.** The route is read once, when the controller takes the Warden over at the start. Set it on the placed actor before you press Play.
-
----
-
 Next: [Doors the Warden can open](doors_the_warden_can_open.md), for the doors on its patrol.
 
 ---

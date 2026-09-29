@@ -5612,15 +5612,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#mistakes-that-cost-time" class="md-nav__link">
-    <span class="md-ellipsis">
-      Mistakes that cost time
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -7485,15 +7476,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#mistakes-that-cost-time" class="md-nav__link">
-    <span class="md-ellipsis">
-      Mistakes that cost time
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -7639,13 +7621,6 @@
 </table>
 <p>If you replace <code>L_MainMenu</code> with your own menu map, set it as <code>Game Default Map</code>, give it the <code>BP_MainMenuGameMode</code> override, place a <code>BP_MainMenu</code> in it, and point both <code>Menu Level</code> fields at it.</p>
 <p>To change the quota or the run length, see <a href="../../loot/tune_the_run/">Change the quota, the run length and the recap</a>.</p>
-<hr />
-<h2 id="mistakes-that-cost-time">Mistakes that cost time<a class="headerlink" href="#mistakes-that-cost-time" title="Permanent link">&para;</a></h2>
-<ul>
-<li><strong>Pressing Play skips the menu.</strong> The editor opens on <code>L_Procedural</code>, so Play starts a run directly. Open <code>L_MainMenu</code> first when you want to test the menu, the lobby or <code>START THE RUN</code>.</li>
-<li><strong>A value set on the placed <code>BP_MainMenu</code> wins over its Blueprint.</strong> If you change <code>Menu Widget Class</code> on the actor in <code>L_MainMenu</code>, a later change of the class default does nothing there. Check the placed actor when the wrong menu opens.</li>
-<li><strong><code>START THE RUN</code> or <code>RESTART</code> seems dead.</strong> Both change map with a <code>servertravel</code> command. When it is refused, the only trace is <code>Command not recognized: servertravel ...</code> in the Output Log, with no Blueprint error. Look there first.</li>
-</ul>
 <hr />
 <p><a href="https://discord.gg/EqHCtq38jy">Join the Discord</a></p>
 

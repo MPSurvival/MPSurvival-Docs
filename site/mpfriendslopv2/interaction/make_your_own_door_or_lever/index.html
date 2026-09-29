@@ -5954,15 +5954,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#mistakes-that-cost-time" class="md-nav__link">
-    <span class="md-ellipsis">
-      Mistakes that cost time
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -7503,15 +7494,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#mistakes-that-cost-time" class="md-nav__link">
-    <span class="md-ellipsis">
-      Mistakes that cost time
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -7804,19 +7786,6 @@
 </tbody>
 </table>
 <p>To make a handle that switches other things, duplicate <code>BP_LeverBase</code> and swap its meshes. It sends <code>SetTargetsActivated</code> when its <code>Alpha</code> crosses <code>Activation Alpha</code> (<code>0.5</code>).</p>
-<hr />
-<h2 id="mistakes-that-cost-time">Mistakes that cost time<a class="headerlink" href="#mistakes-that-cost-time" title="Permanent link">&para;</a></h2>
-<ul>
-<li><strong>A target that does not implement <code>BPI_Activatable</code> does nothing.</strong> There is no cast and no error message.</li>
-<li><strong><code>SetTargetsActivated</code> called only on a player's machine does nothing.</strong> Call it from a path that runs on the server.</li>
-<li><strong>One axis per actor.</strong> <code>BP_GrabAxisBase</code> uses the first <code>BP_GrabAxisComponent</code> it finds.</li>
-<li><strong>A hand-dragged door cannot also be opened by a button.</strong> <code>BP_SlidingDoor_Single</code> is not a <code>BP_DoorBase</code>, and one position cannot have two owners.</li>
-<li><strong>Moving parts do not push players.</strong> Doors and axis parts are moved without sweep.</li>
-</ul>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>An actor without <code>Replicates</code> ticked still works on the host, and nothing happens on the other players' screens. There is no error message.</p>
-</div>
 <hr />
 <p><a href="https://discord.gg/EqHCtq38jy">Join the Discord</a></p>
 

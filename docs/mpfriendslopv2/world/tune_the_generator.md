@@ -84,15 +84,6 @@ Until then the run does not start: no quota, no clock. A map with no level build
 
 ---
 
-## Mistakes that cost time
-
-- **The run never starts.** A level builder never sent `NotifyLevelReady`, or sent it from a player's machine instead of the server.
-- **The loading screen never closes.** Your level builder does not implement `IsLevelVisible`, so it answers false.
-- **The same map every run.** `Seed` is not `0`.
-- **The run never starts after raising `Grid Size`.** The new modules are outside the `NavMeshBoundsVolume`, so the nav mesh never reaches their centre. Stretch the volume, and press `P` in the viewport during play to see the walkable floor.
-
----
-
 Next: [Doors the Warden can open](../ai/doors_the_warden_can_open.md).
 
 ---

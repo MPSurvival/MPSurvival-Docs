@@ -52,14 +52,6 @@ The pick is the function `PickLootClass` on the table. For another rule (no dupl
 
 ---
 
-## Mistakes that cost time
-
-- **An item on top of the shelf instead of under it.** The search for a surface starts `Settle Trace Height` above the item. Under a low shelf, a high value starts inside the plank above and lands on top of it. Lower it.
-- **An item floating in the air.** If nothing is found within `Ground Trace Distance`, or the search starts inside something, the item stays exactly at the point. Move the point closer to the surface.
-- **A point that never spawns.** Its `Loot Table` is empty, or every row has `Weight` `0`.
-
----
-
 Next: [Place an extraction point](place_an_extraction_point.md).
 
 ---

@@ -129,16 +129,6 @@ Fire is the item use key, `Right Mouse` (`IA_UseItem`). Reload is `R` (`IA_Reloa
 
 ---
 
-## Mistakes that cost time
-
-- **Nothing takes damage.** Shots trace the `Weapon` collision channel and deal Unreal's native damage. A target must block `Weapon` and listen to native damage, as `BP_VitalsSystem` does.
-- **No flash, or the flash in the wrong place.** `Muzzle Socket Name` must match a socket on your skeletal mesh.
-- **Shells fly back into the gun when the reload ends.** The montage blends back to the gun's reference pose, so every bone that ends the animation somewhere else travels back on screen. Make the first and the last frame of your gun's reload match the reference pose, shells included, and move the shells in and out on frames where the gun is closed.
-- **A shell streaks across the screen for one frame when it is swapped.** Unreal always interpolates between two frames, even when the key is constant in Blender. Teleport a shell with its bone scale instead: shrink it to `0.001` where it is hidden, move it at that size on the next frame, and give it back its size on the frame after. Do it after the montage's **Blend In** has ended, otherwise the blend slides the shell out of the barrel. `AS_Shotgun_Reload_Empty` sends its fresh shells out on frames 8 to 11 and brings the spent ones back on frames 148 to 151, and has **Allow Frame Stripping** off so no platform drops one of those frames.
-- **The left hand stays on the gun during the reload.** Add `BP_HandIKSuspendNotifyState` over the part of your TPS montage where the hand leaves the grip, as on `AM_Shotgun_Reload_TPS`.
-
----
-
 To turn a prop into a club instead, see [Turn any grabbable object into a melee weapon](make_a_melee_weapon.md).
 
 ---

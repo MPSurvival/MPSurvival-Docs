@@ -6983,15 +6983,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#mistakes-that-cost-time" class="md-nav__link">
-    <span class="md-ellipsis">
-      Mistakes that cost time
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#the-dispatchers" class="md-nav__link">
     <span class="md-ellipsis">
       The dispatchers
@@ -7531,15 +7522,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#mistakes-that-cost-time" class="md-nav__link">
-    <span class="md-ellipsis">
-      Mistakes that cost time
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#the-dispatchers" class="md-nav__link">
     <span class="md-ellipsis">
       The dispatchers
@@ -7794,13 +7776,6 @@
 </tbody>
 </table>
 <p>A gesture also stops when the player's health drops below what it was when the gesture started. Health is read through <code>BPI_VitalManagerInterface</code>. With your own health system, call <code>Server_StopEmote</code> from your damage code.</p>
-<hr />
-<h2 id="mistakes-that-cost-time">Mistakes that cost time<a class="headerlink" href="#mistakes-that-cost-time" title="Permanent link">&para;</a></h2>
-<ul>
-<li><strong>The list that counts is the one on the character's component.</strong> The wheel shows the <code>Emotes</code> of the <code>BP_EmoteComponent</code> on the pawn, and the server refuses any emote that is not in it.</li>
-<li><strong>A new face has to be in <code>Faces</code>.</strong> Adding the entry to <code>E_FaceState</code> and making the Data Asset is not enough.</li>
-<li><strong>Stopping an emote never overwrites your own face.</strong> Releasing on the centre puts <code>Resting Face</code> back only if the screen still shows the emote's face. A face set by your own code with <code>Server_SetFace</code> stays.</li>
-</ul>
 <hr />
 <h2 id="the-dispatchers">The dispatchers<a class="headerlink" href="#the-dispatchers" title="Permanent link">&para;</a></h2>
 <table>

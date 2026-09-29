@@ -79,13 +79,4 @@ To give this map its own quota or run length, see [Change the quota, the run len
 
 ---
 
-## Mistakes that cost time
-
-- **The level is black.** No lamp in the room. Raising the exposure only brightens what a lamp already lights.
-- **No outline on anything.** `MI_InteractableOutline` is missing from the post-process volume, or the volume is not unbound.
-- **The Warden stands still.** The nav mesh does not reach it. Press `P` in the viewport: the walkable floor shows in green, and a patrol point outside it is never reached.
-- **Loot is missing in one room.** Each spawn point rolls `Spawn Chance` every run, `0.6` by default. Set it to `1` on a point that must always spawn.
-
----
-
 [Join the Discord](https://discord.gg/EqHCtq38jy)

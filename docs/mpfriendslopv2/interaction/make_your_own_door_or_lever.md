@@ -116,17 +116,4 @@ To make a handle that switches other things, duplicate `BP_LeverBase` and swap i
 
 ---
 
-## Mistakes that cost time
-
-- **A target that does not implement `BPI_Activatable` does nothing.** There is no cast and no error message.
-- **`SetTargetsActivated` called only on a player's machine does nothing.** Call it from a path that runs on the server.
-- **One axis per actor.** `BP_GrabAxisBase` uses the first `BP_GrabAxisComponent` it finds.
-- **A hand-dragged door cannot also be opened by a button.** `BP_SlidingDoor_Single` is not a `BP_DoorBase`, and one position cannot have two owners.
-- **Moving parts do not push players.** Doors and axis parts are moved without sweep.
-
-!!! warning
-    An actor without `Replicates` ticked still works on the host, and nothing happens on the other players' screens. There is no error message.
-
----
-
 [Join the Discord](https://discord.gg/EqHCtq38jy)

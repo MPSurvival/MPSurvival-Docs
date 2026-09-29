@@ -94,13 +94,6 @@ Pings make no sound. Bind `OnPingPlaced` or `OnPingPromoted` to add one.
 
 ---
 
-## Mistakes that cost time
-
-- **`Discovery Interval` at 0 on `WBP_PingLayer`.** The off-screen arrows stop completely, with no error. Keep it above 0, and check the value on the placed layer, not only on the class.
-- **A body part that stays grey.** The tint only reaches material slots named in `Tinted Slot Names`, on the body and on cosmetic meshes alike. Name the slot `M_Robot_Shell`, or add your slot name to the list.
-
----
-
 Next: [How the menus work, and adding a page](../ui/how_the_menus_work.md).
 
 ---

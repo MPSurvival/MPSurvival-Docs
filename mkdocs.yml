@@ -246,6 +246,8 @@ nav:
           - Build your own level: mpfriendslopv2/world/build_your_own_level.md
           - Place, switch and make lamps: mpfriendslopv2/world/lamps_and_lights.md
           - Sounds, footsteps and surfaces: mpfriendslopv2/world/sounds_and_footsteps.md
+      - Guides:
+          - Add proximity voice chat with Easy Proximity Voice Chat: mpfriendslopv2/guides/add_proximity_voice_chat.md
 
 markdown_extensions:
   - toc:

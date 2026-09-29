@@ -248,6 +248,7 @@ nav:
           - Sounds, footsteps and surfaces: mpfriendslopv2/world/sounds_and_footsteps.md
       - Guides:
           - Add proximity voice chat with Easy Proximity Voice Chat: mpfriendslopv2/guides/add_proximity_voice_chat.md
+          - Set up Steam sessions with Advanced Steam Sessions: mpfriendslopv2/guides/set_up_steam_sessions.md
 
 markdown_extensions:
   - toc:

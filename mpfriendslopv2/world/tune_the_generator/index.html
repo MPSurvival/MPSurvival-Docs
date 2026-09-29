@@ -7325,15 +7325,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#mistakes-that-cost-time" class="md-nav__link">
-    <span class="md-ellipsis">
-      Mistakes that cost time
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -7521,15 +7512,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#mistakes-that-cost-time" class="md-nav__link">
-    <span class="md-ellipsis">
-      Mistakes that cost time
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -7690,14 +7672,6 @@
 <li>On every machine with a screen, return true from <code>IsLevelVisible</code> once the level can be seen there. The loading screen waits for it.</li>
 </ol>
 <p>Until then the run does not start: no quota, no clock. A map with no level builder starts the run once every player has arrived.</p>
-<hr />
-<h2 id="mistakes-that-cost-time">Mistakes that cost time<a class="headerlink" href="#mistakes-that-cost-time" title="Permanent link">&para;</a></h2>
-<ul>
-<li><strong>The run never starts.</strong> A level builder never sent <code>NotifyLevelReady</code>, or sent it from a player's machine instead of the server.</li>
-<li><strong>The loading screen never closes.</strong> Your level builder does not implement <code>IsLevelVisible</code>, so it answers false.</li>
-<li><strong>The same map every run.</strong> <code>Seed</code> is not <code>0</code>.</li>
-<li><strong>The run never starts after raising <code>Grid Size</code>.</strong> The new modules are outside the <code>NavMeshBoundsVolume</code>, so the nav mesh never reaches their centre. Stretch the volume, and press <code>P</code> in the viewport during play to see the walkable floor.</li>
-</ul>
 <hr />
 <p>Next: <a href="../../ai/doors_the_warden_can_open/">Doors the Warden can open</a>.</p>
 <hr />

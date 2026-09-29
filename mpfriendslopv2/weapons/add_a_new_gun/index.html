@@ -6573,15 +6573,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#mistakes-that-cost-time" class="md-nav__link">
-    <span class="md-ellipsis">
-      Mistakes that cost time
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -7539,15 +7530,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#mistakes-that-cost-time" class="md-nav__link">
-    <span class="md-ellipsis">
-      Mistakes that cost time
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -7801,15 +7783,6 @@
 <li><strong>In the shop:</strong> see <a href="../../items/the_shop/">Add an item to the shop</a>. A gun bought in the shop arrives full.</li>
 </ul>
 <p>Fire is the item use key, <code>Right Mouse</code> (<code>IA_UseItem</code>). Reload is <code>R</code> (<code>IA_Reload</code>). Players rebind both in the CONTROLS tab. To change the shipped keys, see <a href="../../start/controls/">The controls, and adding an input</a>.</p>
-<hr />
-<h2 id="mistakes-that-cost-time">Mistakes that cost time<a class="headerlink" href="#mistakes-that-cost-time" title="Permanent link">&para;</a></h2>
-<ul>
-<li><strong>Nothing takes damage.</strong> Shots trace the <code>Weapon</code> collision channel and deal Unreal's native damage. A target must block <code>Weapon</code> and listen to native damage, as <code>BP_VitalsSystem</code> does.</li>
-<li><strong>No flash, or the flash in the wrong place.</strong> <code>Muzzle Socket Name</code> must match a socket on your skeletal mesh.</li>
-<li><strong>Shells fly back into the gun when the reload ends.</strong> The montage blends back to the gun's reference pose, so every bone that ends the animation somewhere else travels back on screen. Make the first and the last frame of your gun's reload match the reference pose, shells included, and move the shells in and out on frames where the gun is closed.</li>
-<li><strong>A shell streaks across the screen for one frame when it is swapped.</strong> Unreal always interpolates between two frames, even when the key is constant in Blender. Teleport a shell with its bone scale instead: shrink it to <code>0.001</code> where it is hidden, move it at that size on the next frame, and give it back its size on the frame after. Do it after the montage's <strong>Blend In</strong> has ended, otherwise the blend slides the shell out of the barrel. <code>AS_Shotgun_Reload_Empty</code> sends its fresh shells out on frames 8 to 11 and brings the spent ones back on frames 148 to 151, and has <strong>Allow Frame Stripping</strong> off so no platform drops one of those frames.</li>
-<li><strong>The left hand stays on the gun during the reload.</strong> Add <code>BP_HandIKSuspendNotifyState</code> over the part of your TPS montage where the hand leaves the grip, as on <code>AM_Shotgun_Reload_TPS</code>.</li>
-</ul>
 <hr />
 <p>To turn a prop into a club instead, see <a href="../make_a_melee_weapon/">Turn any grabbable object into a melee weapon</a>.</p>
 <hr />

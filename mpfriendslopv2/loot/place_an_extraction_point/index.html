@@ -6264,15 +6264,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#mistakes-that-cost-time" class="md-nav__link">
-    <span class="md-ellipsis">
-      Mistakes that cost time
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#two-extraction-points" class="md-nav__link">
     <span class="md-ellipsis">
       Two extraction points
@@ -7558,15 +7549,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#mistakes-that-cost-time" class="md-nav__link">
-    <span class="md-ellipsis">
-      Mistakes that cost time
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#two-extraction-points" class="md-nav__link">
     <span class="md-ellipsis">
       Two extraction points
@@ -7731,16 +7713,6 @@
 <h2 id="floor-arrows-and-signs">Floor arrows and signs<a class="headerlink" href="#floor-arrows-and-signs" title="Permanent link">&para;</a></h2>
 <p>The start room of <code>L_Procedural</code> guides players to the trap with two Decal Actors, <code>Start_SignArrow_Hall</code> and <code>Start_SignLabel_Extraction</code>, in the outliner folder <code>StartModule/Signage</code>. They use <code>MI_Decal_ExtractionArrow</code> and <code>MI_Decal_ExtractionSign</code>.</p>
 <p>A decal paints everything inside its box, loot included. Keep <code>Decal Size</code> X at <code>10</code> and sink the actor slightly behind the floor or wall. A thicker box paints the arrow on every item dropped on it.</p>
-<hr />
-<h2 id="mistakes-that-cost-time">Mistakes that cost time<a class="headerlink" href="#mistakes-that-cost-time" title="Permanent link">&para;</a></h2>
-<ul>
-<li><strong>Loot on the hatch, status stays <code>Empty</code>.</strong> The trap only counts actors that implement <code>BPI_Grabbable</code> and whose collision object type is in <code>Detection Object Types</code>. Selling in the chute only needs a <code>BP_LootValueComponent</code>, so an item can sell when dropped in by hand and still never make the hatch <code>Ready</code>.</li>
-<li><strong>The button does nothing.</strong> Someone is standing on the hatch (the sign says so), or the button's <code>Targets</code> points at another actor.</li>
-</ul>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>A zone set to <code>No Collision</code> detects nothing. The trap stays <code>Empty</code>, the button does nothing, and there is no error or log. The zones need query collision.</p>
-</div>
 <hr />
 <h2 id="two-extraction-points">Two extraction points<a class="headerlink" href="#two-extraction-points" title="Permanent link">&para;</a></h2>
 <p>Place a second <code>BP_ExtractionTrap</code> with its own shaft and its own button. Each trap has its own zones and its own sign. They sell into the same team bank, and both open for good when the quota is met.</p>

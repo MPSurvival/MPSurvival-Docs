@@ -6711,15 +6711,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#mistakes-that-cost-time" class="md-nav__link">
-    <span class="md-ellipsis">
-      Mistakes that cost time
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -7503,15 +7494,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#mistakes-that-cost-time" class="md-nav__link">
-    <span class="md-ellipsis">
-      Mistakes that cost time
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -7615,19 +7597,6 @@
 <h2 id="the-start-room-is-a-safe-zone">The start room is a safe zone<a class="headerlink" href="#the-start-room-is-a-safe-zone" title="Permanent link">&para;</a></h2>
 <p>The Warden never walks into the start room of <code>L_Procedural</code>, but it shoots into it when it sees you. A <code>NavModifierVolume</code> with the <code>NavArea_Null</code> area covers the inside of the room and removes the nav mesh there. The Warden walks up to the doorway and stops.</p>
 <p>To make another safe room, place a <code>NavModifierVolume</code> over it and set <code>Area Class</code> to <code>NavArea_Null</code>. Keep the doorway itself outside the volume.</p>
-<hr />
-<h2 id="mistakes-that-cost-time">Mistakes that cost time<a class="headerlink" href="#mistakes-that-cost-time" title="Permanent link">&para;</a></h2>
-<ul>
-<li><strong>The Warden stops in front of every door.</strong> A moving part still has <code>Can Ever Affect Navigation</code> ticked. The closed door cuts the nav mesh, so no path goes through it. Press <code>P</code> in the viewport during play: the green floor should run through the doorway.</li>
-<li><strong>The door opens on the host only.</strong> <code>Replicates</code> is not ticked on your door.</li>
-<li><strong>The Warden walks into the door and nothing happens.</strong> The moving part has no collision, or its collision does not block <code>Pawn</code>. No hit, no event.</li>
-<li><strong>The Warden stops in the doorway, its head against the top.</strong> The frame of a single door is clear to <code>220</code> cm across its full width, and <code>250</code> cm in the middle only. The Warden is <code>220</code> cm tall. A taller enemy needs a taller frame, and a taller <code>Agent Height</code> on the nav mesh so its paths avoid what it cannot fit under.</li>
-<li><strong>Players open the door by walking into it.</strong> That is not this component: it only reacts to pawns possessed by an <code>AIController</code>. Look for another event on your door.</li>
-</ul>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>A <code>BP_AIDoorOpenerComponent</code> on the extraction trap, or on a parent the trap inherits from, lets the Warden open it just by walking into it. There is no error message. Add the component to the doors themselves, never to <code>BP_DoorBase</code>.</p>
-</div>
 <hr />
 <p>Next: <a href="../make_your_own_enemy/">Make an enemy variant or your own enemy</a>.</p>
 <hr />

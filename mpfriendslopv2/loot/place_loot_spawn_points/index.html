@@ -6204,15 +6204,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#mistakes-that-cost-time" class="md-nav__link">
-    <span class="md-ellipsis">
-      Mistakes that cost time
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -7467,15 +7458,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#mistakes-that-cost-time" class="md-nav__link">
-    <span class="md-ellipsis">
-      Mistakes that cost time
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -7576,13 +7558,6 @@
 <p>The easiest start is to duplicate <code>DA_LootTable_Salvage</code> and edit the weights. <code>DA_LootTable_Shelf</code> is the same list without <code>BP_Loot_EngineBlock</code>, <code>BP_Loot_Generator</code> and <code>BP_Loot_VaultPlate</code>: heavy items are kept off shelves. <code>BP_Loot_BaseballBat</code> and <code>BP_Loot_Hammer</code> are in no table. They are placed by hand.</p>
 <p><code>Loot Class</code> accepts any actor. To be worth money when sold, it needs a <code>BP_LootValueComponent</code>: see <a href="../add_a_loot_item/">Add a loot item</a>.</p>
 <p>The pick is the function <code>PickLootClass</code> on the table. For another rule (no duplicates, a guaranteed item), make a child of <code>BP_LootTableDataAsset</code> and override it.</p>
-<hr />
-<h2 id="mistakes-that-cost-time">Mistakes that cost time<a class="headerlink" href="#mistakes-that-cost-time" title="Permanent link">&para;</a></h2>
-<ul>
-<li><strong>An item on top of the shelf instead of under it.</strong> The search for a surface starts <code>Settle Trace Height</code> above the item. Under a low shelf, a high value starts inside the plank above and lands on top of it. Lower it.</li>
-<li><strong>An item floating in the air.</strong> If nothing is found within <code>Ground Trace Distance</code>, or the search starts inside something, the item stays exactly at the point. Move the point closer to the surface.</li>
-<li><strong>A point that never spawns.</strong> Its <code>Loot Table</code> is empty, or every row has <code>Weight</code> <code>0</code>.</li>
-</ul>
 <hr />
 <p>Next: <a href="../place_an_extraction_point/">Place an extraction point</a>.</p>
 <hr />

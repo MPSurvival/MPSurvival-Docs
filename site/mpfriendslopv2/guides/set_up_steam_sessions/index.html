@@ -7779,13 +7779,18 @@
 </ol>
 <p><img alt="The Online Subsystem Steam line in the Plugins window, ticked." src="../img/set_up_steam_sessions/01-online-subsystem-steam.png" width="921" /></p>
 <ol>
+<li>Type <code>Steam Sockets</code> in the search box, and tick its box.</li>
+</ol>
+<p><img alt="The Steam Sockets line in the Plugins window, ticked." src="../img/set_up_steam_sessions/02-steam-sockets.png" width="920" /></p>
+<ol>
 <li>Clear the search box. In the list on the left, click <strong>Advanced Sessions Plugin</strong>, under <strong>Project</strong>.</li>
 <li>Tick <strong>Advanced Sessions</strong> and <strong>Advanced Steam Sessions</strong>.</li>
 </ol>
-<p><img alt="Advanced Sessions and Advanced Steam Sessions, both ticked." src="../img/set_up_steam_sessions/02-advanced-sessions-plugins.png" width="921" /></p>
+<p><img alt="Advanced Sessions and Advanced Steam Sessions, both ticked." src="../img/set_up_steam_sessions/03-advanced-sessions-plugins.png" width="921" /></p>
 <ol>
 <li>Close the editor. Do not open it again yet.</li>
 </ol>
+<p>Steam Sockets carries the network driver that connects players through Steam. Since Unreal Engine 5.6, Online Subsystem Steam no longer contains one.</p>
 <hr />
 <h2 id="tell-unreal-to-use-steam">Tell Unreal to use Steam<a class="headerlink" href="#tell-unreal-to-use-steam" title="Permanent link">&para;</a></h2>
 <ol>
@@ -7794,7 +7799,7 @@
 <p>Add these lines at the end of the file:</p>
 <div class="highlight"><pre><span></span><code><span class="k">[/Script/Engine.GameEngine]</span>
 <span class="na">!NetDriverDefinitions</span><span class="o">=</span><span class="s">ClearArray</span>
-<span class="na">+NetDriverDefinitions=(DefName</span><span class="o">=</span><span class="s">&quot;GameNetDriver&quot;</span><span class="na">,DriverClassName</span><span class="o">=</span><span class="s">&quot;OnlineSubsystemSteam.SteamNetDriver&quot;</span><span class="na">,DriverClassNameFallback</span><span class="o">=</span><span class="s">&quot;OnlineSubsystemUtils.IpNetDriver&quot;</span><span class="na">)</span>
+<span class="na">+NetDriverDefinitions=(DefName</span><span class="o">=</span><span class="s">&quot;GameNetDriver&quot;</span><span class="na">,DriverClassName</span><span class="o">=</span><span class="s">&quot;/Script/SteamSockets.SteamSocketsNetDriver&quot;</span><span class="na">,DriverClassNameFallback</span><span class="o">=</span><span class="s">&quot;/Script/OnlineSubsystemUtils.IpNetDriver&quot;</span><span class="na">)</span>
 <span class="na">+NetDriverDefinitions=(DefName</span><span class="o">=</span><span class="s">&quot;DemoNetDriver&quot;</span><span class="na">,DriverClassName</span><span class="o">=</span><span class="s">&quot;/Script/Engine.DemoNetDriver&quot;</span><span class="na">,DriverClassNameFallback</span><span class="o">=</span><span class="s">&quot;/Script/Engine.DemoNetDriver&quot;</span><span class="na">)</span>
 
 <span class="k">[OnlineSubsystem]</span>
@@ -7804,9 +7809,6 @@
 <span class="na">bEnabled</span><span class="o">=</span><span class="s">true</span>
 <span class="na">SteamDevAppId</span><span class="o">=</span><span class="s">480</span>
 <span class="na">bInitServerOnClient</span><span class="o">=</span><span class="s">true</span>
-
-<span class="k">[/Script/OnlineSubsystemSteam.SteamNetDriver]</span>
-<span class="na">NetConnectionClassName</span><span class="o">=</span><span class="s">&quot;OnlineSubsystemSteam.SteamNetConnection&quot;</span>
 </code></pre></div>
 </li>
 <li>
@@ -7824,6 +7826,14 @@
 <tr>
 <td><code>!NetDriverDefinitions=ClearArray</code></td>
 <td>Removes the network driver the engine declares by default. Unreal uses the first one it finds, so without this line it ignores the Steam driver</td>
+</tr>
+<tr>
+<td><code>SteamSocketsNetDriver</code></td>
+<td>Players connect through Steam, to a Steam ID, with no port to open on the router</td>
+</tr>
+<tr>
+<td><code>IpNetDriver</code></td>
+<td>The fallback. Steam does not start in Play In Editor, so the editor keeps playing over IP</td>
 </tr>
 <tr>
 <td><code>DefaultPlatformService=Steam</code></td>
@@ -7846,7 +7856,7 @@
 <li>Click <strong>Class Settings</strong> in the toolbar.</li>
 <li>In <strong>Details</strong>, set <code>Parent Class</code> to <code>AdvancedFriendsGameInstance</code>.</li>
 </ol>
-<p><img alt="Parent Class set to Advanced Friends Game Instance." src="../img/set_up_steam_sessions/03-parent-class.png" width="440" /></p>
+<p><img alt="Parent Class set to Advanced Friends Game Instance." src="../img/set_up_steam_sessions/04-parent-class.png" width="440" /></p>
 <ol>
 <li>Click <strong>Compile</strong>.</li>
 </ol>
@@ -7860,7 +7870,7 @@
 <li>Add <strong>Is Overlay Enabled</strong>.</li>
 <li>Join both results with an <strong>AND</strong>, and connect it to <code>Can Invite</code> on the <strong>Return Node</strong>.</li>
 </ol>
-<p><img alt="CanInviteFriends returns true when Steam runs and its overlay is available." src="../img/set_up_steam_sessions/04-can-invite-friends.png" width="1040" /></p>
+<p><img alt="CanInviteFriends returns true when Steam runs and its overlay is available." src="../img/set_up_steam_sessions/05-can-invite-friends.png" width="1040" /></p>
 <p>The button turns on by itself when the lobby opens. No widget needs to change.</p>
 <hr />
 <h2 id="open-the-steam-invite-window">Open the Steam invite window<a class="headerlink" href="#open-the-steam-invite-window" title="Permanent link">&para;</a></h2>
@@ -7869,7 +7879,7 @@
 <li>Add <strong>Get Player Controller</strong>, with <code>Player Index</code> at <code>0</code>.</li>
 <li>From the event, call <strong>Show Invite UI</strong>. Connect the player controller to its <code>Player Controller</code> pin.</li>
 </ol>
-<p><img alt="Event Invite Friends opens the Steam invite window." src="../img/set_up_steam_sessions/05-invite-friends.png" width="881" /></p>
+<p><img alt="Event Invite Friends opens the Steam invite window." src="../img/set_up_steam_sessions/06-invite-friends.png" width="881" /></p>
 <p>The <code>INVITE FRIENDS</code> button already calls <strong>Invite Friends</strong> through the interface.</p>
 <hr />
 <h2 id="join-when-a-friend-accepts">Join when a friend accepts<a class="headerlink" href="#join-when-a-friend-accepts" title="Permanent link">&para;</a></h2>
@@ -7878,7 +7888,7 @@
 <li>From the event, call <strong>Join Invited Session</strong>, with <strong>Self</strong> as its <code>Target</code>.</li>
 <li>Connect <code>Session to Join</code> of the event to <code>Session to Join</code> of the call.</li>
 </ol>
-<p><img alt="Event On Session Invite Accepted joins the session with Join Invited Session." src="../img/set_up_steam_sessions/06-invite-accepted.png" width="768" /></p>
+<p><img alt="Event On Session Invite Accepted joins the session with Join Invited Session." src="../img/set_up_steam_sessions/07-invite-accepted.png" width="768" /></p>
 <ol>
 <li>Click <strong>Compile</strong>, then <strong>Save</strong>.</li>
 </ol>
@@ -7895,6 +7905,8 @@
 <li>Click <code>INVITE FRIENDS</code>. The Steam window opens on your friends list.</li>
 <li>On a second PC, log in with another Steam account and launch the game.</li>
 <li>Open <code>JOIN</code>. Your session shows under your Steam name. Click it to join your lobby.</li>
+<li>Leave the lobby on the second PC. On the first PC, click <code>INVITE FRIENDS</code> and invite the second account.</li>
+<li>On the second PC, keep the game running and accept the invite. The game joins your lobby.</li>
 </ol>
 <hr />
 <h2 id="before-you-ship-your-game">Before you ship your game<a class="headerlink" href="#before-you-ship-your-game" title="Permanent link">&para;</a></h2>
@@ -7920,6 +7932,10 @@
 <tr>
 <td><code>Shift+Tab</code> does nothing in the game</td>
 <td>Steam is not running, or you are not logged in. Also check the lines of <code>Config/DefaultEngine.ini</code>.</td>
+</tr>
+<tr>
+<td>The session shows in <code>JOIN</code>, but a click on it brings you back to the menu with <code>LOST CONNECTION TO THE HOST</code></td>
+<td>The game used the IP driver, which cannot reach a Steam ID. Check that <strong>Steam Sockets</strong> is ticked and that <code>DriverClassName</code> names <code>/Script/SteamSockets.SteamSocketsNetDriver</code>. In the log, the line <code>AddressResolution: Result [Host=steam.</code> ends with <code>[FAILED]</code></td>
 </tr>
 </tbody>
 </table>

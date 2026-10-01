@@ -44,12 +44,18 @@ The `ExampleBlueprints` folder of the zip is not needed. The plugins come alread
 
    ![The Online Subsystem Steam line in the Plugins window, ticked.](img/set_up_steam_sessions/01-online-subsystem-steam.png){ width="921" }
 
-4. Clear the search box. In the list on the left, click **Advanced Sessions Plugin**, under **Project**.
-5. Tick **Advanced Sessions** and **Advanced Steam Sessions**.
+4. Type `Steam Sockets` in the search box, and tick its box.
 
-   ![Advanced Sessions and Advanced Steam Sessions, both ticked.](img/set_up_steam_sessions/02-advanced-sessions-plugins.png){ width="921" }
+   ![The Steam Sockets line in the Plugins window, ticked.](img/set_up_steam_sessions/02-steam-sockets.png){ width="920" }
 
-6. Close the editor. Do not open it again yet.
+5. Clear the search box. In the list on the left, click **Advanced Sessions Plugin**, under **Project**.
+6. Tick **Advanced Sessions** and **Advanced Steam Sessions**.
+
+   ![Advanced Sessions and Advanced Steam Sessions, both ticked.](img/set_up_steam_sessions/03-advanced-sessions-plugins.png){ width="921" }
+
+7. Close the editor. Do not open it again yet.
+
+Steam Sockets carries the network driver that connects players through Steam. Since Unreal Engine 5.6, Online Subsystem Steam no longer contains one.
 
 ---
 
@@ -61,7 +67,7 @@ The `ExampleBlueprints` folder of the zip is not needed. The plugins come alread
     ```ini
     [/Script/Engine.GameEngine]
     !NetDriverDefinitions=ClearArray
-    +NetDriverDefinitions=(DefName="GameNetDriver",DriverClassName="OnlineSubsystemSteam.SteamNetDriver",DriverClassNameFallback="OnlineSubsystemUtils.IpNetDriver")
+    +NetDriverDefinitions=(DefName="GameNetDriver",DriverClassName="/Script/SteamSockets.SteamSocketsNetDriver",DriverClassNameFallback="/Script/OnlineSubsystemUtils.IpNetDriver")
     +NetDriverDefinitions=(DefName="DemoNetDriver",DriverClassName="/Script/Engine.DemoNetDriver",DriverClassNameFallback="/Script/Engine.DemoNetDriver")
 
     [OnlineSubsystem]
@@ -71,9 +77,6 @@ The `ExampleBlueprints` folder of the zip is not needed. The plugins come alread
     bEnabled=true
     SteamDevAppId=480
     bInitServerOnClient=true
-
-    [/Script/OnlineSubsystemSteam.SteamNetDriver]
-    NetConnectionClassName="OnlineSubsystemSteam.SteamNetConnection"
     ```
 
 3. Save the file, then open MPFriendslopV2 again.
@@ -81,6 +84,8 @@ The `ExampleBlueprints` folder of the zip is not needed. The plugins come alread
 | Line | Why |
 |---|---|
 | `!NetDriverDefinitions=ClearArray` | Removes the network driver the engine declares by default. Unreal uses the first one it finds, so without this line it ignores the Steam driver |
+| `SteamSocketsNetDriver` | Players connect through Steam, to a Steam ID, with no port to open on the router |
+| `IpNetDriver` | The fallback. Steam does not start in Play In Editor, so the editor keeps playing over IP |
 | `DefaultPlatformService=Steam` | Sessions go through Steam instead of the default online subsystem |
 | `SteamDevAppId=480` | Spacewar, the test app that Valve shares with every developer |
 | `bInitServerOnClient=true` | Lets a player host a session. Without it, `HOST RUN` fails |
@@ -93,7 +98,7 @@ The `ExampleBlueprints` folder of the zip is not needed. The plugins come alread
 2. Click **Class Settings** in the toolbar.
 3. In **Details**, set `Parent Class` to `AdvancedFriendsGameInstance`.
 
-   ![Parent Class set to Advanced Friends Game Instance.](img/set_up_steam_sessions/03-parent-class.png){ width="440" }
+   ![Parent Class set to Advanced Friends Game Instance.](img/set_up_steam_sessions/04-parent-class.png){ width="440" }
 
 4. Click **Compile**.
 
@@ -110,7 +115,7 @@ The `ExampleBlueprints` folder of the zip is not needed. The plugins come alread
 3. Add **Is Overlay Enabled**.
 4. Join both results with an **AND**, and connect it to `Can Invite` on the **Return Node**.
 
-   ![CanInviteFriends returns true when Steam runs and its overlay is available.](img/set_up_steam_sessions/04-can-invite-friends.png){ width="1040" }
+   ![CanInviteFriends returns true when Steam runs and its overlay is available.](img/set_up_steam_sessions/05-can-invite-friends.png){ width="1040" }
 
 The button turns on by itself when the lobby opens. No widget needs to change.
 
@@ -122,7 +127,7 @@ The button turns on by itself when the lobby opens. No widget needs to change.
 2. Add **Get Player Controller**, with `Player Index` at `0`.
 3. From the event, call **Show Invite UI**. Connect the player controller to its `Player Controller` pin.
 
-   ![Event Invite Friends opens the Steam invite window.](img/set_up_steam_sessions/05-invite-friends.png){ width="881" }
+   ![Event Invite Friends opens the Steam invite window.](img/set_up_steam_sessions/06-invite-friends.png){ width="881" }
 
 The `INVITE FRIENDS` button already calls **Invite Friends** through the interface.
 
@@ -134,7 +139,7 @@ The `INVITE FRIENDS` button already calls **Invite Friends** through the interfa
 2. From the event, call **Join Invited Session**, with **Self** as its `Target`.
 3. Connect `Session to Join` of the event to `Session to Join` of the call.
 
-   ![Event On Session Invite Accepted joins the session with Join Invited Session.](img/set_up_steam_sessions/06-invite-accepted.png){ width="768" }
+   ![Event On Session Invite Accepted joins the session with Join Invited Session.](img/set_up_steam_sessions/07-invite-accepted.png){ width="768" }
 
 4. Click **Compile**, then **Save**.
 
@@ -154,6 +159,8 @@ Steam does not start in Play In Editor. There, the game uses the default online 
 6. Click `INVITE FRIENDS`. The Steam window opens on your friends list.
 7. On a second PC, log in with another Steam account and launch the game.
 8. Open `JOIN`. Your session shows under your Steam name. Click it to join your lobby.
+9. Leave the lobby on the second PC. On the first PC, click `INVITE FRIENDS` and invite the second account.
+10. On the second PC, keep the game running and accept the invite. The game joins your lobby.
 
 ---
 
@@ -171,6 +178,7 @@ Steam does not start in Play In Editor. There, the game uses the default online 
 |---|---|
 | `INVITE FRIENDS` stays greyed out in Play In Editor | That is expected: Steam does not start in the editor. Test with **Standalone Game** or a packaged build. |
 | `Shift+Tab` does nothing in the game | Steam is not running, or you are not logged in. Also check the lines of `Config/DefaultEngine.ini`. |
+| The session shows in `JOIN`, but a click on it brings you back to the menu with `LOST CONNECTION TO THE HOST` | The game used the IP driver, which cannot reach a Steam ID. Check that **Steam Sockets** is ticked and that `DriverClassName` names `/Script/SteamSockets.SteamSocketsNetDriver`. In the log, the line `AddressResolution: Result [Host=steam.` ends with `[FAILED]` |
 
 For every setting of the Steam online subsystem, see [Online Subsystem Steam](https://dev.epicgames.com/documentation/unreal-engine/online-subsystem-steam-interface-in-unreal-engine) in the Unreal Engine documentation.
 

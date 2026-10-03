@@ -47,7 +47,7 @@ On a procedural map, the quota follows the loot that actually spawned.
 
 | Field | What it does | Default |
 |---|---|---|
-| `Quota Ratio` | The quota is this value times the value of all the loot spawned in the level | `0.6` |
+| `Quota Ratio` | The quota is this value times the value of all the loot spawned in the level | `0.3` |
 
 `Quota Ratio` only applies on a map that has a generator. A map with no generator, such as a hand built map of your own, keeps its fixed `Run Quota`. The other run numbers are on [Change the quota, the run length and the recap](../loot/tune_the_run.md).
 

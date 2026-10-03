@@ -1,6 +1,6 @@
 # Add an inventory item
 
-An inventory item is one Data Asset. The pickup on the ground is always the same actor, `BP_ItemPickup`, and it reads its mesh from the Data Asset. No child class to make, no list to register it in.
+An inventory item is one Data Asset. The pickup on the ground is always the same actor, `BP_ItemPickup`, and it reads its mesh from the Data Asset. No list to register it in. A child class is only needed to put the item in a loot table.
 
 By the end of this page you have an item that lies in the level, goes into a quick slot with its icon, shows in the player's hand, and, if you want, heals or restores stamina when used.
 
@@ -71,6 +71,19 @@ See [How the player character works](../player/how_the_player_works.md#put-it-on
 | `Charge` | The charge the item starts with: `100` for a full flashlight, `2` for a loaded shotgun |
 | `Interaction Type` | `Simple` by default. `Hold` makes the player hold the interact key |
 | `Interaction Duration` | For `Hold`, the hold time in seconds. Ignored for `Simple`. `Spam` is covered in [Make any actor interactable](../interaction/make_an_actor_interactable.md) |
+
+---
+
+## Step 4, put it in the loot
+
+A loot table picks classes, so an item goes in it as a child of `BP_ItemPickup` that already holds its Data Asset. `BP_ItemPickup_Shotgun_SawedOff` is the shipped example.
+
+1. In `Blueprints/Environments/Items/Childs/`, right click, then **Blueprint Class**, and pick `BP_ItemPickup` as the parent.
+2. Name it `BP_ItemPickup_<Name>`.
+3. In its Class Defaults, set `Item Data` to your `DA_Item_<Name>`, and `Charge` to what it starts with.
+4. Add it as a row of a loot table, as in [Place loot spawn points and loot tables](../loot/place_loot_spawn_points.md#make-a-loot-table).
+
+The child has no graph. It is not sold and adds nothing to the quota.
 
 ---
 

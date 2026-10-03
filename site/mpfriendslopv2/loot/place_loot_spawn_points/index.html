@@ -7615,7 +7615,7 @@
 <tr>
 <td><code>Spawn Chance</code></td>
 <td>Chance from 0 to 1 that this point spawns anything this run</td>
-<td><code>0.6</code></td>
+<td><code>0.9</code></td>
 </tr>
 <tr>
 <td><code>Random Yaw</code></td>
@@ -7635,7 +7635,7 @@
 </tbody>
 </table>
 <p>Every field is set per placed point. Changing a default on the class does not change a point where you already edited that field.</p>
-<p>In the rooms of <code>Maps/Modules/</code>, most points use <code>DA_LootTable_Shelf</code>. Each dead end also has points on <code>DA_LootTable_Salvage</code>, the table with the heavy pieces, the bat and the hammer.</p>
+<p>In the rooms of <code>Maps/Modules/</code>, the points on furniture use <code>DA_LootTable_Shelf</code>. Every room also has at least one point on the floor with <code>DA_LootTable_Salvage</code>, the table with the heavy pieces and the weapons: the bat, the hammer and the sawed-off shotgun.</p>
 <hr />
 <h2 id="make-a-loot-table">Make a loot table<a class="headerlink" href="#make-a-loot-table" title="Permanent link">&para;</a></h2>
 <ol>
@@ -7663,8 +7663,8 @@
 </tr>
 </tbody>
 </table>
-<p>The easiest start is to duplicate <code>DA_LootTable_Salvage</code> and edit the weights. <code>DA_LootTable_Shelf</code> is the same list without <code>BP_Loot_EngineBlock</code>, <code>BP_Loot_Generator</code> and <code>BP_Loot_VaultPlate</code>: heavy items are kept off shelves. <code>BP_Loot_BaseballBat</code> and <code>BP_Loot_Hammer</code> are in no table. They are placed by hand.</p>
-<p><code>Loot Class</code> accepts any actor. To be worth money when sold, it needs a <code>BP_LootValueComponent</code>: see <a href="../add_a_loot_item/">Add a loot item</a>.</p>
+<p>The easiest start is to duplicate <code>DA_LootTable_Salvage</code> and edit the weights. <code>DA_LootTable_Shelf</code> leaves out the heavy items (<code>BP_Loot_EngineBlock</code>, <code>BP_Loot_Generator</code>, <code>BP_Loot_VaultPlate</code>) and the weapons, which stay on the floor.</p>
+<p><code>Loot Class</code> accepts any actor. To be worth money when sold, it needs a <code>BP_LootValueComponent</code>: see <a href="../add_a_loot_item/">Add a loot item</a>. An inventory item goes in a table through a child of <code>BP_ItemPickup</code>: see <a href="../../items/add_an_item/#step-4-put-it-in-the-loot">Put it in the loot</a>.</p>
 <p>The pick is the function <code>PickLootClass</code> on the table. For another rule (no duplicates, a guaranteed item), make a child of <code>BP_LootTableDataAsset</code> and override it.</p>
 <hr />
 <p>Next: <a href="../place_an_extraction_point/">Place an extraction point</a>.</p>

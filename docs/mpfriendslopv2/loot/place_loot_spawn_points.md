@@ -20,14 +20,14 @@ When the run starts, the point rolls `Spawn Chance`, picks an item from the tabl
 | Field | What it does | Default |
 |---|---|---|
 | `Loot Table` | The table this point rolls. Empty means the point spawns nothing | empty |
-| `Spawn Chance` | Chance from 0 to 1 that this point spawns anything this run | `0.6` |
+| `Spawn Chance` | Chance from 0 to 1 that this point spawns anything this run | `0.9` |
 | `Random Yaw` | Turns the item to a random direction. Untick it to use the point's own rotation | ticked |
 | `Settle Trace Height` | How far above the item's centre, in cm, the search for a surface starts | `25` |
 | `Ground Trace Distance` | How far down, in cm, it looks for a surface | `200` |
 
 Every field is set per placed point. Changing a default on the class does not change a point where you already edited that field.
 
-In the rooms of `Maps/Modules/`, most points use `DA_LootTable_Shelf`. Each dead end also has points on `DA_LootTable_Salvage`, the table with the heavy pieces, the bat and the hammer.
+In the rooms of `Maps/Modules/`, the points on furniture use `DA_LootTable_Shelf`. Every room also has at least one point on the floor with `DA_LootTable_Salvage`, the table with the heavy pieces and the weapons: the bat, the hammer and the sawed-off shotgun.
 
 ---
 
@@ -44,9 +44,9 @@ In the rooms of `Maps/Modules/`, most points use `DA_LootTable_Shelf`. Each dead
 | `Loot Class` | The actor to spawn. Usually one of the `BP_Loot_*` classes |
 | `Weight` | How often this row is picked. `3` is three times as likely as `1`. `0` never spawns |
 
-The easiest start is to duplicate `DA_LootTable_Salvage` and edit the weights. `DA_LootTable_Shelf` is the same list without `BP_Loot_EngineBlock`, `BP_Loot_Generator` and `BP_Loot_VaultPlate`: heavy items are kept off shelves. `BP_Loot_BaseballBat` and `BP_Loot_Hammer` are in no table. They are placed by hand.
+The easiest start is to duplicate `DA_LootTable_Salvage` and edit the weights. `DA_LootTable_Shelf` leaves out the heavy items (`BP_Loot_EngineBlock`, `BP_Loot_Generator`, `BP_Loot_VaultPlate`) and the weapons, which stay on the floor.
 
-`Loot Class` accepts any actor. To be worth money when sold, it needs a `BP_LootValueComponent`: see [Add a loot item](add_a_loot_item.md).
+`Loot Class` accepts any actor. To be worth money when sold, it needs a `BP_LootValueComponent`: see [Add a loot item](add_a_loot_item.md). An inventory item goes in a table through a child of `BP_ItemPickup`: see [Put it in the loot](../items/add_an_item.md#step-4-put-it-in-the-loot).
 
 The pick is the function `PickLootClass` on the table. For another rule (no duplicates, a guaranteed item), make a child of `BP_LootTableDataAsset` and override it.
 

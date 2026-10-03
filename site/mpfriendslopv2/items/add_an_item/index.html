@@ -6395,6 +6395,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#step-4-put-it-in-the-loot" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 4, put it in the loot
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#what-you-get-for-free" class="md-nav__link">
     <span class="md-ellipsis">
       What you get for free
@@ -7594,6 +7603,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#step-4-put-it-in-the-loot" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 4, put it in the loot
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#what-you-get-for-free" class="md-nav__link">
     <span class="md-ellipsis">
       What you get for free
@@ -7619,7 +7637,7 @@
 
 
 <h1 id="add-an-inventory-item">Add an inventory item<a class="headerlink" href="#add-an-inventory-item" title="Permanent link">&para;</a></h1>
-<p>An inventory item is one Data Asset. The pickup on the ground is always the same actor, <code>BP_ItemPickup</code>, and it reads its mesh from the Data Asset. No child class to make, no list to register it in.</p>
+<p>An inventory item is one Data Asset. The pickup on the ground is always the same actor, <code>BP_ItemPickup</code>, and it reads its mesh from the Data Asset. No list to register it in. A child class is only needed to put the item in a loot table.</p>
 <p>By the end of this page you have an item that lies in the level, goes into a quick slot with its icon, shows in the player's hand, and, if you want, heals or restores stamina when used.</p>
 <p>If you have not read <a href="../how_items_work/">How items and the inventory work</a>, start there.</p>
 <ul>
@@ -7750,6 +7768,16 @@
 </tr>
 </tbody>
 </table>
+<hr />
+<h2 id="step-4-put-it-in-the-loot">Step 4, put it in the loot<a class="headerlink" href="#step-4-put-it-in-the-loot" title="Permanent link">&para;</a></h2>
+<p>A loot table picks classes, so an item goes in it as a child of <code>BP_ItemPickup</code> that already holds its Data Asset. <code>BP_ItemPickup_Shotgun_SawedOff</code> is the shipped example.</p>
+<ol>
+<li>In <code>Blueprints/Environments/Items/Childs/</code>, right click, then <strong>Blueprint Class</strong>, and pick <code>BP_ItemPickup</code> as the parent.</li>
+<li>Name it <code>BP_ItemPickup_&lt;Name&gt;</code>.</li>
+<li>In its Class Defaults, set <code>Item Data</code> to your <code>DA_Item_&lt;Name&gt;</code>, and <code>Charge</code> to what it starts with.</li>
+<li>Add it as a row of a loot table, as in <a href="../../loot/place_loot_spawn_points/#make-a-loot-table">Place loot spawn points and loot tables</a>.</li>
+</ol>
+<p>The child has no graph. It is not sold and adds nothing to the quota.</p>
 <hr />
 <h2 id="what-you-get-for-free">What you get for free<a class="headerlink" href="#what-you-get-for-free" title="Permanent link">&para;</a></h2>
 <p>Once the Data Asset exists and a pickup points at it:</p>

@@ -2,16 +2,33 @@ site_name: Del Studio Assets Documentation
 theme:
   name: material
   language: en
+  logo: assets/logo.svg
+  favicon: assets/logo.svg
+  font:
+    text: Inter
+    code: JetBrains Mono
   palette:
-    scheme: slate
-    primary: amber
-    accent: deep orange
+    - scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+    - scheme: default
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
   features:
     - navigation.tabs
+    - navigation.tabs.sticky
     - navigation.sections
     - navigation.top
     - navigation.indexes
+    - navigation.footer
     - content.code.annotate
+    - content.code.copy
     - search.suggest
     - search.highlight
     - content.tabs.link
@@ -255,12 +272,15 @@ markdown_extensions:
       permalink: true
   - admonition
   - attr_list
+  - md_in_html
   - codehilite
   - pymdownx.highlight
   - pymdownx.superfences
   - pymdownx.inlinehilite
   - pymdownx.details
-  - pymdownx.emoji
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
   - pymdownx.tabbed
 
 extra:

@@ -412,6 +412,8 @@
       
         
       
+        
+      
     
     
     
@@ -1063,6 +1065,84 @@
   
   <span class="md-ellipsis">
     Create an interaction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_10" id="__nav_2_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Guides
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_10">
+            <span class="md-nav__icon md-icon"></span>
+            Guides
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mpsurvival/guides/set_up_steam_sessions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Set up Steam sessions
     
   </span>
   
@@ -4279,6 +4359,15 @@
   <a href="#closing-the-store" class="md-nav__link">
     <span class="md-ellipsis">
       Closing the store
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#going-bankrupt" class="md-nav__link">
+    <span class="md-ellipsis">
+      Going bankrupt
     </span>
   </a>
   
@@ -7610,6 +7699,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#going-bankrupt" class="md-nav__link">
+    <span class="md-ellipsis">
+      Going bankrupt
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#what-resets-between-two-days" class="md-nav__link">
     <span class="md-ellipsis">
       What resets between two days
@@ -7709,6 +7807,10 @@
 <li><code>START A NEW DAY</code> fades to black and starts the next day.</li>
 </ol>
 <p>The sign refuses while a customer is still shopping, so you cannot close on someone standing at your till. When it refuses, its outline and prompt disappear entirely.</p>
+<hr />
+<h2 id="going-bankrupt">Going bankrupt<a class="headerlink" href="#going-bankrupt" title="Permanent link">&para;</a></h2>
+<p>The balance can go below zero: wages, rent, utilities and tax are charged at the end of the day whether you can pay them or not. If the balance is still negative when you press <code>START A NEW DAY</code>, the store does not reopen. A centered <strong>BANKRUPT</strong> screen replaces the report, in the report's own layout: the number of days you stayed open, your final balance, and two buttons, <code>MAIN MENU</code> and <code>QUIT GAME</code>. Nothing is saved at that point, so <code>CONTINUE</code> from the main menu brings back your last save.</p>
+<p>The rule lives in one function, <code>IsBankrupt</code> on <code>BP_StoreManager</code>: balance below zero. Change it there (a grace threshold, a debt limit) and the screen follows. The screen itself is <code>BP_GameOverWidget</code>; the player controller picks it from its <code>GameOverClass</code> setting.</p>
 <hr />
 <h2 id="what-resets-between-two-days">What resets between two days<a class="headerlink" href="#what-resets-between-two-days" title="Permanent link">&para;</a></h2>
 <table>

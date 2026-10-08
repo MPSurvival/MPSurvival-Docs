@@ -34,6 +34,14 @@ The sign refuses while a customer is still shopping, so you cannot close on some
 
 ---
 
+## Going bankrupt
+
+The balance can go below zero: wages, rent, utilities and tax are charged at the end of the day whether you can pay them or not. If the balance is still negative when you press `START A NEW DAY`, the store does not reopen. A centered **BANKRUPT** screen replaces the report, in the report's own layout: the number of days you stayed open, your final balance, and two buttons, `MAIN MENU` and `QUIT GAME`. Nothing is saved at that point, so `CONTINUE` from the main menu brings back your last save.
+
+The rule lives in one function, `IsBankrupt` on `BP_StoreManager`: balance below zero. Change it there (a grace threshold, a debt limit) and the screen follows. The screen itself is `BP_GameOverWidget`; the player controller picks it from its `GameOverClass` setting.
+
+---
+
 ## What resets between two days
 
 | Reset | Kept |

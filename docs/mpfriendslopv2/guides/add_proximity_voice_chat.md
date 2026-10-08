@@ -18,7 +18,7 @@ The guide uses Easy Proximity Voice Chat (EPVC) 1.2, a separate plugin on Fab. M
 2. Type `Easy Proximity Voice Chat` in the search box.
 3. Tick the box on its line.
 
-   ![The Easy Proximity Voice Chat line in the Plugins window, ticked.](img/add_proximity_voice_chat/01-plugin.png){ width="920" }
+    ![The Easy Proximity Voice Chat line in the Plugins window, ticked.](img/add_proximity_voice_chat/01-plugin.png){ width="920" }
 
 4. Close the editor. Do not open it again yet.
 
@@ -53,7 +53,7 @@ EPVC reads its settings from one Data Asset. The Data Asset points to a Sound At
 5. Pick `ProximityVoiceConfig`. Name it `DA_Voice`.
 6. Open `DA_Voice` and fill the three fields of the table below.
 
-   ![The Playback fields of DA_Voice: SCLS_Dialogue, ATT_Voice and head.](img/add_proximity_voice_chat/03-da-voice.png){ width="480" }
+    ![The Playback fields of DA_Voice: SCLS_Dialogue, ATT_Voice and head.](img/add_proximity_voice_chat/03-da-voice.png){ width="480" }
 
 7. Save both assets.
 
@@ -76,7 +76,7 @@ The voice component is a child of the EPVC component. It adds the links to the f
 3. Name it `BP_VoiceChatComponent`, then open it.
 4. Click **Class Defaults**. Set `Default Configuration` to `DA_Voice`.
 
-   ![Default Configuration set to DA_Voice in the Class Defaults.](img/add_proximity_voice_chat/05-default-configuration.png){ width="480" }
+    ![Default Configuration set to DA_Voice in the Class Defaults.](img/add_proximity_voice_chat/05-default-configuration.png){ width="480" }
 
 5. In **My Blueprint**, add a variable named `FaceComponent`. Set its type to **BP Face Component**, **Object Reference**.
 6. Add a second variable named `NameplateComponent`, of type **BP Nameplate Component**, **Object Reference**.
@@ -90,7 +90,7 @@ Only the player who talks turns their microphone on. EPVC then sends their voice
 1. In **My Blueprint**, add a function named `TryOpenMic`.
 2. Build its graph: **Get Owner**, **Cast To Pawn**, **Is Locally Controlled**, a **Branch**, and **Set Active Voice** with `Active` ticked.
 
-   ![The TryOpenMic function, from Get Owner to Set Active Voice.](img/add_proximity_voice_chat/06-try-open-mic.png){ width="1904" }
+    ![The TryOpenMic function, from Get Owner to Set Active Voice.](img/add_proximity_voice_chat/06-try-open-mic.png){ width="1904" }
 
 3. Click **Compile**.
 
@@ -104,20 +104,20 @@ Open the **Event Graph** and start from **Event Begin Play**.
 2. Set `FaceComponent` with the result.
 3. Do the same for **BP Nameplate Component** and `NameplateComponent`.
 
-   ![Begin Play stores the face and nameplate components in the two variables.](img/add_proximity_voice_chat/07-begin-play-cache.png){ width="2137" }
+    ![Begin Play stores the face and nameplate components in the two variables.](img/add_proximity_voice_chat/07-begin-play-cache.png){ width="2137" }
 
 4. Right click in the graph and search `Assign On Voice Activity`. Unreal adds a **Bind Event to On Voice Activity** node and a new custom event wired to it.
 5. Connect the bind node after the second **Set**.
 6. Cast the owner with **Cast To Pawn**. From **As Pawn**, search `Assign Receive Restarted Delegate`.
 7. After that bind node, call **Try Open Mic**.
 
-   ![The bind to On Voice Activity, the cast to Pawn, the bind to Receive Restarted and Try Open Mic.](img/add_proximity_voice_chat/08-begin-play-open-mic.png){ width="1693" }
+    ![The bind to On Voice Activity, the cast to Pawn, the bind to Receive Restarted and Try Open Mic.](img/add_proximity_voice_chat/08-begin-play-open-mic.png){ width="1693" }
 
 8. Add **Switch Has Authority** after **Try Open Mic**.
 9. From **Authority**, get the **BP Death Component** of the owner, then check it with **Is Valid**.
 10. From **Is Valid**, add `Assign On Decapitated`, then `Assign On Revived`. Their `Target` is the death component.
 
-   ![On the server, the voice component binds to OnDecapitated and OnRevived of the death component.](img/add_proximity_voice_chat/09-begin-play-death.png){ width="2114" }
+    ![On the server, the voice component binds to OnDecapitated and OnRevived of the death component.](img/add_proximity_voice_chat/09-begin-play-death.png){ width="2114" }
 
 The second call to **Try Open Mic** is for the host. On a listen server, the host's pawn starts before its controller takes it, so it is not locally controlled at Begin Play. **Receive Restarted** fires after that, on the server and on the player's own machine.
 
@@ -131,16 +131,16 @@ The assign nodes created four custom events. Fill them as follows.
 2. From **Then 0**, check `FaceComponent` with **Is Valid**, then call **Set Mouth Openness** with `Volume`.
 3. From **Then 1**, check `NameplateComponent`, then call **Set Speaking**. Its `New Speaking` is `Volume > 0`.
 
-   ![OnVoiceActivity_Event drives the mouth and the microphone of the nameplate.](img/add_proximity_voice_chat/10-voice-activity.png){ width="1625" }
+    ![OnVoiceActivity_Event drives the mouth and the microphone of the nameplate.](img/add_proximity_voice_chat/10-voice-activity.png){ width="1625" }
 
 4. `ReceiveRestartedDelegate_Event` calls **Try Open Mic**.
 
-   ![ReceiveRestartedDelegate_Event calls Try Open Mic.](img/add_proximity_voice_chat/11-restart.png){ width="887" }
+    ![ReceiveRestartedDelegate_Event calls Try Open Mic.](img/add_proximity_voice_chat/11-restart.png){ width="887" }
 
 5. `OnDecapitated_Event` calls **Set Server Muted** with `Muted` ticked.
 6. `OnRevived_Event` calls **Set Server Muted** with `Muted` not ticked.
 
-   ![OnDecapitated_Event mutes the player, OnRevived_Event unmutes them.](img/add_proximity_voice_chat/12-mute-while-dead.png){ width="1708" }
+    ![OnDecapitated_Event mutes the player, OnRevived_Event unmutes them.](img/add_proximity_voice_chat/12-mute-while-dead.png){ width="1708" }
 
 7. Click **Compile**, then **Save**.
 

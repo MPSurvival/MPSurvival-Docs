@@ -42,16 +42,16 @@ The `ExampleBlueprints` folder of the zip is not needed. The plugins come alread
 2. Open **Edit**, then **Plugins**.
 3. Type `Online Subsystem Steam` in the search box, and tick its box.
 
-   ![The Online Subsystem Steam line in the Plugins window, ticked.](img/set_up_steam_sessions/01-online-subsystem-steam.png){ width="921" }
+    ![The Online Subsystem Steam line in the Plugins window, ticked.](img/set_up_steam_sessions/01-online-subsystem-steam.png){ width="921" }
 
 4. Type `Steam Sockets` in the search box, and tick its box.
 
-   ![The Steam Sockets line in the Plugins window, ticked.](img/set_up_steam_sessions/02-steam-sockets.png){ width="920" }
+    ![The Steam Sockets line in the Plugins window, ticked.](img/set_up_steam_sessions/02-steam-sockets.png){ width="920" }
 
 5. Clear the search box. In the list on the left, click **Advanced Sessions Plugin**, under **Project**.
 6. Tick **Advanced Sessions** and **Advanced Steam Sessions**.
 
-   ![Advanced Sessions and Advanced Steam Sessions, both ticked.](img/set_up_steam_sessions/03-advanced-sessions-plugins.png){ width="921" }
+    ![Advanced Sessions and Advanced Steam Sessions, both ticked.](img/set_up_steam_sessions/03-advanced-sessions-plugins.png){ width="921" }
 
 7. Close the editor. Do not open it again yet.
 
@@ -98,7 +98,7 @@ Steam Sockets carries the network driver that connects players through Steam. Si
 2. Click **Class Settings** in the toolbar.
 3. In **Details**, set `Parent Class` to `AdvancedFriendsGameInstance`.
 
-   ![Parent Class set to Advanced Friends Game Instance.](img/set_up_steam_sessions/04-parent-class.png){ width="440" }
+    ![Parent Class set to Advanced Friends Game Instance.](img/set_up_steam_sessions/04-parent-class.png){ width="440" }
 
 4. Click **Compile**.
 
@@ -115,7 +115,7 @@ Steam Sockets carries the network driver that connects players through Steam. Si
 3. Add **Is Overlay Enabled**.
 4. Join both results with an **AND**, and connect it to `Can Invite` on the **Return Node**.
 
-   ![CanInviteFriends returns true when Steam runs and its overlay is available.](img/set_up_steam_sessions/05-can-invite-friends.png){ width="1040" }
+    ![CanInviteFriends returns true when Steam runs and its overlay is available.](img/set_up_steam_sessions/05-can-invite-friends.png){ width="1040" }
 
 The button turns on by itself when the lobby opens. No widget needs to change.
 
@@ -127,7 +127,7 @@ The button turns on by itself when the lobby opens. No widget needs to change.
 2. Add **Get Player Controller**, with `Player Index` at `0`.
 3. From the event, call **Show Invite UI**. Connect the player controller to its `Player Controller` pin.
 
-   ![Event Invite Friends opens the Steam invite window.](img/set_up_steam_sessions/06-invite-friends.png){ width="881" }
+    ![Event Invite Friends opens the Steam invite window.](img/set_up_steam_sessions/06-invite-friends.png){ width="881" }
 
 The `INVITE FRIENDS` button already calls **Invite Friends** through the interface.
 
@@ -139,7 +139,7 @@ The `INVITE FRIENDS` button already calls **Invite Friends** through the interfa
 2. From the event, call **Join Invited Session**, with **Self** as its `Target`.
 3. Connect `Session to Join` of the event to `Session to Join` of the call.
 
-   ![Event On Session Invite Accepted joins the session with Join Invited Session.](img/set_up_steam_sessions/07-invite-accepted.png){ width="768" }
+    ![Event On Session Invite Accepted joins the session with Join Invited Session.](img/set_up_steam_sessions/07-invite-accepted.png){ width="768" }
 
 4. Click **Compile**, then **Save**.
 

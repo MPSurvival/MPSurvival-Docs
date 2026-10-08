@@ -1,4 +1,4 @@
-# 🎛️ Configuration (Data Asset)
+# Configuration (Data Asset)
 
 Every tunable lives in a **`ProximityVoiceConfig`** Data Asset. Author presets, assign one as the component's **Default Configuration**, and swap them at runtime with **Set Voice Configuration**.
 
@@ -40,7 +40,7 @@ How the voice sounds on receiving machines.
 !!! tip
     Assign a **Sound Attenuation** asset to `Proximity Attenuation` to control how far a voice carries and how it falls off with distance. This is your main "how loud, how far" dial.
 
-#### 🌍 Turning proximity off entirely
+#### Turning proximity off entirely
 
 Proximity is driven **only** by the `Proximity Attenuation` asset. Leave it **empty (None)** and there's no distance falloff at all, the voice plays at full volume for everyone who can receive it, no matter how far away the speaker is.
 
@@ -53,7 +53,7 @@ This effectively turns EPVC into a **global / non-proximity voice chat**. Handy 
 !!! note
     Removing the attenuation only disables **distance falloff**. [Muting](muting.md), [Channels](channels.md) and [Occlusion](occlusion.md) still apply, so you can still, say, have global team voice that gets muffled through walls, or none of that, it's up to your config.
 
-#### 🔊 Emitters
+#### Emitters
 
 A speaker's voice can come out of several places at once: their own body, plus any [receiver](receivers.md) (radio, intercom) rebroadcasting their channel. These settings decide which one you actually hear when more than one is audible.
 
@@ -113,7 +113,7 @@ Set Voice Configuration (New Configuration = DA_NoVoice)
 
 ---
 
-## 📢 Need help?
+## Need help?
 
 [👉 Join the Discord](https://discord.gg/EqHCtq38jy)
 

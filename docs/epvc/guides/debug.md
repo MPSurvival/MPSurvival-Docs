@@ -1,4 +1,4 @@
-# 🐛 Debug Overlay
+# Debug Overlay
 
 EPVC ships with an in-world debug overlay so you can *see* what the voice system is doing: who's transmitting, their ranges, live levels, and occlusion lines. Perfect for tuning attenuation and occlusion, or diagnosing "why can't I hear them".
 
@@ -44,7 +44,7 @@ Walk between a speaker and a radio rebroadcasting them and you'll see the handov
 
 ---
 
-## 📢 Need help?
+## Need help?
 
 [👉 Join the Discord](https://discord.gg/EqHCtq38jy)
 

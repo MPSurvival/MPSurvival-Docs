@@ -1,4 +1,4 @@
-# 🔊 Radios & Receivers
+# Radios & Receivers
 
 A **receiver** rebroadcasts a whole channel out of the actor it sits on: a radio, an intercom, a PA speaker, a walkie-talkie in someone's hand.
 
@@ -128,7 +128,7 @@ And on the **Proximity Voice Chat Subsystem**:
 
 ---
 
-## 📢 Need help?
+## Need help?
 
 [👉 Join the Discord](https://discord.gg/EqHCtq38jy)
 

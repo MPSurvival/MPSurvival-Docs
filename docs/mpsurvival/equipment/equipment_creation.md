@@ -1,4 +1,4 @@
-# 🚀 How to create an equipment item ?
+# How to create an equipment item ?
 
 The process to create an equipment item is basically the same as creating a regular item   
 (see [How to create an item?](../items/item_creation.md)).

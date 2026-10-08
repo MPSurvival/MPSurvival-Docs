@@ -1,4 +1,4 @@
-# 🚀 How to create a wieldable class ?
+# How to create a wieldable class ?
 
 ### 1. Choose your base blueprint class
 

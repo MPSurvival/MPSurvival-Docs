@@ -1,4 +1,4 @@
-# 🚀 How to create an item ?
+# How to create an item ?
 
 ### 1. Create a new item data asset
 

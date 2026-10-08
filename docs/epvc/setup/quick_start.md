@@ -1,4 +1,4 @@
-# 🚀 Quick Start
+# Quick Start
 
 Get from zero to "I can hear my friend" in a few minutes.
 
@@ -58,7 +58,7 @@ Walk the two players close together and talk.
 
 ---
 
-### ✅ Checklist if you hear nothing
+### Checklist if you hear nothing
 
 | Check | Why |
 |-------|-----|
@@ -85,7 +85,7 @@ Once you can hear each other, the rest is opt-in:
 
 ---
 
-## 📢 Need help?
+## Need help?
 
 [👉 Join the Discord](https://discord.gg/EqHCtq38jy)
 

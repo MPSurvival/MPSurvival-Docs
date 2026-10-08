@@ -1,4 +1,4 @@
-# 🔊 Sound Class & Menu Volume
+# Sound Class & Menu Volume
 
 Proximity voice is not a normal `Sound Wave`, it's a live stream, so Unreal gives you no obvious place to plug it into your audio settings. EPVC does: pick a **Sound Class** on the config asset and the voice becomes a classed sound like any other, so **Sound Mixes**, class volume and ducking all apply to it.
 
@@ -87,7 +87,7 @@ Not sure the class is really applied? Open `SC_Voice`, set its `Volume` to `0.15
 
 ---
 
-## 📢 Need help?
+## Need help?
 
 [👉 Join the Discord](https://discord.gg/EqHCtq38jy)
 

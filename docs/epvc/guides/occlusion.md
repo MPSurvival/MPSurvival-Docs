@@ -1,4 +1,4 @@
-# 🧱 Occlusion
+# Occlusion
 
 Occlusion makes a voice **muffled** when world geometry sits between the speaker and the local listener. Walk behind a wall and the other players fade and get muddy, exactly what you'd expect.
 
@@ -63,7 +63,7 @@ Any surface **not** in the list uses the `Occluded Volume Multiplier` / `Occlude
 
 ---
 
-## 📢 Need help?
+## Need help?
 
 [👉 Join the Discord](https://discord.gg/EqHCtq38jy)
 

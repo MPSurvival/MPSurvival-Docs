@@ -1,4 +1,4 @@
-# 📡 Blueprint Events
+# Blueprint Events
 
 EPVC exposes voice as gameplay signals so you can drive UI and gameplay: speaking indicators, HUD icons, lip-sync triggers, "someone is talking" prompts, and more.
 
@@ -61,7 +61,7 @@ Plus the pure reads `Is Receiving Voice()`, `Get Received Voice Level()` and `Ge
 
 ---
 
-## 📢 Need help?
+## Need help?
 
 [👉 Join the Discord](https://discord.gg/EqHCtq38jy)
 

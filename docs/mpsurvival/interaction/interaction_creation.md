@@ -1,4 +1,4 @@
-# 🚀 How to create an interaction with an object ?
+# How to create an interaction with an object ?
 
 ### 1. Add the interactable interface
 

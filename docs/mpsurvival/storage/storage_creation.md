@@ -1,4 +1,4 @@
-# 🚀 How to create a storage ?
+# How to create a storage ?
 
 ### 1. Add the storage component
 

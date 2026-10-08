@@ -1,4 +1,4 @@
-# 🎚️ Voice Effects
+# Voice Effects
 
 Voices can run through a **Source Effect Chain**: bitcrusher, filter, EQ, ring modulation, the **pitch shifter EPVC ships with**, whatever you assemble. That's how you get a radio crunch, a helmet filter, a possessed-monster voice, or a phone call.
 
@@ -104,7 +104,7 @@ Set Voice Configuration (New Configuration = DA_MaskedVoice)
 
 ---
 
-## 📢 Need help?
+## Need help?
 
 [👉 Join the Discord](https://discord.gg/EqHCtq38jy)
 

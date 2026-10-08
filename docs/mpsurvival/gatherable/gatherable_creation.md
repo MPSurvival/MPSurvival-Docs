@@ -1,4 +1,4 @@
-# 🚀 How to create a gatherable ?
+# How to create a gatherable ?
 
 ### 1. Create a new gatherable data asset
 

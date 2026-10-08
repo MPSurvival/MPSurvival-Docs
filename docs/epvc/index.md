@@ -1,4 +1,4 @@
-# 🎙️ Easy Proximity Voice Chat
+# Easy Proximity Voice Chat
 
 Welcome to the official documentation for **Easy Proximity Voice Chat** (EPVC), the drop-in proximity voice chat for Unreal Engine.
 
@@ -8,7 +8,7 @@ No OnlineSubsystem. No EOS/Steam voice setup. It runs over your game's **normal 
 
 ---
 
-## 🆕 What's new in 1.2
+## What's new in 1.2
 
 - **Sound Class**: pick a **Sound Class** on the config asset and the voice becomes a normal classed sound, so your options menu can move it like Master, Music or SFX. Radios can use a different class, so voice and radio get separate sliders. See [Sound Class & Volume](guides/sound_class.md).
 - **Voice Pitch Shift**: a pitch shift **source effect** Unreal does not ship with. Deep voices, high voices, masked voices, plus a per speaker random detune so one preset gives everyone their own voice. See [Voice Effects](guides/effects.md).
@@ -17,7 +17,7 @@ Previously, **1.1** added [Radios & Receivers](guides/receivers.md), [Voice Effe
 
 ---
 
-## 💥 What is Easy Proximity Voice Chat?
+## What is Easy Proximity Voice Chat?
 
 EPVC gives every player a **spatialized voice** that other nearby players hear based on distance, world geometry, and channels, without you touching any online backend. Drop the component on your player, decide *when* it transmits (push-to-talk, open mic, trigger zone), and the plugin handles capture, encoding, replication, jitter buffering, and 3D playback.
 
@@ -29,7 +29,7 @@ EPVC gives every player a **spatialized voice** that other nearby players hear b
 
 ---
 
-## 🔌 Steam & EOS Compatibility
+## Steam & EOS Compatibility
 
 **Yes, EPVC works with Steam and EOS.** To be clear about what "no OnlineSubsystem" means: EPVC replaces their *voice* stack, not their *networking*. You keep using Steam or EOS for sessions, matchmaking and transport exactly as you do today.
 
@@ -50,7 +50,7 @@ You do **not** need to enable Steam voice, provision an EOS RTC (Voice) product,
 
 ---
 
-## ⚙️ Key Features
+## Key Features
 
 ### Proximity Voice
 - Spatialized 3D playback with attenuation
@@ -99,7 +99,7 @@ You do **not** need to enable Steam voice, provision an EOS RTC (Voice) product,
 
 ---
 
-## 📚 Guides
+## Guides
 
 Use the navigation to set things up, in order:
 
@@ -116,7 +116,7 @@ Use the navigation to set things up, in order:
 
 ---
 
-## 📢 Join the Community
+## Join the Community
 
 Got ideas? Need help? Found a bug?
 

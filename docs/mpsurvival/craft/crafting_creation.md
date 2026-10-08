@@ -1,4 +1,4 @@
-# 🚀 How to create a crafting recipe ?
+# How to create a crafting recipe ?
 
 ### 1. Create a new crafting data asset
 

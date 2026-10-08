@@ -1,4 +1,4 @@
-# 🚀 How to create a vital ?
+# How to create a vital ?
 
 ### 1. Create a new vital data asset
 

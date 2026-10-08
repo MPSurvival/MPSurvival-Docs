@@ -1,4 +1,4 @@
-# 🧭 MPSurvival, the Ultimate Multiplayer Survival Template
+# MPSurvival, the Ultimate Multiplayer Survival Template
 
 Welcome to the official documentation for **MPSurvival**, the ultimate template to kickstart your multiplayer survival game in Unreal Engine.
 
@@ -8,7 +8,7 @@ This template is designed to **save you weeks of work** by providing a clean, mo
 
 ---
 
-## 💥 What is MPSurvival?
+## What is MPSurvival?
 
 MPSurvival gives you a **robust starting point** for your own survival game, with no bloat, just essentials. It's multiplayer-ready, 100% Blueprint-based, and packed with well-documented systems covering:
 
@@ -21,7 +21,7 @@ MPSurvival gives you a **robust starting point** for your own survival game, wit
 
 ---
 
-## ⚙️ Key Features
+## Key Features
 
 ### Inventory System
 - Drag & drop, stack splitting, slot interaction
@@ -60,7 +60,7 @@ MPSurvival gives you a **robust starting point** for your own survival game, wit
 
 ---
 
-## 📚 Guides
+## Guides
 
 Use the navigation to set up each system:
 
@@ -75,7 +75,7 @@ Use the navigation to set up each system:
 
 ---
 
-## 📢 Join the Community
+## Join the Community
 
 Got ideas? Need help? Found a bug?
 

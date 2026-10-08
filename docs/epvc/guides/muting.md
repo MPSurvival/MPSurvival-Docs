@@ -1,4 +1,4 @@
-# 🔇 Muting
+# Muting
 
 EPVC has two independent muting layers:
 
@@ -7,7 +7,7 @@ EPVC has two independent muting layers:
 
 ---
 
-## 🙉 Local muting (client-side)
+## Local muting (client-side)
 
 Mute a specific player just for yourself. Great for a "mute this player" button in your scoreboard.
 
@@ -27,7 +27,7 @@ Mute Player Locally (Player To Mute = ThatPawn, Mute = true)
 
 ---
 
-## 🛑 Server muting (authoritative)
+## Server muting (authoritative)
 
 Server muting is enforced for the whole session. There are two ways in.
 
@@ -63,7 +63,7 @@ Get World Subsystem (Proximity Voice Chat Subsystem) → Server Mute Player (Pla
 
 ---
 
-## 📢 Need help?
+## Need help?
 
 [👉 Join the Discord](https://discord.gg/EqHCtq38jy)
 

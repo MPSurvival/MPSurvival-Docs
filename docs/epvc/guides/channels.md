@@ -1,4 +1,4 @@
-# 📻 Channels
+# Channels
 
 Channels decide **who hears who**. A listener only hears speakers on their **own** channel. Everyone starts on channel `0`.
 
@@ -53,7 +53,7 @@ See [Radios & Receivers](receivers.md).
 
 ---
 
-## 📢 Need help?
+## Need help?
 
 [👉 Join the Discord](https://discord.gg/EqHCtq38jy)
 

@@ -11,6 +11,8 @@ Manuals for the Unreal Engine templates and plugins made by Del Studio. Each ass
 
 <div class="ds-entry" markdown>
 
+[![MPSurvival](assets/products/mpsurvival.jpg)](mpsurvival/index.md)
+
 <p class="ds-kind">Template</p>
 
 ### [MPSurvival](mpsurvival/index.md)
@@ -20,6 +22,8 @@ The ultimate multiplayer survival template, with inventory, crafting, vitals, ga
 </div>
 
 <div class="ds-entry" markdown>
+
+[![Easy Proximity Voice Chat](assets/products/epvc.jpg)](epvc/index.md)
 
 <p class="ds-kind">Plugin</p>
 
@@ -31,6 +35,8 @@ Drop-in proximity voice chat over normal replication, no OnlineSubsystem, no EOS
 
 <div class="ds-entry" markdown>
 
+[![The Last Template](assets/products/tlt.jpg)](tlt/index.md)
+
 <p class="ds-kind">Template</p>
 
 ### [The Last Template](tlt/index.md)
@@ -41,6 +47,8 @@ A third person survival action template. Locomotion and traversal, guns and mele
 
 <div class="ds-entry" markdown>
 
+[![Grand Opening](assets/products/go.jpg)](go/index.md)
+
 <p class="ds-kind">Template</p>
 
 ### [Grand Opening](go/index.md)
@@ -50,6 +58,8 @@ A first person store management template. Order stock from the office computer, 
 </div>
 
 <div class="ds-entry" markdown>
+
+[![MPFriendslopV2](assets/products/mpfriendslopv2.jpg)](mpfriendslopv2/index.md)
 
 <p class="ds-kind">Template</p>
 

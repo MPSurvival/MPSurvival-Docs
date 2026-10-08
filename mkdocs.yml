@@ -57,6 +57,8 @@ nav:
           - Create a storage system: mpsurvival/storage/storage_creation.md
       - Interactions:
           - Create an interaction: mpsurvival/interaction/interaction_creation.md
+      - Guides:
+          - Set up Steam sessions: mpsurvival/guides/set_up_steam_sessions.md
   - Easy Proximity Voice Chat:
       - Overview: epvc/index.md
       - Setup:

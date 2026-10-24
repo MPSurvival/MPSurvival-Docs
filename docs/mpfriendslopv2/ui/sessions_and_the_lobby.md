@@ -60,6 +60,8 @@ MPFriendslopV2 ships two, in `Blueprints/DataAssets/Level/Childs/`: `DA_Level_Pr
 3. Open `WBP_SessionPage`, click **Class Defaults**, and add it to `Levels`. The order of the list is the order of the cards.
 4. Save both.
 
+The same steps with pictures, from the map to the card picture, are in the guide [Add a level to the lobby](../guides/add_a_level.md).
+
 The card itself is `WBP_LevelCard`: its colours are in `Settings|Style` and its sounds in `Settings|Audio`. To use a card of your own, set `Level Card Class` on `WBP_SessionPage`.
 
 ---

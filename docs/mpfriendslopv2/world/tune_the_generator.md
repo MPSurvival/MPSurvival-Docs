@@ -49,7 +49,7 @@ On a procedural map, the quota follows the loot that actually spawned.
 |---|---|---|
 | `Quota Ratio` | The quota is this value times the value of all the loot spawned in the level | `0.3` |
 
-`Quota Ratio` only applies on a map that has a generator. A map with no generator, such as a hand built map of your own, keeps its fixed `Run Quota`. The other run numbers are on [Change the quota, the run length and the recap](../loot/tune_the_run.md).
+`Quota Ratio` applies on every map. With a generator, only the loot inside the generated level counts. On a map with no generator, such as `L_Annex` or a hand built map of your own, all the loot in the level counts. The other run numbers are on [Change the quota, the run length and the recap](../loot/tune_the_run.md).
 
 ---
 
@@ -80,7 +80,7 @@ The game mode does not know `BP_LevelGenerator`. It waits for any actor that imp
 2. When it is, get the game mode and send it `NotifyLevelReady`, from `BPI_RunControl`, on the server.
 3. On every machine with a screen, return true from `IsLevelVisible` once the level can be seen there. The loading screen waits for it.
 
-Until then the run does not start: no quota, no clock. A map with no level builder starts the run once every player has arrived.
+Until then the run does not start: no quota, no clock. A map with no level builder starts the run once every player has arrived and the level has begun play, so the loot placed in it has spawned and counts in the quota.
 
 ---
 

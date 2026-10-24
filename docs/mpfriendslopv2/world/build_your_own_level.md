@@ -2,7 +2,7 @@
 
 A run map is an ordinary Unreal level with a handful of template actors dropped into it. There is no list to register it in and no setting to add to its World Settings. By the end of this page you have a map the crew can loot, extract from and play from the menu.
 
-The start room of `L_Procedural` and every room in `Maps/Modules/` are built exactly this way. Keep one open next to your level and copy what you need from it.
+The start room of `L_Procedural`, every room in `Maps/Modules/` and the whole of `L_Annex` are built exactly this way. `L_Annex` is a complete run map with no generator: keep it open next to your level and copy what you need from it.
 
 - The run map: `Content/MPFriendslop/Maps/L_Procedural`
 - The rooms: `Content/MPFriendslop/Maps/Modules/`
@@ -65,9 +65,9 @@ Beyond the `PlayerStart`s, only the extraction trap and some loot are needed for
 
 ## Step 5, play it from the menu
 
-Point `Run Level` on `WBP_SessionPage` and `Level To Play` on `WBP_MainMenuPage` at your map. **START THE RUN** travels to the first, **SOLO RUN** opens the second, so set both. The steps are on [The maps, and how a game starts](../start/maps_and_game_flow.md).
+Give your map a level card in the lobby, so the host can pick it before **START THE RUN**: [Add your level to the lobby](../ui/sessions_and_the_lobby.md#add-your-level-to-the-lobby). For **SOLO RUN**, set `Level To Play` on `WBP_MainMenuPage`. The steps are on [The maps, and how a game starts](../start/maps_and_game_flow.md).
 
-To give this map its own quota or run length, see [Change the quota, the run length and the recap](../loot/tune_the_run.md).
+The quota follows the loot you place. To change its ratio or the run length on this map only, see [Change the quota, the run length and the recap](../loot/tune_the_run.md).
 
 ---
 

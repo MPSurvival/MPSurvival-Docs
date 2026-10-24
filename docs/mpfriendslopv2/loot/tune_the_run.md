@@ -11,29 +11,29 @@ The quota and the length of a run are two numbers on the GameMode. The clock and
 
 1. Open `BP_FriendslopGameMode`.
 2. Click **Class Defaults**.
-3. In `Settings|Extraction`, set `Run Quota` and `Run Duration Seconds`.
+3. In `Settings|Extraction`, set `Quota Ratio` and `Run Duration Seconds`.
 4. Compile and save.
 
 | Field | What it does | Shipped |
 |---|---|---|
-| `Run Quota` | The extracted value the crew must sell before the trap opens for good and everyone can jump | `2000` |
+| `Quota Ratio` | The quota is this share of the value of all the loot in the level when the run starts | `0.3` |
 | `Run Duration Seconds` | How long the run lasts. When it runs out, the run ends | `300` (5 minutes) |
 | `Starting Extracted Value` | Money already in the bank when the run starts. It shows on the recap as a `STARTING FUNDS` row | `0` |
 
-`Run Quota` is the quota of a map without a level generator. On `L_Procedural` the quota follows the loot that spawned instead, through `Quota Ratio` on the same GameMode. See [Tune the generator](../world/tune_the_generator.md).
+The quota follows the loot on every map. When the run starts, the GameMode adds up the value of the loot in the level and multiplies it by `Quota Ratio`. On `L_Procedural` only the loot inside the generated level counts, not the arena. On a hand built map such as `L_Annex`, all the loot in the level counts, so a map with no loot has a quota of `0`. See [Tune the generator](../world/tune_the_generator.md).
 
-`Starting Extracted Value` is a test shortcut. Set it at or above `Run Quota` and the quota is met the moment you spawn, so you can test the trap and the jump without carrying anything. Put it back to `0` for your game.
+`Starting Extracted Value` is a test shortcut. Set it at or above the quota and the quota is met the moment you spawn, so you can test the trap and the jump without carrying anything. Put it back to `0` for your game.
 
 ---
 
 ## Different numbers on each map
 
-`L_Procedural` and `L_Showcase` have no GameMode override: they use the project default, `BP_FriendslopGameMode`, set in **Project Settings**, then **Maps & Modes**. So changing its Class Defaults changes every map.
+`L_Procedural`, `L_Annex` and `L_Showcase` have no GameMode override: they use the project default, `BP_FriendslopGameMode`, set in **Project Settings**, then **Maps & Modes**. So changing its Class Defaults changes every map.
 
 For a map with its own quota or length:
 
 1. Right click `BP_FriendslopGameMode`, then **Create Child Blueprint Class**.
-2. In the child's Class Defaults, set `Run Quota` and `Run Duration Seconds`.
+2. In the child's Class Defaults, set `Quota Ratio` and `Run Duration Seconds`.
 3. Open your map, then **World Settings**, and set `GameMode Override` to the child.
 
 ---

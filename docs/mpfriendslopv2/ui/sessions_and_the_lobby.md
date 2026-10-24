@@ -1,6 +1,6 @@
 # Sessions and the lobby
 
-`HOST RUN` on the main menu opens one page, `WBP_SessionPage`, with two tabs: `JOIN` lists the games you can join, `HOST` opens your own lobby. From the lobby, the host starts the run and everyone travels to `L_Procedural` together.
+`HOST RUN` on the main menu opens one page, `WBP_SessionPage`, with two tabs: `JOIN` lists the games you can join, `HOST` opens your own lobby. From the lobby, the host picks the level, starts the run, and everyone travels to it together.
 
 - The session page and its rows: `Content/MPFriendslop/Blueprints/Widgets/Menu/`
 - The session state: `BP_FriendslopGameInstance`, `BP_LobbyGameState` and `BP_FriendslopPlayerState`
@@ -16,7 +16,8 @@ The lobby **is** `L_MainMenu`, running as a listen server.
 1. The host picks the options on the `HOST` tab and clicks `OPEN LOBBY`. The page creates the session, then reloads `L_MainMenu` as a listen server capped at `MAX PLAYERS`.
 2. Another player clicks a line on the `JOIN` tab and travels to the host's `L_MainMenu`. The menu sees that they are in a session and opens the lobby for them directly.
 3. Each player has a line in the lobby with their colour and a status: `HOST`, `READY`, `PICKING A HAT`, `ENTERING CODE` or `WRONG CODE`. Clicking your own line opens the customization page.
-4. The host clicks `START THE RUN`. Everyone travels to `Run Level`.
+4. The host clicks a level card on the left of the page. Every player sees the chosen card in amber.
+5. The host clicks `START THE RUN`. Everyone travels to the chosen level.
 
 The back arrow or `Escape` in a lobby leaves the session and reloads the menu.
 
@@ -33,6 +34,33 @@ Three lines on the `HOST` tab. The host clicks the value to cycle it.
 | `PRIVATE CODE` | `OFF`, or a code of letters that every joining player must type | Any time, lobby open or not |
 
 `MAX PLAYERS` cycles from `Min Players` up to `Max Lobby Players`, which is four. The starting value is `Host Options` on `BP_FriendslopGameInstance` (`Max Players` 4, `Lan Only` off), and the host's choice is kept there for the whole session, restarts included.
+
+---
+
+## The level cards
+
+On the `HOST` tab and in the lobby, the left of the page shows one card per level: a picture and a name. The host clicks a card to pick that level, lobby open or not. The other players see the same cards, with the host's choice in amber, and cannot click them. Until the host clicks one, the first card is the choice. `START THE RUN` travels to the chosen level, and `RESTART` reloads it.
+
+The choice travels with the host options, so the server holds it and the clients only read it.
+
+The cards come from `Levels` on `WBP_SessionPage`, in `Settings|Session`. Each entry is a level Data Asset made from `BP_LevelDataAsset`:
+
+| Field | What it does |
+|---|---|
+| `Display Name` | The name under the picture |
+| `Map` | The level `START THE RUN` travels to |
+| `Thumbnail` | The picture, 16:9. The shipped ones are 512 x 288 |
+
+MPFriendslopV2 ships two, in `Blueprints/DataAssets/Level/Childs/`: `DA_Level_Procedural`, which plays `L_Procedural`, and `DA_Level_Annex`, which plays `L_Annex`.
+
+### Add your level to the lobby
+
+1. In `Content/MPFriendslop/Blueprints/DataAssets/Level/Childs/`, right click, then **Miscellaneous**, then **Data Asset**, and pick `BP_LevelDataAsset`. Name it `DA_Level_` followed by your map's name.
+2. Open it and fill `Display Name`, `Map` and `Thumbnail`.
+3. Open `WBP_SessionPage`, click **Class Defaults**, and add it to `Levels`. The order of the list is the order of the cards.
+4. Save both.
+
+The card itself is `WBP_LevelCard`: its colours are in `Settings|Style` and its sounds in `Settings|Audio`. To use a card of your own, set `Level Card Class` on `WBP_SessionPage`.
 
 ---
 
@@ -76,7 +104,8 @@ The words the page swaps while it runs, such as `OPEN LOBBY`, `START THE RUN`, `
 
 | Field | Where | What it does | Shipped default |
 |---|---|---|---|
-| `Run Level` | `WBP_SessionPage` | The map `START THE RUN` travels to | `L_Procedural` |
+| `Levels` | `WBP_SessionPage` | The levels the host can pick, one card each | `DA_Level_Procedural`, `DA_Level_Annex` |
+| `Level Card Class` | `WBP_SessionPage` | The widget each level card is made from | `WBP_LevelCard` |
 | `Refresh Interval` | `WBP_SessionPage` | Seconds between two searches on the `JOIN` tab | `5` |
 | `Max Results` | `WBP_SessionPage` | How many sessions a search returns | `50` |
 | `Min Players` | `WBP_SessionPage` | The lowest `MAX PLAYERS` value | `2` |
@@ -103,7 +132,7 @@ The lobby makes one `WBP_LobbyRow` per player when the page opens, `Max Lobby Pl
 
 ---
 
-To send the lobby to your own map, see [The maps, and how a game starts](../start/maps_and_game_flow.md).
+To build a map of your own and play it from the menu, see [The maps, and how a game starts](../start/maps_and_game_flow.md).
 
 ---
 

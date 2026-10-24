@@ -1345,6 +1345,8 @@
       
         
       
+        
+      
     
     
     
@@ -1489,6 +1491,29 @@
   
   <span class="md-ellipsis">
     Sound Class & Volume
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../input_device/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Microphone Selection
     
   </span>
   
@@ -7755,7 +7780,7 @@
 <td><code>On Channel Changed</code></td>
 <td>Every machine</td>
 <td><code>New Channel</code></td>
-<td>Update team/radio UI.</td>
+<td>Update team/radio UI. Fires on any change to the player's channels. <code>New Channel</code> is <code>Get Channel</code>, read <code>Get Channels</code> for the full list.</td>
 </tr>
 <tr>
 <td><code>On Voice Activated</code></td>
@@ -7785,7 +7810,7 @@
 </table>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>For a <strong>"who is talking" list</strong>, bind <code>On Voice Activity</code>: <code>Speaker</code> is the owning actor and <code>Volume</code> is non-zero only while they transmit. Filter by <code>Channel</code> if you only care about your own.</p>
+<p>For a <strong>"who is talking" list</strong>, bind <code>On Voice Activity</code>: <code>Speaker</code> is the owning actor and <code>Volume</code> is non-zero only while they transmit. To keep only one channel, check <code>Is Talking On Channel</code> on the speaker's component: <code>Channel</code> is only the first channel they talk on.</p>
 </div>
 <hr />
 <h3 id="handy-getters">Handy getters<a class="headerlink" href="#handy-getters" title="Permanent link">&para;</a></h3>

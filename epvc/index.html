@@ -1343,6 +1343,8 @@
       
         
       
+        
+      
     
     
     
@@ -1487,6 +1489,29 @@
   
   <span class="md-ellipsis">
     Sound Class & Volume
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="guides/input_device/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Microphone Selection
     
   </span>
   
@@ -7581,9 +7606,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#whats-new-in-12" class="md-nav__link">
+  <a href="#whats-new-in-13" class="md-nav__link">
     <span class="md-ellipsis">
-      What's new in 1.2
+      What's new in 1.3
     </span>
   </a>
   
@@ -7654,9 +7679,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#menu-volume-sound-class" class="md-nav__link">
+  <a href="#options-menu" class="md-nav__link">
     <span class="md-ellipsis">
-      Menu Volume &amp; Sound Class
+      Options Menu
     </span>
   </a>
   
@@ -7739,17 +7764,18 @@
 
 <h1 id="easy-proximity-voice-chat">Easy Proximity Voice Chat<a class="headerlink" href="#easy-proximity-voice-chat" title="Permanent link">&para;</a></h1>
 <p>Welcome to the official documentation for <strong>Easy Proximity Voice Chat</strong> (EPVC), the drop-in proximity voice chat for Unreal Engine.</p>
-<p>No OnlineSubsystem. No EOS/Steam voice setup. It runs over your game's <strong>normal replication</strong>, works on <strong>dedicated servers</strong>, and is fully testable in <strong>PIE</strong>. Voice is treated as a real gameplay signal: channels, radios, voice effects, occlusion through geometry, runtime-swappable config, server &amp; client muting, and Blueprint events.</p>
+<p>No OnlineSubsystem. No EOS/Steam voice setup. It runs over your game's <strong>normal replication</strong>, works on <strong>dedicated servers</strong>, and is fully testable in <strong>PIE</strong>. Voice is treated as a real gameplay signal: overlapping channels, radios, voice effects, occlusion through geometry, microphone selection, runtime-swappable config, server &amp; client muting, and Blueprint events.</p>
 <blockquote>
 <p>🎯 Designed to be integrated in minutes, not weeks. Add one component, flip one setting, and talk.</p>
 </blockquote>
 <hr />
-<h2 id="whats-new-in-12">What's new in 1.2<a class="headerlink" href="#whats-new-in-12" title="Permanent link">&para;</a></h2>
+<h2 id="whats-new-in-13">What's new in 1.3<a class="headerlink" href="#whats-new-in-13" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Sound Class</strong>: pick a <strong>Sound Class</strong> on the config asset and the voice becomes a normal classed sound, so your options menu can move it like Master, Music or SFX. Radios can use a different class, so voice and radio get separate sliders. See <a href="guides/sound_class/">Sound Class &amp; Volume</a>.</li>
-<li><strong>Voice Pitch Shift</strong>: a pitch shift <strong>source effect</strong> Unreal does not ship with. Deep voices, high voices, masked voices, plus a per speaker random detune so one preset gives everyone their own voice. See <a href="guides/effects/">Voice Effects</a>.</li>
+<li><strong>Overlapping channels</strong>: a player can be on several channels at once, and talk, listen or both on each one. Keep everyone on channel <code>0</code> for proximity, give each team a radio channel, and players hear both at the same time. <code>Set Channel</code> works as before. See <a href="guides/channels/">Channels</a>.</li>
+<li><strong>Microphone selection</strong>: list the microphones and switch between them from your options menu, live, with three static nodes. The choice is saved between sessions. See <a href="guides/input_device/">Microphone Selection</a>.</li>
+<li><strong>Lighter voice packets</strong>: each packet is 7 bytes smaller, and a player who talks on no channel sends nothing.</li>
 </ul>
-<p>Previously, <strong>1.1</strong> added <a href="guides/receivers/">Radios &amp; Receivers</a>, <a href="guides/effects/">Voice Effects</a>, emitter selection, per-emitter occlusion and the <a href="guides/debug/">debug overlay</a>.</p>
+<p>Previously, <strong>1.2</strong> added the voice <a href="guides/sound_class/">Sound Class</a> and the <a href="guides/effects/">Voice Pitch Shift</a> effect, and <strong>1.1</strong> added <a href="guides/receivers/">Radios &amp; Receivers</a>, <a href="guides/effects/">Voice Effects</a>, emitter selection, per-emitter occlusion and the <a href="guides/debug/">debug overlay</a>.</p>
 <hr />
 <h2 id="what-is-easy-proximity-voice-chat">What is Easy Proximity Voice Chat?<a class="headerlink" href="#what-is-easy-proximity-voice-chat" title="Permanent link">&para;</a></h2>
 <p>EPVC gives every player a <strong>spatialized voice</strong> that other nearby players hear based on distance, world geometry, and channels, without you touching any online backend. Drop the component on your player, decide <em>when</em> it transmits (push-to-talk, open mic, trigger zone), and the plugin handles capture, encoding, replication, jitter buffering, and 3D playback.</p>
@@ -7817,9 +7843,10 @@
 </ul>
 <h3 id="channels">Channels<a class="headerlink" href="#channels" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Speakers talk and listen on a channel</li>
-<li>Listeners only hear speakers on their <strong>own</strong> channel</li>
-<li>Great for teams, radios, lobbies, spectators</li>
+<li>A player can be on <strong>several channels at once</strong>, talking, listening or both on each</li>
+<li>A listener hears a speaker who talks on a channel they listen to</li>
+<li>Proximity and a team radio at the same time, with nothing to switch</li>
+<li>Teams, radio push-to-talk, lobbies, spectators, dead players</li>
 </ul>
 <h3 id="radios-receivers">Radios &amp; Receivers<a class="headerlink" href="#radios-receivers" title="Permanent link">&para;</a></h3>
 <ul>
@@ -7835,11 +7862,12 @@
 <li>Applied per emitter: clean on the pawn, crunchy on the radio</li>
 <li>Swappable at runtime like any other config setting</li>
 </ul>
-<h3 id="menu-volume-sound-class">Menu Volume &amp; Sound Class<a class="headerlink" href="#menu-volume-sound-class" title="Permanent link">&para;</a></h3>
+<h3 id="options-menu">Options Menu<a class="headerlink" href="#options-menu" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Route the voice through your own <strong>Sound Class</strong></li>
 <li>Sound Mixes, class volume and ducking apply live, even mid sentence</li>
 <li>Receivers can carry a different class, one slider for voice, one for radio</li>
+<li><strong>Microphone selection</strong>: list the microphones, switch live, saved between sessions</li>
 </ul>
 <h3 id="occlusion">Occlusion<a class="headerlink" href="#occlusion" title="Permanent link">&para;</a></h3>
 <ul>
@@ -7869,10 +7897,11 @@
 <ul>
 <li><a href="setup/quick_start/">Quick Start</a>, enable voice and hear your first words</li>
 <li><a href="guides/configuration/">Configuration (Data Asset)</a>, tune capture, playback, latency</li>
-<li><a href="guides/channels/">Channels</a>, separate who hears who</li>
+<li><a href="guides/channels/">Channels</a>, decide who hears who, on one channel or several</li>
 <li><a href="guides/receivers/">Radios &amp; Receivers</a>, rebroadcast a channel out of a radio or intercom</li>
 <li><a href="guides/effects/">Voice Effects</a>, bitcrusher, filters, pitch shift and the radio crunch</li>
 <li><a href="guides/sound_class/">Sound Class &amp; Volume</a>, wire the voice to your options menu</li>
+<li><a href="guides/input_device/">Microphone Selection</a>, let players pick their microphone</li>
 <li><a href="guides/muting/">Muting</a>, local &amp; server muting</li>
 <li><a href="guides/occlusion/">Occlusion</a>, muffle voices through walls</li>
 <li><a href="guides/events/">Blueprint Events</a>, react to voice in your UI/gameplay</li>

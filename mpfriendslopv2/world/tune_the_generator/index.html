@@ -7844,7 +7844,7 @@
 </tr>
 </tbody>
 </table>
-<p><code>Quota Ratio</code> only applies on a map that has a generator. A map with no generator, such as a hand built map of your own, keeps its fixed <code>Run Quota</code>. The other run numbers are on <a href="../../loot/tune_the_run/">Change the quota, the run length and the recap</a>.</p>
+<p><code>Quota Ratio</code> applies on every map. With a generator, only the loot inside the generated level counts. On a map with no generator, such as <code>L_Annex</code> or a hand built map of your own, all the loot in the level counts. The other run numbers are on <a href="../../loot/tune_the_run/">Change the quota, the run length and the recap</a>.</p>
 <hr />
 <h2 id="a-bigger-grid">A bigger grid<a class="headerlink" href="#a-bigger-grid" title="Permanent link">&para;</a></h2>
 <p>The Warden only walks where the nav mesh is. <code>L_Procedural</code> has one <code>NavMeshBoundsVolume</code> sized for a <code>5</code> x <code>5</code> grid. When you raise <code>Grid Size</code>, stretch that volume over the new modules. Keep its bottom just under the floor: deeper, it would also cover the shaft under the extraction trap.</p>
@@ -7881,7 +7881,7 @@
 <li>When it is, get the game mode and send it <code>NotifyLevelReady</code>, from <code>BPI_RunControl</code>, on the server.</li>
 <li>On every machine with a screen, return true from <code>IsLevelVisible</code> once the level can be seen there. The loading screen waits for it.</li>
 </ol>
-<p>Until then the run does not start: no quota, no clock. A map with no level builder starts the run once every player has arrived.</p>
+<p>Until then the run does not start: no quota, no clock. A map with no level builder starts the run once every player has arrived and the level has begun play, so the loot placed in it has spawned and counts in the quota.</p>
 <hr />
 <p>Next: <a href="../../ai/doors_the_warden_can_open/">Doors the Warden can open</a>.</p>
 <hr />

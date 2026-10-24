@@ -1335,6 +1335,8 @@
       
         
       
+        
+      
     
     
     
@@ -1476,6 +1478,29 @@
   
   <span class="md-ellipsis">
     Sound Class & Volume
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../epvc/guides/input_device/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Microphone Selection
     
   </span>
   
@@ -7195,6 +7220,30 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#the-level-cards" class="md-nav__link">
+    <span class="md-ellipsis">
+      The level cards
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The level cards">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-your-level-to-the-lobby" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add your level to the lobby
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#the-private-code" class="md-nav__link">
     <span class="md-ellipsis">
       The private code
@@ -7569,6 +7618,8 @@
       
         
       
+        
+      
     
     
     
@@ -7607,6 +7658,29 @@
             Guides
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/add_a_level/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Add a level to the lobby
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -7714,6 +7788,30 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#the-level-cards" class="md-nav__link">
+    <span class="md-ellipsis">
+      The level cards
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The level cards">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-your-level-to-the-lobby" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add your level to the lobby
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#the-private-code" class="md-nav__link">
     <span class="md-ellipsis">
       The private code
@@ -7775,7 +7873,7 @@
 
 
 <h1 id="sessions-and-the-lobby">Sessions and the lobby<a class="headerlink" href="#sessions-and-the-lobby" title="Permanent link">&para;</a></h1>
-<p><code>HOST RUN</code> on the main menu opens one page, <code>WBP_SessionPage</code>, with two tabs: <code>JOIN</code> lists the games you can join, <code>HOST</code> opens your own lobby. From the lobby, the host starts the run and everyone travels to <code>L_Procedural</code> together.</p>
+<p><code>HOST RUN</code> on the main menu opens one page, <code>WBP_SessionPage</code>, with two tabs: <code>JOIN</code> lists the games you can join, <code>HOST</code> opens your own lobby. From the lobby, the host picks the level, starts the run, and everyone travels to it together.</p>
 <ul>
 <li>The session page and its rows: <code>Content/MPFriendslop/Blueprints/Widgets/Menu/</code></li>
 <li>The session state: <code>BP_FriendslopGameInstance</code>, <code>BP_LobbyGameState</code> and <code>BP_FriendslopPlayerState</code></li>
@@ -7788,7 +7886,8 @@
 <li>The host picks the options on the <code>HOST</code> tab and clicks <code>OPEN LOBBY</code>. The page creates the session, then reloads <code>L_MainMenu</code> as a listen server capped at <code>MAX PLAYERS</code>.</li>
 <li>Another player clicks a line on the <code>JOIN</code> tab and travels to the host's <code>L_MainMenu</code>. The menu sees that they are in a session and opens the lobby for them directly.</li>
 <li>Each player has a line in the lobby with their colour and a status: <code>HOST</code>, <code>READY</code>, <code>PICKING A HAT</code>, <code>ENTERING CODE</code> or <code>WRONG CODE</code>. Clicking your own line opens the customization page.</li>
-<li>The host clicks <code>START THE RUN</code>. Everyone travels to <code>Run Level</code>.</li>
+<li>The host clicks a level card on the left of the page. Every player sees the chosen card in amber.</li>
+<li>The host clicks <code>START THE RUN</code>. Everyone travels to the chosen level.</li>
 </ol>
 <p>The back arrow or <code>Escape</code> in a lobby leaves the session and reloads the menu.</p>
 <hr />
@@ -7821,6 +7920,43 @@
 </tbody>
 </table>
 <p><code>MAX PLAYERS</code> cycles from <code>Min Players</code> up to <code>Max Lobby Players</code>, which is four. The starting value is <code>Host Options</code> on <code>BP_FriendslopGameInstance</code> (<code>Max Players</code> 4, <code>Lan Only</code> off), and the host's choice is kept there for the whole session, restarts included.</p>
+<hr />
+<h2 id="the-level-cards">The level cards<a class="headerlink" href="#the-level-cards" title="Permanent link">&para;</a></h2>
+<p>On the <code>HOST</code> tab and in the lobby, the left of the page shows one card per level: a picture and a name. The host clicks a card to pick that level, lobby open or not. The other players see the same cards, with the host's choice in amber, and cannot click them. Until the host clicks one, the first card is the choice. <code>START THE RUN</code> travels to the chosen level, and <code>RESTART</code> reloads it.</p>
+<p>The choice travels with the host options, so the server holds it and the clients only read it.</p>
+<p>The cards come from <code>Levels</code> on <code>WBP_SessionPage</code>, in <code>Settings|Session</code>. Each entry is a level Data Asset made from <code>BP_LevelDataAsset</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Display Name</code></td>
+<td>The name under the picture</td>
+</tr>
+<tr>
+<td><code>Map</code></td>
+<td>The level <code>START THE RUN</code> travels to</td>
+</tr>
+<tr>
+<td><code>Thumbnail</code></td>
+<td>The picture, 16:9. The shipped ones are 512 x 288</td>
+</tr>
+</tbody>
+</table>
+<p>MPFriendslopV2 ships two, in <code>Blueprints/DataAssets/Level/Childs/</code>: <code>DA_Level_Procedural</code>, which plays <code>L_Procedural</code>, and <code>DA_Level_Annex</code>, which plays <code>L_Annex</code>.</p>
+<h3 id="add-your-level-to-the-lobby">Add your level to the lobby<a class="headerlink" href="#add-your-level-to-the-lobby" title="Permanent link">&para;</a></h3>
+<ol>
+<li>In <code>Content/MPFriendslop/Blueprints/DataAssets/Level/Childs/</code>, right click, then <strong>Miscellaneous</strong>, then <strong>Data Asset</strong>, and pick <code>BP_LevelDataAsset</code>. Name it <code>DA_Level_</code> followed by your map's name.</li>
+<li>Open it and fill <code>Display Name</code>, <code>Map</code> and <code>Thumbnail</code>.</li>
+<li>Open <code>WBP_SessionPage</code>, click <strong>Class Defaults</strong>, and add it to <code>Levels</code>. The order of the list is the order of the cards.</li>
+<li>Save both.</li>
+</ol>
+<p>The same steps with pictures, from the map to the card picture, are in the guide <a href="../../guides/add_a_level/">Add a level to the lobby</a>.</p>
+<p>The card itself is <code>WBP_LevelCard</code>: its colours are in <code>Settings|Style</code> and its sounds in <code>Settings|Audio</code>. To use a card of your own, set <code>Level Card Class</code> on <code>WBP_SessionPage</code>.</p>
 <hr />
 <h2 id="the-private-code">The private code<a class="headerlink" href="#the-private-code" title="Permanent link">&para;</a></h2>
 <p>With a code set, a player who joins the lobby lands on a gate titled <code>THIS CREW IS LOCKED</code>, with a text box, <code>CONFIRM</code> and <code>LEAVE</code>. The right code puts them in the lobby. A wrong one shows <code>WRONG CODE</code> on their line. After too many wrong codes, or too long without typing one, the server sends them back to the menu with a reason.</p>
@@ -7903,10 +8039,16 @@
 </thead>
 <tbody>
 <tr>
-<td><code>Run Level</code></td>
+<td><code>Levels</code></td>
 <td><code>WBP_SessionPage</code></td>
-<td>The map <code>START THE RUN</code> travels to</td>
-<td><code>L_Procedural</code></td>
+<td>The levels the host can pick, one card each</td>
+<td><code>DA_Level_Procedural</code>, <code>DA_Level_Annex</code></td>
+</tr>
+<tr>
+<td><code>Level Card Class</code></td>
+<td><code>WBP_SessionPage</code></td>
+<td>The widget each level card is made from</td>
+<td><code>WBP_LevelCard</code></td>
 </tr>
 <tr>
 <td><code>Refresh Interval</code></td>
@@ -7972,7 +8114,7 @@
 <p>A <code>Max Players</code> above <code>Max Lobby Players</code> lets the extra players in, but the lobby has no line to show them. Keep <code>Max Players</code> at or below <code>Max Lobby Players</code>.</p>
 </div>
 <hr />
-<p>To send the lobby to your own map, see <a href="../../start/maps_and_game_flow/">The maps, and how a game starts</a>.</p>
+<p>To build a map of your own and play it from the menu, see <a href="../../start/maps_and_game_flow/">The maps, and how a game starts</a>.</p>
 <hr />
 <p><a href="https://discord.gg/EqHCtq38jy">Join the Discord</a></p>
 

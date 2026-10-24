@@ -2,7 +2,7 @@
 
 A **receiver** rebroadcasts a whole channel out of the actor it sits on: a radio, an intercom, a PA speaker, a walkie-talkie in someone's hand.
 
-Drop the **Proximity Voice Receiver** component on any actor, set its **Listen Channel**, and every speaker talking on that channel is also heard **from that actor**, spatialized from there with its own attenuation, volume and effects. Nothing on other channels comes out of it.
+Drop the **Proximity Voice Receiver** component on any actor, set its **Listen Channel**, and every speaker who talks on that channel is also heard **from that actor**, spatialized from there with its own attenuation, volume and effects. Nothing on other channels comes out of it.
 
 Speakers keep emitting from their own body too, so someone standing next to the speaker hears them directly, and someone standing next to the radio hears them through the radio.
 
@@ -25,7 +25,7 @@ That's it, it works as soon as it's placed.
 
 | Property | Description |
 |----------|-------------|
-| `Listen Channel` | Only speakers on this channel come out of this receiver. Everything else is ignored. |
+| `Listen Channel` | Only speakers who talk on this channel come out of this receiver. A speaker on several channels comes out of every receiver tuned to one of them. |
 | `Receiver Enabled` | Turn the receiver on or off. Off is silent and releases its audio immediately. |
 | `Output Configuration` | A `ProximityVoiceConfig` asset used for voices coming out of **this** receiver: attenuation, volume, sound class, source effects, occlusion. Leave it empty to use each speaker's own config. |
 | `Volume Multiplier` | Volume applied on top of the output configuration. Handy to reuse one config asset at several levels. |
@@ -110,7 +110,7 @@ And on the **Proximity Voice Chat Subsystem**:
 
 ### Example: a walkie-talkie with a blinking light
 
-1. Put a **Proximity Voice Receiver** on your walkie-talkie actor, `Listen Channel = 1`.
+1. Put a **Proximity Voice Receiver** on your walkie-talkie actor, `Listen Channel = 1`. Speakers reach it with `Join Channel(1)`, and stay on channel `0` for proximity, see [Channels](channels.md#example-proximity-and-a-team-radio-at-the-same-time).
 2. Assign `DA_RadioReceiver` as its `Output Configuration` (short attenuation + crunch chain).
 3. Bind **On Receiver Activity** and drive a light / material parameter with `Volume`.
 4. Bind **On Speaker Started** / **On Speaker Stopped** to play a *click* or a burst of static.
@@ -123,7 +123,7 @@ And on the **Proximity Voice Chat Subsystem**:
 - A speaker **never** hears their own voice come back out of a receiver, no feedback loop to worry about.
 - Receivers only hold a speaker while that speaker is **actually transmitting**. Slots are freed at the end of each talk burst.
 - Slots are first come, first served. A speaker who finds the receiver full is simply not rebroadcast, and still emits from their own body.
-- A speaker is rebroadcast even when the local listener is on **another channel**, that's the point of a radio.
+- A speaker is rebroadcast even when the local listener does not listen to that channel, that's the point of a radio.
 - [Muting](muting.md) still applies. A locally muted or server-muted player doesn't come out of a receiver either.
 
 ---

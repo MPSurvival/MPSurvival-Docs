@@ -1345,6 +1345,8 @@
       
         
       
+        
+      
     
     
     
@@ -1603,6 +1605,29 @@
   
   <span class="md-ellipsis">
     Sound Class & Volume
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../input_device/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Microphone Selection
     
   </span>
   
@@ -7548,6 +7573,8 @@
       
         
       
+        
+      
     
     
     
@@ -7583,6 +7610,29 @@
             Guides
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mpfriendslopv2/guides/add_a_level/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Add a level to the lobby
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -7761,7 +7811,7 @@
 
 <h1 id="radios-receivers">Radios &amp; Receivers<a class="headerlink" href="#radios-receivers" title="Permanent link">&para;</a></h1>
 <p>A <strong>receiver</strong> rebroadcasts a whole channel out of the actor it sits on: a radio, an intercom, a PA speaker, a walkie-talkie in someone's hand.</p>
-<p>Drop the <strong>Proximity Voice Receiver</strong> component on any actor, set its <strong>Listen Channel</strong>, and every speaker talking on that channel is also heard <strong>from that actor</strong>, spatialized from there with its own attenuation, volume and effects. Nothing on other channels comes out of it.</p>
+<p>Drop the <strong>Proximity Voice Receiver</strong> component on any actor, set its <strong>Listen Channel</strong>, and every speaker who talks on that channel is also heard <strong>from that actor</strong>, spatialized from there with its own attenuation, volume and effects. Nothing on other channels comes out of it.</p>
 <p>Speakers keep emitting from their own body too, so someone standing next to the speaker hears them directly, and someone standing next to the radio hears them through the radio.</p>
 <hr />
 <h3 id="1-add-a-receiver">1. Add a receiver<a class="headerlink" href="#1-add-a-receiver" title="Permanent link">&para;</a></h3>
@@ -7787,7 +7837,7 @@
 <tbody>
 <tr>
 <td><code>Listen Channel</code></td>
-<td>Only speakers on this channel come out of this receiver. Everything else is ignored.</td>
+<td>Only speakers who talk on this channel come out of this receiver. A speaker on several channels comes out of every receiver tuned to one of them.</td>
 </tr>
 <tr>
 <td><code>Receiver Enabled</code></td>
@@ -7968,7 +8018,7 @@
 <hr />
 <h3 id="example-a-walkie-talkie-with-a-blinking-light">Example: a walkie-talkie with a blinking light<a class="headerlink" href="#example-a-walkie-talkie-with-a-blinking-light" title="Permanent link">&para;</a></h3>
 <ol>
-<li>Put a <strong>Proximity Voice Receiver</strong> on your walkie-talkie actor, <code>Listen Channel = 1</code>.</li>
+<li>Put a <strong>Proximity Voice Receiver</strong> on your walkie-talkie actor, <code>Listen Channel = 1</code>. Speakers reach it with <code>Join Channel(1)</code>, and stay on channel <code>0</code> for proximity, see <a href="../channels/#example-proximity-and-a-team-radio-at-the-same-time">Channels</a>.</li>
 <li>Assign <code>DA_RadioReceiver</code> as its <code>Output Configuration</code> (short attenuation + crunch chain).</li>
 <li>Bind <strong>On Receiver Activity</strong> and drive a light / material parameter with <code>Volume</code>.</li>
 <li>Bind <strong>On Speaker Started</strong> / <strong>On Speaker Stopped</strong> to play a <em>click</em> or a burst of static.</li>
@@ -7980,7 +8030,7 @@
 <li>A speaker <strong>never</strong> hears their own voice come back out of a receiver, no feedback loop to worry about.</li>
 <li>Receivers only hold a speaker while that speaker is <strong>actually transmitting</strong>. Slots are freed at the end of each talk burst.</li>
 <li>Slots are first come, first served. A speaker who finds the receiver full is simply not rebroadcast, and still emits from their own body.</li>
-<li>A speaker is rebroadcast even when the local listener is on <strong>another channel</strong>, that's the point of a radio.</li>
+<li>A speaker is rebroadcast even when the local listener does not listen to that channel, that's the point of a radio.</li>
 <li><a href="../muting/">Muting</a> still applies. A locally muted or server-muted player doesn't come out of a receiver either.</li>
 </ul>
 <hr />

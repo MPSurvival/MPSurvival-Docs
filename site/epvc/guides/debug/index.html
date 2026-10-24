@@ -1345,6 +1345,8 @@
       
         
       
+        
+      
     
     
     
@@ -1489,6 +1491,29 @@
   
   <span class="md-ellipsis">
     Sound Class & Volume
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../input_device/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Microphone Selection
     
   </span>
   
@@ -7512,6 +7537,8 @@
       
         
       
+        
+      
     
     
     
@@ -7547,6 +7574,29 @@
             Guides
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mpfriendslopv2/guides/add_a_level/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Add a level to the lobby
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -7712,7 +7762,7 @@
 </tr>
 <tr>
 <td><code>Show Text</code></td>
-<td>Floating text over each speaker (state, level, channel, occlusion…).</td>
+<td>Floating text over each speaker (state, level, channels, occlusion…). Channels read like <code>Ch 0, 1 talk, 5 listen</code>: a bare number is talk and listen.</td>
 </tr>
 <tr>
 <td><code>Show Ranges</code></td>
@@ -7735,10 +7785,10 @@
 <hr />
 <h3 id="what-to-look-for">What to look for<a class="headerlink" href="#what-to-look-for" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>No text over a speaker who should be talking?</strong> They're probably not calling <code>Set Active Voice(true)</code>, or they're on a different <a href="../channels/">channel</a>.</li>
+<li><strong>No text over a speaker who should be talking?</strong> They're probably not calling <code>Set Active Voice(true)</code>, or they don't talk on a <a href="../channels/">channel</a> you listen to.</li>
 <li><strong>Text shows transmitting but you hear nothing?</strong> Check <a href="../muting/">muting</a> and your attenuation range, or you're testing with a single player (you never hear yourself).</li>
 <li><strong>Voice cuts through walls?</strong> Occlusion lines will show whether the trace hits your geometry, verify the mesh responds to the <code>Occlusion Trace Channel</code>.</li>
-<li><strong>A radio stays silent?</strong> Check the receiver's <code>Listen Channel</code> matches the speaker, that <code>Receiver Enabled</code> is on, and that its <code>Max Simultaneous Speakers</code> isn't already full.</li>
+<li><strong>A radio stays silent?</strong> Check the speaker talks on the receiver's <code>Listen Channel</code>, that <code>Receiver Enabled</code> is on, and that its <code>Max Simultaneous Speakers</code> isn't already full.</li>
 </ul>
 <hr />
 <h2 id="need-help">Need help?<a class="headerlink" href="#need-help" title="Permanent link">&para;</a></h2>

@@ -11,14 +11,14 @@ All events live on the **Proximity Voice Chat** component.
 | Event | Fires on | Params | Use it for |
 |-------|----------|--------|------------|
 | `On Voice Activity` | Every machine, for any speaker | `Speaker`, `Volume`, `Channel` | Speaking indicators above other players. Non-zero only while transmitting. |
-| `On Channel Changed` | Every machine | `New Channel` | Update team/radio UI. |
+| `On Channel Changed` | Every machine | `New Channel` | Update team/radio UI. Fires on any change to the player's channels. `New Channel` is `Get Channel`, read `Get Channels` for the full list. |
 | `On Voice Activated` | The speaker's own machine | — | Local "mic live" indicator, start push-to-talk FX. |
 | `On Voice Deactivated` | The speaker's own machine | — | Stop the above. |
 | `On Self Voice Activity` | Owning client + server only | `Volume`, `Channel` | Your **own** mic level meter. |
 | `On Server Mute Changed` | Every machine | `bMuted` | Show a muted icon over a server-muted player. |
 
 !!! tip
-    For a **"who is talking" list**, bind `On Voice Activity`: `Speaker` is the owning actor and `Volume` is non-zero only while they transmit. Filter by `Channel` if you only care about your own.
+    For a **"who is talking" list**, bind `On Voice Activity`: `Speaker` is the owning actor and `Volume` is non-zero only while they transmit. To keep only one channel, check `Is Talking On Channel` on the speaker's component: `Channel` is only the first channel they talk on.
 
 ---
 

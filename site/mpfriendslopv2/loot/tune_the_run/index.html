@@ -1335,6 +1335,8 @@
       
         
       
+        
+      
     
     
     
@@ -1476,6 +1478,29 @@
   
   <span class="md-ellipsis">
     Sound Class & Volume
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../epvc/guides/input_device/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Microphone Selection
     
   </span>
   
@@ -7551,6 +7576,8 @@
       
         
       
+        
+      
     
     
     
@@ -7589,6 +7616,29 @@
             Guides
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/add_a_level/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Add a level to the lobby
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -7749,7 +7799,7 @@
 <ol>
 <li>Open <code>BP_FriendslopGameMode</code>.</li>
 <li>Click <strong>Class Defaults</strong>.</li>
-<li>In <code>Settings|Extraction</code>, set <code>Run Quota</code> and <code>Run Duration Seconds</code>.</li>
+<li>In <code>Settings|Extraction</code>, set <code>Quota Ratio</code> and <code>Run Duration Seconds</code>.</li>
 <li>Compile and save.</li>
 </ol>
 <table>
@@ -7762,9 +7812,9 @@
 </thead>
 <tbody>
 <tr>
-<td><code>Run Quota</code></td>
-<td>The extracted value the crew must sell before the trap opens for good and everyone can jump</td>
-<td><code>2000</code></td>
+<td><code>Quota Ratio</code></td>
+<td>The quota is this share of the value of all the loot in the level when the run starts</td>
+<td><code>0.3</code></td>
 </tr>
 <tr>
 <td><code>Run Duration Seconds</code></td>
@@ -7778,15 +7828,15 @@
 </tr>
 </tbody>
 </table>
-<p><code>Run Quota</code> is the quota of a map without a level generator. On <code>L_Procedural</code> the quota follows the loot that spawned instead, through <code>Quota Ratio</code> on the same GameMode. See <a href="../../world/tune_the_generator/">Tune the generator</a>.</p>
-<p><code>Starting Extracted Value</code> is a test shortcut. Set it at or above <code>Run Quota</code> and the quota is met the moment you spawn, so you can test the trap and the jump without carrying anything. Put it back to <code>0</code> for your game.</p>
+<p>The quota follows the loot on every map. When the run starts, the GameMode adds up the value of the loot in the level and multiplies it by <code>Quota Ratio</code>. On <code>L_Procedural</code> only the loot inside the generated level counts, not the arena. On a hand built map such as <code>L_Annex</code>, all the loot in the level counts, so a map with no loot has a quota of <code>0</code>. See <a href="../../world/tune_the_generator/">Tune the generator</a>.</p>
+<p><code>Starting Extracted Value</code> is a test shortcut. Set it at or above the quota and the quota is met the moment you spawn, so you can test the trap and the jump without carrying anything. Put it back to <code>0</code> for your game.</p>
 <hr />
 <h2 id="different-numbers-on-each-map">Different numbers on each map<a class="headerlink" href="#different-numbers-on-each-map" title="Permanent link">&para;</a></h2>
-<p><code>L_Procedural</code> and <code>L_Showcase</code> have no GameMode override: they use the project default, <code>BP_FriendslopGameMode</code>, set in <strong>Project Settings</strong>, then <strong>Maps &amp; Modes</strong>. So changing its Class Defaults changes every map.</p>
+<p><code>L_Procedural</code>, <code>L_Annex</code> and <code>L_Showcase</code> have no GameMode override: they use the project default, <code>BP_FriendslopGameMode</code>, set in <strong>Project Settings</strong>, then <strong>Maps &amp; Modes</strong>. So changing its Class Defaults changes every map.</p>
 <p>For a map with its own quota or length:</p>
 <ol>
 <li>Right click <code>BP_FriendslopGameMode</code>, then <strong>Create Child Blueprint Class</strong>.</li>
-<li>In the child's Class Defaults, set <code>Run Quota</code> and <code>Run Duration Seconds</code>.</li>
+<li>In the child's Class Defaults, set <code>Quota Ratio</code> and <code>Run Duration Seconds</code>.</li>
 <li>Open your map, then <strong>World Settings</strong>, and set <code>GameMode Override</code> to the child.</li>
 </ol>
 <hr />

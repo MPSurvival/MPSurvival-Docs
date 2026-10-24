@@ -29,7 +29,7 @@ The ultimate multiplayer survival template, with inventory, crafting, vitals, ga
 
 ### [Easy Proximity Voice Chat](epvc/index.md)
 
-Drop-in proximity voice chat over normal replication, no OnlineSubsystem, no EOS/Steam voice setup. Channels, radios & intercoms, voice effects, occlusion through geometry, runtime-swappable config, server & client muting, and Blueprint events. Dedicated-server ready and PIE-testable.
+Drop-in proximity voice chat over normal replication, no OnlineSubsystem, no EOS/Steam voice setup. Overlapping channels, radios & intercoms, voice effects, occlusion through geometry, microphone selection, runtime-swappable config, server & client muting, and Blueprint events. Dedicated-server ready and PIE-testable.
 
 </div>
 

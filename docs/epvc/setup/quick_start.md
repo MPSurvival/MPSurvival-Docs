@@ -66,7 +66,7 @@ Walk the two players close together and talk.
 | Microphone allowed by the OS | No mic = no capture |
 | `Set Active Voice(true)` is actually being called | Nothing is sent until you transmit |
 | Testing with **2+ players** | You never hear yourself |
-| Both players on the **same channel** | Listeners only hear their own channel — see [Channels](../guides/channels.md) |
+| The speaker **talks** on a channel the listener **listens** to | Both are on channel `0` by default, see [Channels](../guides/channels.md) |
 | Speaker not **server-muted** | See [Muting](../guides/muting.md) |
 
 !!! tip
@@ -78,7 +78,8 @@ Walk the two players close together and talk.
 
 Once you can hear each other, the rest is opt-in:
 
-- [Channels](../guides/channels.md), so teams don't hear each other
+- [Channels](../guides/channels.md), so teams don't hear each other, or hear proximity and a team radio at once
+- [Microphone Selection](../guides/input_device.md), a microphone picker for your options menu
 - [Radios & Receivers](../guides/receivers.md), one component to turn a prop into a radio or an intercom
 - [Voice Effects](../guides/effects.md), the radio crunch and other source effects
 - [Occlusion](../guides/occlusion.md), muffle voices through walls

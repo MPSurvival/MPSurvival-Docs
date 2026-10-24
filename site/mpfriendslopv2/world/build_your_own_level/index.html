@@ -1335,6 +1335,8 @@
       
         
       
+        
+      
     
     
     
@@ -1476,6 +1478,29 @@
   
   <span class="md-ellipsis">
     Sound Class & Volume
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../epvc/guides/input_device/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Microphone Selection
     
   </span>
   
@@ -7560,6 +7585,8 @@
       
         
       
+        
+      
     
     
     
@@ -7598,6 +7625,29 @@
             Guides
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/add_a_level/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Add a level to the lobby
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -7758,7 +7808,7 @@
 
 <h1 id="build-your-own-level">Build your own level<a class="headerlink" href="#build-your-own-level" title="Permanent link">&para;</a></h1>
 <p>A run map is an ordinary Unreal level with a handful of template actors dropped into it. There is no list to register it in and no setting to add to its World Settings. By the end of this page you have a map the crew can loot, extract from and play from the menu.</p>
-<p>The start room of <code>L_Procedural</code> and every room in <code>Maps/Modules/</code> are built exactly this way. Keep one open next to your level and copy what you need from it.</p>
+<p>The start room of <code>L_Procedural</code>, every room in <code>Maps/Modules/</code> and the whole of <code>L_Annex</code> are built exactly this way. <code>L_Annex</code> is a complete run map with no generator: keep it open next to your level and copy what you need from it.</p>
 <ul>
 <li>The run map: <code>Content/MPFriendslop/Maps/L_Procedural</code></li>
 <li>The rooms: <code>Content/MPFriendslop/Maps/Modules/</code></li>
@@ -7852,8 +7902,8 @@
 <p><code>BP_DebugKillVolume</code>, in <code>Blueprints/Environments/</code>, kills any player who enters its box. Put one at the bottom of a pit if your level has one.</p>
 <hr />
 <h2 id="step-5-play-it-from-the-menu">Step 5, play it from the menu<a class="headerlink" href="#step-5-play-it-from-the-menu" title="Permanent link">&para;</a></h2>
-<p>Point <code>Run Level</code> on <code>WBP_SessionPage</code> and <code>Level To Play</code> on <code>WBP_MainMenuPage</code> at your map. <strong>START THE RUN</strong> travels to the first, <strong>SOLO RUN</strong> opens the second, so set both. The steps are on <a href="../../start/maps_and_game_flow/">The maps, and how a game starts</a>.</p>
-<p>To give this map its own quota or run length, see <a href="../../loot/tune_the_run/">Change the quota, the run length and the recap</a>.</p>
+<p>Give your map a level card in the lobby, so the host can pick it before <strong>START THE RUN</strong>: <a href="../../ui/sessions_and_the_lobby/#add-your-level-to-the-lobby">Add your level to the lobby</a>. For <strong>SOLO RUN</strong>, set <code>Level To Play</code> on <code>WBP_MainMenuPage</code>. The steps are on <a href="../../start/maps_and_game_flow/">The maps, and how a game starts</a>.</p>
+<p>The quota follows the loot you place. To change its ratio or the run length on this map only, see <a href="../../loot/tune_the_run/">Change the quota, the run length and the recap</a>.</p>
 <hr />
 <h2 id="step-6-test-it-with-two-players">Step 6, test it with two players<a class="headerlink" href="#step-6-test-it-with-two-players" title="Permanent link">&para;</a></h2>
 <ol>

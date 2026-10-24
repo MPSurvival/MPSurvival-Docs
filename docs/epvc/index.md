@@ -2,18 +2,19 @@
 
 Welcome to the official documentation for **Easy Proximity Voice Chat** (EPVC), the drop-in proximity voice chat for Unreal Engine.
 
-No OnlineSubsystem. No EOS/Steam voice setup. It runs over your game's **normal replication**, works on **dedicated servers**, and is fully testable in **PIE**. Voice is treated as a real gameplay signal: channels, radios, voice effects, occlusion through geometry, runtime-swappable config, server & client muting, and Blueprint events.
+No OnlineSubsystem. No EOS/Steam voice setup. It runs over your game's **normal replication**, works on **dedicated servers**, and is fully testable in **PIE**. Voice is treated as a real gameplay signal: overlapping channels, radios, voice effects, occlusion through geometry, microphone selection, runtime-swappable config, server & client muting, and Blueprint events.
 
 > 🎯 Designed to be integrated in minutes, not weeks. Add one component, flip one setting, and talk.
 
 ---
 
-## What's new in 1.2
+## What's new in 1.3
 
-- **Sound Class**: pick a **Sound Class** on the config asset and the voice becomes a normal classed sound, so your options menu can move it like Master, Music or SFX. Radios can use a different class, so voice and radio get separate sliders. See [Sound Class & Volume](guides/sound_class.md).
-- **Voice Pitch Shift**: a pitch shift **source effect** Unreal does not ship with. Deep voices, high voices, masked voices, plus a per speaker random detune so one preset gives everyone their own voice. See [Voice Effects](guides/effects.md).
+- **Overlapping channels**: a player can be on several channels at once, and talk, listen or both on each one. Keep everyone on channel `0` for proximity, give each team a radio channel, and players hear both at the same time. `Set Channel` works as before. See [Channels](guides/channels.md).
+- **Microphone selection**: list the microphones and switch between them from your options menu, live, with three static nodes. The choice is saved between sessions. See [Microphone Selection](guides/input_device.md).
+- **Lighter voice packets**: each packet is 7 bytes smaller, and a player who talks on no channel sends nothing.
 
-Previously, **1.1** added [Radios & Receivers](guides/receivers.md), [Voice Effects](guides/effects.md), emitter selection, per-emitter occlusion and the [debug overlay](guides/debug.md).
+Previously, **1.2** added the voice [Sound Class](guides/sound_class.md) and the [Voice Pitch Shift](guides/effects.md) effect, and **1.1** added [Radios & Receivers](guides/receivers.md), [Voice Effects](guides/effects.md), emitter selection, per-emitter occlusion and the [debug overlay](guides/debug.md).
 
 ---
 
@@ -58,9 +59,10 @@ You do **not** need to enable Steam voice, provision an EOS RTC (Voice) product,
 - Works for listen server **and** dedicated server
 
 ### Channels
-- Speakers talk and listen on a channel
-- Listeners only hear speakers on their **own** channel
-- Great for teams, radios, lobbies, spectators
+- A player can be on **several channels at once**, talking, listening or both on each
+- A listener hears a speaker who talks on a channel they listen to
+- Proximity and a team radio at the same time, with nothing to switch
+- Teams, radio push-to-talk, lobbies, spectators, dead players
 
 ### Radios & Receivers
 - One component turns any actor into a **radio, intercom or PA speaker**
@@ -74,10 +76,11 @@ You do **not** need to enable Steam voice, provision an EOS RTC (Voice) product,
 - Applied per emitter: clean on the pawn, crunchy on the radio
 - Swappable at runtime like any other config setting
 
-### Menu Volume & Sound Class
+### Options Menu
 - Route the voice through your own **Sound Class**
 - Sound Mixes, class volume and ducking apply live, even mid sentence
 - Receivers can carry a different class, one slider for voice, one for radio
+- **Microphone selection**: list the microphones, switch live, saved between sessions
 
 ### Occlusion
 - Voices get **muffled** by world geometry between speaker and listener
@@ -105,10 +108,11 @@ Use the navigation to set things up, in order:
 
 - [Quick Start](setup/quick_start.md), enable voice and hear your first words
 - [Configuration (Data Asset)](guides/configuration.md), tune capture, playback, latency
-- [Channels](guides/channels.md), separate who hears who
+- [Channels](guides/channels.md), decide who hears who, on one channel or several
 - [Radios & Receivers](guides/receivers.md), rebroadcast a channel out of a radio or intercom
 - [Voice Effects](guides/effects.md), bitcrusher, filters, pitch shift and the radio crunch
 - [Sound Class & Volume](guides/sound_class.md), wire the voice to your options menu
+- [Microphone Selection](guides/input_device.md), let players pick their microphone
 - [Muting](guides/muting.md), local & server muting
 - [Occlusion](guides/occlusion.md), muffle voices through walls
 - [Blueprint Events](guides/events.md), react to voice in your UI/gameplay

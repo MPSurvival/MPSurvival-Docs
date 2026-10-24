@@ -18,7 +18,7 @@ Show Voice Debug (Enable = true, Show Text = true, Show Ranges = true, Show Occl
 | Param | Description |
 |-------|-------------|
 | `Enable` | Master toggle for the overlay. |
-| `Show Text` | Floating text over each speaker (state, level, channel, occlusion…). |
+| `Show Text` | Floating text over each speaker (state, level, channels, occlusion…). Channels read like `Ch 0, 1 talk, 5 listen`: a bare number is talk and listen. |
 | `Show Ranges` | Visualizes attenuation ranges around speakers. |
 | `Show Occlusion Lines` | Draws one line per emitter (the speaker's body, and every [receiver](receivers.md) rebroadcasting them) toward the listener. |
 
@@ -37,10 +37,10 @@ Walk between a speaker and a radio rebroadcasting them and you'll see the handov
 
 ### What to look for
 
-- **No text over a speaker who should be talking?** They're probably not calling `Set Active Voice(true)`, or they're on a different [channel](channels.md).
+- **No text over a speaker who should be talking?** They're probably not calling `Set Active Voice(true)`, or they don't talk on a [channel](channels.md) you listen to.
 - **Text shows transmitting but you hear nothing?** Check [muting](muting.md) and your attenuation range, or you're testing with a single player (you never hear yourself).
 - **Voice cuts through walls?** Occlusion lines will show whether the trace hits your geometry, verify the mesh responds to the `Occlusion Trace Channel`.
-- **A radio stays silent?** Check the receiver's `Listen Channel` matches the speaker, that `Receiver Enabled` is on, and that its `Max Simultaneous Speakers` isn't already full.
+- **A radio stays silent?** Check the speaker talks on the receiver's `Listen Channel`, that `Receiver Enabled` is on, and that its `Max Simultaneous Speakers` isn't already full.
 
 ---
 

@@ -7821,7 +7821,7 @@
 <h2 id="from-play-to-the-end-of-a-run">From Play to the end of a run<a class="headerlink" href="#from-play-to-the-end-of-a-run" title="Permanent link">&para;</a></h2>
 <ol>
 <li>The game opens on <code>L_MainMenu</code>. The main menu shows <code>HOST RUN</code>, <code>SOLO RUN</code>, <code>CUSTOMIZE</code>, <code>SETTINGS</code> and <code>QUIT</code>.</li>
-<li><code>SOLO RUN</code> opens the run map straight away, alone. Nobody can join a solo run.</li>
+<li><code>SOLO RUN</code> opens the solo page. The player picks a level card and clicks <code>START THE RUN</code>, and the level opens, alone. Nobody can join a solo run.</li>
 <li><code>HOST RUN</code> opens the session page. The host picks the options and clicks <code>OPEN LOBBY</code>. <code>L_MainMenu</code> reloads as a listen server, and that is the lobby. Other players find it in the browser and join it.</li>
 <li>The host picks a level card and clicks <code>START THE RUN</code>. Every player travels to that level together.</li>
 <li>The run ends when the run clock reaches zero, when every standing player has jumped into the extraction, or when the whole crew is down. With two players or more, a crew that is all down first fights it out in the Last Loser Standing arena, and the run ends after it. The recap screen opens.</li>
@@ -7835,11 +7835,10 @@
 <ol>
 <li>Build your level. It needs at least one <code>PlayerStart</code>. What else a run map needs is in <a href="../../world/build_your_own_level/">Build your own level</a>.</li>
 <li>Leave its World Settings alone. The project default game mode is already <code>BP_FriendslopGameMode</code>.</li>
-<li>Give it a level card in the lobby: a level Data Asset added to <code>Levels</code> on <code>Content/MPFriendslop/Blueprints/Widgets/Menu/WBP_SessionPage</code>. The steps are in <a href="../../ui/sessions_and_the_lobby/#add-your-level-to-the-lobby">Add your level to the lobby</a>.</li>
-<li>For <code>SOLO RUN</code>, open <code>WBP_MainMenuPage</code> in the same folder and set <code>Level To Play</code> to your map.</li>
+<li>Give it a level card: a level Data Asset added to <code>Levels</code> on <code>Content/MPFriendslop/Blueprints/Misc/BP_FriendslopGameInstance</code>. The card shows in the lobby and on the <code>SOLO RUN</code> page. The steps are in <a href="../../ui/sessions_and_the_lobby/#add-your-level-to-the-lobby">Add your level to the lobby</a>.</li>
 <li>Save.</li>
 </ol>
-<p><code>START THE RUN</code> plays the level the host picked in the lobby, <code>SOLO RUN</code> plays <code>Level To Play</code>. <code>RESTART</code> needs nothing, it reloads whatever map is running.</p>
+<p><code>START THE RUN</code> plays the level picked on the cards, in the lobby or on the <code>SOLO RUN</code> page. <code>RESTART</code> needs nothing, it reloads whatever map is running.</p>
 <p>The map fields are soft references to a level, picked from a list. You never type a path.</p>
 <table>
 <thead>
@@ -7853,15 +7852,9 @@
 <tbody>
 <tr>
 <td><code>Levels</code></td>
-<td><code>WBP_SessionPage</code>, in <code>Settings|Session</code></td>
+<td><code>BP_FriendslopGameInstance</code> (in <code>Blueprints/Misc/</code>), in <code>Settings|Level</code></td>
 <td><code>DA_Level_Procedural</code>, <code>DA_Level_Annex</code></td>
-<td>The level cards, and so <code>START THE RUN</code></td>
-</tr>
-<tr>
-<td><code>Level To Play</code></td>
-<td><code>WBP_MainMenuPage</code>, in <code>Settings|Menu</code></td>
-<td><code>L_Procedural</code></td>
-<td><code>SOLO RUN</code></td>
+<td>The level cards of the lobby and of <code>SOLO RUN</code>, and so <code>START THE RUN</code></td>
 </tr>
 <tr>
 <td><code>Menu Level</code></td>

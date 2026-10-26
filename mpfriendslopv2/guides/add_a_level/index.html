@@ -7861,8 +7861,8 @@
 
 
 <h1 id="add-a-level-to-the-lobby">Add a level to the lobby<a class="headerlink" href="#add-a-level-to-the-lobby" title="Permanent link">&para;</a></h1>
-<p>After this guide, your map has its own card in the lobby, with a name and a picture. The host clicks the card, then <strong>START THE RUN</strong>, and the crew plays your map.</p>
-<p>A card is a level Data Asset in the <code>Levels</code> list of <code>WBP_SessionPage</code>. Adding a level opens no graph.</p>
+<p>After this guide, your map has its own card, with a name and a picture, in the lobby and on the <strong>SOLO RUN</strong> page. The host clicks the card, then <strong>START THE RUN</strong>, and the crew plays your map. Alone, a player does the same from <strong>SOLO RUN</strong>.</p>
+<p>A card is a level Data Asset in the <code>Levels</code> list of <code>BP_FriendslopGameInstance</code>. The lobby and the <strong>SOLO RUN</strong> page both read that list. Adding a level opens no graph.</p>
 <h2 id="before-you-start">Before you start<a class="headerlink" href="#before-you-start" title="Permanent link">&para;</a></h2>
 <ul>
 <li>MPFriendslopV2 open in Unreal Engine 5.8.</li>
@@ -7926,15 +7926,15 @@
 <hr />
 <h2 id="add-the-card-to-the-lobby">Add the card to the lobby<a class="headerlink" href="#add-the-card-to-the-lobby" title="Permanent link">&para;</a></h2>
 <ol>
-<li>Open <code>Content/MPFriendslop/Blueprints/Widgets/Menu/WBP_SessionPage</code>.</li>
-<li>Click <strong>Graph</strong> at the top right, then <strong>Class Defaults</strong> in the toolbar.</li>
-<li>In the <strong>Details</strong> panel, find <code>Levels</code>, under <code>Settings</code> then <code>Session</code>.</li>
+<li>Open <code>Content/MPFriendslop/Blueprints/Misc/BP_FriendslopGameInstance</code>.</li>
+<li>Click <strong>Class Defaults</strong> in the toolbar.</li>
+<li>In the <strong>Details</strong> panel, find <code>Levels</code>, under <code>Settings</code> then <code>Level</code>.</li>
 <li>Click the <strong>+</strong> next to <code>Levels</code>. A new row appears at the end of the list.</li>
 <li>In the new row, pick your <code>DA_Level_</code> Data Asset.</li>
 <li>Click <strong>Compile</strong>, then <strong>Save</strong>.</li>
 </ol>
-<p>The cards follow the order of the list.</p>
-<p><strong>SOLO RUN</strong> does not use the cards. To play your map from <strong>SOLO RUN</strong>, see <a href="../../start/maps_and_game_flow/#play-your-own-run-map-from-the-menu">The maps, and how a game starts</a>.</p>
+<p>The cards follow the order of the list. The first card is the one picked when a page opens.</p>
+<p>The <strong>SOLO RUN</strong> page shows the same cards, so your level is there too.</p>
 <hr />
 <h2 id="change-the-picture-of-a-card">Change the picture of a card<a class="headerlink" href="#change-the-picture-of-a-card" title="Permanent link">&para;</a></h2>
 <ol>

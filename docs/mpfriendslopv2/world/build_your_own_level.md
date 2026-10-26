@@ -65,7 +65,7 @@ Beyond the `PlayerStart`s, only the extraction trap and some loot are needed for
 
 ## Step 5, play it from the menu
 
-Give your map a level card in the lobby, so the host can pick it before **START THE RUN**: [Add your level to the lobby](../ui/sessions_and_the_lobby.md#add-your-level-to-the-lobby). For **SOLO RUN**, set `Level To Play` on `WBP_MainMenuPage`. The steps are on [The maps, and how a game starts](../start/maps_and_game_flow.md).
+Give your map a level card, so it can be picked before **START THE RUN**, in the lobby and on the **SOLO RUN** page: [Add your level to the lobby](../ui/sessions_and_the_lobby.md#add-your-level-to-the-lobby).
 
 The quota follows the loot you place. To change its ratio or the run length on this map only, see [Change the quota, the run length and the recap](../loot/tune_the_run.md).
 

@@ -36,7 +36,7 @@ The project settings (**Project Settings**, then **Maps & Modes**) are already s
 ## From Play to the end of a run
 
 1. The game opens on `L_MainMenu`. The main menu shows `HOST RUN`, `SOLO RUN`, `CUSTOMIZE`, `SETTINGS` and `QUIT`.
-2. `SOLO RUN` opens the run map straight away, alone. Nobody can join a solo run.
+2. `SOLO RUN` opens the solo page. The player picks a level card and clicks `START THE RUN`, and the level opens, alone. Nobody can join a solo run.
 3. `HOST RUN` opens the session page. The host picks the options and clicks `OPEN LOBBY`. `L_MainMenu` reloads as a listen server, and that is the lobby. Other players find it in the browser and join it.
 4. The host picks a level card and clicks `START THE RUN`. Every player travels to that level together.
 5. The run ends when the run clock reaches zero, when every standing player has jumped into the extraction, or when the whole crew is down. With two players or more, a crew that is all down first fights it out in the Last Loser Standing arena, and the run ends after it. The recap screen opens.
@@ -53,18 +53,16 @@ The lobby, the join code and the kick are covered in [Sessions and the lobby](..
 
 1. Build your level. It needs at least one `PlayerStart`. What else a run map needs is in [Build your own level](../world/build_your_own_level.md).
 2. Leave its World Settings alone. The project default game mode is already `BP_FriendslopGameMode`.
-3. Give it a level card in the lobby: a level Data Asset added to `Levels` on `Content/MPFriendslop/Blueprints/Widgets/Menu/WBP_SessionPage`. The steps are in [Add your level to the lobby](../ui/sessions_and_the_lobby.md#add-your-level-to-the-lobby).
-4. For `SOLO RUN`, open `WBP_MainMenuPage` in the same folder and set `Level To Play` to your map.
-5. Save.
+3. Give it a level card: a level Data Asset added to `Levels` on `Content/MPFriendslop/Blueprints/Misc/BP_FriendslopGameInstance`. The card shows in the lobby and on the `SOLO RUN` page. The steps are in [Add your level to the lobby](../ui/sessions_and_the_lobby.md#add-your-level-to-the-lobby).
+4. Save.
 
-`START THE RUN` plays the level the host picked in the lobby, `SOLO RUN` plays `Level To Play`. `RESTART` needs nothing, it reloads whatever map is running.
+`START THE RUN` plays the level picked on the cards, in the lobby or on the `SOLO RUN` page. `RESTART` needs nothing, it reloads whatever map is running.
 
 The map fields are soft references to a level, picked from a list. You never type a path.
 
 | Field | Where | Shipped value | Used by |
 |---|---|---|---|
-| `Levels` | `WBP_SessionPage`, in `Settings|Session` | `DA_Level_Procedural`, `DA_Level_Annex` | The level cards, and so `START THE RUN` |
-| `Level To Play` | `WBP_MainMenuPage`, in `Settings|Menu` | `L_Procedural` | `SOLO RUN` |
+| `Levels` | `BP_FriendslopGameInstance` (in `Blueprints/Misc/`), in `Settings|Level` | `DA_Level_Procedural`, `DA_Level_Annex` | The level cards of the lobby and of `SOLO RUN`, and so `START THE RUN` |
 | `Menu Level` | `WBP_PausePage`, in `Settings|Menu` | `L_MainMenu` | `LEAVE THE RUN` |
 | `Menu Level` | `BP_FriendslopPlayerState` (in `Blueprints/PlayerCharacter/`), in `Settings|Session` | `L_MainMenu` | A player the server sends back: kicked, wrong code, host left |
 | `Menu Widget Class` | `BP_MainMenu` (in `Blueprints/Misc/`), in `Settings|Menu` | `WBP_MenuRoot` | The menu created on the menu map |

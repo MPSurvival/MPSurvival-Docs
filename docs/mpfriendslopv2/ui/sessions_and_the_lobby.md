@@ -43,7 +43,7 @@ On the `HOST` tab and in the lobby, the left of the page shows one card per leve
 
 The choice travels with the host options, so the server holds it and the clients only read it.
 
-The cards come from `Levels` on `WBP_SessionPage`, in `Settings|Session`. Each entry is a level Data Asset made from `BP_LevelDataAsset`:
+The cards come from `Levels` on `BP_FriendslopGameInstance`, in `Settings|Level`, the same list the `SOLO RUN` page shows. Each entry is a level Data Asset made from `BP_LevelDataAsset`:
 
 | Field | What it does |
 |---|---|
@@ -57,12 +57,12 @@ MPFriendslopV2 ships two, in `Blueprints/DataAssets/Level/Childs/`: `DA_Level_Pr
 
 1. In `Content/MPFriendslop/Blueprints/DataAssets/Level/Childs/`, right click, then **Miscellaneous**, then **Data Asset**, and pick `BP_LevelDataAsset`. Name it `DA_Level_` followed by your map's name.
 2. Open it and fill `Display Name`, `Map` and `Thumbnail`.
-3. Open `WBP_SessionPage`, click **Class Defaults**, and add it to `Levels`. The order of the list is the order of the cards.
+3. Open `BP_FriendslopGameInstance`, in `Blueprints/Misc/`, click **Class Defaults**, and add it to `Levels`. The order of the list is the order of the cards.
 4. Save both.
 
 The same steps with pictures, from the map to the card picture, are in the guide [Add a level to the lobby](../guides/add_a_level.md).
 
-The card itself is `WBP_LevelCard`: its colours are in `Settings|Style` and its sounds in `Settings|Audio`. To use a card of your own, set `Level Card Class` on `WBP_SessionPage`.
+The card itself is `WBP_LevelCard`: its colours are in `Settings|Style` and its sounds in `Settings|Audio`. To use a card of your own, set `Level Card Class` on `WBP_SessionPage` and on `WBP_SoloPage`.
 
 ---
 
@@ -106,7 +106,7 @@ The words the page swaps while it runs, such as `OPEN LOBBY`, `START THE RUN`, `
 
 | Field | Where | What it does | Shipped default |
 |---|---|---|---|
-| `Levels` | `WBP_SessionPage` | The levels the host can pick, one card each | `DA_Level_Procedural`, `DA_Level_Annex` |
+| `Levels` | `BP_FriendslopGameInstance` | The levels the host can pick, one card each. `SOLO RUN` shows the same list | `DA_Level_Procedural`, `DA_Level_Annex` |
 | `Level Card Class` | `WBP_SessionPage` | The widget each level card is made from | `WBP_LevelCard` |
 | `Refresh Interval` | `WBP_SessionPage` | Seconds between two searches on the `JOIN` tab | `5` |
 | `Max Results` | `WBP_SessionPage` | How many sessions a search returns | `50` |

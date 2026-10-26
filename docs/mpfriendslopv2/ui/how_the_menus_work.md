@@ -38,7 +38,7 @@ The home page, `WBP_MainMenuPage`, has five entries: `HOST RUN`, `SOLO RUN`, `CU
 | Field | What it does | Shipped default |
 |---|---|---|
 | `Game Title` | The big title at the top. Set it to your game's name | `MPFRIENDSLOP V2` |
-| `Level To Play` | The map `SOLO RUN` opens | `L_Procedural` |
+| `Solo Page Class` | The page `SOLO RUN` opens: the level cards and `START THE RUN` | `WBP_SoloPage` |
 | `Session Page Class` | The page `HOST RUN` opens | `WBP_SessionPage` |
 | `Customization Page Class` | The page `CUSTOMIZE` opens | `WBP_Customization` |
 | `Settings Page Class` | The page `SETTINGS` opens | `WBP_SettingsPage` |

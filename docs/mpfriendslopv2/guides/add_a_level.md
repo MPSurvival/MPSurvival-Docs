@@ -1,8 +1,8 @@
 # Add a level to the lobby
 
-After this guide, your map has its own card in the lobby, with a name and a picture. The host clicks the card, then **START THE RUN**, and the crew plays your map.
+After this guide, your map has its own card, with a name and a picture, in the lobby and on the **SOLO RUN** page. The host clicks the card, then **START THE RUN**, and the crew plays your map. Alone, a player does the same from **SOLO RUN**.
 
-A card is a level Data Asset in the `Levels` list of `WBP_SessionPage`. Adding a level opens no graph.
+A card is a level Data Asset in the `Levels` list of `BP_FriendslopGameInstance`. The lobby and the **SOLO RUN** page both read that list. Adding a level opens no graph.
 
 ## Before you start
 
@@ -72,16 +72,16 @@ Any 16:9 picture of your own works too.
 
 ## Add the card to the lobby
 
-1. Open `Content/MPFriendslop/Blueprints/Widgets/Menu/WBP_SessionPage`.
-2. Click **Graph** at the top right, then **Class Defaults** in the toolbar.
-3. In the **Details** panel, find `Levels`, under `Settings` then `Session`.
+1. Open `Content/MPFriendslop/Blueprints/Misc/BP_FriendslopGameInstance`.
+2. Click **Class Defaults** in the toolbar.
+3. In the **Details** panel, find `Levels`, under `Settings` then `Level`.
 4. Click the **+** next to `Levels`. A new row appears at the end of the list.
 5. In the new row, pick your `DA_Level_` Data Asset.
 6. Click **Compile**, then **Save**.
 
-The cards follow the order of the list.
+The cards follow the order of the list. The first card is the one picked when a page opens.
 
-**SOLO RUN** does not use the cards. To play your map from **SOLO RUN**, see [The maps, and how a game starts](../start/maps_and_game_flow.md#play-your-own-run-map-from-the-menu).
+The **SOLO RUN** page shows the same cards, so your level is there too.
 
 ---
 
